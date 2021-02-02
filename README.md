@@ -17,7 +17,8 @@
 TBD
 (A web-based broswer multiplayer game to interact with your friends and family virtually during COVID-19 pandemic.)
 
-
+## Core Features
+A multiplayer game that provides a playground for everyone to connect and have fun with community and specially with their friends. Thus, to support that purpose, our game will has these core features. An authorization system that allows players to create account and log-in to play. A friend system that allows users look up for their friends and then save to a list. Later, users can invite their friends to a private lobby. Also, a chat system will be available both in lobby and in match. For communication, players can invite their comrades to a voice system such as Discord, Google Meeting by send their link to the chat box in lobby or in-game. Finally, players' profile can be customized so each player can have their own unique profile. So, with these features we hope our players have good time with their friends and community. 
 
 ## Team Members
 - **Christian Hintay:** Github user name - [hintaycl](https://github.com/hintaycl) (email: hintaycl@myumanitoba.ca)
