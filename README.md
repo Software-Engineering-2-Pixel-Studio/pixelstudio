@@ -1,4 +1,4 @@
-<h1 align="center">Project Name</h1>
+<h1 align="center">League of Towers</h1>
   <p align="center">A web-based multiplayer game to interact with your friends and family virtually during COVID-19 pandemic.<p>
   <p align="center">
     <sup>
