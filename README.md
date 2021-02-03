@@ -8,9 +8,14 @@
   
 - [Description](#description)
 - [Team Members](#team-members)
-- [Languages & Techniques](#tech-stacks)
+- [Technologies ](#technologies)
   * [Languages](#languages)
   * [Techniques](#techniques)
+
+
+- Wiki
+* [Contribution Guidelines](https://github.com/Software-Engineering-2-Pixel-Studio/pixelstudio/wiki/Contribution-Guidelines)
+* [Meeting Minutes](https://github.com/Software-Engineering-2-Pixel-Studio/pixelstudio/wiki/Meeting-Minutes)
 
 
 ## Description
@@ -36,11 +41,14 @@ A multiplayer game that provides a playground for everyone to connect and have f
 
 
 
-## Tech Stacks
+
+## Technologies 
 ### Languages
-TBD
-(Probably C# and Javascript)
+- Game development: C#
+- Web application: Javascript
 
 ### Techniques
-TBD
-(Probably Firebase backend and Unity)
+- Game development: Unity, WebGL
+- Server-side & Databases: Firebase, Rest API
+- Web front-end framework: Vue.js
+- Deployment: Firebase
