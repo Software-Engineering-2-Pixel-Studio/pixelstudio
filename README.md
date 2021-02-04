@@ -13,10 +13,10 @@
   * [Techniques](#techniques)
 
 
-- Wiki
-* [Project Proposal](https://github.com/Software-Engineering-2-Pixel-Studio/pixelstudio/wiki/Project-Proposal)
-* [Meeting Minutes](https://github.com/Software-Engineering-2-Pixel-Studio/pixelstudio/wiki/Meeting-Minutes)
-* [Contribution Guidelines](https://github.com/Software-Engineering-2-Pixel-Studio/pixelstudio/wiki/Contribution-Guidelines)
+- [Wiki](https://github.com/Software-Engineering-2-Pixel-Studio/pixelstudio/wiki)
+  * [Project Proposal](https://github.com/Software-Engineering-2-Pixel-Studio/pixelstudio/wiki/Project-Proposal)
+  * [Meeting Minutes](https://github.com/Software-Engineering-2-Pixel-Studio/pixelstudio/wiki/Meeting-Minutes)
+  * [Contribution Guidelines](https://github.com/Software-Engineering-2-Pixel-Studio/pixelstudio/wiki/Contribution-Guidelines)
 
 ## Description
 This project is a 2D tower defense game with a top-down view where players need to coordinate their actions through communication to protect the base and prevent enemy units from entering their lands. This web-based browser game will be focusing on providing people an experience of playing cooperatively by requiring them to manage shared resources such as money and experience points. At the same time, players will need to develop a reliable strategy before placing towers to defend their base since each player will be restricted to build only a specific type of tower (e. g. supporting or attacking). To coordinate their actions, players will communicate through the in-game chat or any other out of game application such as Zoom or Discord.
