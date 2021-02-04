@@ -14,9 +14,9 @@
 
 
 - Wiki
-* [Contribution Guidelines](https://github.com/Software-Engineering-2-Pixel-Studio/pixelstudio/wiki/Contribution-Guidelines)
+* [Project Proposal](https://github.com/Software-Engineering-2-Pixel-Studio/pixelstudio/wiki/Project-Proposal)
 * [Meeting Minutes](https://github.com/Software-Engineering-2-Pixel-Studio/pixelstudio/wiki/Meeting-Minutes)
-
+* [Contribution Guidelines](https://github.com/Software-Engineering-2-Pixel-Studio/pixelstudio/wiki/Contribution-Guidelines)
 
 ## Description
 This project is a 2D tower defense game with a top-down view where players need to coordinate their actions through communication to protect the towers and prevent enemy units from entering their lands. 
