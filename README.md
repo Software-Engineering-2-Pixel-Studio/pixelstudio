@@ -1,3 +1,4 @@
+![logo-black-bg](./docs/logo.jpeg)
 <h1 align="center">League of Towers</h1>
   <p align="center">A web-based browser multiplayer game to interact with your friends and family virtually during COVID-19 pandemic.<p>
   <p align="center">
@@ -38,6 +39,16 @@ A multiplayer game that provides a playground for everyone to connect and have f
 - **Nurida Karimbaeva:** Github user name - [nuridak](https://github.com/nuridak) (email: karimban@myumanitoba.ca)
 - **Hoang Huy Pham:** Github user name - [Phamhhuy](https://github.com/Phamhhuy) (email: phamhh@myumanitoba.ca)
 - **Juhee Kim:** Github user name - [juliek1217](https://github.com/juliek1217) (email: kimj4@myumanitoba.ca)
+
+### Team Members
+
+| Name | GitHub Username | Role | Email
+| --- | --- | --- | --- |
+| Christian Hintay | [hintaycl](https://github.com/hintaycl) | Game Developer | hintaycl@myumanitoba.ca
+| Nurida Karimbaeva | [nuridak](https://github.com/nuridak)| Game Developer | karimban@myumanitoba.ca
+| Hoang Huy Pham | [Phamhhuy](https://github.com/Phamhhuy)| Game Developer | phamhh@myumanitoba.ca
+| Juhee Kim | [juliek1217](https://github.com/juliek1217)| Web Developer | kimj4@myumanitoba.ca
+
 
 ## Technologies 
 ### Languages
