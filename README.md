@@ -1,3 +1,7 @@
+<div align="center">
+        <img height="200px" src="./docs/logo.jpeg" alt="League of Towers logo" />
+</div>
+
 <h1 align="center">League of Towers</h1>
   <p align="center">A web-based browser multiplayer game to interact with your friends and family virtually during COVID-19 pandemic.<p>
   <p align="center">
@@ -6,8 +10,8 @@
     </sup>
   </p>
   
-- [Description](#description)
 - [Team Members](#team-members)
+- [Description](#description)
 - [Technologies ](#technologies)
   * [Languages](#languages)
   * [Techniques](#techniques)
@@ -15,6 +19,14 @@
   * [Project Proposal](https://github.com/Software-Engineering-2-Pixel-Studio/pixelstudio/wiki/Project-Proposal)
   * [Meeting Minutes](https://github.com/Software-Engineering-2-Pixel-Studio/pixelstudio/wiki/Meeting-Minutes)
   * [Contribution Guidelines](https://github.com/Software-Engineering-2-Pixel-Studio/pixelstudio/wiki/Contribution-Guidelines)
+
+### Team Members
+| Name | GitHub Username | Role | Email
+| --- | --- | --- | --- |
+| Christian Hintay | [hintaycl](https://github.com/hintaycl) | Game Developer | hintaycl@myumanitoba.ca
+| Nurida Karimbaeva | [nuridak](https://github.com/nuridak)| Game Developer | karimban@myumanitoba.ca
+| Hoang Huy Pham | [Phamhhuy](https://github.com/Phamhhuy)| Game Developer | phamhh@myumanitoba.ca
+| Juhee Kim | [juliek1217](https://github.com/juliek1217)| Web Developer | kimj4@myumanitoba.ca
 
 ## Description
 This project is a 2D tower defense game with a top-down view where players need to coordinate their actions through communication to protect the base and prevent enemy units from entering their lands. This web-based browser game will be focusing on providing people an experience of playing cooperatively by requiring them to manage shared resources such as money and experience points. At the same time, players will need to develop a reliable strategy before placing towers to defend their base since each player will be restricted to build only a specific type of tower (e. g. supporting or attacking). To coordinate their actions, players will communicate through the in-game chat or any other out of game application such as Zoom or Discord.
@@ -32,12 +44,6 @@ The project objectives are to:
 
 ## Core Features
 A multiplayer game that provides a playground for everyone to connect and have fun with the community and especially with their friends. Thus, to support this purpose, our game will have these core features. Firstly, **the Co-op Mode** will be available which allows players to support each other in Gameplay. Thus, players can share the joy of fighting off enemies with their comrades. Secondly, **an authorization system** that allows players to create accounts and log-in to play. This feature allows users to have their own profile and they can also customize it based on their styles. Furthermore, our game also provides features in mechanism. **A leveling up system** in gameplay that allows users to make progress and receive some benefits such as tech points, powers, etc.. Lastly, our players will be able to choose their own play style or different strategies based on the situation through a **specialized class system**. For example, players can choose the support class to build towers that have ability to increase damage or the defense class to build fences that block the path until they are destroyed. At the end, with these features we hope our players can enjoy the game and have fun with friends and community.
-
-## Team Members
-- **Christian Hintay:** Github user name - [hintaycl](https://github.com/hintaycl) (email: hintaycl@myumanitoba.ca)
-- **Nurida Karimbaeva:** Github user name - [nuridak](https://github.com/nuridak) (email: karimban@myumanitoba.ca)
-- **Hoang Huy Pham:** Github user name - [Phamhhuy](https://github.com/Phamhhuy) (email: phamhh@myumanitoba.ca)
-- **Juhee Kim:** Github user name - [juliek1217](https://github.com/juliek1217) (email: kimj4@myumanitoba.ca)
 
 ## Technologies 
 ### Languages
