@@ -18,10 +18,14 @@ public class LevelManager : Singleton<LevelManager>
             return tilePrefabs[0].GetComponent<SpriteRenderer>().sprite.bounds.size.x;
         }
     }
+    private void Awake()
+    {
+        CreateLevel();
+    }
     // Start is called before the first frame update
     void Start()
     {
-        CreateLevel();
+        
     }
 
     // Update is called once per frame
