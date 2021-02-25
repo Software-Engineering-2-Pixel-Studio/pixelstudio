@@ -1,0 +1,12 @@
+language: node_js
+node_js:
+  - "stable"
+cache:
+  directories:
+  - node_modules
+install: npm install
+script:
+  - cd client/web
+  - npm test
+branches:
+  only: main

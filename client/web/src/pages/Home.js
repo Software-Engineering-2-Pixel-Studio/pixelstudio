@@ -91,7 +91,9 @@ export default function Home() {
               autoComplete="username"
               autoFocus
             />
-<Button
+
+
+<Button href="/playroom/"
               type="submit"
               fullWidth
               variant="contained"
