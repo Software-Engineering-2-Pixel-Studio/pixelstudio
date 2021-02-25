@@ -4,9 +4,7 @@ node_js:
 cache:
   directories:
   - node_modules
-install: npm install
+install: yarn install
 script:
   - cd client/web
-  - npm test
-branches:
-  only: main
+  - yarn test
