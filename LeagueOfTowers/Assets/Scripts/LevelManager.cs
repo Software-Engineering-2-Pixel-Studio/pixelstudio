@@ -3,10 +3,15 @@ using System.Collections.Generic;
 using UnityEngine;
 using System;
 
-public class LevelManager : MonoBehaviour
+public class LevelManager : Singleton<LevelManager>
 {
     [SerializeField]
     private GameObject[] tilePrefabs;
+
+    [SerializeField]
+    private Transform map;
+
+    public Dictionary<Point, TileScript> Tiles { get; set; }
 
     public float TileSize{
         get{ 
@@ -30,6 +35,9 @@ public class LevelManager : MonoBehaviour
     }
 
     private void CreateLevel(){
+
+        Tiles = new Dictionary<Point, TileScript>();
+
         string[] mapData = LoadLevel();
 
         int mapsizeX = mapData[0].ToCharArray().Length;
@@ -47,8 +55,11 @@ public class LevelManager : MonoBehaviour
 
     private void PlaceTile(string tileType, int x, int y, Vector3 startPosition){
         int tileIndex = int.Parse(tileType);
-        GameObject newTile = Instantiate(tilePrefabs[tileIndex]);
-        newTile.transform.position = new Vector3(startPosition.x + (TileSize*x), startPosition.y - (TileSize*y), 0);
+        TileScript newTile = Instantiate(tilePrefabs[tileIndex]).GetComponent<TileScript>();
+
+        newTile.Setup(new Point(x, y), new Vector3(startPosition.x + (TileSize * x), startPosition.y - (TileSize * y), 0), map);
+
+        
     }
 
     private string[] LoadLevel(){
