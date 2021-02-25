@@ -10,8 +10,9 @@ GameObject:
   m_Component:
   - component: {fileID: 2101991716508579651}
   - component: {fileID: 3887917252487574918}
+  - component: {fileID: 4378856563196152909}
   m_Layer: 0
-  m_Name: TX Tileset Grass 0
+  m_Name: TilesetGrass
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -82,3 +83,15 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &4378856563196152909
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5689901036279309930}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d61e646a8814f3d4d91aea8d28a2db98, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
