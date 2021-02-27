@@ -7,6 +7,5 @@ cache:
 install: npm install
 script:
   - cd client/web
-  - npm test
 branches:
   only: main
