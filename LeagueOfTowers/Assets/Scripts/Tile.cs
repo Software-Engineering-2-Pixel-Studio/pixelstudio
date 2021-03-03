@@ -17,6 +17,10 @@ public class Tile : MonoBehaviour
     private Color32 colorFullTile = new Color32(244, 183, 163, 255);
     private Color32 colorEmptyTile = new Color32(192, 255, 158, 255);
 
+    //for debugging the aStar/enemy path algorithm
+    private bool aStarDebugging;
+    private bool isWalkable;
+
 
     // Start is called before the first frame update
     void Start()
@@ -48,31 +52,47 @@ public class Tile : MonoBehaviour
         this.centerWorldPos = new Vector3(worldPosition.x + (tileSize / 2), worldPosition.y - (tileSize / 2), 0);
     }
 
+    private void setSpriteRenderer(SpriteRenderer spriteRenderer)
+    {
+        this.spriteRenderer = spriteRenderer;
+    }
+
+    public void setAStarDebugging(bool debuggingState)
+    {
+        this.aStarDebugging = debuggingState;
+    }
+
+    public void setWalkable(bool walkableState)
+    {
+        this.isWalkable = walkableState;
+    }
+
     //this function is called whenever the mouse is hover on this Tile
     private void OnMouseOver()
     {
         //make sure user have to pick a tower from buttons before place a tower on Map
         if (GameManager.Instance.GetPickedTowerButton() != null && !EventSystem.current.IsPointerOverGameObject())
         {
-            //if this Tile has a placed Tower
-            if (isPlaced)
+            if (!aStarDebugging)
             {
-                this.ColorTile(this.colorFullTile);
-            }
-            //else empty
-            else
-            {
-                this.ColorTile(this.colorEmptyTile);
-
-                //left-click at the tile to place the tower and leave out the last tile colum (for Tower Panel Overlay)
-                if (Input.GetMouseButtonDown(0) && gridPos.X < MapManager.Instance.GetXIndexSize() - 1)
+                //if this Tile has a placed Tower
+                if (isPlaced)
                 {
-                    PlaceTower();
-                    isPlaced = true;
+                    this.ColorTile(this.colorFullTile);
+                }
+                //else empty
+                else
+                {
+                    this.ColorTile(this.colorEmptyTile);
+
+                    //left-click at the tile to place the tower and leave out the last tile colum (for Tower Panel Overlay)
+                    if (Input.GetMouseButtonDown(0) && gridPos.X < MapManager.Instance.GetXIndexSize() - 1)
+                    {
+                        PlaceTower();
+                        isPlaced = true;
+                    }
                 }
             }
-            
-            
         }
     }
 
@@ -101,6 +121,9 @@ public class Tile : MonoBehaviour
         //deactive the Hover's spriterenderer
         Hover.Instance.Deactivate();
 
+        //make the tile not walkable by enemy
+        this.isWalkable = false;
+
         Debug.Log("Placed a tower!");
         
     }
@@ -112,7 +135,10 @@ public class Tile : MonoBehaviour
 
     private void OnMouseExit()
     {
-        ColorTile(Color.white);
+        if (!aStarDebugging)
+        {
+            ColorTile(Color.white);
+        }
     }
 
     //this function Set up new Tile that created from MapManager
@@ -125,6 +151,12 @@ public class Tile : MonoBehaviour
         this.transform.position = worldPosition;
         this.transform.SetParent(parent);
         this.isPlaced = false;
+        this.isWalkable = true;
+    }
+
+    public Point GetTilePosition()
+    {
+        return this.gridPos;
     }
 
     public Vector3 GetWorldPosition()
@@ -136,5 +168,19 @@ public class Tile : MonoBehaviour
     {
         return this.centerWorldPos;
     }
+
+    public SpriteRenderer GetSpriteRenderer()
+    {
+        return this.spriteRenderer;
+    }
+
+    public bool GetAStarDebuggingState()
+    {
+        return this.aStarDebugging;
+    }
     
+    public bool GetWalkableState()
+    {
+        return this.isWalkable;
+    }
 }

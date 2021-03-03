@@ -18,4 +18,9 @@ public struct Point
         this.X = x;
         this.Y = y;
     }
+
+    public static bool arePointsEqual (Point firstPoint, Point secondPoint)
+    {
+        return firstPoint.X == secondPoint.X && firstPoint.Y == secondPoint.Y;
+    }
 }

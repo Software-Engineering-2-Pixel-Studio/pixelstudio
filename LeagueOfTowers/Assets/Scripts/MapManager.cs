@@ -36,6 +36,9 @@ public class MapManager : Singleton<MapManager>
     //a parent object to put all the Tile under
     [SerializeField] private Transform ground;
 
+    //size of map
+    private Point mapSize;
+
 
     //methods
     /*public float getTileSize()
@@ -77,6 +80,9 @@ public class MapManager : Singleton<MapManager>
     {
         Tiles = new Dictionary<Point, Tile>();
         string[] mapData = ReadLevelText();
+
+        //set the mapsize
+        mapSize = new Point(mapData[0].ToCharArray().Length, mapData.Length);
 
         //this line set the origin point to the topleft screen.
         Vector3 worldStart = Camera.main.ScreenToWorldPoint(new Vector3(0, Screen.height, 0));
@@ -215,6 +221,16 @@ public class MapManager : Singleton<MapManager>
     public int GetYIndexSize()
     {
         return this.yIndexSize;
+    }
+
+    //test if a tile is inbound
+    public bool tileIsInBounds(Point position)
+    {
+        //check if it's not past the left and right boundary of the map
+        bool isGreaterThanLeftMapBoundary = position.X >= 0 && position.Y >= 0;
+        bool isLessThanRightMapBoundary = position.X < mapSize.X && position.Y < mapSize.Y;
+
+        return isGreaterThanLeftMapBoundary && isLessThanRightMapBoundary;
     }
 
 }
