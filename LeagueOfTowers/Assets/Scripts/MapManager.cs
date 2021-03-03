@@ -128,19 +128,7 @@ public class MapManager : Singleton<MapManager>
         {
             randomIndex = UnityEngine.Random.Range(4, 8); //4-7
         }
-        //Instantiate for spawn a GameObject, here is a prefab, into the scene.
-        //this function return a GameObject type.
-        //so, the newTile here store the reference (pointer) to the new created tile
-        //on the scene.
-        //GameObject newTile = Instantiate(tilePrefabs[randomIndex]);
 
-        //this line will "transform" (move) the newTile to the position on the scene
-        //which is set by a new Vector3.
-        //this is a 2D game, so z = 0. but, when we want to display another object
-        //above this Tile, we can set z to be higher so it will appear first.
-        //worldStart.x + TileSize *x : new poistion in x-axis is calculated with orign + size of sprite. (go to the right)
-        //worldStart.y - TileSize*y: new position in y-axis calculated with origin  - size of spirte (go down)
-        //newTile.transform.position = new Vector3(worldStart.x + TileSize * x, worldStart.y - TileSize * y, 0);
 
         //Position on the grid where we place the tile
         Point gridPos = new Point(x, y);
@@ -158,8 +146,6 @@ public class MapManager : Singleton<MapManager>
         //also, add this new tile along with its gridPos to the dictionary
         //this can be done from Tile script with Singleton help
         //Tiles.Add(gridPos, newTile);
-
-
         
     }
 

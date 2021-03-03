@@ -63,7 +63,7 @@ public class Tile : MonoBehaviour
             else
             {
                 this.ColorTile(this.colorEmptyTile);
-                //Debug.Log(this.gridPos.X + ", " + this.gridPos.Y);
+
                 //left-click at the tile to place the tower and leave out the last tile colum (for Tower Panel Overlay)
                 if (Input.GetMouseButtonDown(0) && gridPos.X < MapManager.Instance.GetXIndexSize() - 1)
                 {

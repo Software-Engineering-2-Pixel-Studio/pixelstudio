@@ -20,10 +20,7 @@ public class CameraMovement : MonoBehaviour
 
     void Start()
     {
-        /*this.minX = mapMan.getMapBounds()[0];
-        this.maxX = mapMan.getMapBounds()[1];
-        this.minY = mapMan.getMapBounds()[2];
-        this.maxY = mapMan.getMapBounds()[3];*/
+       
     }
 
     // Update is called once per frame
