@@ -6,7 +6,7 @@ public class AStarDebugger : MonoBehaviour
 {
     //fields
     //list of tiles for debugging, and arrow prefab for pointing to parents
-    [SerializeField] private Tile startTile, goalTile;
+    [SerializeField] private Tile startTile, goalTile; //point == tile
     [SerializeField] private GameObject arrowPrefab;
     [SerializeField] private GameObject debugTilePrefab;
 
@@ -30,8 +30,8 @@ public class AStarDebugger : MonoBehaviour
 
     private void clickTile()
     {
-        //mouse button 1 (right click)
-        if (Input.GetMouseButtonDown(1))
+        //mouse button 1 == right click, 0 == left click 
+        if (Input.GetMouseButtonDown(0))
         {
             //invisible ray cast from mouse position towards a tile
             RaycastHit2D hit = Physics2D.Raycast(Camera.main.ScreenToWorldPoint(Input.mousePosition), Vector2.zero);
@@ -49,15 +49,11 @@ public class AStarDebugger : MonoBehaviour
                     if (startTile == null)
                     {
                         startTile = temp;
-                        //startTile.setAStarDebugging(true);
-                        //startTile.GetSpriteRenderer().color = new Color32(0, 132, 255, 255);
                         createDebugTile(startTile.GetWorldPosition(), new Color32(255, 135, 0, 255));
 
                     } else if (goalTile == null)
                     {
                         goalTile = temp;
-                        //goalTile.setAStarDebugging(true);
-                        //goalTile.GetSpriteRenderer().color = new Color32(255, 132, 0, 255);
                         createDebugTile(goalTile.GetWorldPosition(), new Color32(255, 0, 0, 255));
                     }
                 }
@@ -98,7 +94,13 @@ public class AStarDebugger : MonoBehaviour
     {
         if (node.Parent != null)
         {
-            //instantiate the arrow
+            float size = node.TileReference.GetComponent<SpriteRenderer>().sprite.bounds.size.x;
+
+            //Adjust arrow prefab's position
+            //to show the arrow's direction towards the Parent node
+            position.x = position.x + size/2;
+            position.y = position.y - size/2;
+            
             GameObject arrow = (GameObject)Instantiate(arrowPrefab, position, Quaternion.identity);
 
             //rotate the arrows based on their x and y position
@@ -107,6 +109,7 @@ public class AStarDebugger : MonoBehaviour
             float rotationAngle = Mathf.Atan2(y, x) * 180 / Mathf.PI;
 
             arrow.transform.rotation = Quaternion.AngleAxis(rotationAngle, Vector3.forward);
+            
         }
     }
 

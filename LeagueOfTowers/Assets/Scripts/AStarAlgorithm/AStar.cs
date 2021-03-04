@@ -49,20 +49,19 @@ public static class AStar
                 //get the surrounding position of neighbours
                 int xPosition = currentNode.GridPosition.X - x;
                 int yPosition = currentNode.GridPosition.Y - y;
-                Point neighbourPos = new Point(xPosition, yPosition);
+
+                Point neighbourPos = new Point(currentNode.GridPosition.X - x, currentNode.GridPosition.Y - y);
 
                 //check if tile is bounds
                 bool tileIsInBounds = MapManager.Instance.tileIsInBounds(neighbourPos);
+                //check if the tile is walkable
+                bool isWalkable = MapManager.Instance.getTiles()[neighbourPos].GetWalkableState();
 
                 //if tile is in bounds, the tile is walkable and the neighbour is not the current grid position
-                if (tileIsInBounds && MapManager.Instance.getTiles()[neighbourPos].GetWalkableState() 
-                    && !Point.arePointsEqual(neighbourPos, currentNode.GridPosition))
+                if (tileIsInBounds && isWalkable && !Point.arePointsEqual(neighbourPos, currentNode.GridPosition))
                 {
                     //create nodes from neighbour position
                     Node neighbour = nodes[neighbourPos];
-
-                    //Debugging for checking the neighbours visually
-                    //neighbour.TileReference.GetSpriteRenderer().color = Color.cyan;
 
                     //add neighbours to the open list
                     if (!openList.Contains(neighbour))
