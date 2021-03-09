@@ -1329,8 +1329,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   startTile: {fileID: 0}
   goalTile: {fileID: 0}
-  arrowPrefab: {fileID: 9057238349600582223, guid: 86ce93737e71499459801133a7a2f3d3, type: 3}
-  debugTilePrefab: {fileID: 3853201022252599721, guid: 06f168219e51ad04b9f2de2bdac805e2, type: 3}
+  arrowPrefab: {fileID: 7365126068704725985, guid: 86ce93737e71499459801133a7a2f3d3, type: 3}
+  debugTilePrefab: {fileID: 4951567252897251044, guid: 297ed581ec361c642ba4c41c9d817a65, type: 3}
 --- !u!4 &1636843824
 Transform:
   m_ObjectHideFlags: 0
