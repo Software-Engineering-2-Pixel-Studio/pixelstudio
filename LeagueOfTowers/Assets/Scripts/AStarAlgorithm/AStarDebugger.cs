@@ -24,14 +24,14 @@ public class AStarDebugger : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            AStar.getPath(startTile.GetTilePosition());
+            AStar.getPath(startTile.GetTilePosition(), goalTile.GetTilePosition());
         }
     }
 
     private void clickTile()
     {
         //mouse button 1 == right click, 0 == left click 
-        if (Input.GetMouseButtonDown(0))
+        if (Input.GetMouseButtonDown(1))
         {
             //invisible ray cast from mouse position towards a tile
             RaycastHit2D hit = Physics2D.Raycast(Camera.main.ScreenToWorldPoint(Input.mousePosition), Vector2.zero);
@@ -54,7 +54,7 @@ public class AStarDebugger : MonoBehaviour
                     } else if (goalTile == null)
                     {
                         goalTile = temp;
-                        createDebugTile(goalTile.GetWorldPosition(), new Color32(255, 0, 0, 255));
+                        createDebugTile(goalTile.GetWorldPosition(), new Color32(255, 0, 255, 255));
                     }
                 }
             }
@@ -62,28 +62,45 @@ public class AStarDebugger : MonoBehaviour
     }
 
     //debugging function to show the path marked by AStar alg
-    public void debugPath(HashSet<Node> openList, HashSet<Node> closedList)
+    public void debugPath(HashSet<Node> openList, HashSet<Node> closedList, Stack<Node> path)
     {
+
         foreach (Node node in openList)
         {
             //color the tiles yellow to help us visualize the open list path
-            if (node.TileReference != startTile)
+            bool notStartAndGoal = node.TileReference != startTile && node.TileReference != goalTile;
+
+            if (notStartAndGoal)
             {
-                createDebugTile(node.TileReference.GetWorldPosition(), Color.yellow);
+                createDebugTile(node.TileReference.GetWorldPosition(), Color.yellow, node);
             }
 
             //points at the parent
             pointToParentNode(node, node.TileReference.GetWorldPosition());
         }
 
-
-
         foreach (Node node in closedList)
         {
             //color the tiles blue to help us visualize the closed list path
-            if (node.TileReference != startTile && node.TileReference != goalTile)
+            bool notStartAndGoal = node.TileReference != startTile && node.TileReference != goalTile;
+
+            if (notStartAndGoal && !path.Contains(node)) //only color it blue if the final path doesn't have it
             {
-                createDebugTile(node.TileReference.GetWorldPosition(), Color.blue);
+                createDebugTile(node.TileReference.GetWorldPosition(), Color.blue, node);
+            }
+
+            //points at the parent
+            pointToParentNode(node, node.TileReference.GetWorldPosition());
+        }
+
+        foreach (Node node in path)
+        {
+            //color the final path green
+            bool notStartAndGoal = node.TileReference != startTile && node.TileReference != goalTile;
+
+            if (notStartAndGoal)
+            {
+                createDebugTile(node.TileReference.GetWorldPosition(), Color.green, node);
             }
         }
     }
@@ -113,10 +130,19 @@ public class AStarDebugger : MonoBehaviour
         }
     }
 
-    private void createDebugTile(Vector3 worldPos, Color32 color) 
+    private void createDebugTile(Vector3 worldPos, Color32 color, Node node = null) 
     {
         //instantiate debug tile
         GameObject debugTile = (GameObject) Instantiate(debugTilePrefab, worldPos, Quaternion.identity);
+
+        if (node != null)
+        {
+            DebugTile temp = debugTile.GetComponent<DebugTile>();
+
+            temp.G.text += node.gCost;
+            temp.H.text += node.hCost;
+            temp.F.text += node.fCost;
+        }
 
         //set the color
         debugTile.GetComponent<SpriteRenderer>().color = color;
