@@ -14,12 +14,12 @@ public class MainMenuController : MonoBehaviourPunCallbacks
 {
     
     [SerializeField] private string GameVersion = "1.0";
-    [SerializeField] private GameObject UserNameMenuCanvas;
+    [SerializeField] private GameObject UserNameCanvas;
     [SerializeField] private GameObject MainMenuCanvas;
 
-    [SerializeField] private InputField UserNameInput;
-    [SerializeField] private InputField CreateGameInput;
-    [SerializeField] private InputField JoinGameInput;
+    [SerializeField] private InputField UserNameInputField;
+    [SerializeField] private InputField CreateInputField;
+    [SerializeField] private InputField JoinInputField;
 
     [SerializeField] private GameObject OKButton;
 
@@ -32,10 +32,8 @@ public class MainMenuController : MonoBehaviourPunCallbacks
     // Start is called before the first frame update
     private void Start()
     {
-        UserNameMenuCanvas.SetActive(true);
-        PhotonNetwork.ConnectUsingSettings();
+        UserNameCanvas.SetActive(true);
         PhotonNetwork.GameVersion = GameVersion;
-
     }
 
     // Update is called once per frame
@@ -51,7 +49,7 @@ public class MainMenuController : MonoBehaviourPunCallbacks
 
     public void ToggleOkButton()
     {
-        if(UserNameInput.text.Length >= 3)
+        if(UserNameInputField.text.Length >= 3)
         {
             OKButton.SetActive(true);
         }
@@ -63,30 +61,29 @@ public class MainMenuController : MonoBehaviourPunCallbacks
 
     public void SetUserName()
     {
-        UserNameMenuCanvas.SetActive(false);
-        PhotonNetwork.NickName = UserNameInput.text;
+        UserNameCanvas.SetActive(false);
+        PhotonNetwork.NickName = UserNameInputField.text;
     }
 
     public void CreateGame()
     {
-        PhotonNetwork.CreateRoom(CreateGameInput.text, new RoomOptions() { MaxPlayers = Constants.MAXPLAYERS }, null);
+        //PhotonNetwork.CreateRoom(CreateGameInput.text, new RoomOptions() { MaxPlayers = Constants.MAXPLAYERS }, null);
+        RoomOptions roomOptions = new RoomOptions();
+        roomOptions.MaxPlayers = Constants.MAXPLAYERS;
+        PhotonNetwork.CreateRoom(CreateInputField.text, roomOptions);
     }
 
     public void JoinGame()
     {
-        PhotonNetwork.JoinOrCreateRoom(JoinGameInput.text, new RoomOptions() { MaxPlayers = Constants.MAXPLAYERS }, TypedLobby.Default);
+        //PhotonNetwork.JoinOrCreateRoom(JoinGameInput.text, new RoomOptions() { MaxPlayers = Constants.MAXPLAYERS }, TypedLobby.Default);
+        PhotonNetwork.JoinRoom(JoinInputField.text);
     }
 
-    public override void OnConnectedToMaster()
-    {
-        PhotonNetwork.JoinLobby(TypedLobby.Default);
-        Debug.Log("Connected");
-    }
-
-    public override void OnDisconnected(DisconnectCause cause)
-    {
-        Debug.LogWarningFormat("PUN : OnDisconnected() was called by PUN with reason {0}", cause);
-    }
+    // public override void OnConnectedToMaster()
+    // {
+    //     PhotonNetwork.JoinLobby(TypedLobby.Default);
+    //     Debug.Log("Connected");
+    // }
 
     public override void OnJoinedRoom()
     {
