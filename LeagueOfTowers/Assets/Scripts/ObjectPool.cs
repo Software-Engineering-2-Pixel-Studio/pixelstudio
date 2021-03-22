@@ -4,33 +4,41 @@ using UnityEngine;
 
 public class ObjectPool : MonoBehaviour
 {
-   [SerializeField]
-   private GameObject[] objectPrefabs;
+    // variables to control the pool of the generated game objects
+    [SerializeField]
+    private GameObject[] objectPrefabs;
 
-   private List<GameObject> pooledObects = new List<GameObject>();
+    private List<GameObject> pooledObects = new List<GameObject>();
 
-   public GameObject GetObject(string type){
+    // generates a new object of specified type and returns it
+    //      -> if inactive object of the same type already exists returns that object
+    public GameObject GetObject(string type){
 
-       foreach (GameObject go in pooledObects)
-       {
-           if(go.name == type && !go.activeInHierarchy){ 
-               go.SetActive(true);
-               return go;
-           }
-       }
-       for (int i=0; i<objectPrefabs.Length; i++){
-           if(objectPrefabs[i].name == type){
-               GameObject newObject = Instantiate(objectPrefabs[i]);
-               pooledObects.Add(newObject);
-               newObject.name = type;
-               return newObject;
-           }
-       }
-       return null;
-   }
+        //looks for the object with the same type in already existing pool of objects
+        foreach (GameObject go in pooledObects)
+        {
+            if(go.name == type && !go.activeInHierarchy){ 
+                go.SetActive(true);
+                return go;
+            }
+        }
+        //if not found, creates a new object and adds it to the object pool
+        for (int i=0; i<objectPrefabs.Length; i++){
+            if(objectPrefabs[i].name == type){
+                GameObject newObject = Instantiate(objectPrefabs[i]);
+                pooledObects.Add(newObject);
+                newObject.name = type;
+                return newObject;
+            }
+        }
+        //if unsuccessful returns null
+        return null;
+    }
 
-   public void ReleaseObject(GameObject gameObject){
-       gameObject.SetActive(false);
-   }
+    //method that releases the object by making it inactive on the field
+    //      -> removes it from the field
+    public void ReleaseObject(GameObject gameObject){
+        gameObject.SetActive(false);
+    }
 
 }

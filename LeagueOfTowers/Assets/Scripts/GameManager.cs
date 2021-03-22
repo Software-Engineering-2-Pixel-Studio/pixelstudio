@@ -39,6 +39,7 @@ public class GameManager : Singleton<GameManager>
     private void Awake(){
         Pool = GetComponent<ObjectPool>();
     }
+
     // Start is called before the first frame update
     void Start()
     {
@@ -64,25 +65,18 @@ public class GameManager : Singleton<GameManager>
         this.currencyText.text = this.currency.ToString() + "<color=lime>$</color>";
     }
 
-    private void CancelPickedTower()
-    {
-        //right-click to cancel
-        if (Input.GetMouseButtonDown(1))
-        {
-            //deactive the sripte image of Hover
-            Hover.Instance.Deactivate();
-
-            //reset picked button
-            this.pickedButton = null;
-        }
-    }
-
     //this function will update the currency and currency display
     //whenever it changes
     public void UpdateCurrency(int value)
     {
         SetCurrency(value);
         SetCurrencyText();
+    }
+
+    //get the amount of gold we have
+    public int GetCurrency()
+    {
+        return this.currency;
     }
 
     //get the picked tower button
@@ -106,10 +100,17 @@ public class GameManager : Singleton<GameManager>
         
     }
 
-    //get the amount of gold we have
-    public int GetCurrency()
+    private void CancelPickedTower()
     {
-        return this.currency;
+        //right-click to cancel
+        if (Input.GetMouseButtonDown(1))
+        {
+            //deactive the sripte image of Hover
+            Hover.Instance.Deactivate();
+
+            //reset picked button
+            this.pickedButton = null;
+        }
     }
 
     //function to update the currency after placed a tower
@@ -122,17 +123,20 @@ public class GameManager : Singleton<GameManager>
         this.pickedButton = null;
     }
 
+    //method that starts a summoning parocess of the monster wave
     public void StartWave(){
         wave++;
         waveText.text = string.Format("Wave: <color=lime>{0}</color>", wave);
         StartCoroutine(SpawnWave());
 
-        waveButton.SetActive(false);
+        waveButton.SetActive(false);    // disactivate a button until wave is done
     }
 
+    // method that spawns a wave of monsters to come out
     private IEnumerator SpawnWave(){
-        MapManager.Instance.GeneratePath();
-        for(int i = 0; i < wave; i++){
+        int numberOfMonster = wave * 3; // every wave the numver of the monsters will be increase by 3
+        for(int i = 0; i < numberOfMonster; i++){
+            MapManager.Instance.GeneratePath(); //regenerate a new path for every monster
             int monsterIndex = Random.Range(0, 2);
             string type = string.Empty;
             switch (monsterIndex)
@@ -156,6 +160,8 @@ public class GameManager : Singleton<GameManager>
         
     }
 
+    // removes a monster from the list of the monsters on the field
+    //      -> if there are no monsters left activates the ability to start next Wave
     public void removeMonster(Monster monster){
         activeMonsters.Remove(monster);
         if(!WaveActive){

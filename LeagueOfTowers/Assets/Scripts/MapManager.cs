@@ -28,6 +28,13 @@ public class MapManager : Singleton<MapManager>
 
     //start and end pathing
     private Point spawnPos;
+
+    public Point SpawnPos{
+        get{
+            return spawnPos;
+        }
+    }
+
     [SerializeField] private GameObject spawnPrefab;
 
     public Portal SpawnPrefab{ get; set;}
@@ -44,7 +51,7 @@ public class MapManager : Singleton<MapManager>
     // path for monsters to use
     private Stack<Node> path;
 
-
+    // the stac that holds the path of the monster
     public Stack<Node> Path
     {
         get{
@@ -86,12 +93,6 @@ public class MapManager : Singleton<MapManager>
     void Update()
     {
 
-    }
-
-    public Point SpawnPos{
-        get{
-            return spawnPos;
-        }
     }
     
     /*
@@ -176,6 +177,7 @@ public class MapManager : Singleton<MapManager>
         
     }
 
+    // gets the Maps representation from an external file and reads it
     private string[] ReadLevelText()
     {
         TextAsset bindData = (TextAsset)Resources.Load("Map");
@@ -257,6 +259,7 @@ public class MapManager : Singleton<MapManager>
         return isGreaterThanLeftMapBoundary && isLessThanRightMapBoundary;
     }
 
+    // generate a path for the enemies using the AStar algorithm
     public void GeneratePath(){
         path = AStar.getPath(spawnPos, basePos); 
     }
