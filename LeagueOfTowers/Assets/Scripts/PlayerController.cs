@@ -7,6 +7,7 @@ public class PlayerController : MonoBehaviour
     //fields
     //[SerializeField] private float speed;
     [SerializeField] private GameObject playerCamera;
+    [SerializeField] private GameObject playerCanvas;
     private PhotonView view;
 
 
@@ -19,11 +20,14 @@ public class PlayerController : MonoBehaviour
         {
             this.transform.GetComponent<PlayerMovement>().enabled = true;
             this.playerCamera.GetComponent<Camera>().enabled = true;
+            this.playerCanvas.GetComponent<Canvas>().enabled = true;
+            
         }
         else
         {
             this.transform.GetComponent<PlayerMovement>().enabled = false;
             this.playerCamera.GetComponent<Camera>().enabled = false;
+            this.playerCanvas.GetComponent<Canvas>().enabled = false;
         }
     }
 
