@@ -8,8 +8,8 @@ public class MapManager : Singleton<MapManager>
     //fields
     //list of tile prefabs
     [SerializeField] private GameObject[] tilePrefabs;
-    [SerializeField] private CameraMovement camMove;
-    [SerializeField] private CameraFollow camFollow;
+    //[SerializeField] private CameraMovement camMove;
+    //[SerializeField] private CameraFollow camFollow;
 
     //mapIndexSize;
     private int xIndexSize;
@@ -111,8 +111,8 @@ public class MapManager : Singleton<MapManager>
         SetUpBase();
 
         setMapBounds(worldStart);
-        camMove.SetBounders(this.getMapBounds());
-        camFollow.SetBounders(this.getMapBounds());
+        //camMove.SetBounders(this.getMapBounds());
+        //camFollow.SetBounders(this.getMapBounds());
 
         
     }//end of CreateLevel
