@@ -11,6 +11,8 @@ public class Node
     //the tile that this node belongs to
     public Tile TileReference { get; private set; }
 
+    public Vector2 WorldPosition{ get; set; }
+
     public Node Parent { get; private set; }
 
     //for calculating the g,h, and f costs from start to goal tiles
@@ -22,6 +24,7 @@ public class Node
     {
         this.TileReference = tileReference;
         this.GridPosition = tileReference.GetTilePosition();
+        this.WorldPosition = tileReference.GetWorldPosition();
     }
 
     //set the parent node and calculate the f,g and h values

@@ -30,6 +30,8 @@ public class MapManager : Singleton<MapManager>
     private Point spawnPos;
     [SerializeField] private GameObject spawnPrefab;
 
+    public Portal SpawnPrefab{ get; set;}
+
     private Point basePos;
     [SerializeField] private GameObject basePrefab;
 
@@ -39,6 +41,19 @@ public class MapManager : Singleton<MapManager>
     //size of map
     private Point mapSize;
 
+    // path for monsters to use
+    private Stack<Node> path;
+
+
+    public Stack<Node> Path
+    {
+        get{
+            if(path == null){
+                GeneratePath();
+            }
+            return new Stack<Node>(new Stack<Node>(path));
+        }
+    }
 
     //methods
     /*public float getTileSize()
@@ -73,6 +88,12 @@ public class MapManager : Singleton<MapManager>
 
     }
 
+    public Point SpawnPos{
+        get{
+            return spawnPos;
+        }
+    }
+    
     /*
      * CreateLevel: generate the map (ground) base on the camera view
      */
@@ -193,6 +214,9 @@ public class MapManager : Singleton<MapManager>
         //place spawn at gridPos = (0,1) or start of the path
         theSpawn.transform.position = Tiles[spawnPos].GetCenterWorldPosition();
 
+        SpawnPrefab = theSpawn.GetComponent<Portal>();  //get script to  the reference
+        SpawnPrefab.name = "SpawnPrefab";               // rename it 
+        //^^^ needed to use later when spawn enemies
     }
 
     private void SetUpBase()
@@ -233,4 +257,7 @@ public class MapManager : Singleton<MapManager>
         return isGreaterThanLeftMapBoundary && isLessThanRightMapBoundary;
     }
 
+    public void GeneratePath(){
+        path = AStar.getPath(spawnPos, basePos); 
+    }
 }
