@@ -23,7 +23,7 @@ public static class AStar
     }
 
     //create a path with A* algorithm
-    public static void getPath(Point start, Point goal)
+    public static Stack<Node> getPath(Point start, Point goal)
     {
         //create nodes when we don't have the,
         if (nodes == null)
@@ -141,10 +141,10 @@ public static class AStar
             }
         }
 
-        
+        return finalPath;
 
         //*****THIS IS ONLY FOR DEBUGGING NEEDS TO BE REMOVED LATER!*****
-        GameObject.Find("AStarDebugger").GetComponent<AStarDebugger>().debugPath(openList, closedList, finalPath);
+        //GameObject.Find("AStarDebugger").GetComponent<AStarDebugger>().debugPath(openList, closedList, finalPath);
     }
 
     private static bool isConnectedDiagonally(Node currentNode, Node neighbour)
