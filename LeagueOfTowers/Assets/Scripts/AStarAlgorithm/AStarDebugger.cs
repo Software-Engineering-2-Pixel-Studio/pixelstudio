@@ -18,7 +18,7 @@ public class AStarDebugger : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    /*void Update()
     {
         clickTile();
 
@@ -27,6 +27,7 @@ public class AStarDebugger : MonoBehaviour
             AStar.getPath(startTile.GetTilePosition(), goalTile.GetTilePosition());
         }
     }
+    */
 
     private void clickTile()
     {
