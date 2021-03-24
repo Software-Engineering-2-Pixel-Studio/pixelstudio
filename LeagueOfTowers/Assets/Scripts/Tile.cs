@@ -90,7 +90,8 @@ public class Tile : MonoBehaviour
                     if (Input.GetMouseButtonDown(0) && gridPos.X < MapManager.Instance.GetXIndexSize() - 1)
                     {
                         PlaceTower();
-                        isPlaced = true;
+                        MapManager.Instance.SetTileIsPlacedAt(this.gridPos.X, this.gridPos.Y);
+                        //isPlaced = true;
                     }
                 }
             }
@@ -186,5 +187,10 @@ public class Tile : MonoBehaviour
     public bool GetWalkableState()
     {
         return this.isWalkable;
+    }
+
+    public void SetIsPlaced(bool state)
+    {
+        this.isPlaced = state;
     }
 }

@@ -1280,6 +1280,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1111824225}
   - component: {fileID: 1111824226}
+  - component: {fileID: 1111824227}
   m_Layer: 6
   m_Name: MapManager
   m_TagString: Untagged
@@ -1325,6 +1326,28 @@ MonoBehaviour:
   spawnPrefab: {fileID: 5087845168296995876, guid: 4745fc5c54140d04796637cd489fcc0b, type: 3}
   basePrefab: {fileID: 9027362658947841971, guid: 867b64a2cb72a324397655ad6c96b7c7, type: 3}
   ground: {fileID: 1422933125}
+--- !u!114 &1111824227
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1111824224}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aa584fbee541324448dd18d8409c7a41, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ObservedComponentsFoldoutOpen: 1
+  Group: 0
+  prefixField: -1
+  Synchronization: 3
+  OwnershipTransfer: 0
+  observableSearch: 2
+  ObservedComponents: []
+  sceneViewId: 4
+  InstantiationId: 0
+  isRuntimeInstantiated: 0
 --- !u!1 &1114094427
 GameObject:
   m_ObjectHideFlags: 0

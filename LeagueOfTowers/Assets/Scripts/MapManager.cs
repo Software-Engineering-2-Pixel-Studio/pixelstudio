@@ -2,12 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System;
-
+using Photon.Pun;
 public class MapManager : Singleton<MapManager>
 {
     //fields
     //list of tile prefabs
     [SerializeField] private GameObject[] tilePrefabs;
+    private PhotonView view;
     //[SerializeField] private CameraMovement camMove;
     //[SerializeField] private CameraFollow camFollow;
 
@@ -45,6 +46,7 @@ public class MapManager : Singleton<MapManager>
     private Stack<Node> path;
 
 
+
     public Stack<Node> Path
     {
         get{
@@ -74,16 +76,16 @@ public class MapManager : Singleton<MapManager>
     }
 
     // Start is called before the first frame update
-    void Start()
+    private void Start()
     {
         //set up prefab Tile_Grass_0 in Prefabs folder to variable tile at runtime
         /*tile = (GameObject) Resources.Load("Prefabs/Tile_Grass_0", typeof(GameObject));*/
-
+        view = this.GetComponent<PhotonView>();
         CreateLevel();
     }
 
     // Update is called once per frame
-    void Update()
+    private void Update()
     {
 
     }
@@ -257,7 +259,21 @@ public class MapManager : Singleton<MapManager>
         return isGreaterThanLeftMapBoundary && isLessThanRightMapBoundary;
     }
 
-    public void GeneratePath(){
+    public void GeneratePath()
+    {
         path = AStar.getPath(spawnPos, basePos); 
+    }
+
+    public void SetTileIsPlacedAt(int gridPointX, int gridPointY)
+    {
+        this.view.RPC("setTileIsPlacedAtRPC", RpcTarget.All, gridPointX, gridPointY);
+    }
+
+    [PunRPC]
+    private void setTileIsPlacedAtRPC(int gridPointX, int gridPointY)
+    {
+        Point gP = new Point(gridPointX, gridPointY);
+        this.Tiles[gP].SetIsPlaced(true);
+        Debug.Log("RPC called for setTileIsPlacedRPC to true");
     }
 }
