@@ -14,7 +14,7 @@ public class Tile : MonoBehaviour
 
     //these for indicate if a Tile is available for placing Tower
     private SpriteRenderer spriteRenderer;
-    private bool isPlaced;
+    [SerializeField] private bool isPlaced;
     private Color32 colorFullTile = new Color32(244, 183, 163, 255);
     private Color32 colorEmptyTile = new Color32(192, 255, 158, 255);
 
@@ -121,8 +121,8 @@ public class Tile : MonoBehaviour
         tower.transform.SetParent(this.transform);
 
         //pay for this tower
-        //GameManager.Instance.PayForPlacedTower();
-
+        GameManager.Instance.PayForPlacedTower();
+        
         //deactive the Hover's spriterenderer
         Hover.Instance.Deactivate();
 

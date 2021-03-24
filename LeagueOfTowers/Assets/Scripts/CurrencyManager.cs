@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using Photon.Pun;
 
-public class CurrencyManager : MonoBehaviour
+public class CurrencyManager : Singleton<CurrencyManager>
 {
     //fields
     [SerializeField] private int currency;
@@ -55,6 +55,10 @@ public class CurrencyManager : MonoBehaviour
     public void SubCurrency(int payAmount)
     {
         this.view.RPC("subCurrencyRPC", RpcTarget.All, payAmount);
+    }
+
+    public int GetCurrency(){
+        return this.currency;
     }
 
 

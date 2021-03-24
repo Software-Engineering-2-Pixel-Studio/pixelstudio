@@ -24,11 +24,15 @@ public class PickedTowerScript : MonoBehaviour
 
     //public method
     public void SetPickedButton(TowerButton clickedTowerButton){
+        
         Debug.Log("Click Button " + clickedTowerButton.GetTowerPrefab().name);
-        this.pickedButton = clickedTowerButton;
+        if(CurrencyManager.Instance.GetCurrency() >= clickedTowerButton.GetPrice()){
+            this.pickedButton = clickedTowerButton;
 
-        GameManager.Instance.SetPickedTower(this.pickedButton);
-        Hover.Instance.Activate(this.pickedButton.GetSprite(), playerCamera.GetComponent<Camera>());
+            GameManager.Instance.SetPickedTower(this.pickedButton);
+            Hover.Instance.Activate(this.pickedButton.GetSprite(), playerCamera.GetComponent<Camera>());
+        }
+        
     }
 
     public TowerButton GetPickedButton(){
