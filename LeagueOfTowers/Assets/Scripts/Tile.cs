@@ -21,6 +21,8 @@ public class Tile : MonoBehaviour
     private bool aStarDebugging;
     private bool isWalkable;
 
+    //tower
+    private Tower myTower;
 
     // Start is called before the first frame update
     void Start()
@@ -93,6 +95,16 @@ public class Tile : MonoBehaviour
                     }
                 }
             }
+        } else if (!EventSystem.current.IsPointerOverGameObject() && GameManager.Instance.GetPickedTowerButton() == null && Input.GetMouseButtonDown(0))
+        {
+            if (myTower != null)
+            {
+                GameManager.Instance.SelectTower(myTower);
+            } 
+            else
+            {
+                GameManager.Instance.DeselectTower();
+            }
         }
     }
 
@@ -114,6 +126,9 @@ public class Tile : MonoBehaviour
 
         //set parent Tile for this tower
         tower.transform.SetParent(this.transform);
+
+        //reference the tower script
+        this.myTower = tower.transform.GetChild(0).GetComponent<Tower>();
 
         //pay for this tower
         GameManager.Instance.PayForPlacedTower();

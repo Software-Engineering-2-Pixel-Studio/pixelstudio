@@ -148,11 +148,11 @@ public class MapManager : Singleton<MapManager>
         int tileIndex = int.Parse(tileType);
 
         int randomIndex;
-        if (tileIndex == 0)
+        if (tileIndex == 0) //for the grass
         {
             randomIndex = UnityEngine.Random.Range(0, 4); //0-3
         }
-        else
+        else //for the gray walkable tiles
         {
             randomIndex = UnityEngine.Random.Range(4, 8); //4-7
         }
