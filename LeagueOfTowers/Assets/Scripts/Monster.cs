@@ -97,6 +97,7 @@ public class Monster : MonoBehaviour
             else if(this.name == "Scarecrow"){
                 StartCoroutine(Scale(new Vector3(0.5f, 0.5f), new Vector3(0.1f,0.1f), true));
             }
+            GameManager.Instance.Lives--;
         }
     }
 
