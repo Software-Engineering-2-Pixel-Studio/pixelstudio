@@ -53,7 +53,7 @@ public class MapManager : Singleton<MapManager>
             if(path == null){
                 GeneratePath();
             }
-            return new Stack<Node>(new Stack<Node>(path));
+            return new Stack<Node>(path);
         }
     }
 
@@ -170,7 +170,7 @@ public class MapManager : Singleton<MapManager>
         Tile newTile = Instantiate(tilePrefabs[randomIndex]).GetComponent<Tile>();
 
         //setup and place this new tile on world scene
-        newTile.SetUpTile(gridPos, worldPos, ground);
+        newTile.SetUpTile(gridPos, worldPos, ground, tileIndex);
 
         //also, add this new tile along with its gridPos to the dictionary
         //this can be done from Tile script with Singleton help
@@ -261,7 +261,7 @@ public class MapManager : Singleton<MapManager>
 
     public void GeneratePath()
     {
-        path = AStar.getPath(spawnPos, basePos); 
+        path = AStar.getPath(basePos,spawnPos); 
     }
 
     public void SetTileIsPlacedAt(int gridPointX, int gridPointY)
