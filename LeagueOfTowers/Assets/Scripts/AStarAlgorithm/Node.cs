@@ -24,7 +24,7 @@ public class Node
     {
         this.TileReference = tileReference;
         this.GridPosition = tileReference.GetTilePosition();
-        this.WorldPosition = tileReference.GetWorldPosition();
+        this.WorldPosition = tileReference.GetCenterWorldPosition();
     }
 
     //set the parent node and calculate the f,g and h values
