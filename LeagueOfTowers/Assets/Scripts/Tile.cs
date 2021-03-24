@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using Photon.Pun;
 
 public class Tile : MonoBehaviour
 {
@@ -104,7 +105,10 @@ public class Tile : MonoBehaviour
         GameObject towerPref = GameManager.Instance.GetPickedTowerButton().GetTowerPrefab();
 
         //Create the tower prefab on the scene
-        GameObject tower = Instantiate(towerPref);
+        //GameObject tower = Instantiate(towerPref);
+
+
+        GameObject tower = PhotonNetwork.Instantiate(towerPref.name, this.GetCenterWorldPosition(), Quaternion.identity);
 
         //place at the correct position of the tile on the map
         tower.transform.position = this.GetCenterWorldPosition();
@@ -116,7 +120,7 @@ public class Tile : MonoBehaviour
         tower.transform.SetParent(this.transform);
 
         //pay for this tower
-        GameManager.Instance.PayForPlacedTower();
+        //GameManager.Instance.PayForPlacedTower();
 
         //deactive the Hover's spriterenderer
         Hover.Instance.Deactivate();

@@ -26,6 +26,8 @@ public class PickedTowerScript : MonoBehaviour
     public void SetPickedButton(TowerButton clickedTowerButton){
         Debug.Log("Click Button " + clickedTowerButton.GetTowerPrefab().name);
         this.pickedButton = clickedTowerButton;
+
+        GameManager.Instance.SetPickedTower(this.pickedButton);
         Hover.Instance.Activate(this.pickedButton.GetSprite(), playerCamera.GetComponent<Camera>());
     }
 

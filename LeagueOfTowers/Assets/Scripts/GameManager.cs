@@ -94,15 +94,16 @@ public class GameManager : Singleton<GameManager>
     //this function is called when user click on the button from the panel
     public void SetPickedTower(TowerButton towerButton)
     {
-        //check if we have enough gold to choose this tower
-        if(this.currency >= towerButton.GetPrice() && !WaveActive)
-        {
-            //set current picked button
-            this.pickedButton = towerButton;
+        // //check if we have enough gold to choose this tower
+        // if(this.currency >= towerButton.GetPrice() && !WaveActive)
+        // {
+        //     //set current picked button
+        //     this.pickedButton = towerButton;
 
-            //activate the Hover's SpriteRenderer and set its Sprite to the one from the button.
-            //Hover.Instance.Activate(this.pickedButton.GetSprite());
-        }
+        //     //activate the Hover's SpriteRenderer and set its Sprite to the one from the button.
+        //     //Hover.Instance.Activate(this.pickedButton.GetSprite());
+        // }
+        this.pickedButton = towerButton;
         
     }
 

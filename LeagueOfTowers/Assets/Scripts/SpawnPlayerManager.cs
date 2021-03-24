@@ -12,12 +12,13 @@ public class SpawnPlayerManager : MonoBehaviour
     // Start is called before the first frame update
     private void Start()
     {
-        minX = -8.4f;
-        maxX = 8.4f;
-        minY = -4.4f;
-        maxY = 4.4f;
-        Vector2 randomPosition = new Vector2(Random.Range(minX, maxX), Random.Range(minY, maxY));
-        PhotonNetwork.Instantiate(player.name, randomPosition, Quaternion.identity);
+        // minX = -8.4f;
+        // maxX = 8.4f;
+        // minY = -4.4f;
+        // maxY = 4.4f;
+        // Vector2 randomPosition = new Vector2(Random.Range(minX, maxX), Random.Range(minY, maxY));
+        Vector2 position = new Vector2(0,0);
+        PhotonNetwork.Instantiate(player.name, position, Quaternion.identity);
     }
 
     // Update is called once per frame
