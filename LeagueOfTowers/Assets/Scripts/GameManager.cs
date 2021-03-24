@@ -101,7 +101,7 @@ public class GameManager : Singleton<GameManager>
             this.pickedButton = towerButton;
 
             //activate the Hover's SpriteRenderer and set its Sprite to the one from the button.
-            Hover.Instance.Activate(this.pickedButton.GetSprite());
+            //Hover.Instance.Activate(this.pickedButton.GetSprite());
         }
         
     }

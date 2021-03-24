@@ -517,7 +517,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 926844214}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 978387833}
+        m_TargetAssemblyTypeName: PickedTowerScript, Assembly-CSharp
+        m_MethodName: SetPickedButton
+        m_Mode: 2
+        m_Arguments:
+          m_ObjectArgument: {fileID: 926844216}
+          m_ObjectArgumentAssemblyTypeName: TowerButton, Assembly-CSharp
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &926844216
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -530,7 +542,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7be0a373cb5f9db43aff4fed70cf74d6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  towerPrefab: {fileID: 0}
+  towerPrefab: {fileID: 998401282728010725, guid: 383eeffabc2dfd447b9f724e5ec0111b, type: 3}
   sprite: {fileID: 21300120, guid: 29c9cded5e558164aaf8c9bf08aa1510, type: 3}
   price: 20
   priceText: {fileID: 81763355}
@@ -656,7 +668,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1277868320}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 978387833}
+        m_TargetAssemblyTypeName: PickedTowerScript, Assembly-CSharp
+        m_MethodName: SetPickedButton
+        m_Mode: 2
+        m_Arguments:
+          m_ObjectArgument: {fileID: 1277868322}
+          m_ObjectArgumentAssemblyTypeName: TowerButton, Assembly-CSharp
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1277868322
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -669,7 +693,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7be0a373cb5f9db43aff4fed70cf74d6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  towerPrefab: {fileID: 0}
+  towerPrefab: {fileID: 2303525347792396461, guid: f8dd84f4ae01ce14db4873e72bd5e2db, type: 3}
   sprite: {fileID: 21300060, guid: 29c9cded5e558164aaf8c9bf08aa1510, type: 3}
   price: 10
   priceText: {fileID: 635715093}
@@ -952,7 +976,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 2060983146}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 978387833}
+        m_TargetAssemblyTypeName: PickedTowerScript, Assembly-CSharp
+        m_MethodName: SetPickedButton
+        m_Mode: 2
+        m_Arguments:
+          m_ObjectArgument: {fileID: 2060983148}
+          m_ObjectArgumentAssemblyTypeName: TowerButton, Assembly-CSharp
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &2060983148
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -965,7 +1001,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7be0a373cb5f9db43aff4fed70cf74d6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  towerPrefab: {fileID: 0}
+  towerPrefab: {fileID: 560284490885896046, guid: 1db58aee163e9a040b1b44f1143630eb, type: 3}
   sprite: {fileID: 21300114, guid: 29c9cded5e558164aaf8c9bf08aa1510, type: 3}
   price: 30
   priceText: {fileID: 235239928}
@@ -1178,6 +1214,7 @@ GameObject:
   - component: {fileID: 569681848496346589}
   - component: {fileID: 569681848496346590}
   - component: {fileID: 569681848496346588}
+  - component: {fileID: 978387833}
   m_Layer: 7
   m_Name: PlayerCharacter
   m_TagString: Untagged
@@ -1285,6 +1322,20 @@ MonoBehaviour:
     InterpolateOption: 0
     InterpolateMoveTowardsSpeed: 1
     InterpolateLerpSpeed: 0
+--- !u!114 &978387833
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 569681848496346560}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8c0db96cd6aeef44f9ca6606133fd47f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  pickedButton: {fileID: 0}
+  playerCamera: {fileID: 569681847286696818}
 --- !u!1 &569681848531831111
 GameObject:
   m_ObjectHideFlags: 0
