@@ -26,6 +26,11 @@ public class PlayerMovement : MonoBehaviour
 
         //Actually move to the destination on scene
         transform.position += (Vector3)moveAmount;
+
+        //limit the movement of player(a camera holder for each player)
+        float clampedX = Mathf.Clamp(transform.position.x, 0, 0.12f);
+        float clampedY = Mathf.Clamp(transform.position.y, 0, 0);
+        transform.position = Vector2.Lerp(transform.position, new Vector2(clampedX, clampedY), speed);
       
     }
 }
