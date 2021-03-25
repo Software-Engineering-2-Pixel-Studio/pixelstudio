@@ -165,7 +165,7 @@ public class Tile : MonoBehaviour
     }
 
     //this function Set up new Tile that created from MapManager
-    public void SetUpTile(Point pointPosition, Vector3 worldPosition, Transform parent)
+    public void SetUpTile(Point pointPosition, Vector3 worldPosition, Transform parent, int tileIndex)
     {
         setTilePos(pointPosition);
         setWorldPos(worldPosition);
@@ -174,7 +174,13 @@ public class Tile : MonoBehaviour
         this.transform.position = worldPosition;
         this.transform.SetParent(parent);
         this.isPlaced = false;
-        this.isWalkable = true;
+        if(tileIndex == 0){
+            this.isWalkable = false;
+        }
+        else{
+            this.isWalkable = true;
+        }
+       
     }
 
     public Point GetTilePosition()
