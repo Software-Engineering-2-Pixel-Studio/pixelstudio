@@ -99,13 +99,13 @@ public class Tower : MonoBehaviour
     public void Shoot()
     {
         //get the projectile type from the pool and return it
-        Projectile projectile = GameManager.Instance.Pool.GetObject(projectileType).GetComponent<Projectile>();
-
+        //Projectile projectile = GameManager.Instance.Pool.GetObject(projectileType).GetComponent<Projectile>();
+        GameObject projectile = PhotonNetwork.Instantiate(this.projectileType, this.transform.position, Quaternion.identity,0,null);
         //spawn the projectile from the middle of the tower
-        projectile.transform.position = transform.position;
+        //projectile.transform.position = transform.position;
 
         //initialize the projectile by passing this tower
-        projectile.Initialize(this);
+        projectile.GetComponent<Projectile>().Initialize(this);
     }
 
     //this function happens when it enters the tower range
@@ -142,4 +142,6 @@ public class Tower : MonoBehaviour
     {
         return target;
     }
+
+    
 }
