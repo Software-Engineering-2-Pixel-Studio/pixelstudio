@@ -14,6 +14,7 @@ public class SpawnMonsterManager : Singleton<SpawnMonsterManager>
     
     [SerializeField] private Text waveText; //holds the reference to the text that shows the number of waves
 
+    private ObjectPool pool;
     private bool WaveActive;
 
     private PhotonView view;    //PhotonView object for synchronize between each view object in the scene
@@ -22,6 +23,7 @@ public class SpawnMonsterManager : Singleton<SpawnMonsterManager>
     private void Start()
     {
         view = this.GetComponent<PhotonView>();
+        pool = GetComponent<ObjectPool>();
         //only MasterClient (host) can see this button
         if(PhotonNetwork.IsMasterClient){
             this.waveButton.SetActive(true);
@@ -55,10 +57,10 @@ public class SpawnMonsterManager : Singleton<SpawnMonsterManager>
                 default:
                     break;
             }
-            //Monster monster = Pool.GetObject(type).GetComponent<Monster>();
-            //monster.Spawn();
+            Monster monster = pool.GetObject(type).GetComponent<Monster>();
+            monster.Spawn();
 
-            //activeMonsters.Add(monster);
+            activeMonsters.Add(monster);
 
             yield return new WaitForSeconds(2.5f);
         }
@@ -66,6 +68,10 @@ public class SpawnMonsterManager : Singleton<SpawnMonsterManager>
     }
 
     //public methods
+    public ObjectPool GetPool(){
+        return this.pool;
+    }
+
     public List<Monster> GetActiveMonsters()
     {
         return this.activeMonsters;

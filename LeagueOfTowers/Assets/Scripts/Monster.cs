@@ -87,8 +87,10 @@ public class Monster : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D other){
         //if the monster collide with the base
         if(other.tag == "BasePortal"){
+            Debug.Log("Reach the base");
             //scale down in size them
             if(this.name == "TrainingDummy"){
+                
                 StartCoroutine(Scale(new Vector3(0.6f, 0.6f), new Vector3(0.1f,0.1f), true));
             }
             else if(this.name == "Scarecrow"){
@@ -100,7 +102,9 @@ public class Monster : MonoBehaviour
     private void Release(){
         IsActive = false; // so next time we use the object it starts as not active;
         GridPosition = MapManager.Instance.SpawnPos; // to make sure next time we use the object it starts at start position
-        GameManager.Instance.Pool.ReleaseObject(gameObject);    // makes an object inactive for later usage
-        GameManager.Instance.removeMonster(this);   // removes the monster from the "active monsters of the wave" list
+        //GameManager.Instance.Pool.ReleaseObject(gameObject);    
+        //GameManager.Instance.removeMonster(this);   
+        SpawnMonsterManager.Instance.GetPool().ReleaseObject(gameObject); // makes an object inactive for later usage
+        SpawnMonsterManager.Instance.removeMonster(this);   // removes the monster from the "active monsters of the wave" list
     }
 }

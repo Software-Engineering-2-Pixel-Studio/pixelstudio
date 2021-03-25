@@ -339,7 +339,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_FontData:
-    m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
+    m_Font: {fileID: 12800000, guid: 4a4df204c321f9c40b0dbfb1baaffb4c, type: 3}
     m_FontSize: 32
     m_FontStyle: 0
     m_BestFit: 0
@@ -2607,7 +2607,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0ca2194b000ef481a90113cec750a12e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  objectPrefabs: []
+  objectPrefabs:
+  - {fileID: 8268816607395305849, guid: 550f309ef03d346838a5a808fba688e1, type: 3}
+  - {fileID: 2014788409335391717, guid: 65b471828d2624cdcb112b72e79ee597, type: 3}
 --- !u!1 &1962025756
 GameObject:
   m_ObjectHideFlags: 0
@@ -2770,8 +2772,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1537229718}
-        m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
+      - m_Target: {fileID: 1891530697}
+        m_TargetAssemblyTypeName: SpawnMonsterManager, Assembly-CSharp
         m_MethodName: StartWave
         m_Mode: 1
         m_Arguments:

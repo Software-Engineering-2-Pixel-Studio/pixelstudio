@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Photon.Pun;
 
 public class ObjectPool : MonoBehaviour
 {
@@ -20,7 +21,10 @@ public class ObjectPool : MonoBehaviour
        }
        for (int i=0; i<objectPrefabs.Length; i++){
            if(objectPrefabs[i].name == type){
-               GameObject newObject = Instantiate(objectPrefabs[i]);
+               Point spawnPoint = MapManager.Instance.SpawnPos;
+               Vector3 worldCenterCoordinate = MapManager.Instance.getTiles()[spawnPoint].GetCenterWorldPosition();
+               //GameObject newObject = Instantiate(objectPrefabs[i]);
+               GameObject newObject = PhotonNetwork.Instantiate(objectPrefabs[i].name, worldCenterCoordinate, Quaternion.identity, 0, null);
                pooledObects.Add(newObject);
                newObject.name = type;
                return newObject;

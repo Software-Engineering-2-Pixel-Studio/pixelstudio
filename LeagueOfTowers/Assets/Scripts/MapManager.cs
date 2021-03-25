@@ -230,6 +230,7 @@ public class MapManager : Singleton<MapManager>
 
         //place the base at grid(16,5) or end of the path
         theBase.transform.position = Tiles[basePos].GetCenterWorldPosition();
+        //theBase.transform.localScale = new Vector3(1.2f, 1.2f, 1.0f);
     }
 
     public Dictionary<Point, Tile> getTiles()
