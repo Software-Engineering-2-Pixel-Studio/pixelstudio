@@ -26,6 +26,9 @@ public class GameManager : Singleton<GameManager>
     [SerializeField]
     private GameObject waveButton;
 
+    //the current selected tower
+    private Tower selectedTower;
+
     //the list of the monsters in the wave
     private List<Monster> activeMonsters = new List<Monster>();
 
@@ -152,6 +155,28 @@ public class GameManager : Singleton<GameManager>
         this.UpdateCurrency(newCurrency);
 
         this.pickedButton = null;
+    }
+
+    public void SelectTower(Tower tower)
+    {
+        //if tower exist, deselect it
+        if (selectedTower != null)
+        {
+            selectedTower.Select();
+        }
+
+        selectedTower = tower;
+        selectedTower.Select();
+    }
+
+    public void DeselectTower()
+    {
+        if (selectedTower != null)
+        {
+            selectedTower.Select();
+        }
+
+        selectedTower = null;
     }
 
     //method that starts a summoning parocess of the monster wave

@@ -5,6 +5,7 @@ TagManager:
   serializedVersion: 2
   tags:
   - BasePortal
+  - Monster
   layers:
   - Default
   - TransparentFX
@@ -47,6 +48,9 @@ TagManager:
     locked: 0
   - name: Debugging
     uniqueID: 1528022919
+    locked: 0
+  - name: Projectiles
+    uniqueID: 3368937551
     locked: 0
   - name: Player
     uniqueID: 3438664305
