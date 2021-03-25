@@ -62,4 +62,20 @@ public class Projectile : MonoBehaviour
         }
         
     }
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.tag == "Monster") //if the target in range is a monster
+        {
+            if (targetMonster.gameObject == other.gameObject)
+            {
+                //Debug.Log("Monster hit");
+
+                targetMonster.TakeDamage(parentTower.getDamage());
+
+                //remove the projectile from the pool of objects in scene
+                GameManager.Instance.Pool.ReleaseObject(gameObject);
+            }
+
+        }
+    }
 }
