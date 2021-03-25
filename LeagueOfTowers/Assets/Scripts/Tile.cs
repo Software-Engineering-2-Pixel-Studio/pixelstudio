@@ -69,6 +69,11 @@ public class Tile : MonoBehaviour
         this.isWalkable = walkableState;
     }
 
+    public void setIsPlaced(bool isPlacedOther)
+    {
+        this.isPlaced = isPlacedOther;
+    }
+
     //this function is called whenever the mouse is hover on this Tile
     private void OnMouseOver()
     {
@@ -130,11 +135,14 @@ public class Tile : MonoBehaviour
         //reference the tower script
         this.myTower = tower.transform.GetChild(0).GetComponent<Tower>();
 
+        myTower.setPrice(GameManager.Instance.GetPickedTowerButton().GetPrice());
+
         //pay for this tower
         GameManager.Instance.PayForPlacedTower();
 
         //deactive the Hover's spriterenderer
         Hover.Instance.Deactivate();
+        
 
         //make the tile not walkable by enemy
         this.isWalkable = false;

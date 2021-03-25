@@ -29,6 +29,9 @@ public class Tower : MonoBehaviour
     //how long till the next attack
     [SerializeField] private float attackCooldown;
 
+    //price of the tower
+    private int price;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -43,6 +46,11 @@ public class Tower : MonoBehaviour
         Attack();
 
         Debug.Log(target);
+    }
+
+    public void setPrice(int otherPrice)
+    {
+        this.price = otherPrice;
     }
 
     public void Select()
@@ -129,5 +137,10 @@ public class Tower : MonoBehaviour
     public Monster getTarget()
     {
         return target;
+    }
+
+    public int getPrice()
+    {
+        return price;
     }
 }
