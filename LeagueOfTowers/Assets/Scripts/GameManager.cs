@@ -48,6 +48,13 @@ public class GameManager : Singleton<GameManager>
     [SerializeField]
     private GameObject gameOverMenu;
 
+    //upgrade panel of tower
+    [SerializeField ] private GameObject upgradePanel;
+
+    //selling price of the tower
+    [SerializeField] private Text sellPriceText;
+
+
     //keeps the status of the wave(true = wave in process; false = not wave time)
     private bool WaveActive{
         get{
@@ -159,24 +166,36 @@ public class GameManager : Singleton<GameManager>
 
     public void SelectTower(Tower tower)
     {
-        //if tower exist, deselect it
-        if (selectedTower != null)
+        if (selectedTower != null) //if we have selected a tower
         {
             selectedTower.Select();
         }
 
+        //sets the selected tower
         selectedTower = tower;
+
+        //selects the tower
         selectedTower.Select();
+
+        sellPriceText.text = "+ " + (selectedTower.getPrice() / 2).ToString();
+
+        //show the upgrade panel
+        upgradePanel.SetActive(true);
     }
 
     public void DeselectTower()
     {
-        if (selectedTower != null)
+        if (selectedTower != null) //if we have selected a tower
         {
+            //de-selects the tower
             selectedTower.Select();
         }
 
+        //set to unselected/null
         selectedTower = null;
+
+        //don't show the upgrade panel
+        upgradePanel.SetActive(false);
     }
 
     //method that starts a summoning parocess of the monster wave
@@ -254,5 +273,19 @@ public class GameManager : Singleton<GameManager>
     //      -> implementation of the functionality of the Quit button
     public void QuitGame(){
         Application.Quit();
+    }
+
+    public void SellTower()
+    {
+        if (selectedTower != null)
+        {
+            UpdateCurrency((selectedTower.getPrice()/2) + currency);
+
+            selectedTower.GetComponentInParent<Tile>().setIsPlaced(false);
+
+            Destroy(selectedTower.transform.parent.gameObject);
+
+            DeselectTower();
+        }
     }
 }
