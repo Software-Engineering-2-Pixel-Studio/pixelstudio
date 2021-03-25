@@ -6,6 +6,9 @@ using Photon.Pun;
 
 public class Tower : MonoBehaviour
 {
+    //price of the tower
+    [SerializeField]
+    private int price;
     private PhotonView view;
 
     //tower range renderer
@@ -22,7 +25,9 @@ public class Tower : MonoBehaviour
 
     //projectile speed
     [SerializeField] private float projectileSpeed;
-    
+
+    //damage of the tower
+    [SerializeField] private int damage;
 
     //let's say we can attack from the getgo
     private bool canAttack = true;
@@ -47,9 +52,19 @@ public class Tower : MonoBehaviour
         //attack targets
         Attack();
 
-        Debug.Log(target);
+        //Debug.Log(target);
     }
 
+    public void setPrice(int otherPrice)
+    {
+        this.price = otherPrice;
+    }
+
+    public void setDamage(int damageGiven)
+    {
+        this.damage = damageGiven;
+
+    }
     public void Select()
     {
         //enable or disable the tower range when selected
@@ -143,5 +158,15 @@ public class Tower : MonoBehaviour
         return target;
     }
 
-    
+    public int getDamage(){
+        return this.damage;
+    }
+
+    public int GetPrice(){
+        return this.price;
+    }
+
+    public PhotonView GetPhotonView(){
+        return this.view;
+    }
 }

@@ -112,8 +112,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aa848dd635b01594a9fdd60df117bced, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  price: 10
   projectileType: FireProjectile
   projectileSpeed: 3
+  damage: 5
   attackCooldown: 3
 --- !u!1 &2303525347792396461
 GameObject:

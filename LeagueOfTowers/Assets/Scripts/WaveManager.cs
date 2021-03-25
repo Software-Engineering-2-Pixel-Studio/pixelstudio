@@ -20,6 +20,10 @@ public class WaveManager : Singleton<WaveManager>
 
     private Coroutine waveCoroutine; //to control the coroutine of the wave
 
+    private bool waveOver;
+
+    private int enemyHealth = 10;
+
     // Start is called before the first frame update
     private void Start()
     {
@@ -68,12 +72,18 @@ public class WaveManager : Singleton<WaveManager>
 
             //get the monster object from the pool of objects control by this WaveManager
             Monster monster = pool.GetObject(type).GetComponent<Monster>();
-            monster.Spawn();
+            monster.Spawn(enemyHealth);
 
-            activeMonsters.Add(monster);
+            if (this.waves % 3 == 0) //increase health of monsters by 2 every 3 waves
+            {
+                this.enemyHealth += 2;
+            }
+
+            this.activeMonsters.Add(monster);
 
             yield return new WaitForSeconds(2.5f);
         }
+        this.waveOver = true;
         
     }
     private bool isWaveActive()
@@ -112,11 +122,12 @@ public class WaveManager : Singleton<WaveManager>
     */
     public void StartWave()
     {
-        waves++;
-        waveText.text = string.Format("{0}", waves);
-        waveCoroutine = StartCoroutine(SpawnWave());
+        this.waves++;
+        this.waveText.text = string.Format("{0}", waves);
+        this.waveCoroutine = StartCoroutine(SpawnWave());
 
-        startWaveButton.SetActive(false);
+        this.startWaveButton.SetActive(false);
+        this.waveOver = false;
     }
 
     /*
@@ -141,7 +152,8 @@ public class WaveManager : Singleton<WaveManager>
     public void removeMonster(Monster monster)
     {
         activeMonsters.Remove(monster);
-        if(!isWaveActive()){
+        //if(!isWaveActive()){
+        if(!isWaveActive() && waveOver){
             startWaveButton.SetActive(true);
         }
     }

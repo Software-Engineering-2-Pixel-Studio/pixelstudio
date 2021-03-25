@@ -5,6 +5,15 @@ using Photon.Pun;
 
 public class Monster : MonoBehaviour
 {
+    //fields
+    [SerializeField] private float healthValue;     //health of monster
+
+    public bool isAlive { get { return healthValue > 0; } } //condition to check if monster is alive
+
+    //money you get from killing these monsters
+    private int dummyIncome = 4;
+    private int scarecrowIncome = 8;
+
     [SerializeField]
     private float speed; //serialized to access from different places
     private Stack<Node> path;
@@ -25,14 +34,16 @@ public class Monster : MonoBehaviour
 
     //Spawns a monster on a map by setting it's position first to the position of the 
     //   Spawn portal
-    public void Spawn(){
+    public void Spawn(int health){
             if(this.name == "TrainingDummy"){
                 StartCoroutine(Scale(new Vector3(0.1f, 0.1f), new Vector3(0.6f,0.6f), false));
                 transform.position = MapManager.Instance.SpawnPrefab.transform.position;
+                this.healthValue = health;
             }
             else if(this.name == "Scarecrow"){
                 StartCoroutine(Scale(new Vector3(0.1f, 0.1f), new Vector3(0.5f,0.5f), false));
                 transform.position = MapManager.Instance.SpawnPrefab.transform.position;
+                this.healthValue = health*2;
             }
 
             SetPath(MapManager.Instance.Path);
@@ -113,5 +124,41 @@ public class Monster : MonoBehaviour
         GridPosition = MapManager.Instance.SpawnPos; // to make sure next time we use the object it starts at start position
         WaveManager.Instance.GetPool().ReleaseObject(gameObject); // makes an object inactive for later usage
         WaveManager.Instance.removeMonster(this);   // removes the monster from the "active monsters of the wave" list
+    }
+
+    public void TakeDamage(int damage)
+    {
+        if (IsActive) //if monster is active
+        {
+            //do some damage
+            healthValue -= damage;
+            Debug.Log("health: " + healthValue.ToString());
+
+            if (healthValue <= 0) //if it's dead (health is 0)
+            {
+                //int currentCurrency = CurrencyManager.Instance.GetCurrency();
+
+                //add some currency depending on type of monster
+                if (this.name == "TrainingDummy")
+                {
+                    //GameManager.Instance.UpdateCurrency(currentCurrency + dummyIncome);
+                    CurrencyManager.Instance.AddCurrency(dummyIncome);
+                }
+                else if (this.name == "Scarecrow")
+                {
+                    //GameManager.Instance.UpdateCurrency(currentCurrency + scarecrowIncome);
+                    CurrencyManager.Instance.AddCurrency(scarecrowIncome);
+                }
+
+                IsActive = false;
+
+                //remove the monster from the pool of objects in scene
+                //GameManager.Instance.Pool.ReleaseObject(gameObject);
+                //GameManager.Instance.removeMonster(this);   // removes the monster from the "active monsters of the wave" list
+                WaveManager.Instance.GetPool().ReleaseObject(gameObject);
+                WaveManager.Instance.removeMonster(this);
+            }
+        }
+
     }
 }

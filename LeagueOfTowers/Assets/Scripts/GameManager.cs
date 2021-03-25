@@ -3,17 +3,22 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using Photon.Pun;
 
 public class GameManager : Singleton<GameManager>
 {
-    
-
     //fields
     //this is for choosing tower from sidebar
     [SerializeField] private TowerButton pickedButton;
 
     //the current selected tower
     private Tower selectedTower;
+
+    //upgrade panel of tower
+    [SerializeField ] private GameObject upgradePanel;
+
+    //selling price of the tower
+    [SerializeField] private Text sellPriceText;
 
     //the list of the monsters in the wave
     private List<Monster> activeMonsters = new List<Monster>();
@@ -29,6 +34,8 @@ public class GameManager : Singleton<GameManager>
     [SerializeField]
     private GameObject gameOverMenu;
 
+    //private PhotonView view;
+
     
     private void Awake(){
         Pool = GetComponent<ObjectPool>();
@@ -37,7 +44,7 @@ public class GameManager : Singleton<GameManager>
     // Start is called before the first frame update
     private void Start()
     {
-
+        //this.view = GetComponent<PhotonView>();
         //Lives = 10;
     }
 
@@ -104,6 +111,10 @@ public class GameManager : Singleton<GameManager>
 
         selectedTower = tower;
         selectedTower.Select();
+
+        sellPriceText.text = "Sell for " + (selectedTower.GetPrice() / 2).ToString();
+
+        upgradePanel.SetActive(true);
     }
 
     public void DeselectTower()
@@ -114,6 +125,7 @@ public class GameManager : Singleton<GameManager>
         }
 
         selectedTower = null;
+        upgradePanel.SetActive(false);
     }
 
     //method that starts a summoning parocess of the monster wave
@@ -192,4 +204,28 @@ public class GameManager : Singleton<GameManager>
     public void QuitGame(){
         Application.Quit();
     }
+
+    public void SellTower()
+    {
+        if (selectedTower != null)
+        {
+            selectedTower.GetComponentInParent<Tile>().SetIsPlaced(false);
+            //UpdateCurrency((selectedTower.getPrice()/2) + currency);
+            CurrencyManager.Instance.AddCurrency(selectedTower.GetPrice()/2);
+            //Destroy(selectedTower.transform.parent.gameObject);
+            selectedTower.transform.parent.gameObject.SetActive(false);
+            //DestroyTower(selectedTower.transform.parent.gameObject);
+            //PhotonNetwork.Destroy(selectedTower.transform.parent.gameObject.GetComponent<Tower>().GetPhotonView());
+            DeselectTower();
+        }
+    }
+
+    // [PunRPC]
+    // private void destroyTowerRPC(GameObject go){
+    //     Destroy(go);
+    // }
+
+    // public void DestroyTower(GameObject gameObject){
+    //     this.view.RPC("destroyTowerRPC", RpcTarget.All, gameObject);
+    // }
 }
