@@ -147,7 +147,7 @@ public class Tile : MonoBehaviour
         //make the tile not walkable by enemy
         this.isWalkable = false;
 
-        Debug.Log("Placed a tower!");
+        //Debug.Log("Placed a tower!");
         
     }
 
