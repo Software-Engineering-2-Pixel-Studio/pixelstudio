@@ -27,10 +27,10 @@
 | Hoang Huy Pham | [Phamhhuy](https://github.com/Phamhhuy)| Game Developer | phamhh@myumanitoba.ca
 
 ## Description
-This project is a 2D tower defense game with a top-down view where players need to coordinate their actions through communication to protect the base and prevent enemy units from entering their lands. This web-based browser game will be focusing on providing people an experience of playing cooperatively by requiring them to manage shared resources such as money and experience points. At the same time, players will need to develop a reliable strategy before placing towers to defend their base since each player will be restricted to build only a specific type of tower (e. g. supporting or attacking). To coordinate their actions, players will communicate through the in-game chat or any other out of game application such as Zoom or Discord.
+This project is a 2D tower defense game with a top-down view where players need to coordinate their actions through communication to protect the base and prevent enemy units from entering their lands. This desktop-based game will be focusing on providing people an experience of playing cooperatively by requiring them to manage shared resources such as money and experience points. At the same time, players will need to develop a reliable strategy before placing towers to defend their base since each player will be restricted to build only a specific type of tower (e. g. supporting or attacking). To coordinate their actions, players can communicate through out of game application such as Zoom or Discord.
 
 ## **Vision**
-This web-based browser game will have a multiplayer feature so friends and family members could gather online and spend time together virtually during the COVID-19 pandemic.
+This desktop-based game will have a multiplayer feature so friends and family members could gather online and spend time together virtually during the COVID-19 pandemic.
 
 ## Objectives
 The project objectives are to:
