@@ -14,6 +14,8 @@ public class CurrencyManager : Singleton<CurrencyManager>
     // Start is called before the first frame update
     private void Start()
     {
+        this.currency = 500;
+        this.currencyDisplay.text = string.Format("{0}<color='lime'>$</color>", this.currency);
         this.view = GetComponent<PhotonView>();
     }
 

@@ -4,9 +4,9 @@ using UnityEngine;
 using UnityEngine.UI;
 using Photon.Pun;
 
-public class SpawnMonsterManager : Singleton<SpawnMonsterManager>
+public class WaveManager : Singleton<WaveManager>
 {
-    [SerializeField] private GameObject waveButton; //reference to the StartWave button
+    [SerializeField] private GameObject startWaveButton; //reference to the StartWave button
 
     private List<Monster> activeMonsters = new List<Monster>(); //the list of the monsters in the wave
 
@@ -26,11 +26,11 @@ public class SpawnMonsterManager : Singleton<SpawnMonsterManager>
         pool = GetComponent<ObjectPool>();
         //only MasterClient (host) can see this button
         if(PhotonNetwork.IsMasterClient){
-            this.waveButton.SetActive(true);
+            this.startWaveButton.SetActive(true);
         }
         else
         {
-            this.waveButton.SetActive(true);
+            this.startWaveButton.SetActive(true);
         }
     }
 
@@ -95,14 +95,14 @@ public class SpawnMonsterManager : Singleton<SpawnMonsterManager>
         waveText.text = string.Format("{0}", waves);
         StartCoroutine(SpawnWave());
 
-        waveButton.SetActive(false);
+        startWaveButton.SetActive(false);
     }
 
     public void removeMonster(Monster monster)
     {
         activeMonsters.Remove(monster);
         if(!isWaveActive()){
-            waveButton.SetActive(true);
+            startWaveButton.SetActive(true);
         }
     }
 

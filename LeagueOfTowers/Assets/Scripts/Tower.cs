@@ -1,9 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Photon.Pun;
+
 
 public class Tower : MonoBehaviour
 {
+    private PhotonView view;
+
     //tower range renderer
     private SpriteRenderer mySpriteRenderer;
 
@@ -32,6 +36,7 @@ public class Tower : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        view = this.GetComponent<PhotonView>();
         //get the sprite
         mySpriteRenderer = GetComponent<SpriteRenderer>();
     }

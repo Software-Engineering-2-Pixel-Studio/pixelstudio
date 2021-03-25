@@ -100,7 +100,8 @@ public class Monster : MonoBehaviour
             else if(this.name == "Scarecrow"){
                 StartCoroutine(Scale(new Vector3(0.5f, 0.5f), new Vector3(0.1f,0.1f), true));
             }
-            GameManager.Instance.Lives--;
+            //GameManager.Instance.Lives--;
+            LivesManager.Instance.SubLives();
         }
     }
 
@@ -111,7 +112,7 @@ public class Monster : MonoBehaviour
         GridPosition = MapManager.Instance.SpawnPos; // to make sure next time we use the object it starts at start position
         //GameManager.Instance.Pool.ReleaseObject(gameObject);    
         //GameManager.Instance.removeMonster(this);   
-        SpawnMonsterManager.Instance.GetPool().ReleaseObject(gameObject); // makes an object inactive for later usage
-        SpawnMonsterManager.Instance.removeMonster(this);   // removes the monster from the "active monsters of the wave" list
+        WaveManager.Instance.GetPool().ReleaseObject(gameObject); // makes an object inactive for later usage
+        WaveManager.Instance.removeMonster(this);   // removes the monster from the "active monsters of the wave" list
     }
 }

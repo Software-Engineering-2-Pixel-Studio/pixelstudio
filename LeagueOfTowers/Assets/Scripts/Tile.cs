@@ -97,7 +97,8 @@ public class Tile : MonoBehaviour
                     }
                 }
             }
-        } else if (!EventSystem.current.IsPointerOverGameObject() && GameManager.Instance.GetPickedTowerButton() == null && Input.GetMouseButtonDown(0))
+        } 
+        else if (!EventSystem.current.IsPointerOverGameObject() && GameManager.Instance.GetPickedTowerButton() == null && Input.GetMouseButtonDown(0))
         {
             if (myTower != null)
             {
