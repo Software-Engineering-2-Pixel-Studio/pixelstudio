@@ -1,0 +1,485 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1" MembersFormat="FullSignature">
+  <Class Name="Photon.Chat.UtilityScripts.EventSystemSpawner">
+    <Position X="15.5" Y="5.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAACAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Photon\PhotonChat\Demos\Common\EventSystemSpawner.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Photon.Chat.UtilityScripts.OnStartDelete">
+    <Position X="0.75" Y="14.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAACAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Photon\PhotonChat\Demos\Common\OnStartDelete.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Photon.Chat.UtilityScripts.TextButtonTransition" BaseTypeListCollapsed="true">
+    <Position X="13.5" Y="8.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAQAAABAAAAAAAAAAAAAAAAAgAAAIAAAAAQAACEI=</HashCode>
+      <FileName>Assets\Photon\PhotonChat\Demos\Common\TextButtonTransition.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="_text" />
+      <Field Name="HoverColor" />
+      <Field Name="NormalColor" />
+      <Field Name="Selectable" />
+    </ShowAsAssociation>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="Photon.Chat.UtilityScripts.TextToggleIsOnTransition" BaseTypeListCollapsed="true">
+    <Position X="15.5" Y="8.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAACAAAAAAAAAAAADAAggAEIAAAQAQAAKAA=</HashCode>
+      <FileName>Assets\Photon\PhotonChat\Demos\Common\TextToggleIsOnTransition.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="AppSettingsExtensions">
+    <Position X="7.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAACAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Photon\PhotonChat\Demos\DemoChat\AppSettingsExtensions.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ChannelSelector" BaseTypeListCollapsed="true">
+    <Position X="16.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAgAgAAACAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Photon\PhotonChat\Demos\DemoChat\ChannelSelector.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="Channel" />
+    </ShowAsAssociation>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="ChatAppIdCheckerUI">
+    <Position X="7.75" Y="5.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAAAAgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Photon\PhotonChat\Demos\DemoChat\ChatAppIdCheckerUI.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="Description" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="ChatGui" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="9.25" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>CGQBAFoQQCqDGEQAABCAAICUAEBggYIYCRAwTAAQAJA=</HashCode>
+      <FileName>Assets\Photon\PhotonChat\Demos\DemoChat\ChatGui.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="FriendItem">
+    <Position X="9" Y="15" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAACAAAAAAAAAAAAAAIAAAAAAABAAAAEAAAAQAAAEA=</HashCode>
+      <FileName>Assets\Photon\PhotonChat\Demos\DemoChat\FriendItem.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="Health" />
+      <Field Name="NameLabel" />
+      <Field Name="StatusLabel" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="IgnoreUiRaycastWhenInactive" BaseTypeListCollapsed="true">
+    <Position X="11.75" Y="15.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Photon\PhotonChat\Demos\DemoChat\IgnoreUiRaycastWhenInactive.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="NamePickGui">
+    <Position X="20" Y="16.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AQAAACAAACAACAAAAAAAAAAAAAAAACAAAAAAAAgAAAA=</HashCode>
+      <FileName>Assets\Photon\PhotonChat\Demos\DemoChat\NamePickGui.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="chatNewComponent" />
+      <Field Name="idInput" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="AStar">
+    <Position X="9.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAACAAAAAAAAAIAAAAAAAAAAAAAAgAAIAA=</HashCode>
+      <FileName>Assets\Scripts\AStarAlgorithm\AStar.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="AStarDebugger">
+    <Position X="11" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAEAAACABABAgAEAAAAAAAAAAAAAAAAJACAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\AStarAlgorithm\AStarDebugger.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="arrowPrefab" />
+      <Field Name="debugTilePrefab" />
+      <Field Name="goalTile" />
+      <Field Name="startTile" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="DebugTile">
+    <Position X="13.5" Y="5.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAEAAAAAgAAAAAAAAAAAAAAAAAAAAAGEBAAAA=</HashCode>
+      <FileName>Assets\Scripts\AStarAlgorithm\DebugTile.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="fText" />
+      <Field Name="gText" />
+      <Field Name="hText" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="Node">
+    <Position X="0.75" Y="17" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAgAAEAAAAiAAAAAAAQAAAAAAAEAAAAAAAACAAAAE=</HashCode>
+      <FileName>Assets\Scripts\AStarAlgorithm\Node.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CameraFollow">
+    <Position X="12.75" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AHQABAAAACAAAAAAAAAAAAAAAAAAAUAAAQAAADAAAEA=</HashCode>
+      <FileName>Assets\Scripts\CameraFollow.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="camTransform" />
+      <Field Name="heightCameraBox" />
+      <Field Name="maxX" />
+      <Field Name="maxY" />
+      <Field Name="minX" />
+      <Field Name="minY" />
+      <Field Name="speed" />
+      <Field Name="widthCameraBox" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="CameraMovement">
+    <Position X="14.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ATQAAAAAECAAAAAAAAAAAAAAAAAAAAAAAQAAADAAAEA=</HashCode>
+      <FileName>Assets\Scripts\CameraMovement.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="maxX" />
+      <Field Name="maxY" />
+      <Field Name="minX" />
+      <Field Name="minY" />
+      <Field Name="moveSpeed" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="GameManager">
+    <Position X="5.5" Y="5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>NsQAgIACACAAgAAigAgagoABAAJCCABKAAwgABAAEOA=</HashCode>
+      <FileName>Assets\Scripts\GameManager.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="activeMonsters" />
+      <Field Name="currency" />
+      <Field Name="currencyText" />
+      <Field Name="enemyHealth" />
+      <Field Name="gameOver" />
+      <Field Name="gameOverMenu" />
+      <Field Name="lives" />
+      <Field Name="livesText" />
+      <Field Name="pickedButton" />
+      <Field Name="selectedTower" />
+      <Field Name="sellPriceText" />
+      <Field Name="upgradePanel" />
+      <Field Name="wave" />
+      <Field Name="waveButton" />
+      <Field Name="waveCoroutine" />
+      <Field Name="waveOver" />
+      <Field Name="waveText" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="Hover">
+    <Position X="1" Y="7" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAQACBAACBAEAAAAAAAAAIAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\Hover.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="rangedSpriteRenderer" />
+      <Field Name="spriteRenderer" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="Constants">
+    <Position X="11.5" Y="5.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAgAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\MainMenuController.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MainMenuController">
+    <Position X="9.75" Y="18.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAIERCAEAAAAAEgCAACAAAAAEAAAEBAACAAwAEA=</HashCode>
+      <FileName>Assets\Scripts\MainMenuController.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="CreateGameInput" />
+      <Field Name="GameVersion" />
+      <Field Name="JoinGameInput" />
+      <Field Name="MainMenuCanvas" />
+      <Field Name="OKButton" />
+      <Field Name="UserNameInput" />
+      <Field Name="UserNameMenuCanvas" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="MapManager">
+    <Position X="3.5" Y="3.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AQR2AAYAAGAkBCOAAQQCAABAAIACCIKAAQAgAAACAsA=</HashCode>
+      <FileName>Assets\Scripts\MapManager.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="basePos" />
+      <Field Name="basePrefab" />
+      <Field Name="camFollow" />
+      <Field Name="camMove" />
+      <Field Name="ground" />
+      <Field Name="mapBounds" />
+      <Field Name="mapSize" />
+      <Field Name="maxMapX" />
+      <Field Name="maxMapY" />
+      <Field Name="minMapX" />
+      <Field Name="minMapY" />
+      <Field Name="path" />
+      <Field Name="spawnPos" />
+      <Field Name="spawnPrefab" />
+      <Field Name="tilePrefabs" />
+      <Field Name="Tiles" />
+      <Field Name="xIndexSize" />
+      <Field Name="yIndexSize" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="Monster">
+    <Position X="14.25" Y="15.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAgCAAAIQAAAAAEAMCAAAAAEAAIQAAAAAAhJEABAA=</HashCode>
+      <FileName>Assets\Scripts\Monster.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="destination" />
+      <Field Name="dummyIncome" />
+      <Field Name="path" />
+      <Field Name="scarecrowIncome" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="ObjectPool">
+    <Position X="7.75" Y="7.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAABIAQAAAAAAAAAAAAIAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\ObjectPool.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="objectPrefabs" />
+      <Field Name="pooledObects" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="Portal">
+    <Position X="1" Y="13" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\Portal.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Projectile">
+    <Position X="11.5" Y="7" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAEAACAAAQBAIAAAAAAAAEAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\Projectile.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="parent" />
+      <Field Name="target" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="Singleton&lt;T&gt;">
+    <Position X="3.75" Y="1" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAABAAAAAQAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\Singleton.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Tile">
+    <Position X="18.75" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>EgQEEAAAACAAACEABoCAAQAAEBJCAgQAECCIAIAQQEA=</HashCode>
+      <FileName>Assets\Scripts\Tile.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="aStarDebugging" />
+      <Field Name="centerWorldPos" />
+      <Field Name="colorEmptyTile" />
+      <Field Name="colorFullTile" />
+      <Field Name="gridPos" />
+      <Field Name="isPlaced" />
+      <Field Name="isWalkable" />
+      <Field Name="myTower" />
+      <Field Name="spriteRenderer" />
+      <Field Name="worldPos" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="Tower">
+    <Position X="20.5" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AIQBCCCAQyAChBAAIAAAATAAAMAAEAAAAAAAQAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\Tower.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="attackCooldown" />
+      <Field Name="attackTimer" />
+      <Field Name="canAttack" />
+      <Field Name="damage" />
+      <Field Name="monsters" />
+      <Field Name="mySpriteRenderer" />
+      <Field Name="price" />
+      <Field Name="projectileSpeed" />
+      <Field Name="projectileType" />
+      <Field Name="target" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="TowerButton">
+    <Position X="22.25" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQBAAAAACAEEAAAEAAACAAAABAAAABAAAAAAAAIAAA=</HashCode>
+      <FileName>Assets\Scripts\TowerButton.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="price" />
+      <Field Name="priceText" />
+      <Field Name="sprite" />
+      <Field Name="towerPrefab" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="Photon.Realtime.Demo.ConnectAndJoinRandomLb" BaseTypeListCollapsed="true">
+    <Position X="9.75" Y="5.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>gEaAAEIAACAAEQAAAEACAIEAAAGBAAIEEAJAAAAAQIA=</HashCode>
+      <FileName>Assets\Photon\PhotonRealtime\Demos\DemoLoadBalancing\ConnectAndJoinRandomLb.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="StateUiText" />
+    </ShowAsAssociation>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="UnityEngine.MonoBehaviour">
+    <Position X="0.75" Y="0.75" Width="1.5" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="UnityEngine.Behaviour">
+    <Position X="18.75" Y="0.5" Width="1.5" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="System.Object" Collapsed="true">
+    <Position X="3" Y="21.25" Width="1.5" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="UnityEngine.SpriteRenderer" Collapsed="true">
+    <Position X="1" Y="11.25" Width="1.5" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="UnityEngine.UI.Text">
+    <Position X="5.75" Y="21.25" Width="1.5" />
+    <TypeIdentifier />
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="UnityEngine.UI.InputField" Collapsed="true">
+    <Position X="9.75" Y="26" Width="1.5" />
+    <TypeIdentifier />
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="System.String" Collapsed="true">
+    <Position X="11.75" Y="20" Width="1.5" />
+    <TypeIdentifier />
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="UnityEngine.GameObject" Collapsed="true">
+    <Position X="1" Y="24" Width="1.5" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="System.Int32" Collapsed="true">
+    <Position X="14.25" Y="22.75" Width="1.5" />
+    <TypeIdentifier />
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="System.Collections.Generic.Stack&lt;T&gt;" Collapsed="true">
+    <Position X="16.5" Y="19.25" Width="1.5" />
+    <TypeIdentifier />
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="UnityEngine.Transform" Collapsed="true">
+    <Position X="23.75" Y="10.75" Width="1.5" />
+    <TypeIdentifier />
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="System.Single" Collapsed="true">
+    <Position X="26.5" Y="10.5" Width="1.5" />
+    <TypeIdentifier />
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="System.Collections.Generic.Dictionary&lt;TKey, TValue&gt;" Collapsed="true">
+    <Position X="23.5" Y="14" Width="1.5" />
+    <TypeIdentifier />
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="System.Collections.Generic.List&lt;T&gt;" Collapsed="true">
+    <Position X="29.75" Y="10.5" Width="1.5" />
+    <TypeIdentifier />
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="System.Boolean" Collapsed="true">
+    <Position X="26.5" Y="14.75" Width="1.5" />
+    <TypeIdentifier />
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="UnityEngine.Coroutine" Collapsed="true">
+    <Position X="23.5" Y="15.75" Width="1.5" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="System.Collections.Generic.Queue&lt;T&gt;" Collapsed="true">
+    <Position X="24.5" Y="1.5" Width="1.5" />
+    <TypeIdentifier />
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="UnityEngine.Sprite">
+    <Position X="27.25" Y="1.25" Width="1.5" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="UnityEngine.UI.Selectable" Collapsed="true">
+    <Position X="17.5" Y="13.25" Width="1.5" />
+    <TypeIdentifier />
+    <Lollipop Position="0.2" />
+  </Class>
+  <Struct Name="Point">
+    <Position X="3.25" Y="17.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAggAAAAAAAAAAAAAAAYAA=</HashCode>
+      <FileName>Assets\Scripts\Point.cs</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="UnityEngine.Vector3" Collapsed="true">
+    <Position X="17" Y="21.75" Width="1.5" />
+    <TypeIdentifier />
+    <Lollipop Position="0.2" />
+  </Struct>
+  <Struct Name="UnityEngine.Color32">
+    <Position X="30" Y="2.75" Width="1.5" />
+    <TypeIdentifier />
+    <Lollipop Position="0.2" />
+  </Struct>
+  <Struct Name="UnityEngine.Color" Collapsed="true">
+    <Position X="17.5" Y="10" Width="1.5" />
+    <TypeIdentifier />
+    <Lollipop Position="0.2" />
+  </Struct>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>
