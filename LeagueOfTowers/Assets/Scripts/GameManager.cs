@@ -6,6 +6,9 @@ using UnityEngine.SceneManagement;
 
 public class GameManager : Singleton<GameManager>
 {
+    //to control the coroutine of the wave
+    Coroutine waveCoroutine;
+
     //fields
     //this is for choosing tower from sidebar
     [SerializeField] private TowerButton pickedButton;
@@ -56,12 +59,12 @@ public class GameManager : Singleton<GameManager>
             return lives;
         }
         set{
-            this.lives = value;
-            this.livesText.text = this.lives.ToString();
-            if (lives <= 0){
+            if (lives == 1){
                 this.lives = 0;
                 GameOver();
             }
+            this.lives = value;
+            this.livesText.text = this.lives.ToString();
         }
     }
     private void Awake(){
@@ -155,7 +158,7 @@ public class GameManager : Singleton<GameManager>
     public void StartWave(){
         wave++;
         waveText.text = string.Format("Wave: <color=lime>{0}</color>", wave);
-        StartCoroutine(SpawnWave());
+        waveCoroutine = StartCoroutine(SpawnWave());
 
         waveButton.SetActive(false);    // disactivate a button until wave is done
     }
@@ -201,6 +204,16 @@ public class GameManager : Singleton<GameManager>
     public void GameOver(){
         if(!gameOver){
             gameOver = true;
+            //stop producing new monsters on the map
+            StopCoroutine(waveCoroutine);
+            //stop existing monsters on the field from moving and remove them
+            for(int i=0; i<=activeMonsters.Count; i++){
+                activeMonsters[i].SetActive(false);
+                activeMonsters.Remove(activeMonsters[i]);
+            }
+            activeMonsters[0].SetActive(false);
+            activeMonsters.Remove(activeMonsters[0]);
+            //activate the game over screen
             gameOverMenu.SetActive(true);
         }
     }
