@@ -75,12 +75,12 @@ public class GameManager : Singleton<GameManager>
             return lives;
         }
         set{
-            if (lives == 1){
+            this.lives = value;
+            this.livesText.text = this.lives.ToString();
+            if (lives <= 0){
                 this.lives = 0;
                 GameOver();
             }
-            this.lives = value;
-            this.livesText.text = this.lives.ToString();
         }
     }
     private void Awake(){
@@ -267,12 +267,9 @@ public class GameManager : Singleton<GameManager>
             //stop producing new monsters on the map
             StopCoroutine(waveCoroutine);
             //stop existing monsters on the field from moving and remove them
-            for(int i=0; i<=activeMonsters.Count; i++){
-                activeMonsters[i].SetActive(false);
-                activeMonsters.Remove(activeMonsters[i]);
+            while(activeMonsters.Count>0){
+                activeMonsters[0].Release();
             }
-            //activeMonsters[0].SetActive(false);
-            //activeMonsters.Remove(activeMonsters[0]);
             //activate the game over screen
             gameOverMenu.SetActive(true);
         }

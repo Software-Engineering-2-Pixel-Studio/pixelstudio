@@ -113,7 +113,7 @@ public class Monster : MonoBehaviour
 
     // method that releases the monster 
     //      -> sets as inactive and removes from the map to be seen, but leaves the object to be used again for the future
-    private void Release(){
+    public void Release(){
         IsActive = false; // so next time we use the object it starts as not active;
         GridPosition = MapManager.Instance.SpawnPos; // to make sure next time we use the object it starts at start position
         GameManager.Instance.Pool.ReleaseObject(gameObject);    // makes an object inactive for later usage
