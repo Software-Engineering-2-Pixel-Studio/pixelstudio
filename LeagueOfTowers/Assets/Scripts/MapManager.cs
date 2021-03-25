@@ -29,6 +29,13 @@ public class MapManager : Singleton<MapManager>
 
     //start and end pathing
     private Point spawnPos;
+
+    public Point SpawnPos{
+        get{
+            return spawnPos;
+        }
+    }
+
     [SerializeField] private GameObject spawnPrefab;
 
     public Portal SpawnPrefab{ get; set;}
@@ -45,8 +52,7 @@ public class MapManager : Singleton<MapManager>
     // path for monsters to use
     private Stack<Node> path;
 
-
-
+    // the stac that holds the path of the monster
     public Stack<Node> Path
     {
         get{
@@ -88,12 +94,6 @@ public class MapManager : Singleton<MapManager>
     private void Update()
     {
 
-    }
-
-    public Point SpawnPos{
-        get{
-            return spawnPos;
-        }
     }
     
     /*
@@ -149,11 +149,11 @@ public class MapManager : Singleton<MapManager>
         int tileIndex = int.Parse(tileType);
 
         int randomIndex;
-        if (tileIndex == 0)
+        if (tileIndex == 0) //for the grass
         {
             randomIndex = UnityEngine.Random.Range(0, 4); //0-3
         }
-        else
+        else //for the gray walkable tiles
         {
             randomIndex = UnityEngine.Random.Range(4, 8); //4-7
         }
@@ -178,6 +178,7 @@ public class MapManager : Singleton<MapManager>
         
     }
 
+    // gets the Maps representation from an external file and reads it
     private string[] ReadLevelText()
     {
         TextAsset bindData = (TextAsset)Resources.Load("Map");
@@ -223,7 +224,7 @@ public class MapManager : Singleton<MapManager>
 
     private void SetUpBase()
     {
-        basePos = new Point(16, 5);
+        basePos = new Point(15, 5);
 
         //create a base prefab on the scene
         GameObject theBase = Instantiate(basePrefab);

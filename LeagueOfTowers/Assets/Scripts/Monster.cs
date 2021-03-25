@@ -11,9 +11,9 @@ public class Monster : MonoBehaviour
 
     public Point GridPosition{ get; set;}
 
-    private Vector3 destination;
+    private Vector3 destination; // the destination of the monster (base location)
 
-    public bool IsActive{ get; set; }
+    public bool IsActive{ get; set; }   // the condition of the monster (can  move or not)
 
     private void Update(){
         Move();
@@ -38,6 +38,8 @@ public class Monster : MonoBehaviour
             SetPath(MapManager.Instance.Path);
     }
 
+    //method that scales the size of the monster
+    //used to create an illusion that they enter/appear from the base/spawn place
     public IEnumerator Scale(Vector3 from, Vector3 to, bool destroy){
         //IsActive = false;
 
@@ -61,6 +63,7 @@ public class Monster : MonoBehaviour
         }
     }
 
+    //method to move the moster from their position towards the base
     private void Move(){
         if(IsActive){
             transform.position = Vector2.MoveTowards(transform.position, destination, speed*Time.deltaTime);
@@ -74,16 +77,17 @@ public class Monster : MonoBehaviour
         }
     }
 
+    //method that sets the path(from spawn to base) to the monster
     private void SetPath(Stack<Node> newPath){
         if(newPath != null){
             this.path = newPath;
             GridPosition = path.Peek().GridPosition;
             destination = path.Pop().WorldPosition;
         }
-        
     }
 
-    //to 
+    //method that starts action when the monster collides with the base 
+    //      -> meaning that the monster enters the base
     private void OnTriggerEnter2D(Collider2D other){
         //if the monster collide with the base
         if(other.tag == "BasePortal"){
@@ -96,9 +100,12 @@ public class Monster : MonoBehaviour
             else if(this.name == "Scarecrow"){
                 StartCoroutine(Scale(new Vector3(0.5f, 0.5f), new Vector3(0.1f,0.1f), true));
             }
+            GameManager.Instance.Lives--;
         }
     }
 
+    // method that releases the monster 
+    //      -> sets as inactive and removes from the map to be seen, but leaves the object to be used again for the future
     private void Release(){
         IsActive = false; // so next time we use the object it starts as not active;
         GridPosition = MapManager.Instance.SpawnPos; // to make sure next time we use the object it starts at start position
