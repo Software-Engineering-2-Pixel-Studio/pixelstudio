@@ -1,9 +1,19 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Photon.Pun;
 
 public class Monster : MonoBehaviour
 {
+    //fields
+    [SerializeField] private float healthValue;     //health of monster
+
+    public bool isAlive { get { return healthValue > 0; } } //condition to check if monster is alive
+
+    //money you get from killing these monsters
+    private int dummyIncome = 4;
+    private int scarecrowIncome = 8;
+
     [SerializeField]
     private float speed; //serialized to access from different places
     private Stack<Node> path;
@@ -13,14 +23,6 @@ public class Monster : MonoBehaviour
     private Vector3 destination; // the destination of the monster (base location)
 
     public bool IsActive{ get; set; }   // the condition of the monster (can  move or not)
-
-    [SerializeField] private float healthValue;
-
-    public bool isAlive { get { return healthValue > 0; } } //condition to check if monster is alive
-
-    //money you get from killing these monsters
-    private int dummyIncome = 4;
-    private int scarecrowIncome = 8;
 
     private void Update(){
         Move();
@@ -42,7 +44,7 @@ public class Monster : MonoBehaviour
                 StartCoroutine(Scale(new Vector3(0.1f, 0.1f), new Vector3(0.5f,0.5f), false));
                 transform.position = MapManager.Instance.SpawnPrefab.transform.position;
                 this.healthValue = health*2;
-        }
+            }
 
             SetPath(MapManager.Instance.Path);
     }
@@ -100,24 +102,28 @@ public class Monster : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D other){
         //if the monster collide with the base
         if(other.tag == "BasePortal"){
+            Debug.Log("Reach the base");
             //scale down in size them
             if(this.name == "TrainingDummy"){
+                
                 StartCoroutine(Scale(new Vector3(0.6f, 0.6f), new Vector3(0.1f,0.1f), true));
             }
             else if(this.name == "Scarecrow"){
                 StartCoroutine(Scale(new Vector3(0.5f, 0.5f), new Vector3(0.1f,0.1f), true));
             }
-            GameManager.Instance.Lives--;
+
+            //decrease players' lives 
+            LivesManager.Instance.SubLives();
         }
     }
 
     // method that releases the monster 
     //      -> sets as inactive and removes from the map to be seen, but leaves the object to be used again for the future
-    public void Release(){
+    private void Release(){
         IsActive = false; // so next time we use the object it starts as not active;
         GridPosition = MapManager.Instance.SpawnPos; // to make sure next time we use the object it starts at start position
-        GameManager.Instance.Pool.ReleaseObject(gameObject);    // makes an object inactive for later usage
-        GameManager.Instance.removeMonster(this);   // removes the monster from the "active monsters of the wave" list
+        WaveManager.Instance.GetPool().ReleaseObject(gameObject); // makes an object inactive for later usage
+        WaveManager.Instance.removeMonster(this);   // removes the monster from the "active monsters of the wave" list
     }
 
     public void TakeDamage(int damage)
@@ -130,25 +136,29 @@ public class Monster : MonoBehaviour
 
             if (healthValue <= 0) //if it's dead (health is 0)
             {
-                int currentCurrency = GameManager.Instance.GetCurrency();
+                //int currentCurrency = CurrencyManager.Instance.GetCurrency();
 
                 //add some currency depending on type of monster
                 if (this.name == "TrainingDummy")
                 {
-                    GameManager.Instance.UpdateCurrency(currentCurrency + dummyIncome);
+                    //GameManager.Instance.UpdateCurrency(currentCurrency + dummyIncome);
+                    CurrencyManager.Instance.AddCurrency(dummyIncome);
                 }
                 else if (this.name == "Scarecrow")
                 {
-                    GameManager.Instance.UpdateCurrency(currentCurrency + scarecrowIncome);
+                    //GameManager.Instance.UpdateCurrency(currentCurrency + scarecrowIncome);
+                    CurrencyManager.Instance.AddCurrency(scarecrowIncome);
                 }
 
                 IsActive = false;
 
                 //remove the monster from the pool of objects in scene
-                GameManager.Instance.Pool.ReleaseObject(gameObject);
-                GameManager.Instance.removeMonster(this);   // removes the monster from the "active monsters of the wave" list
+                //GameManager.Instance.Pool.ReleaseObject(gameObject);
+                //GameManager.Instance.removeMonster(this);   // removes the monster from the "active monsters of the wave" list
+                WaveManager.Instance.GetPool().ReleaseObject(gameObject);
+                WaveManager.Instance.removeMonster(this);
             }
         }
-        
+
     }
 }

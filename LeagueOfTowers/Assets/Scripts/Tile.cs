@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using Photon.Pun;
 
 public class Tile : MonoBehaviour
 {
@@ -13,7 +14,7 @@ public class Tile : MonoBehaviour
 
     //these for indicate if a Tile is available for placing Tower
     private SpriteRenderer spriteRenderer;
-    private bool isPlaced;
+    [SerializeField] private bool isPlaced;
     private Color32 colorFullTile = new Color32(244, 183, 163, 255);
     private Color32 colorEmptyTile = new Color32(192, 255, 158, 255);
 
@@ -25,53 +26,65 @@ public class Tile : MonoBehaviour
     private Tower myTower;
 
     // Start is called before the first frame update
-    void Start()
+    private void Start()
     {
         this.spriteRenderer = this.GetComponent<SpriteRenderer>();
     }
 
     // Update is called once per frame
-    void Update()
+    private void Update()
     {
         
     }
 
+    /*
+        Method to set Tile position on the Grid
+    */
     private void setTilePos(Point pointPosition)
     {
         this.gridPos = pointPosition;
 
     }
 
-
+    /*
+        Method to set Tile position on the world (top-left corner)
+    */
     private void setWorldPos(Vector3 worldPosition)
     {
         this.worldPos = worldPosition;
     }
 
+    /*
+        Method to set Tile center position on the world
+    */
     private void setCenterWorldPos(Vector3 worldPosition)
     {
         float tileSize = this.GetComponent<SpriteRenderer>().sprite.bounds.size.x;
         this.centerWorldPos = new Vector3(worldPosition.x + (tileSize / 2), worldPosition.y - (tileSize / 2), 0);
     }
 
+    /*
+        Method to set the image of this Tile
+    */
     private void setSpriteRenderer(SpriteRenderer spriteRenderer)
     {
         this.spriteRenderer = spriteRenderer;
     }
 
+    /*
+        Method to set the debug state of this Tile
+    */
     public void setAStarDebugging(bool debuggingState)
     {
         this.aStarDebugging = debuggingState;
     }
 
+    /*
+        Method to set the walkable state of this Tile
+    */
     public void setWalkable(bool walkableState)
     {
         this.isWalkable = walkableState;
-    }
-
-    public void setIsPlaced(bool isPlacedOther)
-    {
-        this.isPlaced = isPlacedOther;
     }
 
     //this function is called whenever the mouse is hover on this Tile
@@ -96,11 +109,13 @@ public class Tile : MonoBehaviour
                     if (Input.GetMouseButtonDown(0) && gridPos.X < MapManager.Instance.GetXIndexSize() - 1)
                     {
                         PlaceTower();
-                        isPlaced = true;
+                        MapManager.Instance.SetTileIsPlacedAt(this.gridPos.X, this.gridPos.Y);
+                        //isPlaced = true;
                     }
                 }
             }
-        } else if (!EventSystem.current.IsPointerOverGameObject() && GameManager.Instance.GetPickedTowerButton() == null && Input.GetMouseButtonDown(0))
+        } 
+        else if (!EventSystem.current.IsPointerOverGameObject() && GameManager.Instance.GetPickedTowerButton() == null && Input.GetMouseButtonDown(0))
         {
             if (myTower != null)
             {
@@ -121,10 +136,13 @@ public class Tile : MonoBehaviour
         GameObject towerPref = GameManager.Instance.GetPickedTowerButton().GetTowerPrefab();
 
         //Create the tower prefab on the scene
-        GameObject tower = Instantiate(towerPref);
+        //GameObject tower = Instantiate(towerPref);
+
+
+        GameObject tower = PhotonNetwork.Instantiate(towerPref.name, this.GetCenterWorldPosition(), Quaternion.identity);
 
         //place at the correct position of the tile on the map
-        tower.transform.position = this.GetCenterWorldPosition();
+        //tower.transform.position = this.GetCenterWorldPosition();
 
         //set the layer order based on Y gridposition
         tower.GetComponent<SpriteRenderer>().sortingOrder = this.gridPos.Y + 2;
@@ -135,27 +153,31 @@ public class Tile : MonoBehaviour
         //reference the tower script
         this.myTower = tower.transform.GetChild(0).GetComponent<Tower>();
 
-        myTower.setPrice(GameManager.Instance.GetPickedTowerButton().GetPrice());
-
         //pay for this tower
         GameManager.Instance.PayForPlacedTower();
+        
 
         //deactive the Hover's spriterenderer
         Hover.Instance.Deactivate();
-        
 
         //make the tile not walkable by enemy
         this.isWalkable = false;
 
-        //Debug.Log("Placed a tower!");
+        Debug.Log("Placed a tower!");
         
     }
 
+    /*
+        Method to set color of this Tile
+    */
     private void ColorTile(Color32 color)
     {
         this.spriteRenderer.color = color;
     }
 
+    /*
+        Method to checking state of mouse event when exit this Tile
+    */
     private void OnMouseExit()
     {
         if (!aStarDebugging)
@@ -180,36 +202,62 @@ public class Tile : MonoBehaviour
         else{
             this.isWalkable = true;
         }
-       
+        
     }
 
+    /*
+        Method to get Tile position on the Grid
+    */
     public Point GetTilePosition()
     {
         return this.gridPos;
     }
 
+    /*
+        Method to get Tile position on the World (top-left corner)
+    */
     public Vector3 GetWorldPosition()
     {
         return this.worldPos;
     }
 
+    /*
+        Method to get Tile center position on the World 
+    */
     public Vector3 GetCenterWorldPosition()
     {
         return this.centerWorldPos;
     }
 
+    /*
+        Method to get the Tile image
+    */
     public SpriteRenderer GetSpriteRenderer()
     {
         return this.spriteRenderer;
     }
 
+    /*
+        Method to get the debug state of this Tile
+    */
     public bool GetAStarDebuggingState()
     {
         return this.aStarDebugging;
     }
     
+    /*
+        Method to get the walkable state of this Tile
+    */
     public bool GetWalkableState()
     {
         return this.isWalkable;
+    }
+
+    /*
+        Method to set the IsPlaced State of this Tile
+    */
+    public void SetIsPlaced(bool state)
+    {
+        this.isPlaced = state;
     }
 }

@@ -1,15 +1,16 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Photon.Pun;
 
 public class Hover : Singleton<Hover>
 {
-    // Start is called before the first frame update
-
-    private SpriteRenderer spriteRenderer;
-
+    //fields
+    private SpriteRenderer spriteRenderer;      //tower's image
+    private Camera playerCamera;      //player's camera
     private SpriteRenderer rangedSpriteRenderer;
 
+    // Start is called before the first frame update
     void Start()
     {
         this.spriteRenderer = this.GetComponent<SpriteRenderer>();
@@ -24,34 +25,51 @@ public class Hover : Singleton<Hover>
         FollowMouse();
     }
 
+    /*
+        Method to make this Hover object to follow the mouse
+    */
     private void FollowMouse()
     {
-        if (this.spriteRenderer.enabled)
-        {
-            //get mouse location and transform this Hover to the mouse location
-            this.transform.position = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        if(playerCamera != null){
+            if (this.spriteRenderer.enabled)
+            {
+                //get mouse location and transform this Hover to the mouse location
+                //this.transform.position = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+                this.transform.position = this.playerCamera.ScreenToWorldPoint(Input.mousePosition);
 
-            //set z-coord to 0 so the camera can see it
-            this.transform.position = new Vector3(transform.position.x, transform.position.y, 0);
+                //set z-coord to 0 so the camera can see it
+                this.transform.position = new Vector3(transform.position.x, transform.position.y, 0);
+            }
         }
         
     }
 
+    /*
+        Method to get image that this Hover is holding
+    */
     public SpriteRenderer GetSpriteRenderer()
     {
         return this.spriteRenderer;
     }
 
-    public void Activate(Sprite sprite)
+    /*
+        Method to display components of this Hover on scene
+    */
+    public void Activate(Sprite sprite, Camera playerCameraInUsing)
     {
         this.spriteRenderer.enabled = true;
         rangedSpriteRenderer.enabled = true;
         this.spriteRenderer.sprite = sprite;
+        this.playerCamera = playerCameraInUsing;
     }
 
+    /*
+        Method to hide components of this Hover on scene
+    */
     public void Deactivate()
     {
         this.spriteRenderer.enabled = false;
+        this.playerCamera = null;
         rangedSpriteRenderer.enabled = false;
     }
 }

@@ -1,9 +1,16 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Photon.Pun;
+
 
 public class Tower : MonoBehaviour
 {
+    //price of the tower
+    [SerializeField]
+    private int price;
+    private PhotonView view;
+
     //tower range renderer
     private SpriteRenderer mySpriteRenderer;
 
@@ -18,7 +25,9 @@ public class Tower : MonoBehaviour
 
     //projectile speed
     [SerializeField] private float projectileSpeed;
-    
+
+    //damage of the tower
+    [SerializeField] private int damage;
 
     //let's say we can attack from the getgo
     private bool canAttack = true;
@@ -29,15 +38,10 @@ public class Tower : MonoBehaviour
     //how long till the next attack
     [SerializeField] private float attackCooldown;
 
-    //price of the tower
-    private int price;
-
-    //damage of the tower
-    [SerializeField] private int damage;
-
     // Start is called before the first frame update
     void Start()
     {
+        view = this.GetComponent<PhotonView>();
         //get the sprite
         mySpriteRenderer = GetComponent<SpriteRenderer>();
     }
@@ -59,8 +63,8 @@ public class Tower : MonoBehaviour
     public void setDamage(int damageGiven)
     {
         this.damage = damageGiven;
-    }
 
+    }
     public void Select()
     {
         //enable or disable the tower range when selected
@@ -101,31 +105,22 @@ public class Tower : MonoBehaviour
                 Shoot();
                 canAttack = false;
             }
-        } 
-        else if(monsters.Count > 0)
-        {
-            target = monsters.Dequeue();
-        }
-
-        if (target != null)
-        {
-            if(!target.isAlive || !target.IsActive) //if we have a target and it's not alive nor active
-            {
-                target = null;
-            }
         }
     }
 
+    /*
+        Method to shoot projectile
+    */
     public void Shoot()
     {
         //get the projectile type from the pool and return it
-        Projectile projectile = GameManager.Instance.Pool.GetObject(projectileType).GetComponent<Projectile>();
-
+        //Projectile projectile = GameManager.Instance.Pool.GetObject(projectileType).GetComponent<Projectile>();
+        GameObject projectile = PhotonNetwork.Instantiate(this.projectileType, this.transform.position, Quaternion.identity,0,null);
         //spawn the projectile from the middle of the tower
-        projectile.transform.position = transform.position;
+        //projectile.transform.position = transform.position;
 
         //initialize the projectile by passing this tower
-        projectile.Initialize(this);
+        projectile.GetComponent<Projectile>().Initialize(this);
     }
 
     //this function happens when it enters the tower range
@@ -145,17 +140,14 @@ public class Tower : MonoBehaviour
         //if the target is a monster
         if (other.tag == "Monster")
         {
-            GameObject gameObj = other.gameObject;
-
-            if(gameObj.activeInHierarchy)
-            {
-                //remove the target
-                target = null;
-            }
-
-            
+            //remove the target
+            target = null;
         }
     }
+    
+    /*
+        Method to get projectile speed
+    */
     public float getProjectileSpeed()
     {
         return projectileSpeed;
@@ -166,13 +158,15 @@ public class Tower : MonoBehaviour
         return target;
     }
 
-    public int getPrice()
-    {
-        return price;
+    public int getDamage(){
+        return this.damage;
     }
 
-    public int getDamage()
-    {
-        return damage;
+    public int GetPrice(){
+        return this.price;
+    }
+
+    public PhotonView GetPhotonView(){
+        return this.view;
     }
 }

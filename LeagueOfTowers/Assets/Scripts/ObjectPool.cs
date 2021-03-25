@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Photon.Pun;
 
 public class ObjectPool : MonoBehaviour
 {
@@ -14,19 +15,27 @@ public class ObjectPool : MonoBehaviour
     //      -> if inactive object of the same type already exists returns that object
     public GameObject GetObject(string type){
 
-        //looks for the object with the same type in already existing pool of objects
+       //looks for the object with the same type in already existing pool of objects
         foreach (GameObject go in pooledObects)
         {
-            if(go.name == type && !go.activeInHierarchy){ 
-                go.SetActive(true);
-                return go;
+            if(go != null){
+                if(go.name == type && !go.activeInHierarchy){ 
+                    go.SetActive(true);
+                    return go;
+                }
             }
+           
         }
         //if not found, creates a new object and adds it to the object pool
         for (int i=0; i<objectPrefabs.Length; i++){
             if(objectPrefabs[i].name == type){
-                GameObject newObject = Instantiate(objectPrefabs[i]);
+                Point spawnPoint = MapManager.Instance.SpawnPos;
+                Vector3 worldCenterCoordinate = MapManager.Instance.getTiles()[spawnPoint].GetCenterWorldPosition();
+                //GameObject newObject = Instantiate(objectPrefabs[i]);
+                GameObject newObject = PhotonNetwork.Instantiate(objectPrefabs[i].name, worldCenterCoordinate, Quaternion.identity, 0, null);
+                Debug.Log("NewObject " + newObject);
                 pooledObects.Add(newObject);
+                
                 newObject.name = type;
                 return newObject;
             }
