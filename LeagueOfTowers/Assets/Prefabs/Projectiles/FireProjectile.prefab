@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 5542732999890451530}
   - component: {fileID: 8460077098700277699}
   - component: {fileID: 1352558316025176722}
+  - component: {fileID: 1457355808823065196}
   m_Layer: 0
   m_Name: FireProjectile
   m_TagString: Untagged
@@ -95,3 +96,29 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 70e9d69d8b1fba54196e62867c17b98c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!61 &1457355808823065196
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8344656990412367295}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 5.12, y: 2.88}
+    newSize: {x: 5.12, y: 2.88}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 5.12, y: 2.88}
+  m_EdgeRadius: 0
