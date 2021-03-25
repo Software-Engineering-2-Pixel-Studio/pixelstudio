@@ -26,45 +26,62 @@ public class Tile : MonoBehaviour
     private Tower myTower;
 
     // Start is called before the first frame update
-    void Start()
+    private void Start()
     {
         this.spriteRenderer = this.GetComponent<SpriteRenderer>();
     }
 
     // Update is called once per frame
-    void Update()
+    private void Update()
     {
         
     }
 
+    /*
+        Method to set Tile position on the Grid
+    */
     private void setTilePos(Point pointPosition)
     {
         this.gridPos = pointPosition;
 
     }
 
-
+    /*
+        Method to set Tile position on the world (top-left corner)
+    */
     private void setWorldPos(Vector3 worldPosition)
     {
         this.worldPos = worldPosition;
     }
 
+    /*
+        Method to set Tile center position on the world
+    */
     private void setCenterWorldPos(Vector3 worldPosition)
     {
         float tileSize = this.GetComponent<SpriteRenderer>().sprite.bounds.size.x;
         this.centerWorldPos = new Vector3(worldPosition.x + (tileSize / 2), worldPosition.y - (tileSize / 2), 0);
     }
 
+    /*
+        Method to set the image of this Tile
+    */
     private void setSpriteRenderer(SpriteRenderer spriteRenderer)
     {
         this.spriteRenderer = spriteRenderer;
     }
 
+    /*
+        Method to set the debug state of this Tile
+    */
     public void setAStarDebugging(bool debuggingState)
     {
         this.aStarDebugging = debuggingState;
     }
 
+    /*
+        Method to set the walkable state of this Tile
+    */
     public void setWalkable(bool walkableState)
     {
         this.isWalkable = walkableState;
@@ -150,11 +167,17 @@ public class Tile : MonoBehaviour
         
     }
 
+    /*
+        Method to set color of this Tile
+    */
     private void ColorTile(Color32 color)
     {
         this.spriteRenderer.color = color;
     }
 
+    /*
+        Method to checking state of mouse event when exit this Tile
+    */
     private void OnMouseExit()
     {
         if (!aStarDebugging)
@@ -182,36 +205,57 @@ public class Tile : MonoBehaviour
         
     }
 
+    /*
+        Method to get Tile position on the Grid
+    */
     public Point GetTilePosition()
     {
         return this.gridPos;
     }
 
+    /*
+        Method to get Tile position on the World (top-left corner)
+    */
     public Vector3 GetWorldPosition()
     {
         return this.worldPos;
     }
 
+    /*
+        Method to get Tile center position on the World 
+    */
     public Vector3 GetCenterWorldPosition()
     {
         return this.centerWorldPos;
     }
 
+    /*
+        Method to get the Tile image
+    */
     public SpriteRenderer GetSpriteRenderer()
     {
         return this.spriteRenderer;
     }
 
+    /*
+        Method to get the debug state of this Tile
+    */
     public bool GetAStarDebuggingState()
     {
         return this.aStarDebugging;
     }
     
+    /*
+        Method to get the walkable state of this Tile
+    */
     public bool GetWalkableState()
     {
         return this.isWalkable;
     }
 
+    /*
+        Method to set the IsPlaced State of this Tile
+    */
     public void SetIsPlaced(bool state)
     {
         this.isPlaced = state;

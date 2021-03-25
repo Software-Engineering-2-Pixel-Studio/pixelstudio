@@ -6,12 +6,10 @@ using Photon.Pun;
 public class LivesManager : Singleton<LivesManager>
 {
     //fields
-    [SerializeField] private int lives;
-
-    [SerializeField] private Text livesDisplay;
-
-    [SerializeField] private GameObject gameOver;
-    private PhotonView view;
+    [SerializeField] private int lives;         //number of global share lives 
+    [SerializeField] private Text livesDisplay; //display box for global lives on scene
+    [SerializeField] private GameObject gameOver;   //GameOver Image object
+    private PhotonView view;       //PhotonView object to synchronize
     // Start is called before the first frame update
     private void Start()
     {
@@ -35,8 +33,6 @@ public class LivesManager : Singleton<LivesManager>
     {
         if(--this.lives <= 0)
         {
-            //if(PhotonNetwork.IsMasterClient)
-            //GameManager.Instance.GameOver();
             this.gameOver.SetActive(true);
 
         }
@@ -46,30 +42,19 @@ public class LivesManager : Singleton<LivesManager>
     //public methods
 
     /*
-        a method to substract lives
+        a method to call subLivesRPC and send signal to all players
     */
     public void SubLives()
     {
         this.view.RPC("subLivesRPC", RpcTarget.All);
     }
 
+    /*
+        Method to get global lives
+    */
     public int GetLives()
     {
         return this.lives;
     }
-
-// public int Lives{
-//         get{
-//             return lives;
-//         }
-//         set{
-//             if (lives == 1){
-//                 this.lives = 0;
-//                 GameOver();
-//             }
-//             this.lives = value;
-//             this.livesText.text = this.lives.ToString();
-//         }
-//     }
 
 }

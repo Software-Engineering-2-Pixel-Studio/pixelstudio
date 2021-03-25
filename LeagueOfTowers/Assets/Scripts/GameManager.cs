@@ -6,23 +6,11 @@ using UnityEngine.SceneManagement;
 
 public class GameManager : Singleton<GameManager>
 {
-    //to control the coroutine of the wave
-    Coroutine waveCoroutine;
+    
 
     //fields
     //this is for choosing tower from sidebar
     [SerializeField] private TowerButton pickedButton;
-
-
-
-    //variables to control players' lives
-    // private int lives;
-    // [SerializeField]
-    // private Text livesText;
-
-    //reference to the StartWave button
-    // [SerializeField]
-    // private GameObject waveButton;
 
     //the current selected tower
     private Tower selectedTower;
@@ -30,44 +18,18 @@ public class GameManager : Singleton<GameManager>
     //the list of the monsters in the wave
     private List<Monster> activeMonsters = new List<Monster>();
 
-    //counter for the Waves
-    // private int wave = 0;
-    // //holds the reference to the text that shows the number of waves
-    // [SerializeField]
-    // private Text waveText;
     
     //Pool of objects (monsters/towers)
     public ObjectPool Pool{ get; set; }
 
     //determines if the game is ended or not
-    private bool gameOver = false;
+    //private bool gameOver = false;
 
     // reference to the game over menu object
     [SerializeField]
     private GameObject gameOverMenu;
 
-    //keeps the status of the wave(true = wave in process; false = not wave time)
-    // private bool WaveActive{
-    //     get{
-    //         return activeMonsters.Count > 0;
-    //     }
-    // }
-
-    //sets the number of lives to the value and the text of the lives
-    //      Also returns the value of the lives
-    // public int Lives{
-    //     get{
-    //         return lives;
-    //     }
-    //     set{
-    //         if (lives == 1){
-    //             this.lives = 0;
-    //             GameOver();
-    //         }
-    //         this.lives = value;
-    //         this.livesText.text = this.lives.ToString();
-    //     }
-    // }
+    
     private void Awake(){
         Pool = GetComponent<ObjectPool>();
     }
@@ -85,6 +47,10 @@ public class GameManager : Singleton<GameManager>
         CancelPickedTower();
     }
 
+    /*
+        Method to catch mouse event (right click) for canceling
+        the picked tower and also disable its hover image
+    */
     private void CancelPickedTower()
     {
         //right-click to cancel
@@ -197,22 +163,22 @@ public class GameManager : Singleton<GameManager>
 
     // finishes the game
     //      -> implementation of the game over functionality
-    public void GameOver(){
-        if(!gameOver){
-            gameOver = true;
-            //stop producing new monsters on the map
-            StopCoroutine(waveCoroutine);
-            //stop existing monsters on the field from moving and remove them
-            for(int i=0; i<=activeMonsters.Count; i++){
-                activeMonsters[i].SetActive(false);
-                activeMonsters.Remove(activeMonsters[i]);
-            }
-            activeMonsters[0].SetActive(false);
-            activeMonsters.Remove(activeMonsters[0]);
-            //activate the game over screen
-            gameOverMenu.SetActive(true);
-        }
-    }
+    // public void GameOver(){
+    //     if(!gameOver){
+    //         gameOver = true;
+    //         //stop producing new monsters on the map
+    //         StopCoroutine(waveCoroutine);
+    //         //stop existing monsters on the field from moving and remove them
+    //         for(int i=0; i<=activeMonsters.Count; i++){
+    //             activeMonsters[i].SetActive(false);
+    //             activeMonsters.Remove(activeMonsters[i]);
+    //         }
+    //         activeMonsters[0].SetActive(false);
+    //         activeMonsters.Remove(activeMonsters[0]);
+    //         //activate the game over screen
+    //         gameOverMenu.SetActive(true);
+    //     }
+    // }
 
     //restarts the game
     //      -> implementation of the functionality of the Restart button

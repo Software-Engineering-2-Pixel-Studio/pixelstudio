@@ -10,25 +10,26 @@ using UnityEngine;
 //after the function finished.
 public struct Point
 {
-    public int X { get; set; }
+    public int X { get; set; }          //X coordinate
 
-    public int Y { get; set; }
+    public int Y { get; set; }          //Y coordinate
 
     public Point(int x, int y) {
         this.X = x;
         this.Y = y;
     }
 
+    /*
+        Methods to check if 2 Point are equal
+    */
     public static bool arePointsEqual(Point firstPoint, Point secondPoint)
     {
         return firstPoint.X == secondPoint.X && firstPoint.Y == secondPoint.Y;
     }
 
-    //public static Point operator -(Point firstPoint, Point secondPoint)
-    //{
-    //    return new Point(firstPoint.X - firstPoint.X, secondPoint.Y - secondPoint.Y);
-    //}
-
+    /*
+        Method to calculate the difference between 2 Point (vector)
+    */
     public static Point calculateDifference(Point firstPoint, Point secondPoint)
     {
         return new Point(firstPoint.X - secondPoint.X, firstPoint.Y - secondPoint.Y);

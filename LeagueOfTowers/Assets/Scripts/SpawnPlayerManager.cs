@@ -3,20 +3,15 @@ using System.Collections.Generic;
 using UnityEngine;
 using Photon.Pun;
 
-public class SpawnPlayerManager : MonoBehaviour
+public class SpawnPlayerManager : Singleton<SpawnPlayerManager>
 {
     //fields
-    [SerializeField] private GameObject player;
-    [SerializeField] private float minX, minY, maxX, maxY;
+    [SerializeField] private GameObject player;      //player's prefab
 
     // Start is called before the first frame update
     private void Start()
     {
-        // minX = -8.4f;
-        // maxX = 8.4f;
-        // minY = -4.4f;
-        // maxY = 4.4f;
-        // Vector2 randomPosition = new Vector2(Random.Range(minX, maxX), Random.Range(minY, maxY));
+        //spawn player at center of the world
         Vector2 position = new Vector2(0,0);
         PhotonNetwork.Instantiate(player.name, position, Quaternion.identity);
     }

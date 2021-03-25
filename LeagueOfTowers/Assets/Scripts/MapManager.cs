@@ -7,14 +7,12 @@ public class MapManager : Singleton<MapManager>
 {
     //fields
     //list of tile prefabs
-    [SerializeField] private GameObject[] tilePrefabs;
-    private PhotonView view;
-    //[SerializeField] private CameraMovement camMove;
-    //[SerializeField] private CameraFollow camFollow;
+    [SerializeField] private GameObject[] tilePrefabs;  //list of tile's prefabs
+    private PhotonView view;        //PhotonView object to synchronize
 
     //mapIndexSize;
-    private int xIndexSize;
-    private int yIndexSize;
+    private int xIndexSize;         //number of Tiles in horizontal
+    private int yIndexSize;         //number of Tiles in vertical
 
     //map bounds
     private float minMapX;
@@ -36,11 +34,11 @@ public class MapManager : Singleton<MapManager>
         }
     }
 
-    [SerializeField] private GameObject spawnPrefab;
+    [SerializeField] private GameObject spawnPrefab;        //the spawn portal prefab
 
-    public Portal SpawnPrefab{ get; set;}
+    public Portal SpawnPrefab{ get; set;}          //get, set property for spawn portal object
 
-    private Point basePos;
+    private Point basePos;  //base position base on grid of the map
     [SerializeField] private GameObject basePrefab;
 
     //a parent object to put all the Tile under
@@ -134,8 +132,6 @@ public class MapManager : Singleton<MapManager>
         SetUpBase();
 
         setMapBounds(worldStart);
-        //camMove.SetBounders(this.getMapBounds());
-        //camFollow.SetBounders(this.getMapBounds());
 
         
     }//end of CreateLevel
@@ -188,6 +184,9 @@ public class MapManager : Singleton<MapManager>
         return data.Split('-');
     }
 
+    /*
+
+    */
     private void setMapBounds(Vector3 worldStart)
     {
         this.minMapX = worldStart.x;
@@ -207,6 +206,9 @@ public class MapManager : Singleton<MapManager>
         return mapBounds ;
     }
 
+    /*
+        Method to create the spawn portal on the map
+    */
     private void SetUpSpawn()
     {
         spawnPos = new Point(0, 1);
@@ -222,6 +224,9 @@ public class MapManager : Singleton<MapManager>
         //^^^ needed to use later when spawn enemies
     }
 
+    /*
+        Method to create the base on the map
+    */
     private void SetUpBase()
     {
         basePos = new Point(15, 5);
@@ -234,6 +239,9 @@ public class MapManager : Singleton<MapManager>
         //theBase.transform.localScale = new Vector3(1.2f, 1.2f, 1.0f);
     }
 
+    /*
+        Method to get dictionary of Tiles
+    */
     public Dictionary<Point, Tile> getTiles()
     {
         return this.Tiles;
@@ -261,6 +269,9 @@ public class MapManager : Singleton<MapManager>
         return isGreaterThanLeftMapBoundary && isLessThanRightMapBoundary;
     }
 
+    /*
+        Method to generate path for monster from spawn portal to base 
+    */
     public void GeneratePath()
     {
         path = AStar.getPath(basePos,spawnPos); 

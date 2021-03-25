@@ -22,10 +22,16 @@ public class ConnectToServer : MonoBehaviourPunCallbacks
         
     }
 
+    /*
+        After connect to Photon server, the scene will change to MainMenu scene
+    */
     public override void OnConnectedToMaster(){
         SceneManager.LoadScene("MainMenu");
     }
 
+    /*
+        A case where the user cant connect to Photon Server.
+    */
     public override void OnDisconnected(DisconnectCause cause)
     {
         Debug.LogWarningFormat("PUN : OnDisconnected() was called by PUN with reason {0}", cause);

@@ -5,13 +5,12 @@ using Photon.Pun;
 
 public class Hover : Singleton<Hover>
 {
-    // Start is called before the first frame update
-
-    private SpriteRenderer spriteRenderer;
-    private Camera playerCamera;
-
+    //fields
+    private SpriteRenderer spriteRenderer;      //tower's image
+    private Camera playerCamera;      //player's camera
     private SpriteRenderer rangedSpriteRenderer;
 
+    // Start is called before the first frame update
     void Start()
     {
         this.spriteRenderer = this.GetComponent<SpriteRenderer>();
@@ -26,6 +25,9 @@ public class Hover : Singleton<Hover>
         FollowMouse();
     }
 
+    /*
+        Method to make this Hover object to follow the mouse
+    */
     private void FollowMouse()
     {
         if(playerCamera != null){
@@ -42,15 +44,17 @@ public class Hover : Singleton<Hover>
         
     }
 
-    // public void SetPlayerCamera(Camera playerCameraInUsing){
-    //     this.playerCamera = playerCameraInUsing;
-    // }
-
+    /*
+        Method to get image that this Hover is holding
+    */
     public SpriteRenderer GetSpriteRenderer()
     {
         return this.spriteRenderer;
     }
 
+    /*
+        Method to display components of this Hover on scene
+    */
     public void Activate(Sprite sprite, Camera playerCameraInUsing)
     {
         this.spriteRenderer.enabled = true;
@@ -59,6 +63,9 @@ public class Hover : Singleton<Hover>
         this.playerCamera = playerCameraInUsing;
     }
 
+    /*
+        Method to hide components of this Hover on scene
+    */
     public void Deactivate()
     {
         this.spriteRenderer.enabled = false;

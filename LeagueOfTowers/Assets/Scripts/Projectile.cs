@@ -4,20 +4,19 @@ using UnityEngine;
 
 public class Projectile : MonoBehaviour
 {
-    //the target monster
-    private Monster target;
+    //fields
+    private Monster target; //the target monster
 
-    //tower that the projectile comes from
-    private Tower parent;
+    private Tower parent;   //tower that the projectile comes from
 
     // Start is called before the first frame update
-    void Start()
+    private void Start()
     {
         
     }
 
     // Update is called once per frame
-    void Update()
+    private void Update()
     {
         //move towards the target
         MoveToTarget();
@@ -30,6 +29,9 @@ public class Projectile : MonoBehaviour
         this.parent = towerParent;
     }
 
+    /*
+        Method for moving the projectile to target monster
+    */
     private void MoveToTarget()
     {
         if (target != null && target.IsActive)

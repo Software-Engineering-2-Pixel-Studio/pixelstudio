@@ -93,6 +93,9 @@ public class Tower : MonoBehaviour
         }
     }
 
+    /*
+        Method to shoot projectile
+    */
     public void Shoot()
     {
         //get the projectile type from the pool and return it
@@ -126,6 +129,10 @@ public class Tower : MonoBehaviour
             target = null;
         }
     }
+    
+    /*
+        Method to get projectile speed
+    */
     public float getProjectileSpeed()
     {
         return projectileSpeed;

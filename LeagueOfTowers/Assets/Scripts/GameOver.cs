@@ -7,10 +7,10 @@ using Photon.Pun;
 public class GameOver : Singleton<GameOver>
 {
     //fields
-    [SerializeField] private Text wavesDisplay;
-    [SerializeField] private GameObject restartButton;
+    [SerializeField] private Text wavesDisplay;     //display box of number of waves on the scene
+    [SerializeField] private GameObject restartButton;  //restart button
 
-    private PhotonView view;
+    private PhotonView view;        //photonview object for synchronize
 
     // Start is called before the first frame update
     private void Start()
@@ -31,6 +31,10 @@ public class GameOver : Singleton<GameOver>
         
     }
 
+    /*
+        PUNRPC method
+        Method to let all player re-load the Map scene
+    */
     [PunRPC]
     private void Restart()
     {
@@ -39,6 +43,9 @@ public class GameOver : Singleton<GameOver>
 
 
     //public method
+    /*
+        Method to call Restart method and send the signal to all players
+    */
     public void OnClickRestart()
     {
         view.RPC("Restart", RpcTarget.All);
