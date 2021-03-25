@@ -125,7 +125,7 @@ public class Tile : MonoBehaviour
         GameObject tower = PhotonNetwork.Instantiate(towerPref.name, this.GetCenterWorldPosition(), Quaternion.identity);
 
         //place at the correct position of the tile on the map
-        tower.transform.position = this.GetCenterWorldPosition();
+        //tower.transform.position = this.GetCenterWorldPosition();
 
         //set the layer order based on Y gridposition
         tower.GetComponent<SpriteRenderer>().sortingOrder = this.gridPos.Y + 2;
@@ -139,6 +139,7 @@ public class Tile : MonoBehaviour
         //pay for this tower
         GameManager.Instance.PayForPlacedTower();
         
+
         //deactive the Hover's spriterenderer
         Hover.Instance.Deactivate();
 
