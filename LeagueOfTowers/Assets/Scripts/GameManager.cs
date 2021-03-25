@@ -37,6 +37,9 @@ public class GameManager : Singleton<GameManager>
     //holds the reference to the text that shows the number of waves
     [SerializeField]
     private Text waveText;
+
+    //determines if the wave is done or not
+    private bool waveOver;
     
     //Pool of objects (monsters/towers)
     public ObjectPool Pool{ get; set; }
@@ -47,6 +50,16 @@ public class GameManager : Singleton<GameManager>
     // reference to the game over menu object
     [SerializeField]
     private GameObject gameOverMenu;
+
+    //upgrade panel of tower
+    [SerializeField ] private GameObject upgradePanel;
+
+    //selling price of the tower
+    [SerializeField] private Text sellPriceText;
+
+    //health of enemy
+    private int enemyHealth = 10;
+
 
     //keeps the status of the wave(true = wave in process; false = not wave time)
     private bool WaveActive{
@@ -159,24 +172,36 @@ public class GameManager : Singleton<GameManager>
 
     public void SelectTower(Tower tower)
     {
-        //if tower exist, deselect it
-        if (selectedTower != null)
+        if (selectedTower != null) //if we have selected a tower
         {
             selectedTower.Select();
         }
 
+        //sets the selected tower
         selectedTower = tower;
+
+        //selects the tower
         selectedTower.Select();
+
+        sellPriceText.text = "+ " + (selectedTower.getPrice() / 2).ToString();
+
+        //show the upgrade panel
+        upgradePanel.SetActive(true);
     }
 
     public void DeselectTower()
     {
-        if (selectedTower != null)
+        if (selectedTower != null) //if we have selected a tower
         {
+            //de-selects the tower
             selectedTower.Select();
         }
 
+        //set to unselected/null
         selectedTower = null;
+
+        //don't show the upgrade panel
+        upgradePanel.SetActive(false);
     }
 
     //method that starts a summoning parocess of the monster wave
@@ -186,6 +211,7 @@ public class GameManager : Singleton<GameManager>
         waveCoroutine = StartCoroutine(SpawnWave());
 
         waveButton.SetActive(false);    // disactivate a button until wave is done
+        waveOver = false;
     }
 
     // method that spawns a wave of monsters to come out
@@ -207,19 +233,28 @@ public class GameManager : Singleton<GameManager>
                     break;
             }
             Monster monster = Pool.GetObject(type).GetComponent<Monster>();
-            monster.Spawn();
+
+            //spawn an enemy with the mentioned health
+            monster.Spawn(enemyHealth);
+
+            if (wave % 3 == 0) //increase health of monsters by 2 every 3 waves
+            {
+                enemyHealth += 2;
+            }
 
             activeMonsters.Add(monster);
 
             yield return new WaitForSeconds(2.5f);
         }
+
+        waveOver = true;
     }
 
     // removes a monster from the list of the monsters on the field
     //      -> if there are no monsters left activates the ability to start next Wave
     public void removeMonster(Monster monster){
         activeMonsters.Remove(monster);
-        if(!WaveActive && !gameOver){
+        if(!WaveActive && !gameOver && waveOver){
             waveButton.SetActive(true);
         }
     }
@@ -236,8 +271,8 @@ public class GameManager : Singleton<GameManager>
                 activeMonsters[i].SetActive(false);
                 activeMonsters.Remove(activeMonsters[i]);
             }
-            activeMonsters[0].SetActive(false);
-            activeMonsters.Remove(activeMonsters[0]);
+            //activeMonsters[0].SetActive(false);
+            //activeMonsters.Remove(activeMonsters[0]);
             //activate the game over screen
             gameOverMenu.SetActive(true);
         }
@@ -254,5 +289,19 @@ public class GameManager : Singleton<GameManager>
     //      -> implementation of the functionality of the Quit button
     public void QuitGame(){
         Application.Quit();
+    }
+
+    public void SellTower()
+    {
+        if (selectedTower != null)
+        {
+            UpdateCurrency((selectedTower.getPrice()/2) + currency);
+
+            selectedTower.GetComponentInParent<Tile>().setIsPlaced(false);
+
+            Destroy(selectedTower.transform.parent.gameObject);
+
+            DeselectTower();
+        }
     }
 }

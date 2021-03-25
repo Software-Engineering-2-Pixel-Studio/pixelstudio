@@ -29,6 +29,12 @@ public class Tower : MonoBehaviour
     //how long till the next attack
     [SerializeField] private float attackCooldown;
 
+    //price of the tower
+    private int price;
+
+    //damage of the tower
+    [SerializeField] private int damage;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -42,7 +48,17 @@ public class Tower : MonoBehaviour
         //attack targets
         Attack();
 
-        Debug.Log(target);
+        //Debug.Log(target);
+    }
+
+    public void setPrice(int otherPrice)
+    {
+        this.price = otherPrice;
+    }
+
+    public void setDamage(int damageGiven)
+    {
+        this.damage = damageGiven;
     }
 
     public void Select()
@@ -85,6 +101,18 @@ public class Tower : MonoBehaviour
                 Shoot();
                 canAttack = false;
             }
+        } 
+        else if(monsters.Count > 0)
+        {
+            target = monsters.Dequeue();
+        }
+
+        if (target != null)
+        {
+            if(!target.isAlive || !target.IsActive) //if we have a target and it's not alive nor active
+            {
+                target = null;
+            }
         }
     }
 
@@ -117,8 +145,15 @@ public class Tower : MonoBehaviour
         //if the target is a monster
         if (other.tag == "Monster")
         {
-            //remove the target
-            target = null;
+            GameObject gameObj = other.gameObject;
+
+            if(gameObj.activeInHierarchy)
+            {
+                //remove the target
+                target = null;
+            }
+
+            
         }
     }
     public float getProjectileSpeed()
@@ -129,5 +164,15 @@ public class Tower : MonoBehaviour
     public Monster getTarget()
     {
         return target;
+    }
+
+    public int getPrice()
+    {
+        return price;
+    }
+
+    public int getDamage()
+    {
+        return damage;
     }
 }
