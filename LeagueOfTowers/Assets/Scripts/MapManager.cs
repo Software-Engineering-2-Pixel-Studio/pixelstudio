@@ -223,7 +223,7 @@ public class MapManager : Singleton<MapManager>
 
     private void SetUpBase()
     {
-        basePos = new Point(16, 5);
+        basePos = new Point(15, 5);
 
         //create a base prefab on the scene
         GameObject theBase = Instantiate(basePrefab);
