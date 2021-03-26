@@ -1,11 +1,20 @@
-language: node_js
-node_js:
-  - "stable"
-cache:
-  directories:
-  - node_modules
-install: npm install
+language: generic
+
+# use a Mac OSX image
+os: osx
+
+# run the script to download and install Unity editor
+install:
+- sudo -E sh ./Scripts/install.sh
+
+# run the script for unit tests and builds
 script:
-  - cd client/web
+- sudo -E sh ./Scripts/build.sh
+
 branches:
   only: main
+
+# environment variables used in bash scripts
+env:
+  global:
+  - UNITYCI_PROJECT_NAME="LeagueOfTowers"
