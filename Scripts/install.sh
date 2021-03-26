@@ -16,6 +16,6 @@ if [ $? -ne 0 ]; then { echo "Download failed"; exit $?; } fi
 
 # Run installer(s)
 echo 'Installing Unity 2020.2.3 dmg'
-sudo installer -dumplog -package Unity.dmg -target /
+sudo installer -dumplog Unity.dmg -target /
 #echo 'Installing Unity_win.pkg'
 #sudo installer -dumplog -package Unity_win.pkg -target /
