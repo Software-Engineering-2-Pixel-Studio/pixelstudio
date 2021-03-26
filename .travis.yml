@@ -1,7 +1,7 @@
 language: shell
 
 # use a Mac OSX image
-os: windows
+os: osx
 
 # run the script to download and install Unity editor
 install:
