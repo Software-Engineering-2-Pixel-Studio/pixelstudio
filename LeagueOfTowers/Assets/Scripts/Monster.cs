@@ -102,7 +102,7 @@ public class Monster : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D other){
         //if the monster collide with the base
         if(other.tag == "BasePortal"){
-            Debug.Log("Reach the base");
+            //Debug.Log("Reach the base");
             //scale down in size them
             if(this.name == "TrainingDummy"){
                 
@@ -132,7 +132,7 @@ public class Monster : MonoBehaviour
         {
             //do some damage
             healthValue -= damage;
-            Debug.Log("health: " + healthValue.ToString());
+            //Debug.Log("health: " + healthValue.ToString());
 
             if (healthValue <= 0) //if it's dead (health is 0)
             {
