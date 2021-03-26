@@ -5,7 +5,7 @@ os: osx
 
 # run the script to download and install Unity editor
 install:
-- ./Scripts/install.sh
+- sudo sh ./Scripts/install.sh
 
 # run the script for unit tests and builds
 script:
