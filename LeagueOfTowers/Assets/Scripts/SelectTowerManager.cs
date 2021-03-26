@@ -39,7 +39,6 @@ public class SelectTowerManager : Singleton<SelectTowerManager>
 
         sellPriceText.text = (selectedTower.getPrice() / 2).ToString() + "<color='lime'>$</color>";
 
-        //upgradePanel.SetActive(true);
         this.towerSelectPanel.SetActive(true);
     }
 
@@ -64,15 +63,20 @@ public class SelectTowerManager : Singleton<SelectTowerManager>
     {
         if (selectedTower != null)
         {
+            
             selectedTower.GetComponentInParent<Tile>().SetIsPlaced(false);
-            //UpdateCurrency((selectedTower.getPrice()/2) + currency);
+    
+            //add earned currency for selling tower to global currency
             CurrencyManager.Instance.AddCurrency(selectedTower.getPrice()/2);
             
+            //set tile is empty
             MapManager.Instance.SetTileIsEmptyAt(selectedTower.GetPlacedAtTile().X, selectedTower.GetPlacedAtTile().Y);
+            
+            //destroy this tower
             selectedTower.DestroyThisTower();
             
-            DeselectTower();
-            
+            //un select this tower and hide the UI
+            DeselectTower();    
         }
     }
 }

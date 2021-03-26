@@ -31,7 +31,7 @@ public class ObjectPool : MonoBehaviour
             if(objectPrefabs[i].name == type){
                 Point spawnPoint = MapManager.Instance.SpawnPos;
                 Vector3 worldCenterCoordinate = MapManager.Instance.getTiles()[spawnPoint].GetCenterWorldPosition();
-                //GameObject newObject = Instantiate(objectPrefabs[i]);
+
                 GameObject newObject = PhotonNetwork.Instantiate(objectPrefabs[i].name, worldCenterCoordinate, Quaternion.identity, 0, null);
                 //Debug.Log("NewObject " + newObject);
                 pooledObects.Add(newObject);

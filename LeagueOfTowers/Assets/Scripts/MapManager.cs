@@ -297,11 +297,18 @@ public class MapManager : Singleton<MapManager>
         //Debug.Log("RPC called for setTileIsPlacedRPC to true");
     }
 
+    /*
+        Method to set the Tile is empty so we can place tower on it, also send the signal
+        to every player that this variable has been changed
+    */
     public void SetTileIsEmptyAt(int gridPointX, int gridPointY)
     {
         this.view.RPC("setTileIsEmptyAtRPC", RpcTarget.All, gridPointX, gridPointY);
     }
 
+    /*
+        Method to set the Tile is empty so we can place tower on it
+    */
     [PunRPC]
     private void setTileIsEmptyAtRPC(int gridPointX, int gridPointY)
     {

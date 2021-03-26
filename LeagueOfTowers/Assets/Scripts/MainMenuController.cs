@@ -93,7 +93,6 @@ public class MainMenuController : MonoBehaviourPunCallbacks
     */
     public void JoinGame()
     {
-        //PhotonNetwork.JoinOrCreateRoom(JoinGameInput.text, new RoomOptions() { MaxPlayers = Constants.MAXPLAYERS }, TypedLobby.Default);
         PhotonNetwork.JoinRoom(JoinInputField.text);
     }
 

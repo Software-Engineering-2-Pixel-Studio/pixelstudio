@@ -126,6 +126,10 @@ public class Monster : MonoBehaviour
         WaveManager.Instance.removeMonster(this);   // removes the monster from the "active monsters of the wave" list
     }
 
+    /*
+        Method that reduce the health of this monster when it collide with the projectile
+        also, increase the global currency
+    */
     public void TakeDamage(int damage)
     {
         if (IsActive) //if monster is active
@@ -135,18 +139,15 @@ public class Monster : MonoBehaviour
             //Debug.Log("health: " + healthValue.ToString());
 
             if (healthValue <= 0) //if it's dead (health is 0)
-            {
-                //int currentCurrency = CurrencyManager.Instance.GetCurrency();
+            {;
 
                 //add some currency depending on type of monster
                 if (this.name == "TrainingDummy")
                 {
-                    //GameManager.Instance.UpdateCurrency(currentCurrency + dummyIncome);
                     CurrencyManager.Instance.AddCurrency(dummyIncome);
                 }
                 else if (this.name == "Scarecrow")
                 {
-                    //GameManager.Instance.UpdateCurrency(currentCurrency + scarecrowIncome);
                     CurrencyManager.Instance.AddCurrency(scarecrowIncome);
                 }
 
@@ -155,10 +156,7 @@ public class Monster : MonoBehaviour
                 //remove the monster from the pool of objects in scene
                 WaveManager.Instance.GetPool().ReleaseObject(gameObject);
                 WaveManager.Instance.removeMonster(this);
-
             }
         }
-
     }
-
 }

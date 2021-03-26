@@ -34,7 +34,6 @@ public class Hover : Singleton<Hover>
             if (this.spriteRenderer.enabled)
             {
                 //get mouse location and transform this Hover to the mouse location
-                //this.transform.position = Camera.main.ScreenToWorldPoint(Input.mousePosition);
                 this.transform.position = this.playerCamera.ScreenToWorldPoint(Input.mousePosition);
 
                 //set z-coord to 0 so the camera can see it

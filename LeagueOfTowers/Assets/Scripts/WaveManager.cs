@@ -20,17 +20,18 @@ public class WaveManager : Singleton<WaveManager>
 
     private Coroutine waveCoroutine; //to control the coroutine of the wave
 
-    private bool waveOver;
+    private bool waveOver;      //state when wave have done spawning monster
 
-    private int enemyHealth = 10;
+    private int enemyHealth = 10;   //base health for monster
 
-    private int monsterActiveCount = 0;
+    private int monsterActiveCount = 0; //number of active monster on scene (not destroyed)
 
     // Start is called before the first frame update
     private void Start()
     {
         view = this.GetComponent<PhotonView>();
         pool = GetComponent<ObjectPool>();
+
         //only MasterClient (host) can see this button
         if(PhotonNetwork.IsMasterClient){
             this.startWaveButton.SetActive(true);
@@ -87,7 +88,7 @@ public class WaveManager : Singleton<WaveManager>
             }
 
             this.activeMonsters.Add(monster);
-            //this.monsterActiveCount++;
+
             IncreaseMonsterCount();
             yield return new WaitForSeconds(2.5f);
         }
@@ -144,12 +145,6 @@ public class WaveManager : Singleton<WaveManager>
     {
         //stop producing new monsters on the map
         StopCoroutine(waveCoroutine);
-        // for(int i=0; i<=activeMonsters.Count; i++){
-        //         activeMonsters[i].SetActive(false);
-        //         activeMonsters.Remove(activeMonsters[i]);
-        // }
-        // activeMonsters[0].SetActive(false);
-        // activeMonsters.Remove(activeMonsters[0]);
     }
 
     /*
@@ -160,15 +155,8 @@ public class WaveManager : Singleton<WaveManager>
     {
         activeMonsters.Remove(monster);
         PhotonNetwork.Destroy(monster.transform.gameObject);
-        //this.monsterActiveCount--;
+
         DecreaseMonsterCount();
-        
-        //if(!isWaveActive()){
-        // if(PhotonNetwork.IsMasterClient){
-        //     if(!isWaveActive() && waveOver){
-        //         startWaveButton.SetActive(true);
-        //     }
-        // }
         
     }
 

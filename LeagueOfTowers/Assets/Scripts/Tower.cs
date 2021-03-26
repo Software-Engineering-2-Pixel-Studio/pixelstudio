@@ -38,7 +38,7 @@ public class Tower : MonoBehaviour
     //how long till the next attack
     [SerializeField] private float attackCooldown;
 
-    private Point placedAtTile;
+    private Point placedAtTile;     //tile grid position of this tower
 
     // Start is called before the first frame update
     private void Start()
@@ -116,10 +116,8 @@ public class Tower : MonoBehaviour
     public void Shoot()
     {
         //get the projectile type from the pool and return it
-        //Projectile projectile = GameManager.Instance.Pool.GetObject(projectileType).GetComponent<Projectile>();
         GameObject projectile = PhotonNetwork.Instantiate(this.projectileType, this.transform.position, Quaternion.identity,0,null);
-        //spawn the projectile from the middle of the tower
-        //projectile.transform.position = transform.position;
+
 
         //initialize the projectile by passing this tower
         projectile.GetComponent<Projectile>().Initialize(this);
