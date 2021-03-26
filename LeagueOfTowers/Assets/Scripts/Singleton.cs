@@ -19,14 +19,4 @@ public abstract class Singleton<T> : MonoBehaviour where T: MonoBehaviour
             return instance;
         }
     }
-
-    //above code are the same with this
-    /*public static T getInstance()
-    {
-        if(instance == null)
-        {
-            instance = FindObjectOfType<T>();
-        }
-        return instance;
-    }*/
 }
