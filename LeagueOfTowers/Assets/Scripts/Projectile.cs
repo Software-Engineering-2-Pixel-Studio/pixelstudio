@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Photon.Pun;
 
 public class Projectile : MonoBehaviour
 {
@@ -20,6 +21,12 @@ public class Projectile : MonoBehaviour
     {
         //move towards the target
         MoveToTarget();
+        //if target is destroyed before this projectile hit, destroy this projectile
+        if(PhotonNetwork.IsMasterClient){
+            if(targetMonster == null){
+                PhotonNetwork.Destroy(this.transform.gameObject);
+            }
+        }
     }
 
     //initialize the projectile's tower parent and target
@@ -67,6 +74,7 @@ public class Projectile : MonoBehaviour
         if (other.tag == "Monster") //if the target in range is a monster
         {
             if(targetMonster == null){
+                PhotonNetwork.Destroy(this.transform.gameObject);
                 return;
             }
             else if (targetMonster.gameObject == other.gameObject)
@@ -77,6 +85,8 @@ public class Projectile : MonoBehaviour
 
                 //remove the projectile from the pool of objects in scene
                 GameManager.Instance.Pool.ReleaseObject(gameObject);
+
+                PhotonNetwork.Destroy(this.transform.gameObject);
             }
 
         }

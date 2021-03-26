@@ -25,7 +25,7 @@ public class PickedTowerScript : MonoBehaviour
     //public method
     public void SetPickedButton(TowerButton clickedTowerButton){
         
-        Debug.Log("Click Button " + clickedTowerButton.GetTowerPrefab().name);
+        //Debug.Log("Click Button " + clickedTowerButton.GetTowerPrefab().name);
         if(CurrencyManager.Instance.GetCurrency() >= clickedTowerButton.GetPrice()){
             this.pickedButton = clickedTowerButton;
 
