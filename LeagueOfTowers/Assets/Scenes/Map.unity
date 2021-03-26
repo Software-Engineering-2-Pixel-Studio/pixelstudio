@@ -1857,7 +1857,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -554.73755, y: 300}
+  m_AnchoredPosition: {x: 305.7, y: 400}
   m_SizeDelta: {x: 134.6552, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1034765266
@@ -2189,7 +2189,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -381.28, y: 300}
+  m_AnchoredPosition: {x: 479.16, y: 400}
   m_SizeDelta: {x: 212.26, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1239386569
@@ -2614,8 +2614,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   pickedButton: {fileID: 0}
-  upgradePanel: {fileID: 819626356}
-  sellPriceText: {fileID: 662109876}
   gameOverMenu: {fileID: 842551896}
 --- !u!114 &1537229719
 MonoBehaviour:
