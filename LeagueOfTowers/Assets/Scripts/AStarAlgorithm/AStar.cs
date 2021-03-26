@@ -19,6 +19,7 @@ public static class AStar
         foreach (Tile tile in MapManager.Instance.getTiles().Values)
         {
             nodes.Add(tile.GetTilePosition(), new Node(tile));
+            //nodes.Add(tile.GetWorldPosition(), new Node(tile));
         }
     }
 
@@ -140,11 +141,11 @@ public static class AStar
                 break;
             }
         }
-
+        //GameObject.Find("AStarDebugger").GetComponent<AStarDebugger>().debugPath(openList, closedList, finalPath);
         return finalPath;
 
         //*****THIS IS ONLY FOR DEBUGGING NEEDS TO BE REMOVED LATER!*****
-        //GameObject.Find("AStarDebugger").GetComponent<AStarDebugger>().debugPath(openList, closedList, finalPath);
+        
     }
 
     private static bool isConnectedDiagonally(Node currentNode, Node neighbour)

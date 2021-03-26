@@ -2,18 +2,17 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System;
-
+using Photon.Pun;
 public class MapManager : Singleton<MapManager>
 {
     //fields
     //list of tile prefabs
-    [SerializeField] private GameObject[] tilePrefabs;
-    [SerializeField] private CameraMovement camMove;
-    [SerializeField] private CameraFollow camFollow;
+    [SerializeField] private GameObject[] tilePrefabs;  //list of tile's prefabs
+    private PhotonView view;        //PhotonView object to synchronize
 
     //mapIndexSize;
-    private int xIndexSize;
-    private int yIndexSize;
+    private int xIndexSize;         //number of Tiles in horizontal
+    private int yIndexSize;         //number of Tiles in vertical
 
     //map bounds
     private float minMapX;
@@ -35,11 +34,11 @@ public class MapManager : Singleton<MapManager>
         }
     }
 
-    [SerializeField] private GameObject spawnPrefab;
+    [SerializeField] private GameObject spawnPrefab;        //the spawn portal prefab
 
-    public Portal SpawnPrefab{ get; set;}
+    public Portal SpawnPrefab{ get; set;}          //get, set property for spawn portal object
 
-    private Point basePos;
+    private Point basePos;  //base position base on grid of the map
     [SerializeField] private GameObject basePrefab;
 
     //a parent object to put all the Tile under
@@ -81,16 +80,16 @@ public class MapManager : Singleton<MapManager>
     }
 
     // Start is called before the first frame update
-    void Start()
+    private void Start()
     {
         //set up prefab Tile_Grass_0 in Prefabs folder to variable tile at runtime
         /*tile = (GameObject) Resources.Load("Prefabs/Tile_Grass_0", typeof(GameObject));*/
-
+        view = this.GetComponent<PhotonView>();
         CreateLevel();
     }
 
     // Update is called once per frame
-    void Update()
+    private void Update()
     {
 
     }
@@ -133,8 +132,6 @@ public class MapManager : Singleton<MapManager>
         SetUpBase();
 
         setMapBounds(worldStart);
-        camMove.SetBounders(this.getMapBounds());
-        camFollow.SetBounders(this.getMapBounds());
 
         
     }//end of CreateLevel
@@ -187,6 +184,9 @@ public class MapManager : Singleton<MapManager>
         return data.Split('-');
     }
 
+    /*
+
+    */
     private void setMapBounds(Vector3 worldStart)
     {
         this.minMapX = worldStart.x;
@@ -206,6 +206,9 @@ public class MapManager : Singleton<MapManager>
         return mapBounds ;
     }
 
+    /*
+        Method to create the spawn portal on the map
+    */
     private void SetUpSpawn()
     {
         spawnPos = new Point(0, 1);
@@ -221,6 +224,9 @@ public class MapManager : Singleton<MapManager>
         //^^^ needed to use later when spawn enemies
     }
 
+    /*
+        Method to create the base on the map
+    */
     private void SetUpBase()
     {
         basePos = new Point(15, 5);
@@ -230,8 +236,12 @@ public class MapManager : Singleton<MapManager>
 
         //place the base at grid(16,5) or end of the path
         theBase.transform.position = Tiles[basePos].GetCenterWorldPosition();
+        //theBase.transform.localScale = new Vector3(1.2f, 1.2f, 1.0f);
     }
 
+    /*
+        Method to get dictionary of Tiles
+    */
     public Dictionary<Point, Tile> getTiles()
     {
         return this.Tiles;
@@ -259,8 +269,44 @@ public class MapManager : Singleton<MapManager>
         return isGreaterThanLeftMapBoundary && isLessThanRightMapBoundary;
     }
 
-    // generate a path for the enemies using the AStar algorithm
-    public void GeneratePath(){
-        path = AStar.getPath(basePos, spawnPos); 
+    /*
+        Method to generate path for monster from spawn portal to base 
+    */
+    public void GeneratePath()
+    {
+        path = AStar.getPath(basePos,spawnPos); 
+    }
+
+    /*
+        Sync a specific tile to be full and send signal to other players
+    */
+    public void SetTileIsPlacedAt(int gridPointX, int gridPointY)
+    {
+        this.view.RPC("setTileIsPlacedAtRPC", RpcTarget.All, gridPointX, gridPointY);
+    }
+
+    /*
+        PunRPC
+        Sync a specific tile to be full
+    */
+    [PunRPC]
+    private void setTileIsPlacedAtRPC(int gridPointX, int gridPointY)
+    {
+        Point gP = new Point(gridPointX, gridPointY);
+        this.Tiles[gP].SetIsPlaced(true);
+        //Debug.Log("RPC called for setTileIsPlacedRPC to true");
+    }
+
+    public void SetTileIsEmptyAt(int gridPointX, int gridPointY)
+    {
+        this.view.RPC("setTileIsEmptyAtRPC", RpcTarget.All, gridPointX, gridPointY);
+    }
+
+    [PunRPC]
+    private void setTileIsEmptyAtRPC(int gridPointX, int gridPointY)
+    {
+        Point gP = new Point(gridPointX, gridPointY);
+        this.Tiles[gP].SetIsPlaced(false);
+        //Debug.Log("RPC called for setTileIsPlacedRPC to true");
     }
 }
