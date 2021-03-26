@@ -66,7 +66,10 @@ public class Projectile : MonoBehaviour
     {
         if (other.tag == "Monster") //if the target in range is a monster
         {
-            if (targetMonster.gameObject == other.gameObject)
+            if(targetMonster == null){
+                return;
+            }
+            else if (targetMonster.gameObject == other.gameObject)
             {
                 //Debug.Log("Monster hit");
 

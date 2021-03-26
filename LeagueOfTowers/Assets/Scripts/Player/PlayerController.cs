@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using Photon.Pun;
 public class PlayerController : MonoBehaviour
 {
@@ -8,6 +9,7 @@ public class PlayerController : MonoBehaviour
     //[SerializeField] private float speed;
     [SerializeField] private GameObject playerCamera;
     [SerializeField] private GameObject playerCanvas;
+    [SerializeField] private Text playerNameDisplay;
     private PhotonView view;
 
 
@@ -21,6 +23,8 @@ public class PlayerController : MonoBehaviour
             this.transform.GetComponent<PlayerMovement>().enabled = true;
             this.playerCamera.GetComponent<Camera>().enabled = true;
             this.playerCanvas.GetComponent<Canvas>().enabled = true;
+            this.playerNameDisplay.GetComponent<Text>().enabled = true;
+            this.playerNameDisplay.text = PhotonNetwork.NickName;
             
         }
         else
@@ -28,6 +32,8 @@ public class PlayerController : MonoBehaviour
             this.transform.GetComponent<PlayerMovement>().enabled = false;
             this.playerCamera.GetComponent<Camera>().enabled = false;
             this.playerCanvas.GetComponent<Canvas>().enabled = false;
+            this.playerNameDisplay.GetComponent<Text>().enabled = false;
+            this.playerNameDisplay.text = view.Owner.NickName;
         }
     }
 
