@@ -4,7 +4,7 @@
 #  The below link will need to change depending on the version, this one is for Unity 2020.2.3
 #  Refer to https://unity3d.com/get-unity/download/archive and find the link pointed to by Mac "Unity Editor"
 echo 'Downloading Unity 2020.2.3 dmg:'
-curl --retry 5 -o Unity.pkg https://download.unity3d.com/download_unity/8ff31bc5bf5b/UnityDownloadAssistant.dmg
+curl --retry 5 -o Unity.dmg https://download.unity3d.com/download_unity/8ff31bc5bf5b/UnityDownloadAssistant.dmg
 if [ $? -ne 0 ]; then { echo "Download failed"; exit $?; } fi
 
 # In Unity 5 they split up build platform support into modules which are installed separately
@@ -16,6 +16,6 @@ if [ $? -ne 0 ]; then { echo "Download failed"; exit $?; } fi
 
 # Run installer(s)
 echo 'Installing Unity 2020.2.3 dmg'
-sudo installer -dumplog -package Unity.pkg -target /
+sudo installer -dumplog -package Unity.dmg -target /
 #echo 'Installing Unity_win.pkg'
 #sudo installer -dumplog -package Unity_win.pkg -target /
