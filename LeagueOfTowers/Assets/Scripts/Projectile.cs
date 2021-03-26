@@ -77,22 +77,6 @@ public class Projectile : MonoBehaviour
             }
 
         }
-    }
-
-    private void OnTriggerEnter2D(Collider2D other)
-    {
-        if (other.tag == "Monster") //if the target in range is a monster
-        {
-            if (target.gameObject == other.gameObject)
-            {
-                //Debug.Log("Monster hit");
-
-                target.TakeDamage(parent.getDamage());
-
-                //remove the projectile from the pool of objects in scene
-                GameManager.Instance.Pool.ReleaseObject(gameObject);
-            }
-
-        }
-    }
+    } 
+    
 }

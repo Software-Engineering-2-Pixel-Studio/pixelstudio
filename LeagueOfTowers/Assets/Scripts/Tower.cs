@@ -162,7 +162,7 @@ public class Tower : MonoBehaviour
         return this.damage;
     }
 
-    public int GetPrice(){
+    public int getPrice(){
         return this.price;
     }
 

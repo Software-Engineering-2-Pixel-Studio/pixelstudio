@@ -112,7 +112,7 @@ public class GameManager : Singleton<GameManager>
         selectedTower = tower;
         selectedTower.Select();
 
-        sellPriceText.text = "Sell for " + (selectedTower.GetPrice() / 2).ToString();
+        sellPriceText.text = "Sell for " + (selectedTower.getPrice() / 2).ToString();
 
         upgradePanel.SetActive(true);
     }
@@ -211,7 +211,7 @@ public class GameManager : Singleton<GameManager>
         {
             selectedTower.GetComponentInParent<Tile>().SetIsPlaced(false);
             //UpdateCurrency((selectedTower.getPrice()/2) + currency);
-            CurrencyManager.Instance.AddCurrency(selectedTower.GetPrice()/2);
+            CurrencyManager.Instance.AddCurrency(selectedTower.getPrice()/2);
             //Destroy(selectedTower.transform.parent.gameObject);
             selectedTower.transform.parent.gameObject.SetActive(false);
             //DestroyTower(selectedTower.transform.parent.gameObject);
