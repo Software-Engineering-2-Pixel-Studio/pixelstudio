@@ -11,8 +11,6 @@ public class SelectTowerManager : Singleton<SelectTowerManager>
     [SerializeField ] private GameObject towerSelectPanel;  //upgrade panel of tower
     [SerializeField] private Text sellPriceText;    //selling price of the tower
 
-
-
     // Start is called before the first frame update
     private void Start()
     {

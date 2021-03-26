@@ -85,7 +85,8 @@ public class Projectile : MonoBehaviour
 
                 //remove the projectile from the pool of objects in scene
                 GameManager.Instance.Pool.ReleaseObject(gameObject);
-
+                
+                //destroy it
                 PhotonNetwork.Destroy(this.transform.gameObject);
             }
 

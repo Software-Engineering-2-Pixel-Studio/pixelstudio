@@ -184,6 +184,9 @@ public class Tower : MonoBehaviour
         return this.view;
     }
 
+    /*
+        Destroy this tower
+    */
     public void DestroyThisTower(){
         //only the owner can destroy this tower
         if(this.view.IsMine){
@@ -192,10 +195,17 @@ public class Tower : MonoBehaviour
         }
     }
 
+    /*
+        Set the tile grid position for this tower
+    */
+
     public void SetPlacedAtTile(Point tileGridPosition){
         this.placedAtTile = tileGridPosition;
     }
 
+    /*
+        Get the tile grid position of this tower
+    */
     public Point GetPlacedAtTile(){
         return this.placedAtTile;
     }
