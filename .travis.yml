@@ -1,11 +1,11 @@
 language: generic
 
 # use a Mac OSX image
-os: osx
+os: windows
 
 # run the script to download and install Unity editor
 install:
-- sudo sh ./Scripts/install.sh
+- sudo -E sh ./Scripts/install.sh
 
 # run the script for unit tests and builds
 script:
