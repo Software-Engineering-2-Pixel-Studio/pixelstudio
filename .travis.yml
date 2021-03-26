@@ -12,7 +12,7 @@ script:
 - sudo -E sh ./Scripts/build.sh
 
 branches:
-  only: main
+  only: Unity-travis-yml
 
 # environment variables used in bash scripts
 env:
