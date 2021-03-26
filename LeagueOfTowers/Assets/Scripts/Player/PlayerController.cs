@@ -24,7 +24,12 @@ public class PlayerController : MonoBehaviour
             this.playerCamera.GetComponent<Camera>().enabled = true;
             this.playerCanvas.GetComponent<Canvas>().enabled = true;
             this.playerNameDisplay.GetComponent<Text>().enabled = true;
-            this.playerNameDisplay.text = PhotonNetwork.NickName;
+            if(PhotonNetwork.IsMasterClient){
+                this.playerNameDisplay.text = string.Format("<color='red'>{0}</color>",PhotonNetwork.NickName);
+            }
+            else{
+                this.playerNameDisplay.text = string.Format("<color='blue'>{0}</color>",view.Owner.NickName);
+            }
             
         }
         else
@@ -33,7 +38,14 @@ public class PlayerController : MonoBehaviour
             this.playerCamera.GetComponent<Camera>().enabled = false;
             this.playerCanvas.GetComponent<Canvas>().enabled = false;
             this.playerNameDisplay.GetComponent<Text>().enabled = false;
-            this.playerNameDisplay.text = view.Owner.NickName;
+            if(PhotonNetwork.IsMasterClient){
+                this.playerNameDisplay.text = string.Format("<color='red'>{0}</color>",PhotonNetwork.NickName);
+            }
+            else{
+                this.playerNameDisplay.text = string.Format("<color='blue'>{0}</color>",view.Owner.NickName);
+            }
+            
+            
         }
     }
 

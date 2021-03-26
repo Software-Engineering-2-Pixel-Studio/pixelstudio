@@ -277,16 +277,36 @@ public class MapManager : Singleton<MapManager>
         path = AStar.getPath(basePos,spawnPos); 
     }
 
+    /*
+        Sync a specific tile to be full and send signal to other players
+    */
     public void SetTileIsPlacedAt(int gridPointX, int gridPointY)
     {
         this.view.RPC("setTileIsPlacedAtRPC", RpcTarget.All, gridPointX, gridPointY);
     }
 
+    /*
+        PunRPC
+        Sync a specific tile to be full
+    */
     [PunRPC]
     private void setTileIsPlacedAtRPC(int gridPointX, int gridPointY)
     {
         Point gP = new Point(gridPointX, gridPointY);
         this.Tiles[gP].SetIsPlaced(true);
-        Debug.Log("RPC called for setTileIsPlacedRPC to true");
+        //Debug.Log("RPC called for setTileIsPlacedRPC to true");
+    }
+
+    public void SetTileIsEmptyAt(int gridPointX, int gridPointY)
+    {
+        this.view.RPC("setTileIsEmptyAtRPC", RpcTarget.All, gridPointX, gridPointY);
+    }
+
+    [PunRPC]
+    private void setTileIsEmptyAtRPC(int gridPointX, int gridPointY)
+    {
+        Point gP = new Point(gridPointX, gridPointY);
+        this.Tiles[gP].SetIsPlaced(false);
+        //Debug.Log("RPC called for setTileIsPlacedRPC to true");
     }
 }

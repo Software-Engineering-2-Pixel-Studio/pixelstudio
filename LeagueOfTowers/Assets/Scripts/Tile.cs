@@ -119,11 +119,11 @@ public class Tile : MonoBehaviour
         {
             if (myTower != null)
             {
-                GameManager.Instance.SelectTower(myTower);
+                SelectTowerManager.Instance.SelectTower(myTower);
             } 
             else
             {
-                GameManager.Instance.DeselectTower();
+                SelectTowerManager.Instance.DeselectTower();
             }
         }
     }
@@ -140,7 +140,8 @@ public class Tile : MonoBehaviour
 
 
         GameObject tower = PhotonNetwork.Instantiate(towerPref.name, this.GetCenterWorldPosition(), Quaternion.identity);
-
+        Tower script = tower.GetComponentsInChildren<Tower>()[0];
+        script.SetPlacedAtTile(this.gridPos);
         //place at the correct position of the tile on the map
         //tower.transform.position = this.GetCenterWorldPosition();
 
@@ -163,7 +164,7 @@ public class Tile : MonoBehaviour
         //make the tile not walkable by enemy
         this.isWalkable = false;
 
-        Debug.Log("Placed a tower!");
+        //Debug.Log("Placed a tower!");
         
     }
 

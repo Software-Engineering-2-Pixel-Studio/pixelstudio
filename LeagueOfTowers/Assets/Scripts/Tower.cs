@@ -38,16 +38,18 @@ public class Tower : MonoBehaviour
     //how long till the next attack
     [SerializeField] private float attackCooldown;
 
+    private Point placedAtTile;
+
     // Start is called before the first frame update
-    void Start()
+    private void Start()
     {
-        view = this.GetComponent<PhotonView>();
+        this.view = this.GetComponentInParent<PhotonView>();
         //get the sprite
-        mySpriteRenderer = GetComponent<SpriteRenderer>();
+        this.mySpriteRenderer = GetComponent<SpriteRenderer>();
     }
 
     // Update is called once per frame
-    void Update()
+    private void Update()
     {
         //attack targets
         Attack();
@@ -153,20 +155,48 @@ public class Tower : MonoBehaviour
         return projectileSpeed;
     }
 
+    /*
+        Method to get targer monster of this tower
+    */
     public Monster getTarget()
     {
         return target;
     }
 
+    /*
+        Method to get damage of this tower
+    */
     public int getDamage(){
         return this.damage;
     }
 
+    /*
+        Method to get price of this tower
+    */
     public int getPrice(){
         return this.price;
     }
 
+    /*
+        Method to get PhotonView of this tower
+    */
     public PhotonView GetPhotonView(){
         return this.view;
+    }
+
+    public void DestroyThisTower(){
+        //only the owner can destroy this tower
+        if(this.view.IsMine){
+            //Tower Prefabs has child Range which stores Tower.cs(this) Script.
+            PhotonNetwork.Destroy(this.transform.parent.gameObject);
+        }
+    }
+
+    public void SetPlacedAtTile(Point tileGridPosition){
+        this.placedAtTile = tileGridPosition;
+    }
+
+    public Point GetPlacedAtTile(){
+        return this.placedAtTile;
     }
 }
