@@ -69,10 +69,7 @@ public class SelectTowerManager : Singleton<SelectTowerManager>
             selectedTower.GetComponentInParent<Tile>().SetIsPlaced(false);
             //UpdateCurrency((selectedTower.getPrice()/2) + currency);
             CurrencyManager.Instance.AddCurrency(selectedTower.getPrice()/2);
-            //Destroy(selectedTower.transform.parent.gameObject);
-            //selectedTower.transform.parent.gameObject.SetActive(false);
-            //DestroyTower(selectedTower.transform.parent.gameObject);
-            //PhotonNetwork.Destroy(selectedTower.transform.parent.gameObject.GetComponent<Tower>().GetPhotonView());
+            
             MapManager.Instance.SetTileIsEmptyAt(selectedTower.GetPlacedAtTile().X, selectedTower.GetPlacedAtTile().Y);
             selectedTower.DestroyThisTower();
             

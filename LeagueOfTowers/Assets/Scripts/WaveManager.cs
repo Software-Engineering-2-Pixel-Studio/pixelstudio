@@ -24,6 +24,8 @@ public class WaveManager : Singleton<WaveManager>
 
     private int enemyHealth = 10;
 
+    private int monsterActiveCount = 0;
+
     // Start is called before the first frame update
     private void Start()
     {
@@ -42,7 +44,11 @@ public class WaveManager : Singleton<WaveManager>
     // Update is called once per frame
     private void Update()
     {
-        
+        if(PhotonNetwork.IsMasterClient){
+            if(!isWaveActive() && waveOver){
+                startWaveButton.SetActive(true);
+            }
+        }
     }
 
     /*
@@ -73,6 +79,7 @@ public class WaveManager : Singleton<WaveManager>
             //get the monster object from the pool of objects control by this WaveManager
             Monster monster = pool.GetObject(type).GetComponent<Monster>();
             monster.Spawn(enemyHealth);
+            
 
             if (this.waves % 3 == 0) //increase health of monsters by 2 every 3 waves
             {
@@ -80,7 +87,8 @@ public class WaveManager : Singleton<WaveManager>
             }
 
             this.activeMonsters.Add(monster);
-
+            //this.monsterActiveCount++;
+            IncreaseMonsterCount();
             yield return new WaitForSeconds(2.5f);
         }
         this.waveOver = true;
@@ -88,7 +96,7 @@ public class WaveManager : Singleton<WaveManager>
     }
     private bool isWaveActive()
     {
-        return this.activeMonsters.Count > 0;
+        return this.monsterActiveCount > 0;
     }
 
     //public methods
@@ -122,8 +130,7 @@ public class WaveManager : Singleton<WaveManager>
     */
     public void StartWave()
     {
-        this.waves++;
-        this.waveText.text = string.Format("{0}", waves);
+        IncreaseWaveCount();
         this.waveCoroutine = StartCoroutine(SpawnWave());
 
         this.startWaveButton.SetActive(false);
@@ -152,9 +159,51 @@ public class WaveManager : Singleton<WaveManager>
     public void removeMonster(Monster monster)
     {
         activeMonsters.Remove(monster);
+        PhotonNetwork.Destroy(monster.transform.gameObject);
+        //this.monsterActiveCount--;
+        DecreaseMonsterCount();
+        
         //if(!isWaveActive()){
-        if(!isWaveActive() && waveOver){
-            startWaveButton.SetActive(true);
-        }
+        // if(PhotonNetwork.IsMasterClient){
+        //     if(!isWaveActive() && waveOver){
+        //         startWaveButton.SetActive(true);
+        //     }
+        // }
+        
     }
+
+
+    [PunRPC]
+    private void increaseWaveCountRPC()
+    {
+        this.waves++;
+        this.waveText.text = string.Format("{0}", waves);
+    }
+
+    public void IncreaseWaveCount()
+    {
+        this.view.RPC("increaseWaveCountRPC", RpcTarget.All);
+    }
+
+    [PunRPC]
+    private void decreaseMonsterCountPRC()
+    {
+        this.monsterActiveCount--;
+    }
+
+    public void DecreaseMonsterCount()
+    {
+        this.view.RPC("decreaseMonsterCountPRC", RpcTarget.All);
+    }
+
+    [PunRPC]
+    private void increaseMonsterCountRPC()
+    {
+        this.monsterActiveCount++;
+    }
+    public void IncreaseMonsterCount()
+    {
+        this.view.RPC("increaseMonsterCountRPC", RpcTarget.All);
+    }
+
 }

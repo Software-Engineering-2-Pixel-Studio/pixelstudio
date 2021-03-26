@@ -17,11 +17,13 @@ public class GameOver : Singleton<GameOver>
     {
         view = this.GetComponent<PhotonView>();
         wavesDisplay.text = string.Format("Survived {0} waves", WaveManager.Instance.GetWaves().ToString());
-        ;
 
         //only MasterClient can restart the game
         if(PhotonNetwork.IsMasterClient == false){
             restartButton.SetActive(false);
+        }
+        else{
+            WaveManager.Instance.StopWave();
         }
     }
 

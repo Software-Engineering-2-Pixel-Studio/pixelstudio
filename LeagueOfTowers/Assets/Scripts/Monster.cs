@@ -157,8 +157,10 @@ public class Monster : MonoBehaviour
                 //GameManager.Instance.removeMonster(this);   // removes the monster from the "active monsters of the wave" list
                 WaveManager.Instance.GetPool().ReleaseObject(gameObject);
                 WaveManager.Instance.removeMonster(this);
+                // PhotonNetwork.Destroy(this.transform.gameObject);
             }
         }
 
     }
+
 }
