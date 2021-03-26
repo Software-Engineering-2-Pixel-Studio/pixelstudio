@@ -14,8 +14,11 @@ if [ $? -ne 0 ]; then { echo "Download failed"; exit $?; } fi
 #curl --retry 5 -o Unity_win.pkg http://netstorage.unity3d.com/unity/88d00a7498cd/MacEditorTargetInstaller/UnitySetup-Windows-Support-for-Editor-5.5.1f1.pkg
 #if [ $? -ne 0 ]; then { echo "Download failed"; exit $?; } fi
 
+sudo hdiutil attach Unity.dmg
+
 # Run installer(s)
 echo 'Installing Unity 2020.2.3 exe'
-sudo installer -dumplog -dmg Unity.pkg -target /
+sudo installer -dumplog -package /Volumes/Unity/Unity.pkg -target /
+#sudo installer -dumplog -dmg Unity.pkg -target /
 #echo 'Installing Unity_win.pkg'
 #sudo installer -dumplog -package Unity_win.pkg -target /
