@@ -18,7 +18,9 @@ sudo hdiutil attach Unity.dmg
 
 # Run installer(s)
 echo 'Installing Unity 2020.2.3 exe'
-sudo installer -dumplog -package /Volumes/Unity/Unity.pkg -target /
+sudo installer -dumplog -package /Volumes/Unity.pkg -target /
 #sudo installer -dumplog -dmg Unity.pkg -target /
 #echo 'Installing Unity_win.pkg'
 #sudo installer -dumplog -package Unity_win.pkg -target /
+
+sudo hdiutil detach /Volumes/<image>
