@@ -101,6 +101,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   healthValue: 0
   speed: 3
+  elementType: 1
 --- !u!61 &-8504978830581701477
 BoxCollider2D:
   m_ObjectHideFlags: 0

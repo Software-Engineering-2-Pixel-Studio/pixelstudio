@@ -18,6 +18,10 @@ public class Monster : MonoBehaviour
     private float speed; //serialized to access from different places
     private Stack<Node> path;
 
+    [SerializeField]  private Element elementType; //element type of the monster
+
+    private int typeResistance = 2;
+
     public Point GridPosition{ get; set;}
 
     private Vector3 destination; // the destination of the monster (base location)
@@ -130,10 +134,17 @@ public class Monster : MonoBehaviour
         Method that reduce the health of this monster when it collide with the projectile
         also, increase the global currency
     */
-    public void TakeDamage(int damage)
+    public void TakeDamage(int damage, Element dmgType)
     {
         if (IsActive) //if monster is active
         {
+            //if damage type is the same as the monster type, do less damage
+            if (dmgType == elementType)
+            {
+                damage = damage / typeResistance;
+                typeResistance++;
+            }
+
             //do some damage
             healthValue -= damage;
             //Debug.Log("health: " + healthValue.ToString());

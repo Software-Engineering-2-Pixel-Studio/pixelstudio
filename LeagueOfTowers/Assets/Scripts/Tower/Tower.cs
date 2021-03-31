@@ -3,8 +3,16 @@ using System.Collections.Generic;
 using UnityEngine;
 using Photon.Pun;
 
+public enum Element
+{
+    FIRE,
+    LIGHT,
+    SLOW,
+    NONE
+}
 
-public class Tower : MonoBehaviour
+
+public abstract class Tower : MonoBehaviour
 {
     //price of the tower
     [SerializeField]
@@ -40,6 +48,8 @@ public class Tower : MonoBehaviour
 
     private Point placedAtTile;     //tile grid position of this tower
 
+    private Element elementType;
+
     // Start is called before the first frame update
     private void Start()
     {
@@ -67,6 +77,12 @@ public class Tower : MonoBehaviour
         this.damage = damageGiven;
 
     }
+
+    protected void setElementType(Element otherElement)
+    {
+        this.elementType = otherElement;
+    }
+
     public void Select()
     {
         //enable or disable the tower range when selected
@@ -176,6 +192,14 @@ public class Tower : MonoBehaviour
     }
 
     /*
+        Method to get element of this tower
+    */
+    public Element getElementType()
+    {
+        return this.elementType;
+    }
+
+    /*
         Method to get PhotonView of this tower
     */
     public PhotonView GetPhotonView(){
@@ -207,4 +231,6 @@ public class Tower : MonoBehaviour
     public Point GetPlacedAtTile(){
         return this.placedAtTile;
     }
+
+    
 }
