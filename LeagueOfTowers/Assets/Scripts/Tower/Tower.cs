@@ -128,7 +128,7 @@ public abstract class Tower : MonoBehaviour
         }
 
         //if the target doesn't exist anymore in the tower range and there are still monsters in the queue
-        if (target == null && monsters.Count > 0)
+        if (target == null && monsters.Count > 0 && monsters.Peek().IsActive)
         {
             //remove the monster from the queue
             target = monsters.Dequeue();
@@ -147,7 +147,7 @@ public abstract class Tower : MonoBehaviour
         }
 
         //reset the target when monster enters the portal
-        if (target != null && !target.isAlive)
+        if (target != null && !target.isAlive || target != null && !target.IsActive)
         {
             target = null;
         }
