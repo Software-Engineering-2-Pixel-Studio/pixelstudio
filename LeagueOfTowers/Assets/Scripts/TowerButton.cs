@@ -18,6 +18,7 @@ public class TowerButton : MonoBehaviour
     {
         this.SetPriceText();
 
+        //add a new currency changed event to the tower buttons
         CurrencyManager.Instance.Changed += new CurrencyChanged(PriceCheck);
     }
 
@@ -59,18 +60,22 @@ public class TowerButton : MonoBehaviour
         return this.price;
     }
 
+    /*
+        Method that checks if the price is lower/greater than the users' currency
+    */
     private void PriceCheck()
     {
+
         if (price <= CurrencyManager.Instance.GetCurrency())
         {
+            //maintain white color or whiten the image and text if it's grayed out
             GetComponent<Image>().color = Color.white;
-
             priceText.color = Color.white;
         }
         else
         {
+            //gray the image and text
             GetComponent<Image>().color = Color.gray;
-
             priceText.color = Color.gray;
         }
     }

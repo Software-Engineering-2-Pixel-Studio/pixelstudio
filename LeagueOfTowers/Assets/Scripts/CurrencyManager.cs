@@ -65,6 +65,7 @@ public class CurrencyManager : Singleton<CurrencyManager>
     {
         this.view.RPC("addCurrencyRPC", RpcTarget.All, earnAmount);
 
+        //call currency change
         OnCurrencyChanged();
     }
 
@@ -76,6 +77,7 @@ public class CurrencyManager : Singleton<CurrencyManager>
     {
         this.view.RPC("subCurrencyRPC", RpcTarget.All, payAmount);
 
+        //call currency change
         OnCurrencyChanged();
     }
 
@@ -86,10 +88,15 @@ public class CurrencyManager : Singleton<CurrencyManager>
         return this.currency;
     }
 
+    /*
+        Method that triggers when currency changes
+    */
     public void OnCurrencyChanged()
     {
+        //if the event is not null
         if (Changed != null)
         {
+            //call the event
             Changed();
         }
     }
