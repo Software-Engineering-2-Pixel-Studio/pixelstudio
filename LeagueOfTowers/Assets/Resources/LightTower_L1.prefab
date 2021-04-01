@@ -221,5 +221,7 @@ MonoBehaviour:
   price: 30
   projectileType: LightProjectile
   projectileSpeed: 5
-  damage: 10
-  attackCooldown: 3
+  damage: 15
+  debuffDuration: 1
+  debuffProcChance: 100
+  attackCooldown: 4

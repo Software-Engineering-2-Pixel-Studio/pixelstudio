@@ -37,6 +37,12 @@ public abstract class Tower : MonoBehaviour
     //damage of the tower
     [SerializeField] private int damage;
 
+    //debuff duration of the tower
+    [SerializeField] private float debuffDuration;
+
+    //chance for debuff to be applied
+    [SerializeField] private float debuffProcChance;
+
     //let's say we can attack from the getgo
     private bool canAttack = true;
 
@@ -51,11 +57,16 @@ public abstract class Tower : MonoBehaviour
     private Element elementType;
 
     // Start is called before the first frame update
-    private void Start()
+    protected virtual void Start()
     {
-        this.view = this.GetComponentInParent<PhotonView>();
+        Set();
+    }
+
+    public void Set()
+    {
         //get the sprite
         this.mySpriteRenderer = GetComponent<SpriteRenderer>();
+        this.view = this.GetComponentInParent<PhotonView>();
     }
 
     // Update is called once per frame
@@ -81,6 +92,16 @@ public abstract class Tower : MonoBehaviour
     protected void setElementType(Element otherElement)
     {
         this.elementType = otherElement;
+    }
+
+    public void setDebuffDuration(float givenDebuffDuration)
+    {
+        this.debuffDuration = givenDebuffDuration;
+    }
+
+    public void setDebuffProcChance(float givenDebuffProc)
+    {
+        this.debuffProcChance = givenDebuffProc;
     }
 
     public void Select()
@@ -123,6 +144,17 @@ public abstract class Tower : MonoBehaviour
                 Shoot();
                 canAttack = false;
             }
+        } 
+        else if (monsters.Count > 0) //if there are still monsters
+        {
+            //change target
+            target = monsters.Dequeue();
+        }
+
+        //reset the target when monster enters the portal
+        if (target != null && !target.isAlive)
+        {
+            target = null;
         }
     }
 
@@ -200,6 +232,22 @@ public abstract class Tower : MonoBehaviour
     }
 
     /*
+        Method to get debuff duration of this tower
+    */
+    public float getDebuffDuration()
+    {
+        return this.debuffDuration;
+    }
+
+    /*
+        Method to get debuff proc chance of this tower
+    */
+    public float getDebuffProcChance()
+    {
+        return this.debuffProcChance;
+    }
+
+    /*
         Method to get PhotonView of this tower
     */
     public PhotonView GetPhotonView(){
@@ -231,6 +279,11 @@ public abstract class Tower : MonoBehaviour
     public Point GetPlacedAtTile(){
         return this.placedAtTile;
     }
+
+    /*
+        Get the debuff of this tower
+    */
+    public abstract Debuff GetDebuff();
 
     
 }

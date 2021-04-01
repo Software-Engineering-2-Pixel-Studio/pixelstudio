@@ -4,8 +4,14 @@ using UnityEngine;
 
 public class LightTower : Tower
 {
-    private void Start()
+    protected override void Start()
     {
+        base.Set();
         setElementType(Element.LIGHT);
+    }
+
+    public override Debuff GetDebuff()
+    {
+        return new LightDebuff(getTarget(), getDebuffDuration());
     }
 }

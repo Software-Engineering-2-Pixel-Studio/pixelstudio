@@ -6,7 +6,7 @@ using Photon.Pun;
 public class Monster : MonoBehaviour
 {
     //fields
-    [SerializeField] private float healthValue;     //health of monster
+    private float healthValue;     //health of monster
 
     public bool isAlive { get { return healthValue > 0; } } //condition to check if monster is alive
 
@@ -18,9 +18,19 @@ public class Monster : MonoBehaviour
     private float speed; //serialized to access from different places
     private Stack<Node> path;
 
+    private float maxSpeed; //max speed of monster
+
     [SerializeField]  private Element elementType; //element type of the monster
 
-    private int typeResistance = 2;
+    private int typeResistance = 2; //normal resistance of monster against its own type
+
+    //list of debuffs to monsters
+    private List<Debuff> debuffsList = new List<Debuff>();
+
+    //debuffs added and removed to monster
+    private List<Debuff> debuffsToAdd = new List<Debuff>();
+    private List<Debuff> debuffsToRemove = new List<Debuff>();
+    
 
     public Point GridPosition{ get; set;}
 
@@ -28,7 +38,13 @@ public class Monster : MonoBehaviour
 
     public bool IsActive{ get; set; }   // the condition of the monster (can  move or not)
 
+    private void Awake()
+    {
+        maxSpeed = speed;
+    }
+
     private void Update(){
+        HandleDebuffs();
         Move();
     }
 
@@ -36,21 +52,37 @@ public class Monster : MonoBehaviour
         IsActive = value;
     }
 
+    public void setSpeed(float givenSpeed)
+    {
+        this.speed = givenSpeed;
+    }
+
+    public void decreaseSpeed(float givenSpeed)
+    {
+        this.speed -= givenSpeed;
+    }
+
+    public void setMaxSpeed(float givenMax)
+    {
+        this.maxSpeed = givenMax;
+    }
+
     //Spawns a monster on a map by setting it's position first to the position of the 
     //   Spawn portal
     public void Spawn(int health){
-            if(this.name == "TrainingDummy"){
-                StartCoroutine(Scale(new Vector3(0.1f, 0.1f), new Vector3(0.6f,0.6f), false));
-                transform.position = MapManager.Instance.SpawnPrefab.transform.position;
-                this.healthValue = health;
-            }
-            else if(this.name == "Scarecrow"){
-                StartCoroutine(Scale(new Vector3(0.1f, 0.1f), new Vector3(0.5f,0.5f), false));
-                transform.position = MapManager.Instance.SpawnPrefab.transform.position;
-                this.healthValue = health*2;
-            }
 
-            SetPath(MapManager.Instance.Path);
+        if(this.name == "TrainingDummy"){
+            StartCoroutine(Scale(new Vector3(0.1f, 0.1f), new Vector3(0.6f,0.6f), false));
+            transform.position = MapManager.Instance.SpawnPrefab.transform.position;
+            this.healthValue = health;
+        }
+        else if(this.name == "Scarecrow"){
+            StartCoroutine(Scale(new Vector3(0.1f, 0.1f), new Vector3(0.5f,0.5f), false));
+            transform.position = MapManager.Instance.SpawnPrefab.transform.position;
+            this.healthValue = health*2;
+        }
+
+        SetPath(MapManager.Instance.Path);
     }
 
     //method that scales the size of the monster
@@ -124,6 +156,10 @@ public class Monster : MonoBehaviour
     // method that releases the monster 
     //      -> sets as inactive and removes from the map to be seen, but leaves the object to be used again for the future
     private void Release(){
+
+        //clear debuffs
+        debuffsList.Clear();
+
         IsActive = false; // so next time we use the object it starts as not active;
         GridPosition = MapManager.Instance.SpawnPos; // to make sure next time we use the object it starts at start position
         WaveManager.Instance.GetPool().ReleaseObject(gameObject); // makes an object inactive for later usage
@@ -134,7 +170,7 @@ public class Monster : MonoBehaviour
         Method that reduce the health of this monster when it collide with the projectile
         also, increase the global currency
     */
-    public void TakeDamage(int damage, Element dmgType)
+    public void TakeDamage(float damage, Element dmgType)
     {
         if (IsActive) //if monster is active
         {
@@ -142,12 +178,14 @@ public class Monster : MonoBehaviour
             if (dmgType == elementType)
             {
                 damage = damage / typeResistance;
-                typeResistance++;
             }
 
             //do some damage
             healthValue -= damage;
             //Debug.Log("health: " + healthValue.ToString());
+
+            //Debug.Log("speed: " + speed.ToString());
+            //Debug.Log("Max speed: " + maxSpeed.ToString());
 
             if (healthValue <= 0) //if it's dead (health is 0)
             {;
@@ -169,5 +207,72 @@ public class Monster : MonoBehaviour
                 WaveManager.Instance.removeMonster(this);
             }
         }
+    }
+
+    public void AddDebuff(Debuff givenDebuff)
+    {
+        //check the list of debuff if this given debuff already exist
+        if (!debuffsList.Exists(debuff => debuff.GetType() == givenDebuff.GetType()))
+        {
+            //add debuff to the list
+            debuffsToAdd.Add(givenDebuff);
+        }
+        
+    }
+
+    public void RemoveDebuff(Debuff givenDebuff)
+    {
+        //remove given debuff from list
+        debuffsToRemove.Add(givenDebuff);
+    }
+
+    private void HandleDebuffs()
+    {
+        //if a debuff was added to the list (so more than zero)
+        if (debuffsToAdd.Count > 0)
+        {
+            //add it to list of debuffs
+            debuffsList.AddRange(debuffsToAdd);
+
+            //make sure to clear the list
+            debuffsToAdd.Clear();
+        }
+
+        //run through each debuff needed to remove
+        foreach (Debuff debuff in debuffsToRemove)
+        {
+            //remove them from the list of debuffs
+            debuffsList.Remove(debuff);
+        }
+
+        //clear the list of debuffs
+        debuffsToRemove.Clear();
+
+        foreach (Debuff debuff in debuffsList)
+        {
+            //update every debuff in the list
+            debuff.Update();
+        }
+    }
+
+    /*
+        Method to get element type of this monster
+    */
+    public Element getElementType()
+    {
+        return this.elementType;
+    }
+
+    /*
+        Method to get speed of this monster
+    */
+    public float getSpeed()
+    {
+        return this.speed;
+    }
+
+    public float getMaxSpeed()
+    {
+        return this.maxSpeed;
     }
 }

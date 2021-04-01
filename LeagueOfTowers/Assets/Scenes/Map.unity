@@ -2875,6 +2875,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   startWaveButton: {fileID: 393745913}
   waveText: {fileID: 1239386569}
+  enemyHealth: 50
 --- !u!114 &1891530698
 MonoBehaviour:
   m_ObjectHideFlags: 0
