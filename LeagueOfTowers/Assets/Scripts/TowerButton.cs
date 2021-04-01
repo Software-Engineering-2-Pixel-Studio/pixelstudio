@@ -17,6 +17,8 @@ public class TowerButton : MonoBehaviour
     private void Start()
     {
         this.SetPriceText();
+
+        CurrencyManager.Instance.Changed += new CurrencyChanged(PriceCheck);
     }
 
     // Update is called once per frame
@@ -57,5 +59,20 @@ public class TowerButton : MonoBehaviour
         return this.price;
     }
 
+    private void PriceCheck()
+    {
+        if (price <= CurrencyManager.Instance.GetCurrency())
+        {
+            GetComponent<Image>().color = Color.white;
+
+            priceText.color = Color.white;
+        }
+        else
+        {
+            GetComponent<Image>().color = Color.gray;
+
+            priceText.color = Color.gray;
+        }
+    }
     
 }

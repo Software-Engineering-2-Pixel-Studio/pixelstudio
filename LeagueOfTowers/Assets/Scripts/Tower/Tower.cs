@@ -144,11 +144,6 @@ public abstract class Tower : MonoBehaviour
                 Shoot();
                 canAttack = false;
             }
-        } 
-        else if (monsters.Count > 0) //if there are still monsters
-        {
-            //change target
-            target = monsters.Dequeue();
         }
 
         //reset the target when monster enters the portal
