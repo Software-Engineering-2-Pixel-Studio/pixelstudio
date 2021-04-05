@@ -14,6 +14,10 @@ public class Monster : MonoBehaviour
     private int dummyIncome = 4;
     private int scarecrowIncome = 8;
 
+    //exp you get from killing these monsters
+    private int expDummy = 10;
+    private int expScarecrow = 20;
+
     [SerializeField]
     private float speed; //serialized to access from different places
     private Stack<Node> path;
@@ -190,14 +194,16 @@ public class Monster : MonoBehaviour
             if (healthValue <= 0) //if it's dead (health is 0)
             {;
 
-                //add some currency depending on type of monster
+                //add some currency and exp points depending on type of monster
                 if (this.name == "TrainingDummy")
                 {
                     CurrencyManager.Instance.AddCurrency(dummyIncome);
+                    GameManager.Instance.addExp(expDummy);
                 }
                 else if (this.name == "Scarecrow")
                 {
                     CurrencyManager.Instance.AddCurrency(scarecrowIncome);
+                    GameManager.Instance.addExp(expScarecrow);
                 }
 
                 IsActive = false;

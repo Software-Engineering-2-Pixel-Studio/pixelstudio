@@ -96,7 +96,7 @@ public class Tile : MonoBehaviour
             if (!aStarDebugging)
             {
                 //if this Tile has a placed Tower
-                if (isPlaced)
+                if (isPlaced || isWalkable) //added isWalkable for a quick bugfix to not allow tower placement on monster path
                 {
                     this.ColorTile(this.colorFullTile);
                 }

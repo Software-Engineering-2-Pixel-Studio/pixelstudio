@@ -23,6 +23,19 @@ public class GameManager : Singleton<GameManager>
     [SerializeField]
     private GameObject gameOverMenu;
 
+    //exp needed for player levels
+    private int expPoints;
+
+    //level of player
+    private int playerLevel;
+
+    //tech tokens earned per level
+    private int techTokens;
+
+    [SerializeField] private Text expDisplay;
+    [SerializeField] private Text playerLevelDisplay;
+    [SerializeField] private Text techTokensDisplay;
+
     private void Awake(){
         Pool = GetComponent<ObjectPool>();
     }
@@ -32,12 +45,17 @@ public class GameManager : Singleton<GameManager>
     {
         //this.view = GetComponent<PhotonView>();
         //Lives = 10;
+
+        expPoints = 0;
+        playerLevel = 1;
+        techTokens = 0;
     }
 
     // Update is called once per frame
     private void Update()
     {
         CancelPickedTower();
+        updatePlayerLevel();
     }
 
     /*
@@ -84,4 +102,36 @@ public class GameManager : Singleton<GameManager>
         Application.Quit();
     }
 
+    public void updatePlayerLevel()
+    {
+        if (expPoints >= 100)
+        {
+            //increase player level and tech tokens
+            playerLevel++;
+            techTokens++;
+
+            //reset exp points and carry over extra
+            expPoints = expPoints - 100;
+        }
+    }
+
+    public void addExp(int givenExp)
+    {
+        this.expPoints += givenExp;
+    }
+
+    public int getExpPoints()
+    {
+        return this.expPoints;
+    }
+
+    public int getPlayerLevel()
+    {
+        return this.playerLevel;
+    }
+
+    public int getTechTokens()
+    {
+        return this.techTokens;
+    }
 }

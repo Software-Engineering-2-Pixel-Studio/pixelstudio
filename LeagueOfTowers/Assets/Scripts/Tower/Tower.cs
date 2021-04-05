@@ -52,9 +52,14 @@ public abstract class Tower : MonoBehaviour
     //how long till the next attack
     [SerializeField] private float attackCooldown;
 
+    //upgrades given to tower
+    public TowerUpgrade[] Upgrades { get; protected set; }
+
     private Point placedAtTile;     //tile grid position of this tower
 
-    private Element elementType;
+    private Element elementType; //tower's current element
+
+    private int towerLevel; //tower's current level
 
     // Start is called before the first frame update
     protected virtual void Start()
@@ -67,6 +72,12 @@ public abstract class Tower : MonoBehaviour
         //get the sprite
         this.mySpriteRenderer = GetComponent<SpriteRenderer>();
         this.view = this.GetComponentInParent<PhotonView>();
+    }
+
+    private void Awake()
+    {
+        //set initial tower level
+        towerLevel = 1;
     }
 
     // Update is called once per frame
@@ -104,10 +115,18 @@ public abstract class Tower : MonoBehaviour
         this.debuffProcChance = givenDebuffProc;
     }
 
+    public void setTowerLevel(int givenLevel)
+    {
+        this.towerLevel = givenLevel;
+    }
+
     public void Select()
     {
         //enable or disable the tower range when selected
         mySpriteRenderer.enabled = !mySpriteRenderer.enabled;
+
+        //update the upgrade button tooltip right away
+        SelectTowerManager.Instance.UpdateUpgradeTooltip();
     }
 
     public void Attack()
@@ -243,6 +262,14 @@ public abstract class Tower : MonoBehaviour
     }
 
     /*
+        Method to get level of this tower
+    */
+    public int getTowerLevel()
+    {
+        return this.towerLevel;
+    }
+
+    /*
         Method to get PhotonView of this tower
     */
     public PhotonView GetPhotonView(){
@@ -280,5 +307,73 @@ public abstract class Tower : MonoBehaviour
     */
     public abstract Debuff GetDebuff();
 
+    //returns the default tower stats string passed to stats panel tooltip
+    public virtual string GetStats()
+    {
+        //set the default string passed to tower stats panel
+        string result = string.Format("\nLevel: {0} \nDamage: {1} \nProc: {2}% \nDebuff: {3} sec", towerLevel, damage, debuffProcChance, debuffDuration);
+
+        if (GetNextUpgrade != null) //if an upgrade is available
+        {
+            //return a string that includes the upgrade values
+            result = string.Format("\nLevel: {0} \nDamage: {1} <color=#00ff00ff>+{4}</color>\nProc; {2}% <color=#00ff00ff>+{5}%</color>\nDebuff: {3} sec <color=#00ff00ff>+{6}</color>",
+                towerLevel, damage, debuffProcChance, debuffDuration, GetNextUpgrade.Damage, GetNextUpgrade.DebuffProcChance, GetNextUpgrade.DebuffDuration);
+        }
+
+
+        return result;
+    }
+
+    //returns the next upgrade element in the upgrades list
+    public TowerUpgrade GetNextUpgrade
+    {
+        get
+        {
+            TowerUpgrade result = null;
+
+            //if tower level is still lower than the upgrades length (remember tower level starts at 1 and not 0 so -1
+            if (towerLevel - 1 < Upgrades.Length)
+            {
+                //return the next element in the upgrades list
+                result = Upgrades[towerLevel - 1];
+            }
+
+            //else return default null
+            return result;
+        }
+    }
+
+    public virtual void Upgrade()
+    {
+        //decrease shared global currency
+        //CurrencyManager.Instance.Currency -= NextUpgrade.Price;
+        CurrencyManager.Instance.SubCurrency(GetNextUpgrade.Price);
+
+        //increase price of this tower
+        price += GetNextUpgrade.Price;
+
+        //increase the damage, debuff proc chance, and debuff duration of tower
+        this.damage += GetNextUpgrade.Damage;
+        this.debuffProcChance += GetNextUpgrade.DebuffProcChance;
+        this.debuffDuration += GetNextUpgrade.DebuffDuration;
+
+        //increase tower level
+        towerLevel++;
+
+        //update the tooltip
+        SelectTowerManager.Instance.UpdateUpgradeTooltip();
+    }
+
+    public void TechUpgrade()
+    {
+
+        //increase projectile speed and attack cooldown
+
+
+        //add shadow and outline to this tower
+
+
+        //update the tooltip
+    }
     
 }

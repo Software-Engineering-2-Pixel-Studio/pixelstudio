@@ -11,6 +11,13 @@ public class SelectTowerManager : Singleton<SelectTowerManager>
     [SerializeField ] private GameObject towerSelectPanel;  //upgrade panel of tower
     [SerializeField] private Text sellPriceText;    //selling price of the tower
 
+    //for stats panel
+    [SerializeField] private GameObject statsPanel;
+    [SerializeField] private Text statText;
+
+    //for upgrade button
+    [SerializeField] private Text upgradePrice;
+
     // Start is called before the first frame update
     private void Start()
     {
@@ -28,7 +35,7 @@ public class SelectTowerManager : Singleton<SelectTowerManager>
     */
     public void SelectTower(Tower tower)
     {
-        //if tower exist, deselect it
+        //if tower exist
         if (selectedTower != null)
         {
             selectedTower.Select();
@@ -37,7 +44,8 @@ public class SelectTowerManager : Singleton<SelectTowerManager>
         selectedTower = tower;
         selectedTower.Select();
 
-        sellPriceText.text = (selectedTower.getPrice() / 2).ToString() + "<color='lime'>$</color>";
+        //update sell price
+        sellPriceText.text = (selectedTower.getPrice() / 2).ToString() + " <color='lime'>$</color>";
 
         this.towerSelectPanel.SetActive(true);
     }
@@ -47,6 +55,7 @@ public class SelectTowerManager : Singleton<SelectTowerManager>
     */
     public void DeselectTower()
     {
+        //if tower exist
         if (selectedTower != null)
         {
             selectedTower.Select();
@@ -79,4 +88,86 @@ public class SelectTowerManager : Singleton<SelectTowerManager>
             DeselectTower();    
         }
     }
+
+    /*
+        This method will be called when the UpgradeButton has been clicked
+    */
+    public void UpgradeTower()
+    {
+        if (selectedTower != null)
+        {
+            //if the current tower level is lower than the number of upgrades available
+            //and if the current shared global currency is bigger than the price for upgrade
+            if (selectedTower.getTowerLevel() <= selectedTower.Upgrades.Length && CurrencyManager.Instance.GetCurrency() >= selectedTower.GetNextUpgrade.Price)
+            {
+                selectedTower.Upgrade();
+            }
+        }
+    }
+
+    /*
+        This method will be called when the UpgradeTechButton has been clicked
+    */
+    public void UpgradeTowerTech()
+    {
+        if (selectedTower != null)
+        {
+            if (selectedTower.getTowerLevel() <= selectedTower.Upgrades.Length && GameManager.Instance.getTechTokens() >= selectedTower.GetNextUpgrade.Price)
+            {
+                selectedTower.TechUpgrade();
+            }
+        }
+    }
+
+    /*
+        This method shows the stats panel of the tower
+    */
+    public void ShowStats()
+    {
+        statsPanel.SetActive(!statsPanel.activeSelf);
+    }
+
+    /*
+        This method shows the selected tower stats
+    */
+    public void ShowSelectedTowerStats()
+    {
+        statsPanel.SetActive(!statsPanel.activeSelf);
+        UpdateUpgradeTooltip();
+    }
+
+    /*
+        This method sets the text for the hover upgrade tooltip
+    */
+    public void SetToolTipText(string givenText)
+    {
+        statText.text = givenText;
+    }
+
+    /*
+        This method updates the tooltip for upgrade
+    */
+    public void UpdateUpgradeTooltip()
+    {
+        if (selectedTower != null)
+        {
+            //update the text of sell button
+            sellPriceText.text = (selectedTower.getPrice() / 2).ToString() + " <color='lime'>$</color>";
+
+            //update the tooltip text
+            SetToolTipText(selectedTower.GetStats());
+
+            //upgrade the price text
+            if (selectedTower.GetNextUpgrade != null)
+            {
+                upgradePrice.text = selectedTower.GetNextUpgrade.Price.ToString() + "<color='lime'>$</color>";
+            }
+            else
+            {
+                //if there are no more upgrades, just make the string empty
+                upgradePrice.text = string.Empty;
+            }
+        }
+    }
+    
 }
