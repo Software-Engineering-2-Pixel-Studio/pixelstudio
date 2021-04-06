@@ -15,8 +15,15 @@ public class SelectTowerManager : Singleton<SelectTowerManager>
     [SerializeField] private GameObject statsPanel;
     [SerializeField] private Text statText;
 
+    //for tech panel
+    [SerializeField] private GameObject techPanel;
+    [SerializeField] private Text techStatText;
+
     //for upgrade button
     [SerializeField] private Text upgradePrice;
+
+    //for tech upgrade button
+    [SerializeField] private Text techUpgradePrice;
 
     // Start is called before the first frame update
     private void Start()
@@ -112,7 +119,8 @@ public class SelectTowerManager : Singleton<SelectTowerManager>
     {
         if (selectedTower != null)
         {
-            if (selectedTower.getTowerLevel() <= selectedTower.Upgrades.Length && GameManager.Instance.getTechTokens() >= selectedTower.GetNextUpgrade.Price)
+            //if tower isn't tech upgraded and we have enough tech tokens
+            if (selectedTower.getTechStatus() == false && GameManager.Instance.getTechTokens() >= selectedTower.getTechPrice())
             {
                 selectedTower.TechUpgrade();
             }
@@ -137,11 +145,28 @@ public class SelectTowerManager : Singleton<SelectTowerManager>
     }
 
     /*
+        This method shows the selected tech stats
+    */
+    public void ShowSelectedTechStats()
+    {
+        techPanel.SetActive(!techPanel.activeSelf);
+        UpdateTechTooltip();
+    }
+
+    /*
         This method sets the text for the hover upgrade tooltip
     */
     public void SetToolTipText(string givenText)
     {
         statText.text = givenText;
+    }
+
+    /*
+        This method sets the text for the hover tech upgrade tooltip
+    */
+    public void SetTechStatText(string givenText)
+    {
+        techStatText.text = givenText;
     }
 
     /*
@@ -169,5 +194,31 @@ public class SelectTowerManager : Singleton<SelectTowerManager>
             }
         }
     }
-    
+
+    /*
+        This method updates the tooltip for tower tech stats
+    */
+    public void UpdateTechTooltip()
+    {
+        if (selectedTower != null)
+        {
+            //update the text of sell button
+            sellPriceText.text = (selectedTower.getPrice() / 2).ToString() + " <color='lime'>$</color>";
+
+            //update the tooltip text
+            SetTechStatText(selectedTower.GetTechStats());
+
+            //upgrade the tech price text
+            if (!selectedTower.getTechStatus()) //if tower isn't tech upgraded
+            {
+                techUpgradePrice.text = "1 <color=#800080>TP</color>";
+            }
+            else
+            {
+                //if there are no more tech upgrades, just make the string empty
+                techUpgradePrice.text = string.Empty;
+            }
+        }
+    }
+
 }

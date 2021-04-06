@@ -55,6 +55,16 @@ public abstract class Tower : MonoBehaviour
     //upgrades given to tower
     public TowerUpgrade[] Upgrades { get; protected set; }
 
+    //tech price of the tower
+    private int techPrice = 1;
+
+    //tower isn't tech upgraded initially
+    private bool isTechUpgraded = false;
+
+    //tech upgrades to projectile speed and attack cooldown
+    private int techProjectileSpeedNum = 2;
+    private int techAttackCooldownNum = 1;
+
     private Point placedAtTile;     //tile grid position of this tower
 
     private Element elementType; //tower's current element
@@ -127,6 +137,9 @@ public abstract class Tower : MonoBehaviour
 
         //update the upgrade button tooltip right away
         SelectTowerManager.Instance.UpdateUpgradeTooltip();
+
+        //update the tech upgrade button tooltip right away
+        SelectTowerManager.Instance.UpdateTechTooltip();
     }
 
     public void Attack()
@@ -238,6 +251,14 @@ public abstract class Tower : MonoBehaviour
     }
 
     /*
+        Method to get tech price of this tower
+    */
+    public int getTechPrice()
+    {
+        return this.techPrice;
+    }
+
+    /*
         Method to get element of this tower
     */
     public Element getElementType()
@@ -267,6 +288,11 @@ public abstract class Tower : MonoBehaviour
     public int getTowerLevel()
     {
         return this.towerLevel;
+    }
+
+    public bool getTechStatus()
+    {
+        return this.isTechUpgraded;
     }
 
     /*
@@ -324,6 +350,26 @@ public abstract class Tower : MonoBehaviour
         return result;
     }
 
+    public virtual string GetTechStats()
+    {
+        //set the default string passed to tower stats panel
+        string result;
+
+        if (isTechUpgraded == false) //if tower isn't techupgraded yet
+        {
+            //return a string that includes the upgrade values
+            result = string.Format("\nProjectile Speed:: {0} <color=#00ff00ff>+{2}</color> \nAttackCooldown: {1} <color=#00ff00ff>-{3}</color>",
+                projectileSpeed, attackCooldown, techProjectileSpeedNum, techAttackCooldownNum);
+        }
+        else //if tower is already tech upgraded
+        {
+            result = string.Format("\nProjectile Speed: {0} \nAttackCooldown: {1} \n<color=#00ff00ff>Tech Upgraded</color>", projectileSpeed, attackCooldown);
+        }
+
+
+        return result;
+    }
+
     //returns the next upgrade element in the upgrades list
     public TowerUpgrade GetNextUpgrade
     {
@@ -346,7 +392,6 @@ public abstract class Tower : MonoBehaviour
     public virtual void Upgrade()
     {
         //decrease shared global currency
-        //CurrencyManager.Instance.Currency -= NextUpgrade.Price;
         CurrencyManager.Instance.SubCurrency(GetNextUpgrade.Price);
 
         //increase price of this tower
@@ -366,14 +411,21 @@ public abstract class Tower : MonoBehaviour
 
     public void TechUpgrade()
     {
+        //set tech upgrade to true
+        isTechUpgraded = true;
 
-        //increase projectile speed and attack cooldown
+        //decrease player's tech tokens
+        GameManager.Instance.reduceTechTokens(techPrice);
 
+        //increase price of this tower
+        price += 35;
 
-        //add shadow and outline to this tower
+        //increase projectile speed and decrease attack cooldown
+        projectileSpeed += techProjectileSpeedNum;
+        attackCooldown -= techAttackCooldownNum;
 
-
-        //update the tooltip
+        //update the tech tooltip
+        SelectTowerManager.Instance.UpdateTechTooltip();
     }
     
 }

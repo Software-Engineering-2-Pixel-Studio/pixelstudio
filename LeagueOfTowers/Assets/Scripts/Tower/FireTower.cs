@@ -8,6 +8,9 @@ public class FireTower : Tower
     [SerializeField] private float tickTime;
     [SerializeField] private float tickDamage;
 
+    //header
+    string tooltipHeader = "<Size=2><b>Fire Tower</b></size>";
+
     protected override void Start()
     {
         base.Set();
@@ -46,11 +49,9 @@ public class FireTower : Tower
         return this.tickDamage;
     }
 
+    //override and add string to default tower stats
     public override string GetStats()
     {
-        //header
-        string tooltipHeader = "<Size=2><b>Fire Tower</b></size>";
-
         //additional info
         string addInfo = "\nDeal damage with a \nchance of lingering \ndamage over time";
 
@@ -63,6 +64,15 @@ public class FireTower : Tower
             result = string.Format("<color=#ffa500ff>{0}</color>{1} \nTick time: {2}sec <color=#00ff00ff>+{4}</color> \nTick damage: {3}<color=#00ff00ff>+{5}</color> {6}",
                 tooltipHeader, base.GetStats(), tickTime, tickDamage, GetNextUpgrade.TickTime, GetNextUpgrade.TickDamage, addInfo);
         }
+
+        return result;
+    }
+
+    //override and also add tower header string
+    public override string GetTechStats()
+    {
+        //return a string result with tower header
+        string result = string.Format("\n<color=#ffa500ff>{0}</color> {1}", tooltipHeader, base.GetTechStats());
 
         return result;
     }

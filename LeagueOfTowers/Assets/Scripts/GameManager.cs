@@ -46,6 +46,7 @@ public class GameManager : Singleton<GameManager>
         //this.view = GetComponent<PhotonView>();
         //Lives = 10;
 
+        //initialize variables
         expPoints = 0;
         playerLevel = 1;
         techTokens = 0;
@@ -109,15 +110,19 @@ public class GameManager : Singleton<GameManager>
             //increase player level and tech tokens
             playerLevel++;
             techTokens++;
+            this.playerLevelDisplay.text = this.playerLevel.ToString();
+            this.techTokensDisplay.text = this.techTokens.ToString();
 
             //reset exp points and carry over extra
             expPoints = expPoints - 100;
+            this.expDisplay.text = this.expPoints.ToString();
         }
     }
 
     public void addExp(int givenExp)
     {
         this.expPoints += givenExp;
+        this.expDisplay.text = this.expPoints.ToString();
     }
 
     public int getExpPoints()
@@ -133,5 +138,11 @@ public class GameManager : Singleton<GameManager>
     public int getTechTokens()
     {
         return this.techTokens;
+    }
+
+    public void reduceTechTokens(int givenTokens)
+    {
+        this.techTokens -= givenTokens;
+        this.techTokensDisplay.text = this.techTokens.ToString();
     }
 }
