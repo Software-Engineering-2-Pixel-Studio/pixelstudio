@@ -59,6 +59,9 @@ public class TowerButton : MonoBehaviour
         return this.price;
     }
 
+    /*
+        method to get tower's name
+    */
     public string GetTowerName()
     {
         return this.towerName;

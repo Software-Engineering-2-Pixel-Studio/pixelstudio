@@ -22,12 +22,18 @@ public class RangeScript : MonoBehaviour
     }
 
     //actions
+    /*
+        toggle the sprite renderer for range
+    */
     public void ToggleRangeSR()
     {
         mySpriteRenderer.enabled = !mySpriteRenderer.enabled;
     }
 
     //events
+    /*
+        this method is called when an enemy collide with the range
+    */
     public void OnTriggerEnter2D(Collider2D other)
     {
         if(this.myTowerScript != null){
@@ -35,6 +41,9 @@ public class RangeScript : MonoBehaviour
         }
     }
 
+    /*
+        this method is called when an enemy get out of the range
+    */
     public void OnTriggerExit2D(Collider2D other)
     {
         if(this.myTowerScript != null){

@@ -6,21 +6,20 @@ using Photon.Pun;
 public class TowerScript : MonoBehaviourPun, IPunInstantiateMagicCallback
 {
     //field
-    private string towerName;       //0
-    private int price;              //1
-    private float damage;           //2
-    private string projectileType;  //3
-    private float projectileSpeed;  //4
-    private float attackCooldown;   //5
-    private int towerID;
-    private bool canAttack = true;
-    private float attackTimer; 
-    private MonsterScript target;
+    private string towerName;       //0 //tower's name
+    private int price;              //1 //tower's price
+    private float damage;           //2 //tower's damage
+    private string projectileType;  //3 //tower's projectile type
+    private float projectileSpeed;  //4 //tower's projectile speed
+    private float attackCooldown;   //5 //tower's attack cool down
+    private int parentTileID;       //6 //tileID where tower is placed
+    private int towerID;                //towerID
+    private bool canAttack = true;      //state of attack
+    private float attackTimer;          //time counting for next attack
+    private MonsterScript target;       //tower's target
     private Queue<MonsterScript> monsters = new Queue<MonsterScript>();
-    private int parentTileID;       //6
-    //private Point placedAtGridPostion; //maybe change to tileID-> has to change structure of Dictionary of tiles in MapManager 
     
-    [SerializeField] private GameObject projectilePrefab;
+    [SerializeField] private GameObject projectilePrefab;   //projectile prefab
 
     //components
     private RangeScript myRangeScript;
@@ -30,7 +29,6 @@ public class TowerScript : MonoBehaviourPun, IPunInstantiateMagicCallback
     // Start is called before the first frame update
     void Start()
     {
-        //this.rangeTrans = this.transform.GetChild(0).transform;
         this.view = this.GetComponent<PhotonView>();
         this.myRangeScript = this.GetComponentInChildren<RangeScript>();
     }
@@ -85,6 +83,9 @@ public class TowerScript : MonoBehaviourPun, IPunInstantiateMagicCallback
     }
 
     //events
+    /*
+        initialize towerscript when its tower object is instantiated over network
+    */
     public void OnPhotonInstantiate(PhotonMessageInfo info)
     {
         Debug.Log("called!");
@@ -113,13 +114,12 @@ public class TowerScript : MonoBehaviourPun, IPunInstantiateMagicCallback
 
             //set its parent object
             this.transform.parent = tileGO.transform;
-            //this.placedAtGridPostion = tile.GetTilePosition();
-
-            //MapManager.Instance.SetTileTower(this.parentTileID, this);
-
         }
     }
 
+    /*
+        this method called when an enemy go in the range of tower
+    */
     public void OnTriggerEnter2DRange(Collider2D other)
     {
         //if the target is a monster
@@ -130,6 +130,9 @@ public class TowerScript : MonoBehaviourPun, IPunInstantiateMagicCallback
         }
     }
 
+    /*
+        this method called when an enemy go out of the range of tower
+    */
     public void OnTriggerExit2DRange(Collider2D other)
     {
         //if the target is a monster
@@ -141,16 +144,19 @@ public class TowerScript : MonoBehaviourPun, IPunInstantiateMagicCallback
     }
 
     //actions
+    /*
+        toggle the visual range of tower
+    */
     public void Select()
     {
-        //enable or disable the tower range when selected
-        //mySpriteRenderer.enabled = !mySpriteRenderer.enabled;
         if(this.myRangeScript != null){
             this.myRangeScript.ToggleRangeSR();
         }
-        
     }
 
+    /*
+        attack function of tower with a timer base on the cool down
+    */
     public void Attack()
     {
         //if we can't attack
@@ -188,38 +194,9 @@ public class TowerScript : MonoBehaviourPun, IPunInstantiateMagicCallback
         }
     }
 
-    // [PunRPC]
-    // private void shootRPC(int towerViewID, int monsterViewID, float speed)
-    // {
-    //     //get the projectile type from the pool and return it
-    //     //GameObject projectile = PhotonNetwork.Instantiate(this.projectileType, this.transform.position, Quaternion.identity,0,null);
-    //     Debug.Log("shootRPC is called");
-
-    //     //initialize the projectile by passing this tower
-    //     //projectile.GetComponent<Projectile>().Initialize(this);
-    //     GameObject projectile;
-
-        
-        
-    //     Transform towerTrans = PhotonView.Find(towerViewID).transform;
-    //     //TowerScript towerScript = towerPV.gameObject.GetComponent<TowerScript>();
-
-    //     Transform monsterTrans = PhotonView.Find(monsterViewID).transform;
-    //     //Monster monsterScript = monsterPV.gameObject.GetComponent<Monster>();
-
-    //     GameObject prefab = this.projectilePrefab;
-    //     //projectile = (GameObject) Instantiate(this.projectilePrefab, this.transform.position, Quaternion.identity);
-    //     projectile = (GameObject) Instantiate(prefab, towerTrans.position, Quaternion.identity);
-    //     projectile.GetComponent<ProjectileScript>().InitializeProjectile(towerTrans.GetComponent<TowerScript>(), monsterTrans.GetComponent<Monster>() , speed);
-        
-        
-    // }
-
-    // public void Shoot()
-    // {
-    //     this.view.RPC("shootRPC", RpcTarget.All, this.view.ViewID, this.target.GetComponent<PhotonView>().ViewID, this.projectileSpeed);
-        
-    // }
+    /*
+        create projectile over the network
+    */
     private void shoot()
     {
         object[] data = new object[5];
@@ -232,6 +209,9 @@ public class TowerScript : MonoBehaviourPun, IPunInstantiateMagicCallback
         GameObject projectile = PhotonNetwork.Instantiate(projectilePrefab.name, this.transform.position, Quaternion.identity,0, data );        
     }
 
+    /*
+        method to destroy this tower over network
+    */
     public void DestroyThisTower(){
         //only the owner can destroy this tower
         if(this.view.IsMine){
@@ -240,6 +220,9 @@ public class TowerScript : MonoBehaviourPun, IPunInstantiateMagicCallback
         }
     }
 
+    /*
+        ToString method for simply extract this object's information
+    */
     public override string ToString()
     {
         return this.towerName;

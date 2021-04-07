@@ -23,8 +23,8 @@ public class MapManager : Singleton<MapManager>
     private float[] mapBounds = new float[4];   //minX,maxX,minY,maxY
 
     //a dictionary of tiles, where each tile mapped on a gridposition of the map
-    private Dictionary<Point, Tile> Tiles;
-    private Dictionary<int, Tile> tile2;
+    private Dictionary<Point, Tile> Tiles;      //key = GridPoint, value = Tile
+    private Dictionary<int, Tile> tile2;        //key = tileID, value = Tile
 
     //start and end pathing
     private Point spawnPos;
@@ -264,7 +264,7 @@ public class MapManager : Singleton<MapManager>
 
         //place the base at grid(15,5) or end of the path
         theBase.transform.position = Tiles[basePos].GetCenterWorldPosition();
-        //theBase.transform.localScale = new Vector3(1.2f, 1.2f, 1.0f);
+
     }
 
     /*
@@ -309,13 +309,7 @@ public class MapManager : Singleton<MapManager>
         path = AStar.getPath(basePos,spawnPos); 
     }
 
-    /*
-        Sync a specific tile to be full and send signal to other players
-    */
-    public void SetTileIsPlacedAt(int gridPointX, int gridPointY)
-    {
-        this.view.RPC("setTileIsPlacedAtRPC", RpcTarget.All, gridPointX, gridPointY);
-    }
+    
 
     /*
         PunRPC
@@ -330,12 +324,11 @@ public class MapManager : Singleton<MapManager>
     }
 
     /*
-        Method to set the Tile is empty so we can place tower on it, also send the signal
-        to every player that this variable has been changed
+        Sync a specific tile to be full and send signal to other players
     */
-    public void SetTileIsEmptyAt(int gridPointX, int gridPointY)
+    public void SetTileIsPlacedAt(int gridPointX, int gridPointY)
     {
-        this.view.RPC("setTileIsEmptyAtRPC", RpcTarget.All, gridPointX, gridPointY);
+        this.view.RPC("setTileIsPlacedAtRPC", RpcTarget.All, gridPointX, gridPointY);
     }
 
     /*
@@ -349,17 +342,28 @@ public class MapManager : Singleton<MapManager>
         //Debug.Log("RPC called for setTileIsPlacedRPC to true");
     }
 
+    /*
+        Method to set the Tile is empty so we can place tower on it, also send the signal
+        to every player that this variable has been changed
+    */
+    public void SetTileIsEmptyAt(int gridPointX, int gridPointY)
+    {
+        this.view.RPC("setTileIsEmptyAtRPC", RpcTarget.All, gridPointX, gridPointY);
+    }
+
+    /*
+        Pair of methods to set the tile state over network
+    */
     [PunRPC]
     private void setTileIsPlacedAtRPC2(int tileID, bool state)
     {
         this.tile2[tileID].SetIsPlaced(state);
-        //Debug.Log("RPC called for setTileIsPlacedRPC to true");
+        this.tile2[tileID].SetMyTower(null);
     }
 
     public void SetTileIsPlacedAt2(int tileID, bool state)
     {
         this.view.RPC("setTileIsPlacedAtRPC2", RpcTarget.All, tileID, state);
     }
-
 
 }

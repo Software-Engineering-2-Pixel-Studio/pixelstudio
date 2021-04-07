@@ -44,6 +44,20 @@ public class ProjectileScript : MonoBehaviourPun, IPunInstantiateMagicCallback
         // }
     }
 
+    
+
+    //get/set fields
+    public TowerScript GetOwnerTower()
+    {
+        return this.ownerTower;
+    }
+
+    public int GetProjectileViewID()
+    {
+        return this.view.ViewID;
+    }
+
+    //events
     public void OnPhotonInstantiate(PhotonMessageInfo info)
     {
         Debug.Log("called!");
@@ -62,18 +76,9 @@ public class ProjectileScript : MonoBehaviourPun, IPunInstantiateMagicCallback
         }
     }
 
-    //get/set fields
-    public TowerScript GetOwnerTower()
-    {
-        return this.ownerTower;
-    }
-
-    public int GetProjectileViewID()
-    {
-        return this.view.ViewID;
-    }
-
-    //events
+    /*
+        this method is called if projectile hit other ojbects
+    */
     private void OnTriggerEnter2D(Collider2D other)
     {
         if (other.tag == "Monster") //if the target in range is a monster
@@ -89,18 +94,11 @@ public class ProjectileScript : MonoBehaviourPun, IPunInstantiateMagicCallback
                 {
                     Debug.Log("Monster hit");
 
-                    //targetMonster.TakeDamage(ownerTower.GetDamage());
-
-                    //remove the projectile from the pool of objects in scene
-                    //GameManager.Instance.Pool.ReleaseObject(gameObject);
                     if(this.view.IsMine)
                     {
                         targetMonster.TakeDamage(this.myDamage);
                     }
                     
-                    //destroy it
-                    //PhotonNetwork.Destroy(this.transform.gameObject);
-                    //Destroy(this.gameObject);
                     DestroyThisProjectile();
                 }
             }
@@ -109,14 +107,16 @@ public class ProjectileScript : MonoBehaviourPun, IPunInstantiateMagicCallback
     }
 
     //actions
+    /*
+        this method to move the projectile to target
+    */
     private void moveToTargetMonster()
     {
         if(this.targetMonster.GetIsAlive())
         {
             //move from the origin into the target monster based on projectilespeed + ms of a frame
             this.transform.position = Vector3.MoveTowards(this.transform.position, this.targetMonster.transform.position, Time.deltaTime * mySpeed);
-            //this.transform.position = Vector3.MoveTowards(this.transform.position, this.targetMonster.transform.position, ownerTower.GetProjectileSpeed() * lag)
-            //transform the direction of the projectile
+            
             Vector2 projectileDir = targetMonster.transform.position - transform.position;
 
             //get the angle needed to transform the projectile direction
@@ -130,6 +130,9 @@ public class ProjectileScript : MonoBehaviourPun, IPunInstantiateMagicCallback
         }
     }
 
+    /*
+        this method to destroy this projectile
+    */
     public void DestroyThisProjectile(){
         //only the owner can destroy this projectile
         if(this.view.IsMine)

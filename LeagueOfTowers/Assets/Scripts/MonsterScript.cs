@@ -32,7 +32,6 @@ public class MonsterScript : MonoBehaviourPun, IPunInstantiateMagicCallback
     }
 
     //get/set
-
     public bool GetIsAlive()
     {
         return this.isAlive;
@@ -66,10 +65,14 @@ public class MonsterScript : MonoBehaviourPun, IPunInstantiateMagicCallback
             }
         }
     }
+    
     //events
+    /*
+        initialize this Monster script's fields when it is created over network
+    */
     public void OnPhotonInstantiate(PhotonMessageInfo info) //replace spawn
     {
-        Debug.Log("Monster called!");
+        //Debug.Log("Monster is created!");
         object[] data = this.gameObject.GetPhotonView().InstantiationData;
         if(data != null && data.Length == 6){
             //name
@@ -93,15 +96,15 @@ public class MonsterScript : MonoBehaviourPun, IPunInstantiateMagicCallback
                 StartCoroutine(Scale(new Vector3(0.1f, 0.1f), new Vector3(0.5f,0.5f), false));
             }
 
-            // this.spawnPosition = MapManager.Instance.GetSpawnTile().GetCenterWorldPosition();
-            // this.basePosition = MapManager.Instance.GetBaseTile().GetCenterWorldPosition();
             setPath(MapManager.Instance.Path);
         }
     }
 
-    public IEnumerator Scale(Vector3 from, Vector3 to, bool destroy){
-        //IsActive = false;
-
+    /*
+        coroutine for scaling animation
+    */
+    public IEnumerator Scale(Vector3 from, Vector3 to, bool destroy)
+    {
         float progress = 0.0f;
 
         while (progress<=1)
@@ -114,10 +117,6 @@ public class MonsterScript : MonoBehaviourPun, IPunInstantiateMagicCallback
         //to make sure it is exactly equal to *to*
         this.transform.localScale = to;
 
-        //IsActive = true;
-        //ChangeIsActiveState(true);
-        //ChangeIsAliveState(true);
-
         //in case we need to release the moster and make it inactive
         if(destroy){
             //Release();
@@ -127,7 +126,8 @@ public class MonsterScript : MonoBehaviourPun, IPunInstantiateMagicCallback
         }
     }
 
-    private void OnTriggerEnter2D(Collider2D other){
+    private void OnTriggerEnter2D(Collider2D other)
+    {
         //if the monster collide with the base
         if(other.tag == "BasePortal"){
             Debug.Log("Reach the base");
@@ -160,36 +160,18 @@ public class MonsterScript : MonoBehaviourPun, IPunInstantiateMagicCallback
 
             if (this.myHP <= 0) //if it's dead (health is 0)
             {
-
-                //add some currency depending on type of monster
-                // if (this.myName == "TrainingDummy")
-                // {
-                //     CurrencyManager.Instance.AddCurrency(this.myIncome);
-                // }
-                // else if (this.myName == "Scarecrow")
-                // {
-                //     CurrencyManager.Instance.AddCurrency(scarecrowIncome);
-                // }
                 CurrencyManager.Instance.AddCurrency(this.myIncome);
 
                 //this.isActive = false;
                 ChangeIsActiveState(false);
                 ChangeIsAliveState(false);
 
-                //DestroyThisMonster();
-
-                //remove the monster from the pool of objects in scene
-                //WaveManager.Instance.GetPool().ReleaseObject(gameObject);
-                //WaveManager.Instance.removeMonster(this);
-
-                //call wavemanager to destroy this monster
-
                 WaveManager.Instance.RemoveMonster(this);
             }
         }
     }
     
-
+    //punRPC methods for synchronzing this script's fields over the network
     [PunRPC]
     private void changeIsActiveStateRPC(bool state)
     {

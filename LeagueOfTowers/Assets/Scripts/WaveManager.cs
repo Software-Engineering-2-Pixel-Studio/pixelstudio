@@ -169,11 +169,11 @@ public class WaveManager : Singleton<WaveManager>
     {
         activeMonsters.Remove(monster);
         monster.DestroyThisMonster();
-        Debug.Log("monster destroyed");
+        //Debug.Log("monster destroyed");
         DecreaseMonsterCount();
     }
 
-
+    //punRPC methods for sync this script's fields over network
     [PunRPC]
     private void increaseWaveCountRPC()
     {

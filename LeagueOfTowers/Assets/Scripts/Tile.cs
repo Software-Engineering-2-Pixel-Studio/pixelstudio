@@ -168,25 +168,7 @@ public class Tile : MonoBehaviour
             data[7] = (int) this.tileID;    //tileID where this tower is placed
         }
         GameObject tower = PhotonNetwork.Instantiate(towerPref.name, this.GetCenterWorldPosition(), Quaternion.identity,0, data );
-        //Tower script = tower.GetComponentsInChildren<Tower>()[0];
-        //TowerScript towerScript = tower.transform.GetComponent<TowerScript>();
-        //Debug.Log(towerScript);
-        //int towerViewID = towerScript.GetTowerViewID();
-        //script.SetPlacedAtTile(this.gridPos);
-        //place at the correct position of the tile on the map
-        //tower.transform.position = this.GetCenterWorldPosition();
-
-        //set the layer order based on Y gridposition
-        //tower.GetComponent<SpriteRenderer>().sortingOrder = this.gridPos.Y + 2;
-
-        //set parent Tile for this tower
-        //tower.transform.SetParent(this.transform);
-
-        //reference the tower script
-        //this.myTower = tower.transform.GetChild(0).GetComponent<Tower>();
-        //MapManager.Instance.SetTileTower(this.tileID, towerViewID);
-        //pay for this tower
-        //MapManager.Instance.SetTileTower(this.tileID, towerViewID );
+        
         this.myTower = tower.transform.GetComponent<TowerScript>();
         MapManager.Instance.SetTileIsPlacedAt2(this.tileID, true);
         GameManager.Instance.PayForPlacedTower();
