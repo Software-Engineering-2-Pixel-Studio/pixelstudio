@@ -55,7 +55,7 @@ public class SlowTower : Tower
     public override string GetTechStats()
     {
         //return a string result with tower header
-        string result = string.Format("\n<color=#00ffffff>{0}</color> {1}", tooltipHeader, base.GetTechStats());
+        string result = string.Format("<color=#00ffffff>{0}</color> {1}", tooltipHeader, base.GetTechStats());
 
         return result;
     }

@@ -72,7 +72,7 @@ public class FireTower : Tower
     public override string GetTechStats()
     {
         //return a string result with tower header
-        string result = string.Format("\n<color=#ffa500ff>{0}</color> {1}", tooltipHeader, base.GetTechStats());
+        string result = string.Format("<color=#ffa500ff>{0}</color> {1}", tooltipHeader, base.GetTechStats());
 
         return result;
     }
