@@ -663,6 +663,7 @@ MonoBehaviour:
   sprite: {fileID: 21300120, guid: 29c9cded5e558164aaf8c9bf08aa1510, type: 3}
   price: 20
   priceText: {fileID: 8162613408991468455}
+  towerName: SlowTower
 --- !u!1 &2409452849656402959
 GameObject:
   m_ObjectHideFlags: 0
@@ -1051,6 +1052,7 @@ MonoBehaviour:
   sprite: {fileID: 21300114, guid: 29c9cded5e558164aaf8c9bf08aa1510, type: 3}
   price: 30
   priceText: {fileID: 286326076048166356}
+  towerName: LightTower
 --- !u!1 &5140985351098638750
 GameObject:
   m_ObjectHideFlags: 0
@@ -1202,6 +1204,7 @@ MonoBehaviour:
   sprite: {fileID: 21300060, guid: 29c9cded5e558164aaf8c9bf08aa1510, type: 3}
   price: 10
   priceText: {fileID: 2151819344853251205}
+  towerName: FireTower
 --- !u!1 &5346301276325800480
 GameObject:
   m_ObjectHideFlags: 0

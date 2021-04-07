@@ -10,10 +10,12 @@ public class Projectile : MonoBehaviour
 
     private Tower parentTower;   //tower that the projectile comes from
 
+    private PhotonView view;
+
     // Start is called before the first frame update
     private void Start()
     {
-        
+        this.view = this.GetComponent<PhotonView>();
     }
 
     // Update is called once per frame
@@ -92,5 +94,5 @@ public class Projectile : MonoBehaviour
 
         }
     } 
-    
+
 }

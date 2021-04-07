@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Photon.Pun;
 
-public class Monster : MonoBehaviour
+public class Monster : MonoBehaviourPun
 {
     //fields
     [SerializeField] private float healthValue;     //health of monster
@@ -24,12 +24,22 @@ public class Monster : MonoBehaviour
 
     public bool IsActive{ get; set; }   // the condition of the monster (can  move or not)
 
+    private PhotonView view;
+
+    void Start(){
+        this.view = this.GetComponent<PhotonView>();
+    }
     private void Update(){
         Move();
     }
 
     public void SetActive(bool value){
         IsActive = value;
+    }
+
+    public int GetMonsterViewID()
+    {
+        return this.view.ViewID;
     }
 
     //Spawns a monster on a map by setting it's position first to the position of the 
@@ -122,8 +132,8 @@ public class Monster : MonoBehaviour
     private void Release(){
         IsActive = false; // so next time we use the object it starts as not active;
         GridPosition = MapManager.Instance.SpawnPos; // to make sure next time we use the object it starts at start position
-        WaveManager.Instance.GetPool().ReleaseObject(gameObject); // makes an object inactive for later usage
-        WaveManager.Instance.removeMonster(this);   // removes the monster from the "active monsters of the wave" list
+        //WaveManager.Instance.GetPool().ReleaseObject(gameObject); // makes an object inactive for later usage
+        //WaveManager.Instance.removeMonster(this);   // removes the monster from the "active monsters of the wave" list
     }
 
     /*
@@ -154,8 +164,8 @@ public class Monster : MonoBehaviour
                 IsActive = false;
 
                 //remove the monster from the pool of objects in scene
-                WaveManager.Instance.GetPool().ReleaseObject(gameObject);
-                WaveManager.Instance.removeMonster(this);
+                //WaveManager.Instance.GetPool().ReleaseObject(gameObject);
+                //WaveManager.Instance.removeMonster(this);
             }
         }
     }

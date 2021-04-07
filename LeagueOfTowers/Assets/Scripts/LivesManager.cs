@@ -46,7 +46,10 @@ public class LivesManager : Singleton<LivesManager>
     */
     public void SubLives()
     {
-        this.view.RPC("subLivesRPC", RpcTarget.All);
+        if(PhotonNetwork.IsMasterClient){
+            this.view.RPC("subLivesRPC", RpcTarget.All);
+        }
+        
     }
 
     /*

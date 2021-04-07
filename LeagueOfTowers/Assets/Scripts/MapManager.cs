@@ -24,6 +24,7 @@ public class MapManager : Singleton<MapManager>
 
     //a dictionary of tiles, where each tile mapped on a gridposition of the map
     private Dictionary<Point, Tile> Tiles;
+    private Dictionary<int, Tile> tile2;
 
     //start and end pathing
     private Point spawnPos;
@@ -100,7 +101,9 @@ public class MapManager : Singleton<MapManager>
     private void CreateLevel()
     {
         Tiles = new Dictionary<Point, Tile>();
+        tile2 = new Dictionary<int, Tile>();
         string[] mapData = ReadLevelText();
+        
 
         //set the mapsize
         mapSize = new Point(mapData[0].ToCharArray().Length, mapData.Length);
@@ -115,13 +118,18 @@ public class MapManager : Singleton<MapManager>
         yIndexSize = mapData.Length;
 
         //generate map
+        //string tileID;
+        int tileCount = 0;
         for (int y = 0; y < yIndexSize; y++)       //y-coords
         {
             char[] newTiles = mapData[y].ToCharArray();
             for (int x = 0; x < xIndexSize; x++) //x-coords
             {
-                PlaceTile(newTiles[x].ToString(), x, y, worldStart);
-
+                //tileID = y.ToString() + x.ToString();
+                
+                PlaceTile(tileCount, newTiles[x].ToString(), x, y, worldStart);
+                tileCount++;
+                
             }
         }
 
@@ -140,9 +148,11 @@ public class MapManager : Singleton<MapManager>
     /*
      * PlaceTile: create a tile prefab at a specific location on scene.
      */
-    private void PlaceTile(string tileType, int x, int y, Vector3 worldStart)
+    private void PlaceTile(int count, string tileType, int x, int y, Vector3 worldStart)
     {
         int tileIndex = int.Parse(tileType);
+        //string tileID = y.ToString() + x.ToString();
+        int tileID = count;
 
         int randomIndex;
         if (tileIndex == 0) //for the grass
@@ -163,14 +173,17 @@ public class MapManager : Singleton<MapManager>
 
         //Instantiate(tilePrefabs[randomIndex]) = create new tile from tile prefabs
         //Tile newTile = .....GetComponent<Tile>() mean extract the Tile script from this new tile
-        Tile newTile = Instantiate(tilePrefabs[randomIndex]).GetComponent<Tile>();
+        GameObject nTile = Instantiate(tilePrefabs[randomIndex]);
+        //Tile newTile = Instantiate(tilePrefabs[randomIndex]).GetComponent<Tile>();
+        Tile nTileScript = nTile.GetComponent<Tile>();
 
         //setup and place this new tile on world scene
-        newTile.SetUpTile(gridPos, worldPos, ground, tileIndex);
-
+        nTileScript.SetUpTile(tileID, gridPos, worldPos, ground, tileIndex);
+        //nTile.gameObject.name = nTileScript.ToString();
         //also, add this new tile along with its gridPos to the dictionary
         //this can be done from Tile script with Singleton help
         //Tiles.Add(gridPos, newTile);
+        tile2.Add(tileID, nTileScript);
         
     }
 
@@ -206,6 +219,20 @@ public class MapManager : Singleton<MapManager>
         return mapBounds ;
     }
 
+    public GameObject getTile(int id){
+        return this.ground.GetChild(id).gameObject;
+    }
+
+    public Tile GetSpawnTile()
+    {
+        return this.Tiles[spawnPos];
+    }
+
+    public Tile GetBaseTile()
+    {
+        return this.Tiles[basePos];
+    }
+
     /*
         Method to create the spawn portal on the map
     */
@@ -218,6 +245,7 @@ public class MapManager : Singleton<MapManager>
 
         //place spawn at gridPos = (0,1) or start of the path
         theSpawn.transform.position = Tiles[spawnPos].GetCenterWorldPosition();
+        
 
         SpawnPrefab = theSpawn.GetComponent<Portal>();  //get script to  the reference
         SpawnPrefab.name = "SpawnPrefab";               // rename it 
@@ -234,7 +262,7 @@ public class MapManager : Singleton<MapManager>
         //create a base prefab on the scene
         GameObject theBase = Instantiate(basePrefab);
 
-        //place the base at grid(16,5) or end of the path
+        //place the base at grid(15,5) or end of the path
         theBase.transform.position = Tiles[basePos].GetCenterWorldPosition();
         //theBase.transform.localScale = new Vector3(1.2f, 1.2f, 1.0f);
     }
@@ -245,6 +273,10 @@ public class MapManager : Singleton<MapManager>
     public Dictionary<Point, Tile> getTiles()
     {
         return this.Tiles;
+    }
+
+    public Dictionary<int, Tile> getTile2(){
+        return this.tile2;
     }
 
     //return number of tiles in horizontal of the map
@@ -316,4 +348,18 @@ public class MapManager : Singleton<MapManager>
         this.Tiles[gP].SetIsPlaced(false);
         //Debug.Log("RPC called for setTileIsPlacedRPC to true");
     }
+
+    [PunRPC]
+    private void setTileIsPlacedAtRPC2(int tileID, bool state)
+    {
+        this.tile2[tileID].SetIsPlaced(state);
+        //Debug.Log("RPC called for setTileIsPlacedRPC to true");
+    }
+
+    public void SetTileIsPlacedAt2(int tileID, bool state)
+    {
+        this.view.RPC("setTileIsPlacedAtRPC2", RpcTarget.All, tileID, state);
+    }
+
+
 }

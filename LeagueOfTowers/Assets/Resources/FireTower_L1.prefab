@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 8670515566584905371}
   - component: {fileID: 3807745367874271624}
   - component: {fileID: 4116982212077758811}
-  - component: {fileID: 5981730819178190637}
+  - component: {fileID: 5235116635542287833}
   m_Layer: 2
   m_Name: Range
   m_TagString: Untagged
@@ -100,7 +100,7 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 0.49999997
---- !u!114 &5981730819178190637
+--- !u!114 &5235116635542287833
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -109,14 +109,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 1963667252021282785}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: aa848dd635b01594a9fdd60df117bced, type: 3}
+  m_Script: {fileID: 11500000, guid: 258ac2ec4ac03bd439948fd4d0aef245, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  price: 10
-  projectileType: FireProjectile
-  projectileSpeed: 3
-  damage: 5
-  attackCooldown: 3
 --- !u!1 &2303525347792396461
 GameObject:
   m_ObjectHideFlags: 0
@@ -127,7 +122,9 @@ GameObject:
   m_Component:
   - component: {fileID: 3075163156092195493}
   - component: {fileID: 6361429680458585723}
+  - component: {fileID: 9201399227085727430}
   - component: {fileID: -669689402270249931}
+  - component: {fileID: 1566678340541398613}
   m_Layer: 6
   m_Name: FireTower_L1
   m_TagString: Untagged
@@ -201,6 +198,19 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &9201399227085727430
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2303525347792396461}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 458ed930df3c09741b00d6e1089d8e6a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  projectilePrefab: {fileID: 1396780204091617713, guid: 0a69086c96d133a4781de80d6f9e4d73, type: 3}
 --- !u!114 &-669689402270249931
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -219,7 +229,41 @@ MonoBehaviour:
   Synchronization: 3
   OwnershipTransfer: 0
   observableSearch: 2
-  ObservedComponents: []
+  ObservedComponents:
+  - {fileID: 1566678340541398613}
   sceneViewId: 0
   InstantiationId: 0
   isRuntimeInstantiated: 0
+--- !u!114 &1566678340541398613
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2303525347792396461}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8efc6b1d64977384eb3405357896c656, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_PositionModel:
+    SynchronizeEnabled: 1
+    TeleportEnabled: 1
+    TeleportIfDistanceGreaterThan: 3
+    InterpolateOption: 2
+    InterpolateMoveTowardsSpeed: 1
+    InterpolateLerpSpeed: 1
+    ExtrapolateOption: 0
+    ExtrapolateSpeed: 1
+    ExtrapolateIncludingRoundTripTime: 1
+    ExtrapolateNumberOfStoredPositions: 1
+  m_RotationModel:
+    SynchronizeEnabled: 0
+    InterpolateOption: 1
+    InterpolateRotateTowardsSpeed: 180
+    InterpolateLerpSpeed: 5
+  m_ScaleModel:
+    SynchronizeEnabled: 0
+    InterpolateOption: 0
+    InterpolateMoveTowardsSpeed: 1
+    InterpolateLerpSpeed: 0

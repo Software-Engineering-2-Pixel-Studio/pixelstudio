@@ -556,7 +556,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 377295687}
         m_TargetAssemblyTypeName: SelectTowerManager, Assembly-CSharp
-        m_MethodName: SellTower
+        m_MethodName: SellTower2
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -2995,9 +2995,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1537229718}
-        m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
-        m_MethodName: SellTower
+      - m_Target: {fileID: 377295687}
+        m_TargetAssemblyTypeName: SelectTowerManager, Assembly-CSharp
+        m_MethodName: SellTower2
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

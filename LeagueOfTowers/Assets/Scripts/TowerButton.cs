@@ -12,6 +12,8 @@ public class TowerButton : MonoBehaviour
     [SerializeField] private int price; //tower's price
     [SerializeField] private Text priceText;    //display box for display tower's price on scene
 
+    [SerializeField] private string towerName;
+
 
     // Start is called before the first frame update
     private void Start()
@@ -57,5 +59,9 @@ public class TowerButton : MonoBehaviour
         return this.price;
     }
 
+    public string GetTowerName()
+    {
+        return this.towerName;
+    }
     
 }

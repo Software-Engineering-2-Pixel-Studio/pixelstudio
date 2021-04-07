@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2060324450978625146}
   - component: {fileID: 8786888832722484352}
-  - component: {fileID: 5316607457044877083}
+  - component: {fileID: 2626138468087742323}
   - component: {fileID: -1605245635297364792}
   - component: {fileID: -599331224562745859}
   - component: {fileID: 2496558494552529305}
@@ -87,7 +87,7 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &5316607457044877083
+--- !u!114 &2626138468087742323
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -96,11 +96,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 8268816607395305849}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 73066664e9b2845afb92d2f870a57595, type: 3}
+  m_Script: {fileID: 11500000, guid: 95159f92900ef27468ebd847fc1e2208, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  healthValue: 0
-  speed: 3
+  myHP: 0
 --- !u!61 &-1605245635297364792
 BoxCollider2D:
   m_ObjectHideFlags: 0

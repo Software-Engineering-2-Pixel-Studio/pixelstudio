@@ -75,6 +75,4 @@ public class CurrencyManager : Singleton<CurrencyManager>
     public int GetCurrency(){
         return this.currency;
     }
-
-
 }

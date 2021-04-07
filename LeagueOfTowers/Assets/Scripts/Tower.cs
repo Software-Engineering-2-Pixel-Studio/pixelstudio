@@ -7,41 +7,42 @@ using Photon.Pun;
 public class Tower : MonoBehaviour
 {
     //price of the tower
+    //private string towerName;
     [SerializeField]
-    private int price;
-    private PhotonView view;
+    private int price;  //done
+    private PhotonView view;    //done
 
     //tower range renderer
-    private SpriteRenderer mySpriteRenderer;
+    private SpriteRenderer mySpriteRenderer;    //done
 
     //target monster
-    private Monster target;
+    private Monster target; //done
 
     //pool of monsters that enter the tower
-    private Queue<Monster> monsters = new Queue<Monster>();
+    private Queue<Monster> monsters = new Queue<Monster>(); //done
 
     //projectile type
-    [SerializeField] private string projectileType;
+    [SerializeField] private string projectileType; //done
 
     //projectile speed
-    [SerializeField] private float projectileSpeed;
+    [SerializeField] private float projectileSpeed; //removed
 
     //damage of the tower
-    [SerializeField] private int damage;
+    [SerializeField] private int damage;    //done
 
     //let's say we can attack from the getgo
-    private bool canAttack = true;
+    private bool canAttack = true;  //done
 
     //how fast/often we can attack
-    private float attackTimer;
+    private float attackTimer;  //done
 
     //how long till the next attack
-    [SerializeField] private float attackCooldown;
+    [SerializeField] private float attackCooldown;  //done
 
-    private Point placedAtTile;     //tile grid position of this tower
+    private Point placedAtTile;     //tile grid position of this tower  //removed
 
     // Start is called before the first frame update
-    private void Start()
+    private void Start()    //done
     {
         this.view = this.GetComponentInParent<PhotonView>();
         //get the sprite
@@ -49,31 +50,37 @@ public class Tower : MonoBehaviour
     }
 
     // Update is called once per frame
-    private void Update()
+    private void Update()   //done
     {
         //attack targets
-        Attack();
+        //Attack();
 
         //Debug.Log(target);
     }
+    // public void OnPhotonInstantiate(PhotonMessageInfo info)
+    // {
+    //     var parent = GameObject.Find("Root");
 
-    public void setPrice(int otherPrice)
+    //     this.transform.SetParent(parent.transform, true);
+    // }
+
+    public void setPrice(int otherPrice)    //removed
     {
         this.price = otherPrice;
     }
 
-    public void setDamage(int damageGiven)
+    public void setDamage(int damageGiven)     //removed
     {
         this.damage = damageGiven;
 
     }
-    public void Select()
+    public void Select()    //done
     {
         //enable or disable the tower range when selected
         mySpriteRenderer.enabled = !mySpriteRenderer.enabled;
     }
 
-    public void Attack()
+    public void Attack()    //done
     {
         //if we can't attack
         if (!canAttack)
@@ -113,7 +120,7 @@ public class Tower : MonoBehaviour
     /*
         Method to shoot projectile
     */
-    public void Shoot()
+    public void Shoot() //nearly done
     {
         //get the projectile type from the pool and return it
         GameObject projectile = PhotonNetwork.Instantiate(this.projectileType, this.transform.position, Quaternion.identity,0,null);
@@ -124,7 +131,7 @@ public class Tower : MonoBehaviour
     }
 
     //this function happens when it enters the tower range
-    public void OnTriggerEnter2D(Collider2D other)
+    public void OnTriggerEnter2D(Collider2D other)  //done
     {
         //if the target is a monster
         if (other.tag == "Monster")
@@ -135,7 +142,7 @@ public class Tower : MonoBehaviour
     }
 
     //this function happens when it exits the tower range
-    public void OnTriggerExit2D(Collider2D other)
+    public void OnTriggerExit2D(Collider2D other)   //done
     {
         //if the target is a monster
         if (other.tag == "Monster")
@@ -148,7 +155,7 @@ public class Tower : MonoBehaviour
     /*
         Method to get projectile speed
     */
-    public float getProjectileSpeed()
+    public float getProjectileSpeed()   //removed
     {
         return projectileSpeed;
     }
@@ -207,4 +214,5 @@ public class Tower : MonoBehaviour
     public Point GetPlacedAtTile(){
         return this.placedAtTile;
     }
+
 }

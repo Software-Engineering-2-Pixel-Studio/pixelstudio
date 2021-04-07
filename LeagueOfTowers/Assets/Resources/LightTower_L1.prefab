@@ -10,7 +10,9 @@ GameObject:
   m_Component:
   - component: {fileID: 393416326497456236}
   - component: {fileID: 3959525723476508541}
+  - component: {fileID: 846453504550660276}
   - component: {fileID: -7539143359739975244}
+  - component: {fileID: 7520092581096069506}
   m_Layer: 6
   m_Name: LightTower_L1
   m_TagString: Untagged
@@ -84,6 +86,19 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &846453504550660276
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 560284490885896046}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 458ed930df3c09741b00d6e1089d8e6a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  projectilePrefab: {fileID: 4282152743367297060, guid: d2eceb0906562da41b203db453e5c20f, type: 3}
 --- !u!114 &-7539143359739975244
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -102,10 +117,44 @@ MonoBehaviour:
   Synchronization: 3
   OwnershipTransfer: 0
   observableSearch: 2
-  ObservedComponents: []
+  ObservedComponents:
+  - {fileID: 7520092581096069506}
   sceneViewId: 0
   InstantiationId: 0
   isRuntimeInstantiated: 0
+--- !u!114 &7520092581096069506
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 560284490885896046}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8efc6b1d64977384eb3405357896c656, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_PositionModel:
+    SynchronizeEnabled: 1
+    TeleportEnabled: 1
+    TeleportIfDistanceGreaterThan: 3
+    InterpolateOption: 2
+    InterpolateMoveTowardsSpeed: 1
+    InterpolateLerpSpeed: 1
+    ExtrapolateOption: 0
+    ExtrapolateSpeed: 1
+    ExtrapolateIncludingRoundTripTime: 1
+    ExtrapolateNumberOfStoredPositions: 1
+  m_RotationModel:
+    SynchronizeEnabled: 0
+    InterpolateOption: 1
+    InterpolateRotateTowardsSpeed: 180
+    InterpolateLerpSpeed: 5
+  m_ScaleModel:
+    SynchronizeEnabled: 0
+    InterpolateOption: 0
+    InterpolateMoveTowardsSpeed: 1
+    InterpolateLerpSpeed: 0
 --- !u!1 &3805093408310668223
 GameObject:
   m_ObjectHideFlags: 0
@@ -116,8 +165,8 @@ GameObject:
   m_Component:
   - component: {fileID: 132601009439368559}
   - component: {fileID: 2825539392851199505}
+  - component: {fileID: 6885563645963416135}
   - component: {fileID: 4041410589049501044}
-  - component: {fileID: 226090746339625620}
   m_Layer: 2
   m_Name: Range
   m_TagString: Untagged
@@ -190,6 +239,18 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &6885563645963416135
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3805093408310668223}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 258ac2ec4ac03bd439948fd4d0aef245, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!58 &4041410589049501044
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -206,20 +267,3 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 0.49999997
---- !u!114 &226090746339625620
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3805093408310668223}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: aa848dd635b01594a9fdd60df117bced, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  price: 30
-  projectileType: LightProjectile
-  projectileSpeed: 3
-  damage: 10
-  attackCooldown: 2
