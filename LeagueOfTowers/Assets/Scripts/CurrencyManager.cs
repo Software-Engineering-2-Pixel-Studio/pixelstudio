@@ -4,8 +4,14 @@ using UnityEngine;
 using UnityEngine.UI;
 using Photon.Pun;
 
+//delegate for the event when currency changes
+public delegate void CurrencyChanged();
+
 public class CurrencyManager : Singleton<CurrencyManager>
 {
+    //an event that is triggered when the currency changes
+    public event CurrencyChanged Changed;
+
     //fields
     [SerializeField] private int currency;              //global share currency value for players
     [SerializeField] private Text currencyDisplay;      //display text box for currency value on scene
@@ -58,6 +64,9 @@ public class CurrencyManager : Singleton<CurrencyManager>
     public void AddCurrency(int earnAmount)
     {
         this.view.RPC("addCurrencyRPC", RpcTarget.All, earnAmount);
+
+        //call currency change
+        OnCurrencyChanged();
     }
 
     /*
@@ -67,6 +76,9 @@ public class CurrencyManager : Singleton<CurrencyManager>
     public void SubCurrency(int payAmount)
     {
         this.view.RPC("subCurrencyRPC", RpcTarget.All, payAmount);
+
+        //call currency change
+        OnCurrencyChanged();
     }
 
     /*
@@ -74,6 +86,19 @@ public class CurrencyManager : Singleton<CurrencyManager>
     */
     public int GetCurrency(){
         return this.currency;
+    }
+
+    /*
+        Method that triggers when currency changes
+    */
+    public void OnCurrencyChanged()
+    {
+        //if the event is not null
+        if (Changed != null)
+        {
+            //call the event
+            Changed();
+        }
     }
 
 

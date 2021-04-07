@@ -3,8 +3,16 @@ using System.Collections.Generic;
 using UnityEngine;
 using Photon.Pun;
 
+public enum Element
+{
+    FIRE,
+    LIGHT,
+    SLOW,
+    NONE
+}
 
-public class Tower : MonoBehaviour
+
+public abstract class Tower : MonoBehaviour
 {
     //price of the tower
     [SerializeField]
@@ -29,6 +37,12 @@ public class Tower : MonoBehaviour
     //damage of the tower
     [SerializeField] private int damage;
 
+    //debuff duration of the tower
+    [SerializeField] private float debuffDuration;
+
+    //chance for debuff to be applied
+    [SerializeField] private float debuffProcChance;
+
     //let's say we can attack from the getgo
     private bool canAttack = true;
 
@@ -40,12 +54,19 @@ public class Tower : MonoBehaviour
 
     private Point placedAtTile;     //tile grid position of this tower
 
+    private Element elementType;
+
     // Start is called before the first frame update
-    private void Start()
+    protected virtual void Start()
     {
-        this.view = this.GetComponentInParent<PhotonView>();
+        Set();
+    }
+
+    public void Set()
+    {
         //get the sprite
         this.mySpriteRenderer = GetComponent<SpriteRenderer>();
+        this.view = this.GetComponentInParent<PhotonView>();
     }
 
     // Update is called once per frame
@@ -67,6 +88,22 @@ public class Tower : MonoBehaviour
         this.damage = damageGiven;
 
     }
+
+    protected void setElementType(Element otherElement)
+    {
+        this.elementType = otherElement;
+    }
+
+    public void setDebuffDuration(float givenDebuffDuration)
+    {
+        this.debuffDuration = givenDebuffDuration;
+    }
+
+    public void setDebuffProcChance(float givenDebuffProc)
+    {
+        this.debuffProcChance = givenDebuffProc;
+    }
+
     public void Select()
     {
         //enable or disable the tower range when selected
@@ -91,7 +128,7 @@ public class Tower : MonoBehaviour
         }
 
         //if the target doesn't exist anymore in the tower range and there are still monsters in the queue
-        if (target == null && monsters.Count > 0)
+        if (target == null && monsters.Count > 0 && monsters.Peek().IsActive)
         {
             //remove the monster from the queue
             target = monsters.Dequeue();
@@ -107,6 +144,12 @@ public class Tower : MonoBehaviour
                 Shoot();
                 canAttack = false;
             }
+        }
+
+        //reset the target when monster enters the portal
+        if (target != null && !target.isAlive || target != null && !target.IsActive)
+        {
+            target = null;
         }
     }
 
@@ -176,6 +219,30 @@ public class Tower : MonoBehaviour
     }
 
     /*
+        Method to get element of this tower
+    */
+    public Element getElementType()
+    {
+        return this.elementType;
+    }
+
+    /*
+        Method to get debuff duration of this tower
+    */
+    public float getDebuffDuration()
+    {
+        return this.debuffDuration;
+    }
+
+    /*
+        Method to get debuff proc chance of this tower
+    */
+    public float getDebuffProcChance()
+    {
+        return this.debuffProcChance;
+    }
+
+    /*
         Method to get PhotonView of this tower
     */
     public PhotonView GetPhotonView(){
@@ -207,4 +274,11 @@ public class Tower : MonoBehaviour
     public Point GetPlacedAtTile(){
         return this.placedAtTile;
     }
+
+    /*
+        Get the debuff of this tower
+    */
+    public abstract Debuff GetDebuff();
+
+    
 }

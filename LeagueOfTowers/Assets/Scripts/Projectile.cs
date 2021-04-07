@@ -10,6 +10,8 @@ public class Projectile : MonoBehaviour
 
     private Tower parentTower;   //tower that the projectile comes from
 
+    private Element elementType;
+
     // Start is called before the first frame update
     private void Start()
     {
@@ -29,13 +31,13 @@ public class Projectile : MonoBehaviour
         }
     }
 
-    //initialize the projectile's tower parent and target
+    //initialize the projectile's tower parent and target as well as element type
     public void Initialize(Tower towerParent)
     {
         this.transform.SetParent(towerParent.transform);
         this.parentTower = this.GetComponentInParent<Tower>();
         this.targetMonster = parentTower.getTarget();
-        
+        this.elementType = parentTower.getElementType();
     }
 
     /*
@@ -69,6 +71,26 @@ public class Projectile : MonoBehaviour
         }
         
     }
+
+    private void ApplyDebuff()
+    {
+        //if target monster type is different than projectile element type
+        if (targetMonster.getElementType() != this.elementType)
+        {
+            //roll a chance number for debuff
+            float rollNum = Random.Range(0, 100);
+
+            //add the debuff if roll is more than or equal to proc chance
+            if (rollNum <= parentTower.getDebuffProcChance())
+            {
+                //get parent tower's debuff and apply it to target monster
+                targetMonster.AddDebuff(parentTower.GetDebuff());
+            }
+        }
+
+        
+    }
+
     private void OnTriggerEnter2D(Collider2D other)
     {
         if (other.tag == "Monster") //if the target in range is a monster
@@ -81,7 +103,9 @@ public class Projectile : MonoBehaviour
             {
                 //Debug.Log("Monster hit");
 
-                targetMonster.TakeDamage(parentTower.getDamage());
+                targetMonster.TakeDamage(parentTower.getDamage(), elementType);
+
+                ApplyDebuff();
 
                 //remove the projectile from the pool of objects in scene
                 GameManager.Instance.Pool.ReleaseObject(gameObject);

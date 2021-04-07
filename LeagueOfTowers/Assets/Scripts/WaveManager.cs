@@ -22,7 +22,7 @@ public class WaveManager : Singleton<WaveManager>
 
     private bool waveOver;      //state when wave have done spawning monster
 
-    private int enemyHealth = 10;   //base health for monster
+    [SerializeField] private int enemyHealth;   //base health for monster
 
     private int monsterActiveCount = 0; //number of active monster on scene (not destroyed)
 
