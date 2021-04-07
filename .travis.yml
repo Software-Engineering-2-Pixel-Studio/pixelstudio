@@ -20,6 +20,8 @@ branches:
   only:
   - master
   - develop
+  - nk_travisCI
+
 
 # run the script to download and install Unity editor
 install:
