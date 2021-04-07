@@ -1,11 +1,35 @@
-language: node_js
-node_js:
-  - "stable"
-cache:
-  directories:
-  - node_modules
-install: npm install
-script:
-  - cd client/web
+#language: node_js
+#node_js:
+#  - "stable"
+#cache:
+#  directories:
+#  - node_modules
+#install: npm install
+#script:
+#  - cd client/web
+#branches:
+#  only: main
+# do not install anything extra onto the image
+language: generic
+
+# use a Mac OSX image
+os: osx
+
+# run builds on pushes to the master and develop branches
 branches:
-  only: main
+  only:
+  - master
+  - develop
+
+# run the script to download and install Unity editor
+install:
+- sudo -E sh ./Travis/install.sh
+
+# run the script for unit tests and builds
+script:
+- sudo -E sh ./Travis/build.sh
+
+# environment variables used in bash scripts
+env:
+  global:
+  - UNITYCI_PROJECT_NAME="LeagueOfTowers"
