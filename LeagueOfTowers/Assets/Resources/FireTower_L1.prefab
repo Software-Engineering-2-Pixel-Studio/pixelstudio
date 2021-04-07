@@ -115,9 +115,9 @@ MonoBehaviour:
   price: 10
   projectileType: FireProjectile
   projectileSpeed: 4
-  damage: 5
+  damage: 10
   debuffDuration: 3
-  debuffProcChance: 20
+  debuffProcChance: 30
   attackCooldown: 3
   tickTime: 1
   tickDamage: 5
