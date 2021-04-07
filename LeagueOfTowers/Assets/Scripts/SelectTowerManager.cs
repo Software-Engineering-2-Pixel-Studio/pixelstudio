@@ -28,6 +28,7 @@ public class SelectTowerManager : Singleton<SelectTowerManager>
     */
     public void SelectTower2(TowerScript tower)
     {
+        //Debug.Log("clicked");
         if (sTower != null)
         {
             sTower.Select();
@@ -60,7 +61,7 @@ public class SelectTowerManager : Singleton<SelectTowerManager>
     */
     public void SellTower2()
     {
-        Debug.Log("Sell Tower 2 is called");
+        //Debug.Log("Sell Tower 2 is called");
         if(sTower != null)
         {
             

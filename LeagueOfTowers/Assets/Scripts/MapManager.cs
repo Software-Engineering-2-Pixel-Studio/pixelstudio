@@ -358,7 +358,10 @@ public class MapManager : Singleton<MapManager>
     private void setTileIsPlacedAtRPC2(int tileID, bool state)
     {
         this.tile2[tileID].SetIsPlaced(state);
-        this.tile2[tileID].SetMyTower(null);
+        if(state == false)  //is not placed
+        {
+            this.tile2[tileID].SetMyTower(null);
+        }
     }
 
     public void SetTileIsPlacedAt2(int tileID, bool state)

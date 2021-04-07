@@ -123,12 +123,15 @@ public class Tile : MonoBehaviour
         } 
         else if (!EventSystem.current.IsPointerOverGameObject() && GameManager.Instance.GetPickedTowerButton() == null && Input.GetMouseButtonDown(0))
         {
+            //Debug.Log("clicked");
             if (myTower != null)
             {
+                //Debug.Log("myTower is not null");
                 SelectTowerManager.Instance.SelectTower2(myTower);
             } 
             else
             {
+                //Debug.Log("myTower is null");
                 SelectTowerManager.Instance.DeselectTower2();
             }
         }
