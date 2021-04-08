@@ -122,7 +122,7 @@ public abstract class TowerScript : MonoBehaviourPun, IPunInstantiateMagicCallba
     public virtual string GetStats()
     {
         //set the default string passed to tower stats panel
-        string result = string.Format("\nLevel: {0} \nDamage: {1} \nProc: {2}% \nDebuff: {3} sec", this.level, this.damage, this.debuffChance, this.duration);
+        string result = string.Format("\nLevel: {0} \nDamage: {1} \nProc: {2}% \nDebuff: {3} sec \nElement: {4}", this.level, this.damage, this.debuffChance, this.duration, this.myElement.ToString());
 
         // if (GetNextUpgrade != null) //if an upgrade is available
         // {
@@ -132,8 +132,8 @@ public abstract class TowerScript : MonoBehaviourPun, IPunInstantiateMagicCallba
         // }
         if(this.nextUpgrade != null)
         {
-            result = string.Format("\nLevel: {0} \nDamage: {1} <color=#00ff00ff>+{4}</color>\nProc; {2}% <color=#00ff00ff>+{5}%</color>\nDebuff: {3} sec <color=#00ff00ff>+{6}</color>",
-                this.level, this.damage, this.debuffChance, this.duration, this.nextUpgrade.Damage, this.nextUpgrade.DebuffProcChance, this.nextUpgrade.DebuffDuration);
+            result = string.Format("\nLevel: {0} \nDamage: {1} <color=#00ff00ff>+{4}</color>\nProc; {2}% <color=#00ff00ff>+{5}%</color>\nDebuff: {3} sec <color=#00ff00ff>+{6}</color> \nElement: {7}",
+                this.level, this.damage, this.debuffChance, this.duration, this.nextUpgrade.Damage, this.nextUpgrade.DebuffProcChance, this.nextUpgrade.DebuffDuration, this.myElement);
         }
 
         return result;
