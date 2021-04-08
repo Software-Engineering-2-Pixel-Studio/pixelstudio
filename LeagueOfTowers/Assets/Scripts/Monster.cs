@@ -2,11 +2,15 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Photon.Pun;
+using UnityEngine.UI;
 
 public class Monster : MonoBehaviour
 {
     //fields
     private float healthValue;     //health of monster
+
+    //for health text attached to monster
+    [SerializeField] private Text healthValueDisplayText;
 
     public bool isAlive { get { return healthValue > 0; } } //condition to check if monster is alive
 
@@ -78,12 +82,18 @@ public class Monster : MonoBehaviour
         if(this.name == "TrainingDummy"){
             StartCoroutine(Scale(new Vector3(0.1f, 0.1f), new Vector3(0.6f,0.6f), false));
             transform.position = MapManager.Instance.SpawnPrefab.transform.position;
+
+            //update health value and text
             this.healthValue = health;
+            healthValueDisplayText.text = healthValue.ToString();
         }
         else if(this.name == "Scarecrow"){
             StartCoroutine(Scale(new Vector3(0.1f, 0.1f), new Vector3(0.5f,0.5f), false));
             transform.position = MapManager.Instance.SpawnPrefab.transform.position;
+
+            //update health value and text
             this.healthValue = health*2;
+            healthValueDisplayText.text = healthValue.ToString();
         }
 
         SetPath(MapManager.Instance.Path);
@@ -186,6 +196,7 @@ public class Monster : MonoBehaviour
 
             //do some damage
             healthValue -= damage;
+            healthValueDisplayText.text = healthValue.ToString();
             //Debug.Log("health: " + healthValue.ToString());
 
             //Debug.Log("speed: " + speed.ToString());
