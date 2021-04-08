@@ -15,12 +15,12 @@ public class Monster : MonoBehaviour
     public bool isAlive { get { return healthValue > 0; } } //condition to check if monster is alive
 
     //money you get from killing these monsters
-    private int dummyIncome = 4;
-    private int scarecrowIncome = 8;
+    private int dummyIncome = 5;
+    private int scarecrowIncome = 10;
 
     //exp you get from killing these monsters
-    private int expDummy = 10;
-    private int expScarecrow = 20;
+    private int expDummy = 25;
+    private int expScarecrow = 40;
 
     [SerializeField]
     private float speed; //serialized to access from different places

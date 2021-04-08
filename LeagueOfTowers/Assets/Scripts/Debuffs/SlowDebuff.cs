@@ -36,6 +36,8 @@ public class SlowDebuff : Debuff
     {
         if (target != null) //if target exists
         {
+            slowIsApplied = false;
+
             //set speed back to normal max speed
             target.setSpeed(target.getMaxSpeed());
 
