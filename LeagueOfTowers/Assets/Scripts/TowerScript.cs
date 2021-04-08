@@ -6,24 +6,6 @@ using Photon.Pun;
 public abstract class TowerScript : MonoBehaviourPun, IPunInstantiateMagicCallback
 {
     //field
-    // private string towerName;       //0 //tower's name
-    // private int price;              //1 //tower's price
-    // private float damage;           //2 //tower's damage
-    // private string projectileType;  //3 //tower's projectile type
-    // private float projectileSpeed;  //4 //tower's projectile speed
-    // private float attackCooldown;   //5 //tower's attack cool down
-    // private int parentTileID;       //7 //tileID where tower is placed
-    // private int towerID;            //6 //towerID
-    // private bool canAttack = true;      //state of attack
-    // private float attackTimer;          //time counting for next attack
-    // private MonsterScript target;       //tower's target
-    // private Queue<MonsterScript> monsters = new Queue<MonsterScript>();
-    
-    // [SerializeField] private GameObject projectilePrefab;   //projectile prefab
-
-    // //components
-    // private RangeScript myRangeScript;
-    // private PhotonView view;
     //these need initialize at Instantiate
     protected string towerName;       //0 //tower's name
     [SerializeField] protected int price;              //1 //tower's price
@@ -158,7 +140,7 @@ public abstract class TowerScript : MonoBehaviourPun, IPunInstantiateMagicCallba
     //     }
     // }
 
-    private void setNextUpgrade()
+    protected void setNextUpgrade()
     {
         if(this.upgrades.Length == 2)
         {
@@ -419,7 +401,7 @@ public abstract class TowerScript : MonoBehaviourPun, IPunInstantiateMagicCallba
 
     //punRPC
     [PunRPC]
-    protected virtual void upgradeRPC()
+    private void upgradeRPC()
     {
         //decrease shared global currency
         if(PhotonNetwork.IsMasterClient){

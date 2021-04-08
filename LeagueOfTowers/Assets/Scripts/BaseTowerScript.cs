@@ -50,4 +50,38 @@ public class BaseTowerScript : TowerScript
 
     //     return result;
     // }
+
+    public override void Upgrade()
+    {
+        if(this.view.IsMine)
+        {
+            this.view.RPC("upgradeBaseRPC", RpcTarget.All);
+        }
+    }
+
+    //punRPC
+    [PunRPC]
+    private void upgradeBaseRPC()
+    {
+        //decrease shared global currency
+        if(PhotonNetwork.IsMasterClient){
+            CurrencyManager.Instance.SubCurrency(this.nextUpgrade.Price);
+        }
+        
+        //increase price of this tower
+        this.price += this.nextUpgrade.Price;
+
+        //increase the damage, debuff proc chance, and debuff duration of tower
+        this.damage += this.nextUpgrade.Damage;
+        this.debuffChance += this.nextUpgrade.DebuffProcChance;
+        this.duration += this.nextUpgrade.DebuffDuration;
+
+        // this.slowFactor += this.nextUpgrade.SlowingFactor;
+        // Debug.Log("slowFactor of Slow tower = " + slowFactor);
+
+        //increase tower level
+        this.level++;
+        this.nextUpgradeLevel++;
+        setNextUpgrade();
+    }
 }

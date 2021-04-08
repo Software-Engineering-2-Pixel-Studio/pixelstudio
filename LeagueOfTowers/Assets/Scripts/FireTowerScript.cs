@@ -113,4 +113,39 @@ public class FireTowerScript : TowerScript
     //     this.tickDamage += GetNextUpgrade.TickDamage;
     //     base.Upgrade();
     // }
+
+    public override void Upgrade()
+    {
+        if(this.view.IsMine)
+        {
+            this.view.RPC("upgradeFireRPC", RpcTarget.All);
+        }
+    }
+
+    //punRPC
+    [PunRPC]
+    private void upgradeFireRPC()
+    {
+        //decrease shared global currency
+        if(PhotonNetwork.IsMasterClient){
+            CurrencyManager.Instance.SubCurrency(this.nextUpgrade.Price);
+        }
+        
+        //increase price of this tower
+        this.price += this.nextUpgrade.Price;
+
+        //increase the damage, debuff proc chance, and debuff duration of tower
+        this.damage += this.nextUpgrade.Damage;
+        this.debuffChance += this.nextUpgrade.DebuffProcChance;
+        this.duration += this.nextUpgrade.DebuffDuration;
+
+        this.tickDamage += this.nextUpgrade.TickDamage;
+        this.tickTime += this.nextUpgrade.TickTime;
+        Debug.Log("tickDamage of Slow tower = " + tickDamage);
+
+        //increase tower level
+        this.level++;
+        this.nextUpgradeLevel++;
+        setNextUpgrade();
+    }
 }
