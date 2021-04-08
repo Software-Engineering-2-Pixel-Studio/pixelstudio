@@ -79,5 +79,4 @@ public class TowerButton : MonoBehaviour
             priceText.color = Color.gray;
         }
     }
-    
 }

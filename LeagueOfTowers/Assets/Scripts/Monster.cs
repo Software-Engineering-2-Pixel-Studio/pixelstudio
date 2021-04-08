@@ -11,8 +11,12 @@ public class Monster : MonoBehaviour
     public bool isAlive { get { return healthValue > 0; } } //condition to check if monster is alive
 
     //money you get from killing these monsters
-    private int dummyIncome = 4;
-    private int scarecrowIncome = 8;
+    private int dummyIncome = 5;
+    private int scarecrowIncome = 10;
+
+    //exp you get from killing these monsters
+    private int expDummy = 25;
+    private int expScarecrow = 40;
 
     [SerializeField]
     private float speed; //serialized to access from different places
@@ -190,14 +194,16 @@ public class Monster : MonoBehaviour
             if (healthValue <= 0) //if it's dead (health is 0)
             {;
 
-                //add some currency depending on type of monster
+                //add some currency and exp points depending on type of monster
                 if (this.name == "TrainingDummy")
                 {
                     CurrencyManager.Instance.AddCurrency(dummyIncome);
+                    GameManager.Instance.addExp(expDummy);
                 }
                 else if (this.name == "Scarecrow")
                 {
                     CurrencyManager.Instance.AddCurrency(scarecrowIncome);
+                    GameManager.Instance.addExp(expScarecrow);
                 }
 
                 IsActive = false;

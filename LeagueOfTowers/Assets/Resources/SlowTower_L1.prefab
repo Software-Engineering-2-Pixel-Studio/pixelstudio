@@ -223,6 +223,6 @@ MonoBehaviour:
   projectileSpeed: 3
   damage: 10
   debuffDuration: 1
-  debuffProcChance: 100
+  debuffProcChance: 85
   attackCooldown: 4
   slowFactor: 50
