@@ -210,7 +210,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f9ca49cdf3140d741b089339038bb0ea, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  price: 0
+  damage: 0
   myElement: 0
+  debuffChance: 0
+  duration: 0
+  level: 0
   projectilePrefab: {fileID: 269055198195212943, guid: a8be62bc980f98b478dd9667c820932f, type: 3}
   tickTime: 0
   tickDamage: 0

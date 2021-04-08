@@ -261,7 +261,9 @@ public class Tile : MonoBehaviour
         }
         else{
             this.isWalkable = true;
+            this.isPlaced = true;
         }
+
         
     }
 

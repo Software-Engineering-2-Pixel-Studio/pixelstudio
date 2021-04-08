@@ -99,14 +99,18 @@ public class ProjectileScript : MonoBehaviourPun, IPunInstantiateMagicCallback
             else {
                 if (targetMonster.gameObject == other.gameObject)
                 {
-                    Debug.Log("Monster hit");
+                    //Debug.Log("Monster hit");
 
-                    if(this.view.IsMine)
+                    if(this.view != null )
                     {
-                        targetMonster.TakeDamage(this.myDamage);
+                        if(this.view.IsMine){
+                            targetMonster.TakeDamage(this.myDamage);
+                        }
+
+                        DestroyThisProjectile();
                     }
                     
-                    DestroyThisProjectile();
+                    
                 }
             }
 

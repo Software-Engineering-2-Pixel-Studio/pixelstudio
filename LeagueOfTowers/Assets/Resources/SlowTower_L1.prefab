@@ -98,7 +98,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d09fe73baac8dc04bb163ad675dcb456, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  price: 0
+  damage: 0
   myElement: 0
+  debuffChance: 0
+  duration: 0
+  level: 0
   projectilePrefab: {fileID: 5169112953947239213, guid: cadaf64132996a941985ba3f66acffe0, type: 3}
   slowFactor: 1
 --- !u!114 &7805580536374042748
