@@ -394,21 +394,6 @@ public abstract class TowerScript : MonoBehaviourPun, IPunInstantiateMagicCallba
     {
         if(this.view.IsMine)
         {
-            // //decrease shared global currency
-            // CurrencyManager.Instance.SubCurrency(this.nextUpgrade.Price);
-
-            // //increase price of this tower
-            // this.price += this.nextUpgrade.Price;
-
-            // //increase the damage, debuff proc chance, and debuff duration of tower
-            // this.damage += this.nextUpgrade.Damage;
-            // this.debuffChance += this.nextUpgrade.DebuffProcChance;
-            // this.duration += this.nextUpgrade.DebuffDuration;
-
-            // //increase tower level
-            // this.level++;
-            // this.nextUpgradeLevel++;
-            // setNextUpgrade();
             this.view.RPC("upgradeRPC", RpcTarget.All);
         }
         
@@ -441,8 +426,10 @@ public abstract class TowerScript : MonoBehaviourPun, IPunInstantiateMagicCallba
     protected virtual void upgradeRPC()
     {
         //decrease shared global currency
-        CurrencyManager.Instance.SubCurrency(this.nextUpgrade.Price);
-
+        if(PhotonNetwork.IsMasterClient){
+            CurrencyManager.Instance.SubCurrency(this.nextUpgrade.Price);
+        }
+        
         //increase price of this tower
         this.price += this.nextUpgrade.Price;
 

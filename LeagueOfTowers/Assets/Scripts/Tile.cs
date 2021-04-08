@@ -147,23 +147,18 @@ public class Tile : MonoBehaviour
 
         //Create the tower prefab on the scene
         //GameObject tower = Instantiate(towerPref);
-
-        //object[] basicData = new object[8];
         List<object> lo = new List<object>();
         string towerType = pickedButton.GetTowerName();
         if(towerType == "FireTower")
         {
-            //basicData = TowerData.getFireTowerData(this.tileID);
             lo = TowerData.GetFireTowerData(this.tileID);
         }
         else if(towerType == "SlowTower")
         {
-            //basicData = TowerData.getSlowTowerData(this.tileID);
             lo = TowerData.GetSlowTowerData(this.tileID);
         }
         else if(towerType == "LightTower")
         {
-            //basicData = TowerData.getLightTowerData(this.tileID);
             lo = TowerData.GetLightTowerData(this.tileID);
         }
         else if(towerType == "BaseTower")
@@ -171,43 +166,8 @@ public class Tile : MonoBehaviour
             lo = TowerData.GetBaseTowerData(this.tileID);
         }
 
-        //object[] data = new object[8];
-        // if(basicData != null){
-        //     data[0] = basicData[0]; //name
-        //     data[1] = basicData[1]; //price
-        //     data[2] = basicData[2]; //damage
-        //     data[3] = basicData[3]; //projectileType
-        //     data[4] = basicData[4]; //projectileSpeed
-        //     data[5] = basicData[5]; //cooldown
-        //     data[6] = basicData[6]; //baseID
-        //     data[7] = (int) this.tileID;    //tileID where this tower is placed
-        // }
-        //object[] data;
-        //GameObject tower;
-        // if(towerType == "FireTower")
-        // {
-        //     data = TowerData.getFireTowerData(this.tileID);
-            
-        // }
-        // else if(towerType == "SlowTower")
-        // {
-        //     data = TowerData.getSlowTowerData(this.tileID);
-        // }
-        // else if(towerType == "LightTower")
-        // {
-        //     data = TowerData.getLightTowerData(this.tileID);
-        // }
         GameObject tower = PhotonNetwork.Instantiate(towerPref.name, this.GetCenterWorldPosition(), Quaternion.identity,0, lo.ToArray() );
-        // if(towerType == "FireTower")
-        // {
-        //     this.myTower = tower.transform.GetComponent<FireTowerScript>();
-        // }
-        // else
-        // {
-        //     Debug.Log("WTF this is called");
-        //     this.myTower = tower.transform.GetComponent<TowerScript>();
-        //     Debug.Log(myTower);
-        // }
+        
         this.myTower = tower.transform.GetComponent<TowerScript>();
         this.myTower.GetComponent<SpriteRenderer>().sortingOrder = this.gridPos.Y + 2;
         MapManager.Instance.SetTileIsPlacedAt2(this.tileID, true);
@@ -263,8 +223,6 @@ public class Tile : MonoBehaviour
             this.isWalkable = true;
             this.isPlaced = true;
         }
-
-        
     }
 
     /*

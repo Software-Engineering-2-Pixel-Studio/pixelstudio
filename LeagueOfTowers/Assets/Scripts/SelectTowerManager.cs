@@ -108,10 +108,61 @@ public class SelectTowerManager : Singleton<SelectTowerManager>
                 else if(CurrencyManager.Instance.GetCurrency() >= sTower.GetNextUpgrade().Price)
                 {
                     sTower.Upgrade();
+                    UpdateUpgradeTooltip();
+                    // CurrencyManager.Instance.SubCurrency(sTower.GetNextUpgrade().Price);
+                    
                 }
             }
-            DeselectTower();
-            this.towerSelectPanel.SetActive(false);
+            //DeselectTower();
+            //this.towerSelectPanel.SetActive(false);
         }
+    }
+
+    /*
+        This method shows the selected tower stats
+    */
+    public void ShowSelectedTowerStats()
+    {
+        statsPanel.SetActive(true);
+        UpdateUpgradeTooltip();
+    }
+
+    public void HideSelectedTowerStats()
+    {
+        statsPanel.SetActive(false);
+    }
+
+    /*
+        This method updates the tooltip for upgrade
+    */
+    public void UpdateUpgradeTooltip()
+    {
+        if (sTower != null)
+        {
+            //update the text of sell button
+            sellPriceText.text = (sTower.GetPrice() / 2).ToString() + "<color='lime'>$</color>";
+
+            //update the tooltip text
+            SetToolTipText(sTower.GetStats());
+
+            //upgrade the price text
+            if (sTower.GetNextUpgrade() != null)
+            {
+                upgradePriceText.text = sTower.GetNextUpgrade().Price.ToString() + "<color='lime'>$</color>";
+            }
+            else
+            {
+                //if there are no more upgrades, just make the string empty
+                upgradePriceText.text = "<color='lime'>MaxLevel</color>";;
+            }
+        }
+    }
+
+    /*
+        This method sets the text for the hover upgrade tooltip
+    */
+    public void SetToolTipText(string givenText)
+    {
+        statText.text = givenText;
     }
 }
