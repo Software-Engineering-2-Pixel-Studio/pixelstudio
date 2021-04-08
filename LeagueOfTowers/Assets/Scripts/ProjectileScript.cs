@@ -63,13 +63,20 @@ public class ProjectileScript : MonoBehaviourPun, IPunInstantiateMagicCallback
         Debug.Log("called!");
         object[] data = this.gameObject.GetPhotonView().InstantiationData;
         if(data != null && data.Length == 5){
-            //name
+            //projectileType == projectileName
             this.myName = (string) data[0];
             //projectileSpeed
             this.mySpeed = (float) data[1];
             //projectileDamage
             this.myDamage = (float) data[2];
             //towerViewID
+            // if(this.myName == "FireProjectile")
+            // {
+            //     this.ownerTower = PhotonView.Find((int) data[3]).gameObject.GetComponent<FireTowerScript>();
+            // }
+            // else{
+            //     this.ownerTower = PhotonView.Find((int) data[3]).gameObject.GetComponent<TowerScript>();
+            // }
             this.ownerTower = PhotonView.Find((int) data[3]).gameObject.GetComponent<TowerScript>();
             //monsterViewID
             this.targetMonster = PhotonView.Find((int) data[4]).gameObject.GetComponent<MonsterScript>();

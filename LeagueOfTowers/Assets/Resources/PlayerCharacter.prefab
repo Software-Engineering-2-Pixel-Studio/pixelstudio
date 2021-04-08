@@ -581,7 +581,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300120, guid: 29c9cded5e558164aaf8c9bf08aa1510, type: 3}
+  m_Sprite: {fileID: 21300060, guid: 29c9cded5e558164aaf8c9bf08aa1510, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -659,11 +659,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7be0a373cb5f9db43aff4fed70cf74d6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  towerPrefab: {fileID: 998401282728010725, guid: 383eeffabc2dfd447b9f724e5ec0111b, type: 3}
-  sprite: {fileID: 21300120, guid: 29c9cded5e558164aaf8c9bf08aa1510, type: 3}
+  towerPrefab: {fileID: 2303525347792396461, guid: f8dd84f4ae01ce14db4873e72bd5e2db, type: 3}
+  sprite: {fileID: 21300060, guid: 29c9cded5e558164aaf8c9bf08aa1510, type: 3}
   price: 20
   priceText: {fileID: 8162613408991468455}
-  towerName: SlowTower
+  towerName: FireTower
 --- !u!1 &2409452849656402959
 GameObject:
   m_ObjectHideFlags: 0
@@ -742,7 +742,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 0 <color='lime'>$</color>
+  m_Text: 30 <color='lime'>$</color>
 --- !u!1 &2713894382980678314
 GameObject:
   m_ObjectHideFlags: 0
@@ -801,7 +801,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.04313723, g: 0.77215517, b: 0.9529412, a: 1}
+  m_Color: {r: 1, g: 0.6241763, b: 0, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -821,7 +821,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Slow Tower
+  m_Text: Fire Tower
 --- !u!1 &3710116403929713078
 GameObject:
   m_ObjectHideFlags: 0
@@ -880,7 +880,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.9528302, g: 0.42839217, b: 0.04194841, a: 1}
+  m_Color: {r: 0.7960309, g: 1, b: 0.006289184, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -900,7 +900,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Fire Tower
+  m_Text: Basic Tower
 --- !u!1 &4945795386193811507
 GameObject:
   m_ObjectHideFlags: 0
@@ -1122,7 +1122,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300060, guid: 29c9cded5e558164aaf8c9bf08aa1510, type: 3}
+  m_Sprite: {fileID: 21300118, guid: 29c9cded5e558164aaf8c9bf08aa1510, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -1200,11 +1200,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7be0a373cb5f9db43aff4fed70cf74d6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  towerPrefab: {fileID: 2303525347792396461, guid: f8dd84f4ae01ce14db4873e72bd5e2db, type: 3}
-  sprite: {fileID: 21300060, guid: 29c9cded5e558164aaf8c9bf08aa1510, type: 3}
+  towerPrefab: {fileID: 7390985848245534626, guid: 8883b0c16334b8948ad32d7ce4c18a11, type: 3}
+  sprite: {fileID: 21300118, guid: 29c9cded5e558164aaf8c9bf08aa1510, type: 3}
   price: 10
   priceText: {fileID: 2151819344853251205}
-  towerName: FireTower
+  towerName: BasicTower
 --- !u!1 &5346301276325800480
 GameObject:
   m_ObjectHideFlags: 0
@@ -1386,7 +1386,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 0 <color='lime'>$</color>
+  m_Text: 20 <color='lime'>$</color>
 --- !u!1 &7904908496428298432
 GameObject:
   m_ObjectHideFlags: 0

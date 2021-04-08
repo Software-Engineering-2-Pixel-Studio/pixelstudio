@@ -3,38 +3,58 @@ using System.Collections.Generic;
 using UnityEngine;
 using Photon.Pun;
 
-public class TowerScript : MonoBehaviourPun, IPunInstantiateMagicCallback
+public abstract class TowerScript : MonoBehaviourPun, IPunInstantiateMagicCallback
 {
     //field
-    private string towerName;       //0 //tower's name
-    private int price;              //1 //tower's price
-    private float damage;           //2 //tower's damage
-    private string projectileType;  //3 //tower's projectile type
-    private float projectileSpeed;  //4 //tower's projectile speed
-    private float attackCooldown;   //5 //tower's attack cool down
-    private int parentTileID;       //6 //tileID where tower is placed
-    private int towerID;                //towerID
-    private bool canAttack = true;      //state of attack
-    private float attackTimer;          //time counting for next attack
-    private MonsterScript target;       //tower's target
-    private Queue<MonsterScript> monsters = new Queue<MonsterScript>();
+    // private string towerName;       //0 //tower's name
+    // private int price;              //1 //tower's price
+    // private float damage;           //2 //tower's damage
+    // private string projectileType;  //3 //tower's projectile type
+    // private float projectileSpeed;  //4 //tower's projectile speed
+    // private float attackCooldown;   //5 //tower's attack cool down
+    // private int parentTileID;       //7 //tileID where tower is placed
+    // private int towerID;            //6 //towerID
+    // private bool canAttack = true;      //state of attack
+    // private float attackTimer;          //time counting for next attack
+    // private MonsterScript target;       //tower's target
+    // private Queue<MonsterScript> monsters = new Queue<MonsterScript>();
     
-    [SerializeField] private GameObject projectilePrefab;   //projectile prefab
+    // [SerializeField] private GameObject projectilePrefab;   //projectile prefab
+
+    // //components
+    // private RangeScript myRangeScript;
+    // private PhotonView view;
+
+    protected string towerName;       //0 //tower's name
+    protected int price;              //1 //tower's price
+    protected float damage;           //2 //tower's damage
+    protected string projectileType;  //3 //tower's projectile type
+    protected float projectileSpeed;  //4 //tower's projectile speed
+    protected float attackCooldown;   //5 //tower's attack cool down
+    protected int parentTileID;       //7 //tileID where tower is placed
+    protected int towerID;            //6 //towerID
+    [SerializeField] protected Element myElement; //8
+    protected bool canAttack = true;      //state of attack
+    protected float attackTimer;          //time counting for next attack
+    protected MonsterScript target;       //tower's target
+    protected Queue<MonsterScript> monsters = new Queue<MonsterScript>();
+    
+    [SerializeField] protected GameObject projectilePrefab;   //projectile prefab
 
     //components
-    private RangeScript myRangeScript;
-    private PhotonView view;
+    protected RangeScript myRangeScript;
+    protected PhotonView view;
 
     
     // Start is called before the first frame update
-    void Start()
+    protected virtual void Start()
     {
         this.view = this.GetComponent<PhotonView>();
         this.myRangeScript = this.GetComponentInChildren<RangeScript>();
     }
 
     // Update is called once per frame
-    void Update()
+    protected virtual void Update()
     {
         if(this.view.IsMine){
             Attack();
@@ -86,11 +106,11 @@ public class TowerScript : MonoBehaviourPun, IPunInstantiateMagicCallback
     /*
         initialize towerscript when its tower object is instantiated over network
     */
-    public void OnPhotonInstantiate(PhotonMessageInfo info)
+    public virtual void OnPhotonInstantiate(PhotonMessageInfo info)
     {
-        Debug.Log("called!");
+        //Debug.Log("TowerScript base is called!");
         object[] data = this.gameObject.GetPhotonView().InstantiationData;
-        if(data != null && data.Length == 8){
+        if(data != null && data.Length >= 9){
             //name
             this.towerName = (string) data[0];
             //price
@@ -108,7 +128,9 @@ public class TowerScript : MonoBehaviourPun, IPunInstantiateMagicCallback
             //base id
             this.towerID = (int) data[6] + this.parentTileID;
             this.gameObject.name = this.towerName + this.towerID;
-            
+            //elemetn
+            this.myElement = (Element) ( (byte) data[8]);
+            Debug.Log("Element: " + myElement.ToString());
             GameObject tileGO = MapManager.Instance.getTile(this.parentTileID);
             Tile tile = tileGO.GetComponent<Tile>();
 
