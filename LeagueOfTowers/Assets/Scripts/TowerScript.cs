@@ -396,10 +396,6 @@ public abstract class TowerScript : MonoBehaviourPun, IPunInstantiateMagicCallba
         {
             this.view.RPC("upgradeRPC", RpcTarget.All);
         }
-        
-
-        //update the tooltip
-        //SelectTowerManager.Instance.UpdateUpgradeTooltip();
     }
 
     /*

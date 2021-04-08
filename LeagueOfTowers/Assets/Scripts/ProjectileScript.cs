@@ -70,13 +70,6 @@ public class ProjectileScript : MonoBehaviourPun, IPunInstantiateMagicCallback
             //projectileDamage
             this.myDamage = (float) data[2];
             //towerViewID
-            // if(this.myName == "FireProjectile")
-            // {
-            //     this.ownerTower = PhotonView.Find((int) data[3]).gameObject.GetComponent<FireTowerScript>();
-            // }
-            // else{
-            //     this.ownerTower = PhotonView.Find((int) data[3]).gameObject.GetComponent<TowerScript>();
-            // }
             if(PhotonView.Find((int) data[3]) != null){
                 this.ownerTower = PhotonView.Find((int) data[3]).gameObject.GetComponent<TowerScript>();
             }

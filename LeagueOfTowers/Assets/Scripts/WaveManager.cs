@@ -80,10 +80,7 @@ public class WaveManager : Singleton<WaveManager>
                     break;
             }
             data[1] = (float) data[1] + enemyHealthExtra;
-            //get the monster object from the pool of objects control by this WaveManager
-            //Monster monster = pool.GetObject(type).GetComponent<Monster>();
-            //monster.Spawn(enemyHealth);
-           
+            //get the monster object from the pool of objects control by this WaveManage
 
             Tile spawnTile = MapManager.Instance.GetSpawnTile();
             GameObject monsterGO = PhotonNetwork.Instantiate(type, spawnTile.GetCenterWorldPosition(), Quaternion.identity, 0, data);

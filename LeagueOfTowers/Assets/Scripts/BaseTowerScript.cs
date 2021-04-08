@@ -11,15 +11,6 @@ public class BaseTowerScript : TowerScript
     protected override void Start()
     {
         base.Start();
-        // base.Set();
-        // setElementType(Element.LIGHT);
-
-        // Upgrades = new TowerUpgrade[]
-        // {
-        //     //price, damage, debuffDuration, debuffProcChance
-        //     new TowerUpgrade(10, 5, 1f, 5),
-        //     new TowerUpgrade(15, 10, 1f, 5),
-        // };
     }
 
     protected override void Update()

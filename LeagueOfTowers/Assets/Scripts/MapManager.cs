@@ -171,18 +171,13 @@ public class MapManager : Singleton<MapManager>
         //The actual position on the scene where we place the tile
         Vector3 worldPos = new Vector3(worldStart.x + TileSize * x, worldStart.y - TileSize * y, 0);
 
-        //Instantiate(tilePrefabs[randomIndex]) = create new tile from tile prefabs
-        //Tile newTile = .....GetComponent<Tile>() mean extract the Tile script from this new tile
         GameObject nTile = Instantiate(tilePrefabs[randomIndex]);
-        //Tile newTile = Instantiate(tilePrefabs[randomIndex]).GetComponent<Tile>();
+        
         Tile nTileScript = nTile.GetComponent<Tile>();
 
         //setup and place this new tile on world scene
         nTileScript.SetUpTile(tileID, gridPos, worldPos, ground, tileIndex);
-        //nTile.gameObject.name = nTileScript.ToString();
-        //also, add this new tile along with its gridPos to the dictionary
-        //this can be done from Tile script with Singleton help
-        //Tiles.Add(gridPos, newTile);
+        
         tile2.Add(tileID, nTileScript);
         
     }

@@ -109,12 +109,9 @@ public class SelectTowerManager : Singleton<SelectTowerManager>
                 {
                     sTower.Upgrade();
                     UpdateUpgradeTooltip();
-                    // CurrencyManager.Instance.SubCurrency(sTower.GetNextUpgrade().Price);
                     
                 }
             }
-            //DeselectTower();
-            //this.towerSelectPanel.SetActive(false);
         }
     }
 
