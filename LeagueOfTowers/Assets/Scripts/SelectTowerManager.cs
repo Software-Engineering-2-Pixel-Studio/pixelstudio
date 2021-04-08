@@ -9,7 +9,12 @@ public class SelectTowerManager : Singleton<SelectTowerManager>
     //fields
     private TowerScript sTower;
     [SerializeField ] private GameObject towerSelectPanel;  //upgrade panel of tower
+
+    //for stats panel
+    [SerializeField] private GameObject statsPanel;
+    [SerializeField] private Text statText;
     [SerializeField] private Text sellPriceText;    //selling price of the tower
+    [SerializeField] private Text upgradePriceText;     //upgrading price of the tower
 
     // Start is called before the first frame update
     private void Start()
@@ -26,7 +31,7 @@ public class SelectTowerManager : Singleton<SelectTowerManager>
     /*
         Method to select tower and show up the select tower panel
     */
-    public void SelectTower2(TowerScript tower)
+    public void SelectTower(TowerScript tower)
     {
         //Debug.Log("clicked");
         if (sTower != null)
@@ -38,6 +43,15 @@ public class SelectTowerManager : Singleton<SelectTowerManager>
         sTower.Select();
 
         sellPriceText.text = (sTower.GetPrice() / 2).ToString() + "<color='lime'>$</color>";
+        if (sTower.GetNextUpgrade() != null)
+        {
+            upgradePriceText.text = sTower.GetNextUpgrade().Price.ToString() + "<color='lime'>$</color>";
+        }
+        else
+        {
+            //if there are no more upgrades, just make the string empty
+            upgradePriceText.text = "<color='lime'>MaxLevel</color>";
+        }
 
         this.towerSelectPanel.SetActive(true);
     }
@@ -45,7 +59,7 @@ public class SelectTowerManager : Singleton<SelectTowerManager>
     /*
         Method to deselect tower and hide the select tower panel
     */
-    public void DeselectTower2()
+    public void DeselectTower()
     {
         if(sTower != null)
         {
@@ -59,7 +73,7 @@ public class SelectTowerManager : Singleton<SelectTowerManager>
     /*
         This method will be called when the SellButton has been clicked
     */
-    public void SellTower2()
+    public void SellTower()
     {
         //Debug.Log("Sell Tower 2 is called");
         if(sTower != null)
@@ -71,7 +85,33 @@ public class SelectTowerManager : Singleton<SelectTowerManager>
 
             sTower.DestroyThisTower();
 
-            DeselectTower2();
+            DeselectTower();
+        }
+    }
+
+    /*
+        This method will be called when the UpgradeButton has been clicked
+    */
+    public void UpgradeTower()
+    {
+        if (sTower != null)
+        {
+            //if the current tower level is lower than the number of upgrades available
+            //and if the current shared global currency is bigger than the price for upgrade
+            if (sTower.GetLevel() < 3 )
+            {
+                if(sTower.GetNextUpgrade() == null)
+                {
+                    Debug.Log("Cant found nextUpgrade");
+                    return;
+                }
+                else if(CurrencyManager.Instance.GetCurrency() >= sTower.GetNextUpgrade().Price)
+                {
+                    sTower.Upgrade();
+                }
+            }
+            DeselectTower();
+            this.towerSelectPanel.SetActive(false);
         }
     }
 }

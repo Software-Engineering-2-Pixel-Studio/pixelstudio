@@ -29,7 +29,7 @@ public class BaseTowerScript : TowerScript
 
     public override void OnPhotonInstantiate(PhotonMessageInfo info)
     {
-        base.OnPhotonInstantiate(info); //done 0-8
+        base.OnPhotonInstantiate(info); //done 0-10
         //Debug.Log(this.projectileType);
     }
 

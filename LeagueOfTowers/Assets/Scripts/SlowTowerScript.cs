@@ -30,13 +30,13 @@ public class SlowTowerScript : TowerScript
 
     public override void OnPhotonInstantiate(PhotonMessageInfo info)
     {
-        base.OnPhotonInstantiate(info); //done 0-8
+        base.OnPhotonInstantiate(info); //done 0-10
         //Debug.Log(this.projectileType);
         //this.slowFactor = 1.0f;
         object[] data = this.gameObject.GetPhotonView().InstantiationData;
-        if(data != null && data.Length == 10)
+        if(data != null && data.Length == 12)
         {
-            this.slowFactor = (float) data[9];
+            this.slowFactor = (float) data[11];
         }
     }
     

@@ -13,79 +13,12 @@ public enum Element : byte
 
 public class TowerData : Singleton<TowerData>
 {
-    // private const int propertyCount = 7;
-    // public static object[] getFireTowerData(int tileID)
-    // {
-    //     object[] data = new object[8];
-    //     //name
-    //     data[0] = (string) "FireTower";
-    //     //price
-    //     data[1] = (int) 10; 
-    //     //damage
-    //     data[2] = (float) 5.0f;
-    //     //projectile Type
-    //     data[3] = (string) "FireProjectile";
-    //     //projectile speed
-    //     data[4] = (float) 3.0f;
-    //     //attack cooldown
-    //     data[5] = (float) 3.0f;
-    //     //base id
-    //     data[6] = (int) 1000;
-    //     //tileID
-    //     data[7] = (int) tileID;
-    //     return data;
-    // }
-
-    // public static object[] getSlowTowerData(int tileID)
-    // {
-    //     object[] data = new object[8];
-    //     //name
-    //     data[0] = (string) "SlowTower";
-    //     //price
-    //     data[1] = (int) 20; 
-    //     //damage
-    //     data[2] = (float) 7.0f;
-    //     //projectile Type
-    //     data[3] = (string) "SlowProjectile";
-    //     //projectile speed
-    //     data[4] = (float) 3.0f;
-    //     //attack cooldown
-    //     data[5] = (float) 3.0f;
-    //     //base id
-    //     data[6] = (int) 2000;
-    //     //tileId
-    //     data[7] = (int) tileID;
-    //     return data;
-    // }
-
-    // public static object[] getLightTowerData(int tileID)
-    // {
-    //     object[] data = new object[8];
-    //     //name
-    //     data[0] = (string) "LightTower";
-    //     //price
-    //     data[1] = (int) 30; 
-    //     //damage
-    //     data[2] = (float) 10.0f;
-    //     //projectile Type
-    //     data[3] = (string) "LightProjectile";
-    //     //projectile speed
-    //     data[4] = (float) 3.0f;
-    //     //attack cooldown
-    //     data[5] = (float) 3.0f;
-    //     //base id
-    //     data[6] = (int) 3000;
-    //     //tileID
-    //     data[7] = (int) tileID;
-    //     return data;
-    // }
-
     //quickly shoot, low damage, none element, cheap
-    public static List<object> GetBasicTowerData(int tileID)
+    public static List<object> GetBaseTowerData(int tileID)
     {
         List<object> data = new List<object>();
         //name
-        data.Add((string) "BasicTower");
+        data.Add((string) "BaseTower");
         //price
         data.Add((int) 10);
         //damage
@@ -102,8 +35,33 @@ public class TowerData : Singleton<TowerData>
         data.Add((int) tileID);
         //Element
         data.Add((byte) Element.NONE);
+        //debuffchance
+        data.Add((float) 50.0f);
+        //duration
+        data.Add((float) 0.0f);
         
-        
+        return data;
+    }
+
+    public static List<object> GetBaseTowerUp1Data()
+    {
+        List<object> data = new List<object>();
+        //cost
+        data.Add((int) 10);
+        //plus damage
+        data.Add((float) 5.0f);
+
+        return data;
+    }
+
+    public static List<object> GetBaseTowerUp2Data()
+    {
+        List<object> data = new List<object>();
+        //cost
+        data.Add((int) 20);
+        //plus damage
+        data.Add((float) 10.0f);
+
         return data;
     }
 
@@ -129,15 +87,57 @@ public class TowerData : Singleton<TowerData>
         data.Add((int) tileID);
         //Element
         data.Add((byte) Element.FIRE);
+        //debuffchance
+        data.Add((float) 50.0f);
+        //duration
+        data.Add((float) 4.0f);
         //tickDamage
         data.Add((float) 2.5f);
         //tickTime
         data.Add((float) 1.0f);
         
-        
         return data;
     }
 
+    public static List<object> GetFireTowerUp1Data()
+    {
+        List<object> data = new List<object>();
+        //cost
+        data.Add((int) 20);
+        //plus damage
+        data.Add((float) 5.0f);
+        //plus duration
+        data.Add((float) 1.0f);
+        //plus chance
+        data.Add((float) 10.0f);
+        //plus tick damage
+        data.Add((float) 1.5f);
+        //plus tick time
+        data.Add((float) 0.1);
+
+        return data;
+    }
+
+    public static List<object> GetFireTowerUp2Data()
+    {
+        List<object> data = new List<object>();
+        //cost
+        data.Add((int) 40);
+        //plus damage
+        data.Add((float) 10.0f);
+        //plus duration
+        data.Add((float) 1.0f);
+        //plus chance
+        data.Add((float) 10.0f);
+        //plus tick damage
+        data.Add((float) 2.0f);
+        //plus tick time
+        data.Add((float) 0.1);
+
+        return data;
+    }
+
+    
     //average shoot, slow element, slow down enemy, average cost, low damage
     public static List<object> GetSlowTowerData(int tileID)
     {
@@ -160,10 +160,47 @@ public class TowerData : Singleton<TowerData>
         data.Add((int) tileID);
         //Element
         data.Add((byte) Element.SLOW);
+        //debuffchance
+        data.Add((float) 50.0f);
+        //duration
+        data.Add((float) 2.0f);
         //slowFactor
         data.Add((float) 1.0);
         
-        
+        return data;
+    }
+
+    public static List<object> GetSlowTowerUp1Data()
+    {
+        List<object> data = new List<object>();
+        //cost
+        data.Add((int) 20);
+        //plus damage
+        data.Add((float) 5.0f);
+        //plus durarion
+        data.Add((float) 1.0f);
+        //plus chance
+        data.Add((float) 10.0f);
+        //plus slow factor
+        data.Add((float) 0.25f);
+
+        return data;
+    }
+
+    public static List<object> GetSlowTowerUp2Data()
+    {
+        List<object> data = new List<object>();
+        //cost
+        data.Add((int) 40);
+        //plus damage
+        data.Add((float) 5.0f);
+        //plus durarion
+        data.Add((float) 1.0f);
+        //plus chance
+        data.Add((float) 10.0f);
+        //plus slow factor
+        data.Add((float) 0.25f);
+
         return data;
     }
 
@@ -189,7 +226,40 @@ public class TowerData : Singleton<TowerData>
         data.Add((int) tileID);
         //Element
         data.Add((byte) Element.LIGHT);
+        //debuffchance
+        data.Add((float) 50.0f);
+        //duration
+        data.Add((float) 1.0f);
         
+        return data;
+    }
+    public static List<object> GetLightTowerUp1Data()
+    {
+        List<object> data = new List<object>();
+        //cost
+        data.Add((int) 30);
+        //plus damage
+        data.Add((float) 10.0f);
+        //plus duration
+        data.Add((float) 0.5f);
+        //plus chance
+        data.Add((float) 10.0f);
+
+        return data;
+    }
+
+    public static List<object> GetLightTowerUp2Data()
+    {
+        List<object> data = new List<object>();
+        //cost
+        data.Add((int) 60);
+        //plus damage
+        data.Add((float) 10.0f);
+        //plus duration
+        data.Add((float) 0.5f);
+        //plus chance
+        data.Add((float) 10.0f);
+
         return data;
     }
 }

@@ -127,12 +127,12 @@ public class Tile : MonoBehaviour
             if (myTower != null)
             {
                 //Debug.Log("myTower is not null");
-                SelectTowerManager.Instance.SelectTower2(myTower);
+                SelectTowerManager.Instance.SelectTower(myTower);
             } 
             else
             {
                 //Debug.Log("myTower is null");
-                SelectTowerManager.Instance.DeselectTower2();
+                SelectTowerManager.Instance.DeselectTower();
             }
         }
     }
@@ -166,9 +166,9 @@ public class Tile : MonoBehaviour
             //basicData = TowerData.getLightTowerData(this.tileID);
             lo = TowerData.GetLightTowerData(this.tileID);
         }
-        else if(towerType == "BasicTower")
+        else if(towerType == "BaseTower")
         {
-            lo = TowerData.GetBasicTowerData(this.tileID);
+            lo = TowerData.GetBaseTowerData(this.tileID);
         }
 
         //object[] data = new object[8];

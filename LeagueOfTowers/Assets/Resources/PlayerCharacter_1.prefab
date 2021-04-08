@@ -643,7 +643,7 @@ MonoBehaviour:
   sprite: {fileID: 21300118, guid: 29c9cded5e558164aaf8c9bf08aa1510, type: 3}
   price: 10
   priceText: {fileID: 8473085059590453495}
-  towerName: BasicTower
+  towerName: BaseTower
 --- !u!1 &5276711517127366781
 GameObject:
   m_ObjectHideFlags: 0

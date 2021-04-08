@@ -59,13 +59,13 @@ public class FireTowerScript : TowerScript
     //events
     public override void OnPhotonInstantiate(PhotonMessageInfo info)
     {
-        base.OnPhotonInstantiate(info); //done 0-8
+        base.OnPhotonInstantiate(info); //done 0-10
         //Debug.Log(this.projectileType);
         object[] data = this.gameObject.GetPhotonView().InstantiationData;
-        if(data != null && data.Length == 11)
+        if(data != null && data.Length == 13)
         {
-            this.tickDamage = (float) data[9];
-            this.tickTime = (float) data[10];
+            this.tickDamage = (float) data[11];
+            this.tickTime = (float) data[12];
         }
     }
     //actions

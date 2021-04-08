@@ -24,22 +24,30 @@ public abstract class TowerScript : MonoBehaviourPun, IPunInstantiateMagicCallba
     // //components
     // private RangeScript myRangeScript;
     // private PhotonView view;
-
+    //these need initialize at Instantiate
     protected string towerName;       //0 //tower's name
-    protected int price;              //1 //tower's price
-    protected float damage;           //2 //tower's damage
+    [SerializeField] protected int price;              //1 //tower's price
+    [SerializeField] protected float damage;           //2 //tower's damage
     protected string projectileType;  //3 //tower's projectile type
     protected float projectileSpeed;  //4 //tower's projectile speed
     protected float attackCooldown;   //5 //tower's attack cool down
     protected int parentTileID;       //7 //tileID where tower is placed
     protected int towerID;            //6 //towerID
     [SerializeField] protected Element myElement; //8
+    [SerializeField] protected float debuffChance;    //9
+    [SerializeField] protected float duration;   //10
+    [SerializeField] protected int level;
+    protected int nextUpgradeLevel;
+
+    //these will initialized in run-time       
     protected bool canAttack = true;      //state of attack
     protected float attackTimer;          //time counting for next attack
     protected MonsterScript target;       //tower's target
     protected Queue<MonsterScript> monsters = new Queue<MonsterScript>();
+    protected TowerUpgrade[] upgrades = new TowerUpgrade[2];
+    protected TowerUpgrade nextUpgrade;
     
-    [SerializeField] protected GameObject projectilePrefab;   //projectile prefab
+    [SerializeField] protected GameObject projectilePrefab;   //projectile prefab 
 
     //components
     protected RangeScript myRangeScript;
@@ -102,6 +110,145 @@ public abstract class TowerScript : MonoBehaviourPun, IPunInstantiateMagicCallba
         return this.view.ViewID;
     }
 
+    public int GetLevel()
+    {
+        return this.level;
+    }
+
+    public TowerUpgrade GetNextUpgrade()
+    {
+        return this.nextUpgrade;
+    }
+    public virtual string GetStats()
+    {
+        //set the default string passed to tower stats panel
+        string result = string.Format("\nLevel: {0} \nDamage: {1} \nProc: {2}% \nDebuff: {3} sec", this.level, this.damage, this.debuffChance, this.duration);
+
+        // if (GetNextUpgrade != null) //if an upgrade is available
+        // {
+        //     //return a string that includes the upgrade values
+        //     result = string.Format("\nLevel: {0} \nDamage: {1} <color=#00ff00ff>+{4}</color>\nProc; {2}% <color=#00ff00ff>+{5}%</color>\nDebuff: {3} sec <color=#00ff00ff>+{6}</color>",
+        //         towerLevel, damage, debuffProcChance, debuffDuration, GetNextUpgrade.Damage, GetNextUpgrade.DebuffProcChance, GetNextUpgrade.DebuffDuration);
+        // }
+        if(this.nextUpgrade != null)
+        {
+            result = string.Format("\nLevel: {0} \nDamage: {1} <color=#00ff00ff>+{4}</color>\nProc; {2}% <color=#00ff00ff>+{5}%</color>\nDebuff: {3} sec <color=#00ff00ff>+{6}</color>",
+                this.level, this.damage, this.debuffChance, this.duration, this.nextUpgrade.Damage, this.nextUpgrade.DebuffProcChance, this.nextUpgrade.DebuffDuration);
+        }
+
+        return result;
+    }
+
+    //returns the next upgrade element in the upgrades list
+    // public TowerUpgrade GetNextUpgrade
+    // {
+    //     get
+    //     {
+    //         TowerUpgrade result = null;
+
+    //         //if tower level is still lower than the upgrades length (remember tower level starts at 1 and not 0 so -1
+    //         if (towerLevel - 1 < Upgrades.Length)
+    //         {
+    //             //return the next element in the upgrades list
+    //             result = Upgrades[towerLevel - 1];
+    //         }
+
+    //         //else return default null
+    //         return result;
+    //     }
+    // }
+
+    private void setNextUpgrade()
+    {
+        if(this.upgrades.Length == 2)
+        {
+            if(this.nextUpgradeLevel == 2)
+            {
+                this.nextUpgrade = upgrades[0];
+            }
+            else if(this.nextUpgradeLevel == 3)
+            {
+                this.nextUpgrade = upgrades[1];
+            }
+            else{
+                nextUpgrade = null;
+            }
+        }
+        else
+        {
+            nextUpgrade = null;
+        }
+        
+    }
+
+    private void setUpgrades()
+    {
+        List<object> upgrade1 = new List<object>();
+        List<object> upgrade2 = new List<object>();
+        if(this.towerName == "BaseTower")
+        {
+            Debug.Log("BasicTower upgrades");
+            upgrade1 = TowerData.GetBaseTowerUp1Data();
+            if(upgrade1.Count == 2)
+            {
+                this.upgrades[0] = new TowerUpgrade((int) upgrade1[0], (float) upgrade1[1]);
+            }
+            upgrade2 = TowerData.GetBaseTowerUp2Data();
+            if(upgrade2.Count == 2)
+            {
+                this.upgrades[1] = new TowerUpgrade((int) upgrade2[0], (float) upgrade2[1]);
+            }
+        }
+        else if(this.towerName == "FireTower")
+        {
+            upgrade1 = TowerData.GetFireTowerUp1Data();
+            if(upgrade1.Count == 6)
+            {
+                this.upgrades[0] = new TowerUpgrade((int) upgrade1[0], (float) upgrade1[1],
+                                                    (float) upgrade1[2], (float) upgrade1[3],
+                                                    (float) upgrade1[4], (float) upgrade1[5]);
+            }
+            upgrade2 = TowerData.GetFireTowerUp2Data();
+            if(upgrade2.Count == 6)
+            {
+                this.upgrades[1] = new TowerUpgrade((int) upgrade2[0], (float) upgrade2[1],
+                                                    (float) upgrade2[2], (float) upgrade2[3],
+                                                    (float) upgrade2[4], (float) upgrade2[5]);
+            }
+        }
+        else if(this.towerName == "SlowTower")
+        {
+            upgrade1 = TowerData.GetSlowTowerUp1Data();
+            if(upgrade1.Count == 5)
+            {
+                this.upgrades[0] = new TowerUpgrade((int) upgrade1[0], (float) upgrade1[1],
+                                                    (float) upgrade1[2], (float) upgrade1[3],
+                                                    (float) upgrade1[4]);
+            }
+            upgrade2 = TowerData.GetSlowTowerUp2Data();
+            if(upgrade2.Count == 5)
+            {
+                this.upgrades[1] = new TowerUpgrade((int) upgrade2[0], (float) upgrade2[1],
+                                                    (float) upgrade2[2], (float) upgrade2[3],
+                                                    (float) upgrade2[4]);
+            }
+        }
+        else if(this.towerName == "LightTower"){
+            upgrade1 = TowerData.GetLightTowerUp1Data();
+            if(upgrade1.Count == 4)
+            {
+                this.upgrades[0] = new TowerUpgrade((int) upgrade1[0], (float) upgrade1[1],
+                                                    (float) upgrade1[2], (float) upgrade1[3]);
+            }
+            upgrade2 = TowerData.GetLightTowerUp2Data();
+            if(upgrade2.Count == 4)
+            {
+                this.upgrades[1] = new TowerUpgrade((int) upgrade2[0], (float) upgrade2[1],
+                                                    (float) upgrade2[2], (float) upgrade2[3]);
+            }
+        }
+    }
+
     //events
     /*
         initialize towerscript when its tower object is instantiated over network
@@ -110,7 +257,7 @@ public abstract class TowerScript : MonoBehaviourPun, IPunInstantiateMagicCallba
     {
         //Debug.Log("TowerScript base is called!");
         object[] data = this.gameObject.GetPhotonView().InstantiationData;
-        if(data != null && data.Length >= 9){
+        if(data != null && data.Length >= 11){
             //name
             this.towerName = (string) data[0];
             //price
@@ -130,12 +277,24 @@ public abstract class TowerScript : MonoBehaviourPun, IPunInstantiateMagicCallba
             this.gameObject.name = this.towerName + this.towerID;
             //elemetn
             this.myElement = (Element) ( (byte) data[8]);
-            Debug.Log("Element: " + myElement.ToString());
+            //debuffchance
+            this.debuffChance = (float) data[9];
+            //duration
+            this.duration = (float) data[10];
+            //level
+            this.level = 1;
+            //nextUpgradeLevel
+            this.nextUpgradeLevel = 2;
+            //Debug.Log("Element: " + myElement.ToString());
             GameObject tileGO = MapManager.Instance.getTile(this.parentTileID);
             Tile tile = tileGO.GetComponent<Tile>();
-
+            
             //set its parent object
             this.transform.parent = tileGO.transform;
+
+            //set upgrades
+            this.setUpgrades();
+            this.setNextUpgrade();
         }
     }
 
@@ -231,6 +390,33 @@ public abstract class TowerScript : MonoBehaviourPun, IPunInstantiateMagicCallba
         GameObject projectile = PhotonNetwork.Instantiate(projectilePrefab.name, this.transform.position, Quaternion.identity,0, data );        
     }
 
+    public virtual void Upgrade()
+    {
+        if(this.view.IsMine)
+        {
+            // //decrease shared global currency
+            // CurrencyManager.Instance.SubCurrency(this.nextUpgrade.Price);
+
+            // //increase price of this tower
+            // this.price += this.nextUpgrade.Price;
+
+            // //increase the damage, debuff proc chance, and debuff duration of tower
+            // this.damage += this.nextUpgrade.Damage;
+            // this.debuffChance += this.nextUpgrade.DebuffProcChance;
+            // this.duration += this.nextUpgrade.DebuffDuration;
+
+            // //increase tower level
+            // this.level++;
+            // this.nextUpgradeLevel++;
+            // setNextUpgrade();
+            this.view.RPC("upgradeRPC", RpcTarget.All);
+        }
+        
+
+        //update the tooltip
+        //SelectTowerManager.Instance.UpdateUpgradeTooltip();
+    }
+
     /*
         method to destroy this tower over network
     */
@@ -248,5 +434,26 @@ public abstract class TowerScript : MonoBehaviourPun, IPunInstantiateMagicCallba
     public override string ToString()
     {
         return this.towerName;
+    }
+
+    //punRPC
+    [PunRPC]
+    protected virtual void upgradeRPC()
+    {
+        //decrease shared global currency
+        CurrencyManager.Instance.SubCurrency(this.nextUpgrade.Price);
+
+        //increase price of this tower
+        this.price += this.nextUpgrade.Price;
+
+        //increase the damage, debuff proc chance, and debuff duration of tower
+        this.damage += this.nextUpgrade.Damage;
+        this.debuffChance += this.nextUpgrade.DebuffProcChance;
+        this.duration += this.nextUpgrade.DebuffDuration;
+
+        //increase tower level
+        this.level++;
+        this.nextUpgradeLevel++;
+        setNextUpgrade();
     }
 }
