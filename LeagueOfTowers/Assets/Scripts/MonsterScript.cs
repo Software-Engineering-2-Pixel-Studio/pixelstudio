@@ -64,12 +64,14 @@ public class MonsterScript : MonoBehaviourPun, IPunInstantiateMagicCallback
 
     public void setSpeed(float givenSpeed)
     {
-        this.mySpeed = givenSpeed;
+        //this.mySpeed = givenSpeed;
+        this.view.RPC("setSpeedRPC", RpcTarget.All, givenSpeed);
     }
 
     public void decreaseSpeed(float givenSpeed)
     {
-        this.mySpeed -= givenSpeed;
+        //this.mySpeed -= givenSpeed;
+        this.view.RPC("decreaseSpeedRPC", RpcTarget.All, givenSpeed);
     }
 
     public void setMaxSpeed(float givenMax)
@@ -254,10 +256,23 @@ public class MonsterScript : MonoBehaviourPun, IPunInstantiateMagicCallback
     }
 
     [PunRPC]
+    private void setSpeedRPC(float givenSpeed)
+    {
+        this.mySpeed = givenSpeed;
+    }
+
+    [PunRPC]
+    private void decreaseSpeedRPC(float givenSpeed)
+    {
+        this.mySpeed -= givenSpeed;
+    }
+
+    [PunRPC]
     private void destroyThisMonsterRPC()
     {
         PhotonNetwork.Destroy(this.gameObject);
     }
+
 
     public void DestroyThisMonster()
     {
@@ -272,7 +287,6 @@ public class MonsterScript : MonoBehaviourPun, IPunInstantiateMagicCallback
             //add debuff to the list
             debuffsToAdd.Add(givenDebuff);
         }
-
     }
 
     public void RemoveDebuff(Debuff givenDebuff)
@@ -323,5 +337,6 @@ public class MonsterScript : MonoBehaviourPun, IPunInstantiateMagicCallback
         return this.maxSpeed;
     }
 
+    
 
 }
