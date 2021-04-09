@@ -5,12 +5,13 @@ using Photon.Pun;
 
 public class MonsterScript : MonoBehaviourPun, IPunInstantiateMagicCallback
 {
-    private string myName;
-    [SerializeField] private float myHP;
-    private float mySpeed;
-    private int myIncome;
-    private bool isAlive;
-    private bool isActive;
+    private string myName;                  //0
+    [SerializeField] private float myHP;    //1
+    private float mySpeed;                  //2
+    private int myIncome;                   //3
+    private int myExp;                      //6
+    private bool isAlive;                   //4
+    private bool isActive;                  //5
 
     private Stack<Node> path;
     private Point GridPosition{ get; set;}
@@ -74,7 +75,7 @@ public class MonsterScript : MonoBehaviourPun, IPunInstantiateMagicCallback
     {
         //Debug.Log("Monster is created!");
         object[] data = this.gameObject.GetPhotonView().InstantiationData;
-        if(data != null && data.Length == 6){
+        if(data != null && data.Length == 7){
             //name
             this.myName = (string) data[0];
             //hp
@@ -87,6 +88,8 @@ public class MonsterScript : MonoBehaviourPun, IPunInstantiateMagicCallback
             this.isAlive = (bool) data[4];
             //isActive
             this.isActive = (bool) data[5];
+            //monsterEXP
+            this.myExp = (int) data[6];
 
             //scale animation when spawn
             if(this.myName == "TrainingDummy"){
@@ -155,12 +158,14 @@ public class MonsterScript : MonoBehaviourPun, IPunInstantiateMagicCallback
         {
             //do some damage
             //this.myHP -= damage;
+            
             DecreaseHP(damage);
             //Debug.Log("health: " + healthValue.ToString());
 
             if (this.myHP <= 0) //if it's dead (health is 0)
             {
                 CurrencyManager.Instance.AddCurrency(this.myIncome);
+                LevelUpManager.Instance.AddExpPoints(this.myExp);
 
                 //this.isActive = false;
                 ChangeIsActiveState(false);

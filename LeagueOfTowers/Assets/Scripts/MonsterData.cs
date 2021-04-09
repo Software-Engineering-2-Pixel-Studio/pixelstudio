@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class MonsterData : Singleton<MonsterData>
 {
-    private const int propertyCount = 6;
+    private const int propertyCount = 7;
     public static object[] GetDummyData()
     {
         object[] data = new object[propertyCount];
@@ -20,6 +20,8 @@ public class MonsterData : Singleton<MonsterData>
         data[4] = (bool) true;
         //isActive
         data[5] = (bool) true;
+        //monsterEXP
+        data[6] = (int) 25;
         return data;
     }
     
@@ -38,6 +40,8 @@ public class MonsterData : Singleton<MonsterData>
         data[4] = (bool) true;
         //isActive
         data[5] = (bool) true;
+        //EXP
+        data[6] = (int) 50;
         return data;
     }
 }

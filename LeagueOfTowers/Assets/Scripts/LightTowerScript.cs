@@ -6,7 +6,7 @@ using Photon.Pun;
 public class LightTowerScript : TowerScript
 {
     //header
-    string tooltipHeader = "<Size=2><b>Light Tower</b></size>";
+    //string tooltipHeader = "<Size=2><b>Light Tower</b></size>";
 
     protected override void Start()
     {

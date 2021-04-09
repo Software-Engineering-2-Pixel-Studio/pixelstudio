@@ -169,7 +169,7 @@ public abstract class TowerScript : MonoBehaviourPun, IPunInstantiateMagicCallba
         List<object> upgrade2 = new List<object>();
         if(this.towerName == "BaseTower")
         {
-            Debug.Log("BasicTower upgrades");
+            //Debug.Log("BasicTower upgrades");
             upgrade1 = TowerData.GetBaseTowerUp1Data();
             if(upgrade1.Count == 2)
             {
