@@ -19,14 +19,6 @@ public class SelectTowerManager : Singleton<SelectTowerManager>
     [SerializeField] private Text techUpgradePriceText;
     [SerializeField] private Text techStatText;
 
-    //for stats panel
-    [SerializeField] private GameObject statsPanel;
-    [SerializeField] private Text statText;
-
-    //for tech panel
-    [SerializeField] private GameObject techPanel;
-    [SerializeField] private Text techStatText;
-
     //for upgrade button
     [SerializeField] private Text upgradePrice;
 
@@ -149,22 +141,6 @@ public class SelectTowerManager : Singleton<SelectTowerManager>
     {
         if (sTower != null)
         {
-            //if the current tower level is lower than the number of upgrades available
-            //and if the current shared global currency is bigger than the price for upgrade
-            // if (sTower.GetLevel() < 3 )
-            // {
-            //     if(sTower.GetNextUpgrade() == null)
-            //     {
-            //         Debug.Log("Cant found nextUpgrade");
-            //         return;
-            //     }
-            //     else if(CurrencyManager.Instance.GetCurrency() >= sTower.GetNextUpgrade().Price)
-            //     {
-            //         sTower.Upgrade();
-            //         UpdateUpgradeTooltip();
-                    
-            //     }
-            // }
             //check if we have enough token
             if(LevelUpManager.Instance.GetTechTokens() >= 1)
             {

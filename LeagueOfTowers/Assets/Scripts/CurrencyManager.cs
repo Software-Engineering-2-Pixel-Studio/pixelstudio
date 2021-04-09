@@ -10,7 +10,7 @@ public delegate void CurrencyChanged();
 public class CurrencyManager : Singleton<CurrencyManager>
 {
     //an event that is triggered when the currency changes
-    public event CurrencyChanged Changed;
+    //public event CurrencyChanged Changed;
 
     //fields
     [SerializeField] private int currency;              //global share currency value for players

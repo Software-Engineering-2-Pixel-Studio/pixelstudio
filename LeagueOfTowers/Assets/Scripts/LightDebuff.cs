@@ -30,7 +30,5 @@ public class LightDebuff : Debuff
 
             base.Remove();
         }
-
-        
     }
 }
