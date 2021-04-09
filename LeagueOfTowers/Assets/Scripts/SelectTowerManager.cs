@@ -22,7 +22,7 @@ public class SelectTowerManager : Singleton<SelectTowerManager>
     // Start is called before the first frame update
     private void Start()
     {
-        
+        this.towerSelectPanel.SetActive(false);
     }
 
     // Update is called once per frame
