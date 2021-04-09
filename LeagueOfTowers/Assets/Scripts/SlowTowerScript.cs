@@ -7,7 +7,7 @@ public class SlowTowerScript : TowerScript
     [SerializeField] private float slowFactor; //slow factor of tower
 
     //header
-    //string tooltipHeader = "<Size=2><b>Slow Tower</b></size>";
+    string tooltipHeader = "<Size=2><b>Slow Tower</b></size>";
 
     protected override void Start()
     {

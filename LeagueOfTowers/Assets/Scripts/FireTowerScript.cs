@@ -11,7 +11,7 @@ public class FireTowerScript : TowerScript
 
 
     //header
-    //string tooltipHeader = "<Size=2><b>Fire Tower</b></size>";
+    string tooltipHeader = "<Size=2><b>Fire Tower</b></size>";
 
     protected override void Start()
     {

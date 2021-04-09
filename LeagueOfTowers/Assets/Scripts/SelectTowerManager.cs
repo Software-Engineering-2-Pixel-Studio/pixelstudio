@@ -56,6 +56,16 @@ public class SelectTowerManager : Singleton<SelectTowerManager>
             upgradePriceText.text = "<color='lime'>MaxLevel</color>";
         }
 
+        if(this.sTower.UpgradedTech())
+        {
+            //Debug.Log("test");
+            this.techUpgradePriceText.text = "<color='lime'>MaxLevel</color>";
+        }
+        else
+        {
+            this.techUpgradePriceText.text = "1<color='lime'>T</color>";
+        }
+
         this.towerSelectPanel.SetActive(true);
     }
 
@@ -179,6 +189,7 @@ public class SelectTowerManager : Singleton<SelectTowerManager>
 
     public void HideSelectedTowerTechStats()
     {
+        UpdateTechTooltip();
         techPanel.SetActive(false);
     }
 
@@ -219,7 +230,12 @@ public class SelectTowerManager : Singleton<SelectTowerManager>
 
             if(this.sTower.UpgradedTech())
             {
+                //Debug.Log("test");
                 this.techUpgradePriceText.text = "<color='lime'>MaxLevel</color>";
+            }
+            else
+            {
+                this.techUpgradePriceText.text = "1<color='lime'>T</color>";
             }
         }
     }

@@ -73,10 +73,11 @@ public class ProjectileScript : MonoBehaviourPun, IPunInstantiateMagicCallback
             if(PhotonView.Find((int) data[3]) != null){
                 this.ownerTower = PhotonView.Find((int) data[3]).gameObject.GetComponent<TowerScript>();
             }
+            //monsterViewID
             if(PhotonView.Find((int) data[4]) != null){
                 this.targetMonster = PhotonView.Find((int) data[4]).gameObject.GetComponent<MonsterScript>();
             }
-            //monsterViewID
+            
         }
     }
 
