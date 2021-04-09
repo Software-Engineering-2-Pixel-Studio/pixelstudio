@@ -32,8 +32,31 @@ public class FireDebuff : Debuff
                 target.TakeDamage(tickDamage);
             }
         }
-
-
         base.Update();
     }
+    //************************************************************
+    //GETTERS AND SETTERS
+    //************************************************************
+    /*
+        Method to get the tickDamage
+    */
+    public float getTickDamage()
+    {
+        return this.tickDamage;
+    }
+    /*
+        Method to get the tickTIme
+    */
+    public float getTickTIme()
+    {
+        return this.tickTIme;
+    }
+    /*
+        Method to get the timeSinceLastTick
+    */
+    public float getTimeSinceLastTick()
+    {
+        return this.timeSinceLastTick;
+    }
+
 }
