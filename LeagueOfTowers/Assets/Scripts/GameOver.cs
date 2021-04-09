@@ -24,6 +24,7 @@ public class GameOver : Singleton<GameOver>
         }
         else{
             WaveManager.Instance.StopWave();
+            WaveManager.Instance.DeactiveMonsters();
         }
     }
 

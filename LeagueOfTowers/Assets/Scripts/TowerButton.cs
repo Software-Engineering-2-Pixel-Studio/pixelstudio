@@ -12,6 +12,8 @@ public class TowerButton : MonoBehaviour
     [SerializeField] private int price; //tower's price
     [SerializeField] private Text priceText;    //display box for display tower's price on scene
 
+    [SerializeField] private string towerName;
+
 
     // Start is called before the first frame update
     private void Start()
@@ -19,7 +21,7 @@ public class TowerButton : MonoBehaviour
         this.SetPriceText();
 
         //add a new currency changed event to the tower buttons
-        CurrencyManager.Instance.Changed += new CurrencyChanged(PriceCheck);
+        //CurrencyManager.Instance.Changed += new CurrencyChanged(PriceCheck);
     }
 
     // Update is called once per frame
@@ -61,22 +63,11 @@ public class TowerButton : MonoBehaviour
     }
 
     /*
-        Method that checks if the price is lower/greater than the users' currency
+        method to get tower's name
     */
-    private void PriceCheck()
+    public string GetTowerName()
     {
-
-        if (price <= CurrencyManager.Instance.GetCurrency())
-        {
-            //maintain white color or whiten the image and text if it's grayed out
-            GetComponent<Image>().color = Color.white;
-            priceText.color = Color.white;
-        }
-        else
-        {
-            //gray the image and text
-            GetComponent<Image>().color = Color.gray;
-            priceText.color = Color.gray;
-        }
+        return this.towerName;
     }
+    
 }

@@ -8,8 +8,8 @@ public class WaveManager : Singleton<WaveManager>
 {
     [SerializeField] private GameObject startWaveButton; //reference to the StartWave button
 
-    private List<Monster> activeMonsters = new List<Monster>(); //the list of the monsters in the wave
-
+    //private List<Monster> activeMonsters = new List<Monster>(); //the list of the monsters in the wave
+    private List<MonsterScript> activeMonsters = new List<MonsterScript>();
     private int waves = 0;   //counter for the Waves
     
     [SerializeField] private Text waveText; //holds the reference to the text that shows the number of waves
@@ -22,7 +22,7 @@ public class WaveManager : Singleton<WaveManager>
 
     private bool waveOver;      //state when wave have done spawning monster
 
-    [SerializeField] private int enemyHealth;   //base health for monster
+    private float enemyHealthExtra = 0;   //base health extra for monster
 
     private int monsterActiveCount = 0; //number of active monster on scene (not destroyed)
 
@@ -65,26 +65,30 @@ public class WaveManager : Singleton<WaveManager>
         for(int i = 0; i < waves; i++){
             int monsterIndex = Random.Range(0, 2);
             string type = string.Empty;
+            object[] data = new object[7];
             switch (monsterIndex)
             {
                 case 0:
                     type = "TrainingDummy";
+                    data = MonsterData.GetDummyData();
                     break;
                 case 1:
                     type = "Scarecrow";
+                    data = MonsterData.GetScarecrowData();
                     break;
                 default:
                     break;
             }
+            data[1] = (float) data[1] + enemyHealthExtra;
+            //get the monster object from the pool of objects control by this WaveManage
 
-            //get the monster object from the pool of objects control by this WaveManager
-            Monster monster = pool.GetObject(type).GetComponent<Monster>();
-            monster.Spawn(enemyHealth);
-            
+            Tile spawnTile = MapManager.Instance.GetSpawnTile();
+            GameObject monsterGO = PhotonNetwork.Instantiate(type, spawnTile.GetCenterWorldPosition(), Quaternion.identity, 0, data);
+            MonsterScript monster = monsterGO.GetComponent<MonsterScript>();
 
             if (this.waves % 3 == 0) //increase health of monsters by 2 every 3 waves
             {
-                this.enemyHealth += 2;
+                this.enemyHealthExtra += 2;
             }
 
             this.activeMonsters.Add(monster);
@@ -113,7 +117,7 @@ public class WaveManager : Singleton<WaveManager>
     /*
         Method ot get lists of active monsters
     */
-    public List<Monster> GetActiveMonsters()
+    public List<MonsterScript> GetActiveMonsters()
     {
         return this.activeMonsters;
     }
@@ -147,20 +151,26 @@ public class WaveManager : Singleton<WaveManager>
         StopCoroutine(waveCoroutine);
     }
 
+    public void DeactiveMonsters()
+    {
+        foreach (MonsterScript monster in activeMonsters){
+            monster.ChangeIsActiveState(false);
+        }
+    }
+
     /*
         Method to remove monster from the list of active monsters and 
         also display wave button again if all of active monsters are gone.
     */
-    public void removeMonster(Monster monster)
+    public void RemoveMonster(MonsterScript monster)
     {
         activeMonsters.Remove(monster);
-        PhotonNetwork.Destroy(monster.transform.gameObject);
-
+        monster.DestroyThisMonster();
+        //Debug.Log("monster destroyed");
         DecreaseMonsterCount();
-        
     }
 
-
+    //punRPC methods for sync this script's fields over network
     [PunRPC]
     private void increaseWaveCountRPC()
     {

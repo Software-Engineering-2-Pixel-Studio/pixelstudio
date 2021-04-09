@@ -7,9 +7,17 @@ using UnityEngine.UI;
 public class SelectTowerManager : Singleton<SelectTowerManager>
 {
     //fields
-    private Tower selectedTower; //the current selected tower
+    private TowerScript sTower;
     [SerializeField ] private GameObject towerSelectPanel;  //upgrade panel of tower
+
+    //for stats panel
+    [SerializeField] private GameObject statsPanel;
+    [SerializeField] private GameObject techPanel;
+    [SerializeField] private Text statText;
     [SerializeField] private Text sellPriceText;    //selling price of the tower
+    [SerializeField] private Text upgradePriceText;     //upgrading price of the tower
+    [SerializeField] private Text techUpgradePriceText;
+    [SerializeField] private Text techStatText;
 
     //for stats panel
     [SerializeField] private GameObject statsPanel;
@@ -28,7 +36,7 @@ public class SelectTowerManager : Singleton<SelectTowerManager>
     // Start is called before the first frame update
     private void Start()
     {
-        
+        this.towerSelectPanel.SetActive(false);
     }
 
     // Update is called once per frame
@@ -40,19 +48,37 @@ public class SelectTowerManager : Singleton<SelectTowerManager>
     /*
         Method to select tower and show up the select tower panel
     */
-    public void SelectTower(Tower tower)
+    public void SelectTower(TowerScript tower)
     {
-        //if tower exist
-        if (selectedTower != null)
+        //Debug.Log("clicked");
+        if (sTower != null)
         {
-            selectedTower.Select();
+            sTower.Select();
         }
 
-        selectedTower = tower;
-        selectedTower.Select();
+        sTower = tower;
+        sTower.Select();
 
-        //update sell price
-        sellPriceText.text = (selectedTower.getPrice() / 2).ToString() + " <color='lime'>$</color>";
+        sellPriceText.text = (sTower.GetPrice() / 2).ToString() + "<color='lime'>$</color>";
+        if (sTower.GetNextUpgrade() != null)
+        {
+            upgradePriceText.text = sTower.GetNextUpgrade().Price.ToString() + "<color='lime'>$</color>";
+        }
+        else
+        {
+            //if there are no more upgrades, just make the string empty
+            upgradePriceText.text = "<color='lime'>MaxLevel</color>";
+        }
+
+        if(this.sTower.UpgradedTech())
+        {
+            //Debug.Log("test");
+            this.techUpgradePriceText.text = "<color='lime'>MaxLevel</color>";
+        }
+        else
+        {
+            this.techUpgradePriceText.text = "1<color='lime'>T</color>";
+        }
 
         this.towerSelectPanel.SetActive(true);
     }
@@ -62,13 +88,12 @@ public class SelectTowerManager : Singleton<SelectTowerManager>
     */
     public void DeselectTower()
     {
-        //if tower exist
-        if (selectedTower != null)
+        if(sTower != null)
         {
-            selectedTower.Select();
+            sTower.Select();
         }
 
-        this.selectedTower = null;
+        this.sTower = null;
         this.towerSelectPanel.SetActive(false);
     }
 
@@ -77,22 +102,17 @@ public class SelectTowerManager : Singleton<SelectTowerManager>
     */
     public void SellTower()
     {
-        if (selectedTower != null)
+        //Debug.Log("Sell Tower 2 is called");
+        if(sTower != null)
         {
             
-            selectedTower.GetComponentInParent<Tile>().SetIsPlaced(false);
-    
-            //add earned currency for selling tower to global currency
-            CurrencyManager.Instance.AddCurrency(selectedTower.getPrice()/2);
-            
-            //set tile is empty
-            MapManager.Instance.SetTileIsEmptyAt(selectedTower.GetPlacedAtTile().X, selectedTower.GetPlacedAtTile().Y);
-            
-            //destroy this tower
-            selectedTower.DestroyThisTower();
-            
-            //un select this tower and hide the UI
-            DeselectTower();    
+            CurrencyManager.Instance.AddCurrency(sTower.GetPrice() / 2);
+
+            MapManager.Instance.SetTileIsPlacedAt2(sTower.GetParentTileID(), false);
+
+            sTower.DestroyThisTower();
+
+            DeselectTower();
         }
     }
 
@@ -101,56 +121,137 @@ public class SelectTowerManager : Singleton<SelectTowerManager>
     */
     public void UpgradeTower()
     {
-        if (selectedTower != null)
+        if (sTower != null)
         {
             //if the current tower level is lower than the number of upgrades available
             //and if the current shared global currency is bigger than the price for upgrade
-            if (selectedTower.getTowerLevel() <= selectedTower.Upgrades.Length && CurrencyManager.Instance.GetCurrency() >= selectedTower.GetNextUpgrade.Price)
+            if (sTower.GetLevel() < 3 )
             {
-                selectedTower.Upgrade();
+                if(sTower.GetNextUpgrade() == null)
+                {
+                    Debug.Log("Cant found nextUpgrade");
+                    return;
+                }
+                else if(CurrencyManager.Instance.GetCurrency() >= sTower.GetNextUpgrade().Price)
+                {
+                    sTower.Upgrade();
+                    UpdateUpgradeTooltip();
+                    
+                }
             }
         }
     }
 
     /*
-        This method will be called when the UpgradeTechButton has been clicked
+        This method will be called when the TechButton has been clicked
     */
-    public void UpgradeTowerTech()
+    public void UpgradeTechTower()
     {
-        if (selectedTower != null)
+        if (sTower != null)
         {
-            //if tower isn't tech upgraded and we have enough tech tokens
-            if (selectedTower.getTechStatus() == false && GameManager.Instance.getTechTokens() >= selectedTower.getTechPrice())
+            //if the current tower level is lower than the number of upgrades available
+            //and if the current shared global currency is bigger than the price for upgrade
+            // if (sTower.GetLevel() < 3 )
+            // {
+            //     if(sTower.GetNextUpgrade() == null)
+            //     {
+            //         Debug.Log("Cant found nextUpgrade");
+            //         return;
+            //     }
+            //     else if(CurrencyManager.Instance.GetCurrency() >= sTower.GetNextUpgrade().Price)
+            //     {
+            //         sTower.Upgrade();
+            //         UpdateUpgradeTooltip();
+                    
+            //     }
+            // }
+            //check if we have enough token
+            if(LevelUpManager.Instance.GetTechTokens() >= 1)
             {
-                selectedTower.TechUpgrade();
+                //if this tower's tech is not upgraded
+                if(!sTower.UpgradedTech())
+                {
+                    sTower.TechUpgrade();
+                    UpdateTechTooltip();
+                }
             }
+            
         }
     }
 
-    /*
-        This method shows the stats panel of the tower
-    */
-    public void ShowStats()
-    {
-        statsPanel.SetActive(!statsPanel.activeSelf);
-    }
 
     /*
         This method shows the selected tower stats
     */
     public void ShowSelectedTowerStats()
     {
-        statsPanel.SetActive(!statsPanel.activeSelf);
+        statsPanel.SetActive(true);
         UpdateUpgradeTooltip();
     }
 
-    /*
-        This method shows the selected tech stats
-    */
-    public void ShowSelectedTechStats()
+    public void HideSelectedTowerStats()
     {
-        techPanel.SetActive(!techPanel.activeSelf);
+        statsPanel.SetActive(false);
+        UpdateUpgradeTooltip();
+    }
+
+    public void ShowSelectedTowerTechStats()
+    {
+        techPanel.SetActive(true);
         UpdateTechTooltip();
+    }
+
+    public void HideSelectedTowerTechStats()
+    {
+        UpdateTechTooltip();
+        techPanel.SetActive(false);
+    }
+
+    /*
+        This method updates the tooltip for upgrade
+    */
+    public void UpdateUpgradeTooltip()
+    {
+        if (sTower != null)
+        {
+            //update the text of sell button
+            sellPriceText.text = (sTower.GetPrice() / 2).ToString() + "<color='lime'>$</color>";
+
+            //update the tooltip text
+            SetToolTipText(sTower.GetStats());
+
+            //upgrade the price text
+            if (sTower.GetNextUpgrade() != null)
+            {
+                upgradePriceText.text = sTower.GetNextUpgrade().Price.ToString() + "<color='lime'>$</color>";
+            }
+            else
+            {
+                //if there are no more upgrades, just make the string empty
+                upgradePriceText.text = "<color='lime'>MaxLevel</color>";
+            }
+        }
+    }
+
+    /*
+        This method updates the tooltip for tech upgrade
+    */
+    public void UpdateTechTooltip()
+    {
+        if (sTower != null)
+        {
+            this.techStatText.text = this.sTower.GetTechStats();
+
+            if(this.sTower.UpgradedTech())
+            {
+                //Debug.Log("test");
+                this.techUpgradePriceText.text = "<color='lime'>MaxLevel</color>";
+            }
+            else
+            {
+                this.techUpgradePriceText.text = "1<color='lime'>T</color>";
+            }
+        }
     }
 
     /*
@@ -160,65 +261,4 @@ public class SelectTowerManager : Singleton<SelectTowerManager>
     {
         statText.text = givenText;
     }
-
-    /*
-        This method sets the text for the hover tech upgrade tooltip
-    */
-    public void SetTechStatText(string givenText)
-    {
-        techStatText.text = givenText;
-    }
-
-    /*
-        This method updates the tooltip for upgrade
-    */
-    public void UpdateUpgradeTooltip()
-    {
-        if (selectedTower != null)
-        {
-            //update the text of sell button
-            sellPriceText.text = (selectedTower.getPrice() / 2).ToString() + " <color='lime'>$</color>";
-
-            //update the tooltip text
-            SetToolTipText(selectedTower.GetStats());
-
-            //upgrade the price text
-            if (selectedTower.GetNextUpgrade != null)
-            {
-                upgradePrice.text = selectedTower.GetNextUpgrade.Price.ToString() + "<color='lime'>$</color>";
-            }
-            else
-            {
-                //if there are no more upgrades, just make the string empty
-                upgradePrice.text = string.Empty;
-            }
-        }
-    }
-
-    /*
-        This method updates the tooltip for tower tech stats
-    */
-    public void UpdateTechTooltip()
-    {
-        if (selectedTower != null)
-        {
-            //update the text of sell button
-            sellPriceText.text = (selectedTower.getPrice() / 2).ToString() + " <color='lime'>$</color>";
-
-            //update the tooltip text
-            SetTechStatText(selectedTower.GetTechStats());
-
-            //upgrade the tech price text
-            if (!selectedTower.getTechStatus()) //if tower isn't tech upgraded
-            {
-                techUpgradePrice.text = "1 <color=#800080>TP</color>";
-            }
-            else
-            {
-                //if there are no more tech upgrades, just make the string empty
-                techUpgradePrice.text = string.Empty;
-            }
-        }
-    }
-
 }

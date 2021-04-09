@@ -13,7 +13,7 @@ public class GameManager : Singleton<GameManager>
 
 
     //the list of the monsters in the wave
-    private List<Monster> activeMonsters = new List<Monster>();
+    //private List<Monster> activeMonsters = new List<Monster>();
 
     
     //Pool of objects (monsters/towers)

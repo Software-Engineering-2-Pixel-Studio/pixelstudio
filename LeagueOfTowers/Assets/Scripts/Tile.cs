@@ -7,6 +7,12 @@ using Photon.Pun;
 public class Tile : MonoBehaviour
 {
     //fields
+    //private int tileID;
+
+    [SerializeField]
+    private string tileName;
+
+    private int tileID;
     //these 3 for the basic properties of a Tile
     private Point gridPos;
     private Vector3 worldPos;
@@ -23,7 +29,7 @@ public class Tile : MonoBehaviour
     private bool isWalkable;
 
     //tower
-    private Tower myTower;
+    private TowerScript myTower;
 
     // Start is called before the first frame update
     private void Start()
@@ -117,12 +123,15 @@ public class Tile : MonoBehaviour
         } 
         else if (!EventSystem.current.IsPointerOverGameObject() && GameManager.Instance.GetPickedTowerButton() == null && Input.GetMouseButtonDown(0))
         {
+            //Debug.Log("clicked");
             if (myTower != null)
             {
+                //Debug.Log("myTower is not null");
                 SelectTowerManager.Instance.SelectTower(myTower);
             } 
             else
             {
+                //Debug.Log("myTower is null");
                 SelectTowerManager.Instance.DeselectTower();
             }
         }
@@ -133,28 +142,35 @@ public class Tile : MonoBehaviour
     {
         
         //get the tower prefab from GameManager
+        TowerButton pickedButton = GameManager.Instance.GetPickedTowerButton();
         GameObject towerPref = GameManager.Instance.GetPickedTowerButton().GetTowerPrefab();
 
         //Create the tower prefab on the scene
         //GameObject tower = Instantiate(towerPref);
+        List<object> lo = new List<object>();
+        string towerType = pickedButton.GetTowerName();
+        if(towerType == "FireTower")
+        {
+            lo = TowerData.GetFireTowerData(this.tileID);
+        }
+        else if(towerType == "SlowTower")
+        {
+            lo = TowerData.GetSlowTowerData(this.tileID);
+        }
+        else if(towerType == "LightTower")
+        {
+            lo = TowerData.GetLightTowerData(this.tileID);
+        }
+        else if(towerType == "BaseTower")
+        {
+            lo = TowerData.GetBaseTowerData(this.tileID);
+        }
 
-
-        GameObject tower = PhotonNetwork.Instantiate(towerPref.name, this.GetCenterWorldPosition(), Quaternion.identity);
-        Tower script = tower.GetComponentsInChildren<Tower>()[0];
-        script.SetPlacedAtTile(this.gridPos);
-        //place at the correct position of the tile on the map
-        //tower.transform.position = this.GetCenterWorldPosition();
-
-        //set the layer order based on Y gridposition
-        tower.GetComponent<SpriteRenderer>().sortingOrder = this.gridPos.Y + 2;
-
-        //set parent Tile for this tower
-        tower.transform.SetParent(this.transform);
-
-        //reference the tower script
-        this.myTower = tower.transform.GetChild(0).GetComponent<Tower>();
-
-        //pay for this tower
+        GameObject tower = PhotonNetwork.Instantiate(towerPref.name, this.GetCenterWorldPosition(), Quaternion.identity,0, lo.ToArray() );
+        
+        this.myTower = tower.transform.GetComponent<TowerScript>();
+        this.myTower.GetComponent<SpriteRenderer>().sortingOrder = this.gridPos.Y + 2;
+        MapManager.Instance.SetTileIsPlacedAt2(this.tileID, true);
         GameManager.Instance.PayForPlacedTower();
         
 
@@ -188,8 +204,11 @@ public class Tile : MonoBehaviour
     }
 
     //this function Set up new Tile that created from MapManager
-    public void SetUpTile(Point pointPosition, Vector3 worldPosition, Transform parent, int tileIndex)
+    public void SetUpTile(int tileID, Point pointPosition, Vector3 worldPosition, Transform parent, int tileIndex)
     {
+        this.tileID = tileID;
+        this.tileName = "Tile" + this.tileID;
+        this.gameObject.name = this.tileName;
         setTilePos(pointPosition);
         setWorldPos(worldPosition);
         setCenterWorldPos(worldPosition);
@@ -202,8 +221,8 @@ public class Tile : MonoBehaviour
         }
         else{
             this.isWalkable = true;
+            this.isPlaced = true;
         }
-        
     }
 
     /*
@@ -260,5 +279,13 @@ public class Tile : MonoBehaviour
     public void SetIsPlaced(bool state)
     {
         this.isPlaced = state;
+    }
+
+    public override string ToString(){
+        return this.tileName;
+    }
+
+    public void SetMyTower(TowerScript tower){
+        this.myTower = tower;
     }
 }

@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 9064517345134537535}
   - component: {fileID: 4466292499948698054}
   - component: {fileID: 2492297841562724688}
-  - component: {fileID: 5072866870805336137}
+  - component: {fileID: 7920567432410403908}
   m_Layer: 2
   m_Name: Range
   m_TagString: Untagged
@@ -27,7 +27,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6625069347992144261}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.16, y: -0.94, z: 0}
+  m_LocalPosition: {x: -0.16, y: -0.1, z: 0}
   m_LocalScale: {x: 5.6, y: 5.6, z: 1}
   m_Children: []
   m_Father: {fileID: 4082057558172878335}
@@ -100,7 +100,7 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 0.49999997
---- !u!114 &5072866870805336137
+--- !u!114 &7920567432410403908
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -109,13 +109,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 6625069347992144261}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: aa848dd635b01594a9fdd60df117bced, type: 3}
+  m_Script: {fileID: 11500000, guid: 258ac2ec4ac03bd439948fd4d0aef245, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  projectileType: SlowProjectile
-  projectileSpeed: 4
-  attackCooldown: 3
-  damage: 8
 --- !u!1 &7390985848245534626
 GameObject:
   m_ObjectHideFlags: 0
@@ -127,9 +123,10 @@ GameObject:
   - component: {fileID: 4082057558172878335}
   - component: {fileID: 4972251320640711446}
   - component: {fileID: -9011166402467688010}
-  - component: {fileID: -6857291747309108037}
+  - component: {fileID: 6986000117345554395}
+  - component: {fileID: 6297851935201753556}
   m_Layer: 6
-  m_Name: SlowTower_L2
+  m_Name: BaseTower
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -219,11 +216,12 @@ MonoBehaviour:
   Synchronization: 3
   OwnershipTransfer: 0
   observableSearch: 2
-  ObservedComponents: []
+  ObservedComponents:
+  - {fileID: 6986000117345554395}
   sceneViewId: 0
   InstantiationId: 0
   isRuntimeInstantiated: 0
---- !u!114 &-6857291747309108037
+--- !u!114 &6986000117345554395
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -232,16 +230,49 @@ MonoBehaviour:
   m_GameObject: {fileID: 7390985848245534626}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: aa584fbee541324448dd18d8409c7a41, type: 3}
+  m_Script: {fileID: 11500000, guid: 8efc6b1d64977384eb3405357896c656, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ObservedComponentsFoldoutOpen: 1
-  Group: 0
-  prefixField: -1
-  Synchronization: 3
-  OwnershipTransfer: 0
-  observableSearch: 2
-  ObservedComponents: []
-  sceneViewId: 0
-  InstantiationId: 0
-  isRuntimeInstantiated: 0
+  m_PositionModel:
+    SynchronizeEnabled: 1
+    TeleportEnabled: 1
+    TeleportIfDistanceGreaterThan: 3
+    InterpolateOption: 2
+    InterpolateMoveTowardsSpeed: 1
+    InterpolateLerpSpeed: 1
+    ExtrapolateOption: 0
+    ExtrapolateSpeed: 1
+    ExtrapolateIncludingRoundTripTime: 1
+    ExtrapolateNumberOfStoredPositions: 1
+  m_RotationModel:
+    SynchronizeEnabled: 0
+    InterpolateOption: 1
+    InterpolateRotateTowardsSpeed: 180
+    InterpolateLerpSpeed: 5
+  m_ScaleModel:
+    SynchronizeEnabled: 0
+    InterpolateOption: 0
+    InterpolateMoveTowardsSpeed: 1
+    InterpolateLerpSpeed: 0
+--- !u!114 &6297851935201753556
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7390985848245534626}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a3b1069f774d21e4f811bf7960cb042b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  price: 0
+  damage: 0
+  projectileSpeed: 0
+  attackCooldown: 0
+  myElement: 0
+  debuffChance: 0
+  duration: 0
+  level: 0
+  upgradedTech: 0
+  projectilePrefab: {fileID: 1396780204091617713, guid: 0a69086c96d133a4781de80d6f9e4d73, type: 3}
