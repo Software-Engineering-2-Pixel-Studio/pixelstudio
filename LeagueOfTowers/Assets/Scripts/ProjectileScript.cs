@@ -95,8 +95,6 @@ public class ProjectileScript : MonoBehaviourPun, IPunInstantiateMagicCallback
             //get parent tower's debuff and apply it to target monster
             targetMonster.AddDebuff(ownerTower.GetDebuff());
         }
-
-
     }
 
     /*
@@ -108,7 +106,7 @@ public class ProjectileScript : MonoBehaviourPun, IPunInstantiateMagicCallback
         {
             if(targetMonster == null){
                 //Destroy(this.gameObject);
-                Debug.Log("Target Monster is not found");
+                //Debug.Log("Target Monster is not found");
                 DestroyThisProjectile();
                 return;
             }
@@ -170,6 +168,4 @@ public class ProjectileScript : MonoBehaviourPun, IPunInstantiateMagicCallback
             PhotonNetwork.Destroy(this.transform.gameObject);
         }
     }
-
-
 }
