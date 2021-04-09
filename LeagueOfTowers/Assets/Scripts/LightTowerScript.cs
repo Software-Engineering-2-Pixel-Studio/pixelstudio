@@ -6,7 +6,7 @@ using Photon.Pun;
 public class LightTowerScript : TowerScript
 {
     //header
-    string tooltipHeader = "<Size=2><b>Light Tower</b></size>";
+    //string tooltipHeader = "<Size=2><b>Light Tower</b></size>";
 
     protected override void Start()
     {
@@ -68,6 +68,19 @@ public class LightTowerScript : TowerScript
         }
     }
 
+    public override void TechUpgrade()
+    {
+        //only owner using this
+        if(this.view.IsMine)
+        {   
+            //only this owner's token is reduce
+            LevelUpManager.Instance.SpendToken();
+
+            //send signal to other player about this tower's stat change
+            this.view.RPC("techUpgradeLightRPC", RpcTarget.All);
+        }
+    }
+
     //punRPC
     [PunRPC]
     private void upgradeLightRPC()
@@ -89,5 +102,14 @@ public class LightTowerScript : TowerScript
         this.level++;
         this.nextUpgradeLevel++;
         setNextUpgrade();
+    }
+
+    [PunRPC]
+    private void techUpgradeLightRPC()
+    {
+        this.upgradedTech = true;
+        
+        this.projectileSpeed += this.techUpgrade.ProjectileSpeed;
+        this.attackCooldown += this.techUpgrade.AttackCoolDown;
     }
 }

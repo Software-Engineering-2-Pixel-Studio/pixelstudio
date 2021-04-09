@@ -11,8 +11,8 @@ public abstract class TowerScript : MonoBehaviourPun, IPunInstantiateMagicCallba
     [SerializeField] protected int price;              //1 //tower's price
     [SerializeField] protected float damage;           //2 //tower's damage
     protected string projectileType;  //3 //tower's projectile type
-    protected float projectileSpeed;  //4 //tower's projectile speed
-    protected float attackCooldown;   //5 //tower's attack cool down
+    [SerializeField] protected float projectileSpeed;  //4 //tower's projectile speed
+    [SerializeField] protected float attackCooldown;   //5 //tower's attack cool down
     protected int parentTileID;       //7 //tileID where tower is placed
     protected int towerID;            //6 //towerID
     [SerializeField] protected Element myElement; //8
@@ -21,6 +21,8 @@ public abstract class TowerScript : MonoBehaviourPun, IPunInstantiateMagicCallba
     [SerializeField] protected int level;
     protected int nextUpgradeLevel;
 
+    [SerializeField] protected bool upgradedTech = false;
+
     //these will initialized in run-time       
     protected bool canAttack = true;      //state of attack
     protected float attackTimer;          //time counting for next attack
@@ -28,6 +30,8 @@ public abstract class TowerScript : MonoBehaviourPun, IPunInstantiateMagicCallba
     protected Queue<MonsterScript> monsters = new Queue<MonsterScript>();
     protected TowerUpgrade[] upgrades = new TowerUpgrade[2];
     protected TowerUpgrade nextUpgrade;
+
+    protected TechUpgrade techUpgrade = new TechUpgrade(0.0f, 0.0f);
     
     [SerializeField] protected GameObject projectilePrefab;   //projectile prefab 
 
@@ -125,12 +129,6 @@ public abstract class TowerScript : MonoBehaviourPun, IPunInstantiateMagicCallba
         //set the default string passed to tower stats panel
         string result = string.Format("\nLevel: {0} \nDamage: {1} \nProc: {2}% \nDebuff: {3} sec \nElement: {4}", this.level, this.damage, this.debuffChance, this.duration, this.myElement.ToString());
 
-        // if (GetNextUpgrade != null) //if an upgrade is available
-        // {
-        //     //return a string that includes the upgrade values
-        //     result = string.Format("\nLevel: {0} \nDamage: {1} <color=#00ff00ff>+{4}</color>\nProc; {2}% <color=#00ff00ff>+{5}%</color>\nDebuff: {3} sec <color=#00ff00ff>+{6}</color>",
-        //         towerLevel, damage, debuffProcChance, debuffDuration, GetNextUpgrade.Damage, GetNextUpgrade.DebuffProcChance, GetNextUpgrade.DebuffDuration);
-        // }
         if(this.nextUpgrade != null)
         {
             result = string.Format("\nLevel: {0} \nDamage: {1} <color=#00ff00ff>+{4}</color>\nProc; {2}% <color=#00ff00ff>+{5}%</color>\nDebuff: {3} sec <color=#00ff00ff>+{6}</color> \nElement: {7}",
@@ -140,24 +138,22 @@ public abstract class TowerScript : MonoBehaviourPun, IPunInstantiateMagicCallba
         return result;
     }
 
-    //returns the next upgrade element in the upgrades list
-    // public TowerUpgrade GetNextUpgrade
-    // {
-    //     get
-    //     {
-    //         TowerUpgrade result = null;
+    public virtual string GetTechStats()
+    {
+        string result = string.Format("\nProjectile Speed: {0} \nAttack Cooldown: {1}", this.projectileSpeed, this.attackCooldown);
+        
+        //if the tower's tech is not upgraded yet
+        if(!this.upgradedTech){
+            result = string.Format("\nProjectile Speed: {0} <color=#00ff00ff>+{2}</color> \nAttack Cooldown: {1} <color=#00ff00ff> {3}</color>", this.projectileSpeed, this.attackCooldown, this.techUpgrade.ProjectileSpeed, this.techUpgrade.AttackCoolDown);
+        }
 
-    //         //if tower level is still lower than the upgrades length (remember tower level starts at 1 and not 0 so -1
-    //         if (towerLevel - 1 < Upgrades.Length)
-    //         {
-    //             //return the next element in the upgrades list
-    //             result = Upgrades[towerLevel - 1];
-    //         }
+        return result;
+    }
 
-    //         //else return default null
-    //         return result;
-    //     }
-    // }
+    public bool UpgradedTech()
+    {
+        return this.upgradedTech;
+    }
 
     protected void setNextUpgrade()
     {
@@ -186,10 +182,13 @@ public abstract class TowerScript : MonoBehaviourPun, IPunInstantiateMagicCallba
     {
         List<object> upgrade1 = new List<object>();
         List<object> upgrade2 = new List<object>();
+        List<object> techUp = new List<object>();
+
         if(this.towerName == "BaseTower")
         {
-            Debug.Log("BasicTower upgrades");
+            //Debug.Log("BasicTower upgrades");
             upgrade1 = TowerData.GetBaseTowerUp1Data();
+            
             if(upgrade1.Count == 2)
             {
                 this.upgrades[0] = new TowerUpgrade((int) upgrade1[0], (float) upgrade1[1]);
@@ -199,6 +198,9 @@ public abstract class TowerScript : MonoBehaviourPun, IPunInstantiateMagicCallba
             {
                 this.upgrades[1] = new TowerUpgrade((int) upgrade2[0], (float) upgrade2[1]);
             }
+
+            techUp = TowerData.GetBaseTowerTechUpData();
+            this.techUpgrade = new TechUpgrade((float) techUp[0], (float) techUp[1]);
         }
         else if(this.towerName == "FireTower")
         {
@@ -216,6 +218,9 @@ public abstract class TowerScript : MonoBehaviourPun, IPunInstantiateMagicCallba
                                                     (float) upgrade2[2], (float) upgrade2[3],
                                                     (float) upgrade2[4], (float) upgrade2[5]);
             }
+
+            techUp = TowerData.GetFireTowerTechUpData();
+            this.techUpgrade = new TechUpgrade((float) techUp[0], (float) techUp[1]);
         }
         else if(this.towerName == "SlowTower")
         {
@@ -233,6 +238,9 @@ public abstract class TowerScript : MonoBehaviourPun, IPunInstantiateMagicCallba
                                                     (float) upgrade2[2], (float) upgrade2[3],
                                                     (float) upgrade2[4]);
             }
+
+            techUp = TowerData.GetSlowTowerTechUpData();
+            this.techUpgrade = new TechUpgrade((float) techUp[0], (float) techUp[1]);
         }
         else if(this.towerName == "LightTower"){
             upgrade1 = TowerData.GetLightTowerUp1Data();
@@ -247,6 +255,9 @@ public abstract class TowerScript : MonoBehaviourPun, IPunInstantiateMagicCallba
                 this.upgrades[1] = new TowerUpgrade((int) upgrade2[0], (float) upgrade2[1],
                                                     (float) upgrade2[2], (float) upgrade2[3]);
             }
+
+            techUp = TowerData.GetLightTowerTechUpData();
+            this.techUpgrade = new TechUpgrade((float) techUp[0], (float) techUp[1]);
         }
     }
 
@@ -286,6 +297,8 @@ public abstract class TowerScript : MonoBehaviourPun, IPunInstantiateMagicCallba
             this.level = 1;
             //nextUpgradeLevel
             this.nextUpgradeLevel = 2;
+            //upgradedTech state
+            this.upgradedTech = false;
             //Debug.Log("Element: " + myElement.ToString());
             GameObject tileGO = MapManager.Instance.getTile(this.parentTileID);
             Tile tile = tileGO.GetComponent<Tile>();
@@ -405,6 +418,19 @@ public abstract class TowerScript : MonoBehaviourPun, IPunInstantiateMagicCallba
         }
     }
 
+    public virtual void TechUpgrade()
+    {
+        //only owner using this
+        if(this.view.IsMine)
+        {   
+            //only this owner's token is reduce
+            LevelUpManager.Instance.SpendToken();
+
+            //send signal to other player about this tower's stat change
+            this.view.RPC("techUpgradeRPC", RpcTarget.All);
+        }
+    }
+
     /*
         method to destroy this tower over network
     */
@@ -445,5 +471,14 @@ public abstract class TowerScript : MonoBehaviourPun, IPunInstantiateMagicCallba
         this.level++;
         this.nextUpgradeLevel++;
         setNextUpgrade();
+    }
+
+    [PunRPC]
+    private void techUpgradeRPC()
+    {
+        this.upgradedTech = true;
+        
+        this.projectileSpeed += this.techUpgrade.ProjectileSpeed;
+        this.attackCooldown += this.techUpgrade.AttackCoolDown;
     }
 }

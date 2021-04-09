@@ -11,7 +11,7 @@ public class FireTowerScript : TowerScript
 
 
     //header
-    string tooltipHeader = "<Size=2><b>Fire Tower</b></size>";
+    //string tooltipHeader = "<Size=2><b>Fire Tower</b></size>";
 
     protected override void Start()
     {
@@ -122,6 +122,19 @@ public class FireTowerScript : TowerScript
         }
     }
 
+    public override void TechUpgrade()
+    {
+        //only owner using this
+        if(this.view.IsMine)
+        {   
+            //only this owner's token is reduce
+            LevelUpManager.Instance.SpendToken();
+
+            //send signal to other player about this tower's stat change
+            this.view.RPC("techUpgradeFireRPC", RpcTarget.All);
+        }
+    }
+
     //punRPC
     [PunRPC]
     private void upgradeFireRPC()
@@ -146,5 +159,14 @@ public class FireTowerScript : TowerScript
         this.level++;
         this.nextUpgradeLevel++;
         setNextUpgrade();
+    }
+
+    [PunRPC]
+    private void techUpgradeFireRPC()
+    {
+        this.upgradedTech = true;
+        
+        this.projectileSpeed += this.techUpgrade.ProjectileSpeed;
+        this.attackCooldown += this.techUpgrade.AttackCoolDown;
     }
 }

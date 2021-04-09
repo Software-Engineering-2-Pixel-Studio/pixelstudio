@@ -60,7 +60,7 @@ public class ProjectileScript : MonoBehaviourPun, IPunInstantiateMagicCallback
     //events
     public void OnPhotonInstantiate(PhotonMessageInfo info)
     {
-        Debug.Log("called!");
+        //Debug.Log("called!");
         object[] data = this.gameObject.GetPhotonView().InstantiationData;
         if(data != null && data.Length == 5){
             //projectileType == projectileName
@@ -125,6 +125,8 @@ public class ProjectileScript : MonoBehaviourPun, IPunInstantiateMagicCallback
                         }
                         DestroyThisProjectile();
                     }
+                    // targetMonster.TakeDamage(this.myDamage);
+                    // DestroyThisProjectile();
                     
                     
                 }

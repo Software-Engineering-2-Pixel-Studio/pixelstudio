@@ -65,7 +65,7 @@ public class WaveManager : Singleton<WaveManager>
         for(int i = 0; i < waves; i++){
             int monsterIndex = Random.Range(0, 2);
             string type = string.Empty;
-            object[] data = new object[6];
+            object[] data = new object[7];
             switch (monsterIndex)
             {
                 case 0:
