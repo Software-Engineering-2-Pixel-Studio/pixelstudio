@@ -35,7 +35,11 @@ public class LevelUpManager : Singleton<LevelUpManager>
     public int GetExpPoints()
     {
         return this.expPoints;
+    }
 
+    public int GetTechTokens()
+    {
+        return this.techTokens;
     }
     //events
 

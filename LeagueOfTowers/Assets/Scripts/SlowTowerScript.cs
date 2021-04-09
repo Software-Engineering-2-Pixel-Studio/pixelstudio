@@ -93,6 +93,19 @@ public class SlowTowerScript : TowerScript
         }
     }
 
+    public override void TechUpgrade()
+    {
+        //only owner using this
+        if(this.view.IsMine)
+        {   
+            //only this owner's token is reduce
+            LevelUpManager.Instance.SpendToken();
+
+            //send signal to other player about this tower's stat change
+            this.view.RPC("techUpgradeSlowRPC", RpcTarget.All);
+        }
+    }
+
     //punRPC
     [PunRPC]
     private void upgradeSlowRPC()
@@ -117,6 +130,15 @@ public class SlowTowerScript : TowerScript
         this.level++;
         this.nextUpgradeLevel++;
         setNextUpgrade();
+    }
+
+    [PunRPC]
+    private void techUpgradeSlowRPC()
+    {
+        this.upgradedTech = true;
+        
+        this.projectileSpeed += this.techUpgrade.ProjectileSpeed;
+        this.attackCooldown += this.techUpgrade.AttackCoolDown;
     }
 
 

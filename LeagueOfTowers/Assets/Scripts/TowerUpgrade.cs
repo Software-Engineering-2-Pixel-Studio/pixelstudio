@@ -18,14 +18,15 @@ public class TowerUpgrade
 
     public float TickDamage { get; private set; }
 
-    //base tower
+
+    //base tower upgrade
     public TowerUpgrade(int price, float damage)
     {
         Price = price;
         Damage = damage;
     }
     
-    //fire tower
+    //fire tower upgrade
     public TowerUpgrade(int price, float damage, float debuffDuration, float debuffProcChance, float tickTime, float tickDamage)
     {
         Price = price;
@@ -36,7 +37,7 @@ public class TowerUpgrade
         TickDamage = tickDamage;
     }
 
-    //slow tower
+    //slow tower upgrade
     public TowerUpgrade(int price, float damage, float debuffDuration, float debuffProcChance, float slowingFactor)
     {
         Price = price;
@@ -46,7 +47,7 @@ public class TowerUpgrade
         SlowingFactor = slowingFactor;
     }
 
-    //light tower
+    //light tower upgrade
     public TowerUpgrade(int price, float damage, float debuffDuration, float debuffProcChance)
     {
         Price = price;

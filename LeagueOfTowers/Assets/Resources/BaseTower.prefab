@@ -268,8 +268,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   price: 0
   damage: 0
+  projectileSpeed: 0
+  attackCooldown: 0
   myElement: 0
   debuffChance: 0
   duration: 0
   level: 0
+  upgradedTech: 0
   projectilePrefab: {fileID: 1396780204091617713, guid: 0a69086c96d133a4781de80d6f9e4d73, type: 3}

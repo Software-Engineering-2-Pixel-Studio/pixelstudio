@@ -12,9 +12,12 @@ public class SelectTowerManager : Singleton<SelectTowerManager>
 
     //for stats panel
     [SerializeField] private GameObject statsPanel;
+    [SerializeField] private GameObject techPanel;
     [SerializeField] private Text statText;
     [SerializeField] private Text sellPriceText;    //selling price of the tower
     [SerializeField] private Text upgradePriceText;     //upgrading price of the tower
+    [SerializeField] private Text techUpgradePriceText;
+    [SerializeField] private Text techStatText;
 
     // Start is called before the first frame update
     private void Start()
@@ -116,6 +119,44 @@ public class SelectTowerManager : Singleton<SelectTowerManager>
     }
 
     /*
+        This method will be called when the TechButton has been clicked
+    */
+    public void UpgradeTechTower()
+    {
+        if (sTower != null)
+        {
+            //if the current tower level is lower than the number of upgrades available
+            //and if the current shared global currency is bigger than the price for upgrade
+            // if (sTower.GetLevel() < 3 )
+            // {
+            //     if(sTower.GetNextUpgrade() == null)
+            //     {
+            //         Debug.Log("Cant found nextUpgrade");
+            //         return;
+            //     }
+            //     else if(CurrencyManager.Instance.GetCurrency() >= sTower.GetNextUpgrade().Price)
+            //     {
+            //         sTower.Upgrade();
+            //         UpdateUpgradeTooltip();
+                    
+            //     }
+            // }
+            //check if we have enough token
+            if(LevelUpManager.Instance.GetTechTokens() >= 1)
+            {
+                //if this tower's tech is not upgraded
+                if(!sTower.UpgradedTech())
+                {
+                    sTower.TechUpgrade();
+                    UpdateTechTooltip();
+                }
+            }
+            
+        }
+    }
+
+
+    /*
         This method shows the selected tower stats
     */
     public void ShowSelectedTowerStats()
@@ -127,6 +168,17 @@ public class SelectTowerManager : Singleton<SelectTowerManager>
     public void HideSelectedTowerStats()
     {
         statsPanel.SetActive(false);
+    }
+
+    public void ShowSelectedTowerTechStats()
+    {
+        techPanel.SetActive(true);
+        UpdateTechTooltip();
+    }
+
+    public void HideSelectedTowerTechStats()
+    {
+        techPanel.SetActive(false);
     }
 
     /*
@@ -150,7 +202,23 @@ public class SelectTowerManager : Singleton<SelectTowerManager>
             else
             {
                 //if there are no more upgrades, just make the string empty
-                upgradePriceText.text = "<color='lime'>MaxLevel</color>";;
+                upgradePriceText.text = "<color='lime'>MaxLevel</color>";
+            }
+        }
+    }
+
+    /*
+        This method updates the tooltip for tech upgrade
+    */
+    public void UpdateTechTooltip()
+    {
+        if (sTower != null)
+        {
+            this.techStatText.text = this.sTower.GetTechStats();
+
+            if(this.sTower.UpgradedTech())
+            {
+                this.techUpgradePriceText.text = "<color='lime'>MaxLevel</color>";
             }
         }
     }

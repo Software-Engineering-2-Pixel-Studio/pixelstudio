@@ -28,7 +28,7 @@ public class TowerData : Singleton<TowerData>
         //speed
         data.Add((float) 4.0f);
         //cooldown
-        data.Add((float) 1.0f);
+        data.Add((float) 2.0f);
         //base id
         data.Add((int) 1000);
         //tileID
@@ -39,6 +39,17 @@ public class TowerData : Singleton<TowerData>
         data.Add((float) 50.0f);
         //duration
         data.Add((float) 0.0f);
+        
+        return data;
+    }
+
+    public static List<object> GetBaseTowerTechUpData()
+    {
+        List<object> data = new List<object>();
+        //projectileSpeed
+        data.Add((float) 1.0f);
+        //acttackCoolDown
+        data.Add((float) -1.0f);
         
         return data;
     }
@@ -96,6 +107,16 @@ public class TowerData : Singleton<TowerData>
         //tickTime
         data.Add((float) 1.0f);
         
+        return data;
+    }
+
+    public static List<object> GetFireTowerTechUpData()
+    {
+        List<object> data = new List<object>();
+        //projectileSpeed
+        data.Add((float) 1.0f);
+        //acttackCoolDown
+        data.Add((float) -1.0f);
         return data;
     }
 
@@ -170,6 +191,16 @@ public class TowerData : Singleton<TowerData>
         return data;
     }
 
+    public static List<object> GetSlowTowerTechUpData()
+    {
+        List<object> data = new List<object>();
+        //projectileSpeed
+        data.Add((float) 1.0f);
+        //acttackCoolDown
+        data.Add((float) -1.0f);
+        return data;
+    }
+
     public static List<object> GetSlowTowerUp1Data()
     {
         List<object> data = new List<object>();
@@ -233,6 +264,17 @@ public class TowerData : Singleton<TowerData>
         
         return data;
     }
+
+    public static List<object> GetLightTowerTechUpData()
+    {
+        List<object> data = new List<object>();
+        //projectileSpeed
+        data.Add((float) 1.0f);
+        //acttackCoolDown
+        data.Add((float) -1.0f);
+        return data;
+    }
+
     public static List<object> GetLightTowerUp1Data()
     {
         List<object> data = new List<object>();
