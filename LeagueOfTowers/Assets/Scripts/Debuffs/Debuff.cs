@@ -41,4 +41,30 @@ public abstract class Debuff
             target.RemoveDebuff(this);
         }
     }
+    //************************************************************
+    //GETTERS AND SETTERS
+    //************************************************************
+    /*
+        Method to get the targeted monster
+    */
+    public Monster getTarget()
+    {
+        return this.target;
+    }
+    /*
+        Method to get the duration
+    */
+    public float getDuration()
+    {
+        return this.duration;
+    }
+    /*
+        Method to get the elapsed time
+    */
+    public float getElapsed()
+    {
+        return this.elapsed;
+    }
+
+
 }

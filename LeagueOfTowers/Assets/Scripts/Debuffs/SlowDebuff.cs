@@ -44,4 +44,15 @@ public class SlowDebuff : Debuff
             base.Remove();
         }
     }
+    
+    //************************************************************
+    //GETTERS AND SETTERS
+    //************************************************************
+    /*
+        Method to get the slow factor
+    */
+    public float getSlowFactor()
+    {
+        return this.slowFactor;
+    }
 }

@@ -10,19 +10,56 @@ public class DebuffTests
     [Test]
     public void DebuffTestsSimplePasses()
     {
-        Point point = new Point(1, 1);
-        //check if the created point was assigned correct values
-        Assert.AreEqual(point.X, 1);
-        Assert.AreEqual(point.Y, 1);       
+        // Debuff class vars
+        Monster targetMonsterLight = new Monster();
+        float duration = 1.5f;
+        
+        //create an instance of every type of tower upgrade
+        //Monster target, float duration
+        LightDebuff debuffLight = new LightDebuff( targetMonsterLight, duration);
+
+        //Check that all of the variables are set properly
+        Assert.AreEqual(debuffLight.getDuration(), duration);
+        Assert.AreEqual(debuffLight.getTarget(), targetMonsterLight);   
     }
 
-    // A UnityTest behaves like a coroutine in Play Mode. In Edit Mode you can use
-    // `yield return null;` to skip a frame.
-    [UnityTest]
-    public IEnumerator DebuffTestsWithEnumeratorPasses()
+    [Test]
+    public void FireDebuffTests()
     {
-        // Use the Assert class to test conditions.
-        // Use yield to skip a frame.
-        yield return null;
+        // Debuff class vars
+        Monster targetMonsterFire = new Monster();
+        float duration = 1.5f;
+        // for Fire Debuff
+        float givenTickDamage = 1.5f;
+        float givenTickTime = 0.5f; //how often debuff will tick
+
+        //create an instance of every type of tower upgrade
+        //float givenTickDamage, float givenTickTime, float duration, Monster target
+        FireDebuff debuffFire = new FireDebuff(givenTickDamage, givenTickTime, duration, targetMonsterFire);
+
+        //Check that all of the variables are set properly
+        Assert.AreEqual(debuffFire.getDuration(), duration);
+        Assert.AreEqual(debuffFire.getTarget(), targetMonsterFire);
+        Assert.AreEqual(debuffFire.getTickDamage(), givenTickDamage);
+        Assert.AreEqual(debuffFire.getTickTIme(), givenTickTime);
+    }
+
+    [Test]
+    public void SlowDebuffTests()
+    {
+        // Debuff class vars
+        Monster targetMonsterSlow = new Monster();
+        float duration = 1.5f;
+        // for Slow Debuff
+        float givenSlowFactor = 0.4f;
+
+        //create an instance of every type of tower upgrade
+        //float givenSlowFactor, float duration, Monster target
+        SlowDebuff debuffSlow = new SlowDebuff( givenSlowFactor, duration, targetMonsterSlow);
+
+        //Check that all of the variables are set properly
+        Assert.AreEqual(debuffSlow.getDuration(), duration);
+        Assert.AreEqual(debuffSlow.getTarget(), targetMonsterSlow);
+        Assert.AreEqual(debuffSlow.getSlowFactor(), givenSlowFactor);
     }
 }

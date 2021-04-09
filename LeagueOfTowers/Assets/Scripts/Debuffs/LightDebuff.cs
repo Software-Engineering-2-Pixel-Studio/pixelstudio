@@ -16,7 +16,6 @@ public class LightDebuff : Debuff
         {
             target.setSpeed(0);
         }
-
         base.Update();
     }
 
@@ -30,7 +29,5 @@ public class LightDebuff : Debuff
 
             base.Remove();
         }
-
-        
     }
 }

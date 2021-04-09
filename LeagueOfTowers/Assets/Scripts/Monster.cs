@@ -6,6 +6,9 @@ using UnityEngine.UI;
 
 public class Monster : MonoBehaviour
 {
+    //************************************************************
+    //VARIABLES
+    //************************************************************
     //fields
     private float healthValue;     //health of monster
 
@@ -39,40 +42,73 @@ public class Monster : MonoBehaviour
     private List<Debuff> debuffsToAdd = new List<Debuff>();
     private List<Debuff> debuffsToRemove = new List<Debuff>();
     
-
     public Point GridPosition{ get; set;}
 
     private Vector3 destination; // the destination of the monster (base location)
 
     public bool IsActive{ get; set; }   // the condition of the monster (can  move or not)
 
-    private void Awake()
+    //************************************************************
+    //GETTERS AND SETTERS
+    //************************************************************
+    /*
+        Method to get element type of this monster
+    */
+    public Element getElementType()
     {
-        maxSpeed = speed;
+        return this.elementType;
     }
-
-    private void Update(){
-        HandleDebuffs();
-        Move();
+    /*
+        Method to get speed of this monster
+    */
+    public float getSpeed()
+    {
+        return this.speed;
     }
-
+    /*
+        Method to get max speed of this monster
+    */
+    public float getMaxSpeed()
+    {
+        return this.maxSpeed;
+    }
+    /*
+        Method to set active status of this monster
+    */
     public void SetActive(bool value){
         IsActive = value;
     }
-
+    /*
+        Method to set speed of this monster 
+    */
     public void setSpeed(float givenSpeed)
     {
         this.speed = givenSpeed;
     }
-
-    public void decreaseSpeed(float givenSpeed)
-    {
-        this.speed -= givenSpeed;
-    }
-
+    /*
+        Method to set max speed of this monster 
+    */
     public void setMaxSpeed(float givenMax)
     {
         this.maxSpeed = givenMax;
+    }
+    //************************************************************
+    //OTHER METHODS
+    //************************************************************
+    private void Awake()
+    {
+        maxSpeed = speed;
+    }
+    private void Update(){
+        HandleDebuffs();
+        Move();
+    }
+    /*
+        Method that decreases the speed of this monster 
+    */
+    public void decreaseSpeed(float givenSpeed)
+    {
+        this.speed -= givenSpeed;
     }
 
     //Spawns a monster on a map by setting it's position first to the position of the 
@@ -226,6 +262,9 @@ public class Monster : MonoBehaviour
         }
     }
 
+    /*
+        Method that applies debuff on this monster 
+    */
     public void AddDebuff(Debuff givenDebuff)
     {
         //check the list of debuff if this given debuff already exist
@@ -237,12 +276,18 @@ public class Monster : MonoBehaviour
         
     }
 
+    /*
+        Method that removes debuff from this monster 
+    */
     public void RemoveDebuff(Debuff givenDebuff)
     {
         //remove given debuff from list
         debuffsToRemove.Add(givenDebuff);
     }
 
+    /*
+        Method that handles all of the debuffs of this monster 
+    */
     private void HandleDebuffs()
     {
         //if a debuff was added to the list (so more than zero)
@@ -270,26 +315,5 @@ public class Monster : MonoBehaviour
             //update every debuff in the list
             debuff.Update();
         }
-    }
-
-    /*
-        Method to get element type of this monster
-    */
-    public Element getElementType()
-    {
-        return this.elementType;
-    }
-
-    /*
-        Method to get speed of this monster
-    */
-    public float getSpeed()
-    {
-        return this.speed;
-    }
-
-    public float getMaxSpeed()
-    {
-        return this.maxSpeed;
     }
 }
