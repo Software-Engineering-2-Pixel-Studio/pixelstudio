@@ -12,7 +12,21 @@ public class MonsterScript : MonoBehaviourPun, IPunInstantiateMagicCallback
     private bool isAlive;
     private bool isActive;
 
+    //money you get from killing these monsters
+    private int dummyIncome = 5;
+    private int scarecrowIncome = 10;
+
     private Stack<Node> path;
+
+    private float maxSpeed; //max speed of monster
+
+    //list of debuffs to monsters
+    private List<Debuff> debuffsList = new List<Debuff>();
+
+    //debuffs added and removed to monster
+    private List<Debuff> debuffsToAdd = new List<Debuff>();
+    private List<Debuff> debuffsToRemove = new List<Debuff>();
+
     private Point GridPosition{ get; set;}
     private Vector3 destination; // the destination of the monster (base location)
 
@@ -21,13 +35,20 @@ public class MonsterScript : MonoBehaviourPun, IPunInstantiateMagicCallback
     void Start()
     {
         this.view = this.GetComponent<PhotonView>();
+        maxSpeed = mySpeed;
+    }
+
+    private void Awake()
+    {
+        //maxSpeed = mySpeed;
     }
 
     // Update is called once per frame
     void Update()
     {
         if(this.isActive){
-             move();
+            move();
+            HandleDebuffs();
         }
     }
 
@@ -46,6 +67,28 @@ public class MonsterScript : MonoBehaviourPun, IPunInstantiateMagicCallback
     {
         return this.view.ViewID;
     }
+
+    public void SetActive(bool value)
+    {
+        isActive = value;
+    }
+
+    public void setSpeed(float givenSpeed)
+    {
+        this.mySpeed = givenSpeed;
+    }
+
+    public void decreaseSpeed(float givenSpeed)
+    {
+        this.mySpeed -= givenSpeed;
+    }
+
+    public void setMaxSpeed(float givenMax)
+    {
+        this.maxSpeed = givenMax;
+    }
+
+    //method that sets the path(from spawn to base) to the monster
     private void setPath(Stack<Node> newPath){
         if(newPath != null){
             this.path = newPath;
@@ -53,6 +96,8 @@ public class MonsterScript : MonoBehaviourPun, IPunInstantiateMagicCallback
             this.destination = this.path.Pop().WorldPosition;
         }
     }
+
+    //method to move the moster from their position towards the base
     private void move(){
         if(this.isActive){
             this.transform.position = Vector2.MoveTowards(this.transform.position, this.destination, this.mySpeed*Time.deltaTime);
@@ -81,8 +126,18 @@ public class MonsterScript : MonoBehaviourPun, IPunInstantiateMagicCallback
             this.myHP = (float) data[1];
             //monsterSpeed
             this.mySpeed = (float) data[2];
+
             //monsterIncome
-            this.myIncome = (int) data[3];
+            this.myIncome = (int)data[3];
+            if (this.myName == "TrainingDummy")
+            {
+                this.myIncome = dummyIncome;
+            }
+            else if (this.myName == "Scarecrow")
+            {
+                this.myIncome = scarecrowIncome;
+            }
+            
             //isAlive
             this.isAlive = (bool) data[4];
             //isActive
@@ -120,12 +175,17 @@ public class MonsterScript : MonoBehaviourPun, IPunInstantiateMagicCallback
         //in case we need to release the moster and make it inactive
         if(destroy){
             //Release();
+            //clear debuffs
+            debuffsList.Clear();
+
             ChangeIsActiveState(false);
             ChangeIsAliveState(false);
             WaveManager.Instance.RemoveMonster(this);
         }
     }
 
+    //method that starts action when the monster collides with the base 
+    //      -> meaning that the monster enters the base
     private void OnTriggerEnter2D(Collider2D other)
     {
         //if the monster collide with the base
@@ -155,12 +215,17 @@ public class MonsterScript : MonoBehaviourPun, IPunInstantiateMagicCallback
         {
             //do some damage
             //this.myHP -= damage;
-            DecreaseHP(damage);
+            if(PhotonNetwork.IsMasterClient)
+            {
+                DecreaseHP(damage);
+            }
             //Debug.Log("health: " + healthValue.ToString());
 
             if (this.myHP <= 0) //if it's dead (health is 0)
             {
+                //add currency and exp
                 CurrencyManager.Instance.AddCurrency(this.myIncome);
+                //GameManager.Instance.addExp(expDummy);
 
                 //this.isActive = false;
                 ChangeIsActiveState(false);
@@ -213,5 +278,65 @@ public class MonsterScript : MonoBehaviourPun, IPunInstantiateMagicCallback
     {
         this.view.RPC("destroyThisMonsterRPC", RpcTarget.MasterClient);
     }
+
+    public void AddDebuff(Debuff givenDebuff)
+    {
+        //check the list of debuff if this given debuff already exist
+        if (!debuffsList.Exists(debuff => debuff.GetType() == givenDebuff.GetType()))
+        {
+            //add debuff to the list
+            debuffsToAdd.Add(givenDebuff);
+        }
+
+    }
+
+    public void RemoveDebuff(Debuff givenDebuff)
+    {
+        //remove given debuff from list
+        debuffsToRemove.Add(givenDebuff);
+    }
+
+    private void HandleDebuffs()
+    {
+        //if a debuff was added to the list (so more than zero)
+        if (debuffsToAdd.Count > 0)
+        {
+            //add it to list of debuffs
+            debuffsList.AddRange(debuffsToAdd);
+
+            //make sure to clear the list
+            debuffsToAdd.Clear();
+        }
+
+        //run through each debuff needed to remove
+        foreach (Debuff debuff in debuffsToRemove)
+        {
+            //remove them from the list of debuffs
+            debuffsList.Remove(debuff);
+        }
+
+        //clear the list of debuffs
+        debuffsToRemove.Clear();
+
+        foreach (Debuff debuff in debuffsList)
+        {
+            //update every debuff in the list
+            debuff.Update();
+        }
+    }
+
+    /*
+        Method to get speed of this monster
+    */
+    public float getSpeed()
+    {
+        return this.mySpeed;
+    }
+
+    public float getMaxSpeed()
+    {
+        return this.maxSpeed;
+    }
+
 
 }

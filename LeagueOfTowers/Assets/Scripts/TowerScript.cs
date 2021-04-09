@@ -92,6 +92,22 @@ public abstract class TowerScript : MonoBehaviourPun, IPunInstantiateMagicCallba
         return this.view.ViewID;
     }
 
+    /*
+        Method to get debuff duration of this tower
+    */
+    public float getDebuffDuration()
+    {
+        return this.duration;
+    }
+
+    /*
+        Method to get debuff proc chance of this tower
+    */
+    public float getDebuffProcChance()
+    {
+        return this.debuffChance;
+    }
+
     public int GetLevel()
     {
         return this.level;
@@ -101,6 +117,9 @@ public abstract class TowerScript : MonoBehaviourPun, IPunInstantiateMagicCallba
     {
         return this.nextUpgrade;
     }
+
+    public abstract Debuff GetDebuff();
+
     public virtual string GetStats()
     {
         //set the default string passed to tower stats panel

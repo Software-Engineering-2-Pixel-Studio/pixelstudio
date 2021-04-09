@@ -38,7 +38,7 @@ public abstract class Debuff
     {
         if (target != null) //if target exists
         {
-            //target.RemoveDebuff(this);
+            target.RemoveDebuff(this);
         }
     }
 }

@@ -24,10 +24,10 @@ public class BaseTowerScript : TowerScript
         //Debug.Log(this.projectileType);
     }
 
-    // public override Debuff GetDebuff()
-    // {
-    //     return new LightDebuff(getTarget(), getDebuffDuration());
-    // }
+    public override Debuff GetDebuff()
+    {
+        return new LightDebuff(GetTargetMonster(), getDebuffDuration());
+    }
 
     //override and add string to default tower stats
     // public override string GetStats()

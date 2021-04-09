@@ -80,6 +80,22 @@ public class ProjectileScript : MonoBehaviourPun, IPunInstantiateMagicCallback
         }
     }
 
+    private void ApplyDebuff()
+    {
+        
+        //roll a chance number for debuff
+        float rollNum = Random.Range(0, 100);
+
+        //add the debuff if roll is more than or equal to proc chance
+        if (rollNum <= ownerTower.getDebuffProcChance())
+        {
+            //get parent tower's debuff and apply it to target monster
+            targetMonster.AddDebuff(ownerTower.GetDebuff());
+        }
+
+
+    }
+
     /*
         this method is called if projectile hit other ojbects
     */
@@ -102,6 +118,7 @@ public class ProjectileScript : MonoBehaviourPun, IPunInstantiateMagicCallback
                     {
                         if(this.view.IsMine){
                             targetMonster.TakeDamage(this.myDamage);
+                            ApplyDebuff();
                         }
 
                         DestroyThisProjectile();

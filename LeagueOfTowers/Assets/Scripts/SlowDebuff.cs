@@ -25,8 +25,8 @@ public class SlowDebuff : Debuff
             {
                 //apply speed and lower the speed.
                 slowIsApplied = true;
-                //float slowSpeed = (target.getMaxSpeed() * slowFactor) / 100;
-                //target.decreaseSpeed(slowSpeed);
+                float slowSpeed = (target.getMaxSpeed() * slowFactor) / 100;
+                target.decreaseSpeed(slowSpeed);
             }
         }
 
@@ -40,7 +40,7 @@ public class SlowDebuff : Debuff
             slowIsApplied = false;
 
             //set speed back to normal max speed
-            //target.setSpeed(target.getMaxSpeed());
+            target.setSpeed(target.getMaxSpeed());
 
             base.Remove();
         }

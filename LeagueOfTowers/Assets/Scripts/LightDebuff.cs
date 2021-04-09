@@ -14,7 +14,7 @@ public class LightDebuff : Debuff
         //if there's a target
         if (target != null)
         {
-            //target.setSpeed(0);
+            target.setSpeed(0);
         }
 
         base.Update();
@@ -26,7 +26,7 @@ public class LightDebuff : Debuff
         if (target != null) //if target exists
         {
             //set speed to original max speed of target
-            //target.setSpeed(target.getMaxSpeed());
+            target.setSpeed(target.getMaxSpeed());
 
             base.Remove();
         }

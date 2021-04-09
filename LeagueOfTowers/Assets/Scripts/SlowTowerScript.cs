@@ -44,29 +44,29 @@ public class SlowTowerScript : TowerScript
         return this.slowFactor;
     }
 
-    // public override Debuff GetDebuff()
-    // {
-    //     return new SlowDebuff(slowFactor, getDebuffDuration(),getTarget());
-    // }
+    public override Debuff GetDebuff()
+    {
+        return new SlowDebuff(slowFactor, getDebuffDuration(), GetTargetMonster());
+    }
 
     //override and add string to default tower stats
-    // public override string GetStats()
-    // {
-    //     //additional info
-    //     string addInfo = "\nDeal low damage and \nslow monsters";
+    public override string GetStats()
+    {
+        //additional info
+        string addInfo = "\nDeal low damage and \nslow monsters";
 
-    //     //return the default string result
-    //     string result = string.Format("<color=#00ffffff>{0}</color>{1} \nSlow Speed: {2}% {3}",
-    //         tooltipHeader, base.GetStats(), slowFactor, addInfo);
+        //return the default string result
+        string result = string.Format("<color=#00ffffff>{0}</color>{1} \nSlow Speed: {2}% {3}",
+            tooltipHeader, base.GetStats(), slowFactor, addInfo);
 
-    //     if (GetNextUpgrade != null) //if next upgrade is available
-    //     {
-    //         result = string.Format("<color=#00ffffff>{0}</color>{1} \nSlow Speed: {2}% <color=#00ff00ff>+{3}%</color> {4}",
-    //             tooltipHeader, base.GetStats(), slowFactor, GetNextUpgrade.SlowingFactor, addInfo);
-    //     }
+        if (this.nextUpgrade != null) //if next upgrade is available
+        {
+            result = string.Format("<color=#00ffffff>{0}</color>{1} \nSlow Speed: {2}% <color=#00ff00ff>+{3}%</color> {4}",
+                tooltipHeader, base.GetStats(), slowFactor, this.nextUpgrade.SlowingFactor, addInfo);
+        }
 
-    //     return result;
-    // }
+        return result;
+    }
 
     //override and also add tower header string
     // public override string GetTechStats()

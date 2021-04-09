@@ -29,7 +29,7 @@ public class FireDebuff : Debuff
                 timeSinceLastTick = 0;
 
                 //do damage to monster
-                //target.TakeDamage(tickDamage, Element.FIRE);
+                target.TakeDamage(tickDamage);
             }
         }
 

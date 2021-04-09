@@ -33,23 +33,23 @@ public class LightTowerScript : TowerScript
         //Debug.Log(this.projectileType);
     }
 
-    // public override Debuff GetDebuff()
-    // {
-    //     return new LightDebuff(getTarget(), getDebuffDuration());
-    // }
+    public override Debuff GetDebuff()
+    {
+        return new LightDebuff(GetTargetMonster(), getDebuffDuration());
+    }
 
     //override and add string to default tower stats
-    // public override string GetStats()
-    // {
-    //     //additional info
-    //     string addInfo = "\nDeal low damage \nand stun monsters";
+    public override string GetStats()
+    {
+        //additional info
+        string addInfo = "\nDeal low damage \nand stun monsters";
 
-    //     //return the default string result
-    //     string result = string.Format("<color=#FFFF00>{0}</color>{1} {2}",
-    //         tooltipHeader, base.GetStats(), addInfo);
+        //return the default string result
+        string result = string.Format("<color=#FFFF00>{0}</color>{1} {2}",
+            tooltipHeader, base.GetStats(), addInfo);
 
-    //     return result;
-    // }
+        return result;
+    }
 
     //override and also add tower header string
     // public override string GetTechStats()

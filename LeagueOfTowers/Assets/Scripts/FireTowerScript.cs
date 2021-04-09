@@ -72,29 +72,29 @@ public class FireTowerScript : TowerScript
 
     //punRPC
 
-    // public override Debuff GetDebuff()
-    // {
-    //     return new FireDebuff(tickDamage, tickTime, getDebuffDuration(), getTarget());
-    // }
+    public override Debuff GetDebuff()
+    {
+        return new FireDebuff(tickDamage, tickTime, getDebuffDuration(), GetTargetMonster());
+    }
 
     //override and add string to default tower stats
-    // public override string GetStats()
-    // {
-    //     //additional info
-    //     string addInfo = "\nDeal damage with a \nchance of lingering \ndamage over time";
+    public override string GetStats()
+    {
+        //additional info
+        string addInfo = "\nDeal damage with a \nchance of lingering \ndamage over time";
 
-    //     //return the default string result
-    //     string result = string.Format("<color=#ffa500ff>{0}</color>{1} \nTick time: {2}sec \nTick damage: {3} {4}",
-    //         tooltipHeader, base.GetStats(), tickTime, tickDamage, addInfo);
+        //return the default string result
+        string result = string.Format("<color=#ffa500ff>{0}</color>{1} \nTick time: {2}sec \nTick damage: {3} {4}",
+            tooltipHeader, base.GetStats(), tickTime, tickDamage, addInfo);
 
-    //     if (GetNextUpgrade != null) //if next upgrade is available
-    //     {
-    //         result = string.Format("<color=#ffa500ff>{0}</color>{1} \nTick time: {2}sec <color=#00ff00ff>+{4}</color> \nTick damage: {3}<color=#00ff00ff>+{5}</color> {6}",
-    //             tooltipHeader, base.GetStats(), tickTime, tickDamage, GetNextUpgrade.TickTime, GetNextUpgrade.TickDamage, addInfo);
-    //     }
+        if (this.nextUpgrade != null) //if next upgrade is available
+        {
+            result = string.Format("<color=#ffa500ff>{0}</color>{1} \nTick time: {2}sec <color=#00ff00ff>+{4}</color> \nTick damage: {3}<color=#00ff00ff>+{5}</color> {6}",
+                tooltipHeader, base.GetStats(), tickTime, tickDamage, this.nextUpgrade.TickTime, this.nextUpgrade.TickDamage, addInfo);
+        }
 
-    //     return result;
-    // }
+        return result;
+    }
 
     //override and also add tower header string
     // public override string GetTechStats()
