@@ -15,7 +15,7 @@ public class MonsterData : Singleton<MonsterData>
         //speed
         data[2] = (float) 3.0f;
         //income
-        data[3] = (int) 4;
+        data[3] = (int) 5;
         //isAlive
         data[4] = (bool) true;
         //isActive
@@ -33,7 +33,7 @@ public class MonsterData : Singleton<MonsterData>
         //speed
         data[2] = (float) 3.0f;
         //income
-        data[3] = (int) 8;
+        data[3] = (int) 10;
         //isAlive
         data[4] = (bool) true;
         //isActive

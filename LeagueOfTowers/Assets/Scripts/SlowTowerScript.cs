@@ -111,7 +111,6 @@ public class SlowTowerScript : TowerScript
         this.duration += this.nextUpgrade.DebuffDuration;
 
         this.slowFactor += this.nextUpgrade.SlowingFactor;
-        Debug.Log("slowFactor of Slow tower = " + slowFactor);
 
         //increase tower level
         this.level++;

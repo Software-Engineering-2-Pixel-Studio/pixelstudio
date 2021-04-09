@@ -357,7 +357,7 @@ public abstract class TowerScript : MonoBehaviourPun, IPunInstantiateMagicCallba
         }
 
         //if the target doesn't exist anymore in the tower range and there are still monsters in the queue
-        if (this.target == null && this.monsters.Count > 0)
+        if (this.target == null && this.monsters.Count > 0 && monsters.Peek().GetIsActive())
         {
             //remove the monster from the queue
             this.target = this.monsters.Dequeue();
@@ -373,6 +373,12 @@ public abstract class TowerScript : MonoBehaviourPun, IPunInstantiateMagicCallba
                 shoot();
                 this.canAttack = false;
             }
+        }
+
+        //reset the target when monster enters the portal
+        if (target != null && !target.GetIsAlive() || target != null && !target.GetIsActive())
+        {
+            target = null;
         }
     }
 

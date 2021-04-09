@@ -161,11 +161,11 @@ public class TowerData : Singleton<TowerData>
         //Element
         data.Add((byte) Element.SLOW);
         //debuffchance
-        data.Add((float) 50.0f);
+        data.Add((float) 80.0f);
         //duration
         data.Add((float) 2.0f);
         //slowFactor
-        data.Add((float) 1.0);
+        data.Add((float) 50.0f);
         
         return data;
     }
@@ -182,7 +182,7 @@ public class TowerData : Singleton<TowerData>
         //plus chance
         data.Add((float) 10.0f);
         //plus slow factor
-        data.Add((float) 0.25f);
+        data.Add((float) 10.0f);
 
         return data;
     }
@@ -199,7 +199,7 @@ public class TowerData : Singleton<TowerData>
         //plus chance
         data.Add((float) 10.0f);
         //plus slow factor
-        data.Add((float) 0.25f);
+        data.Add((float) 15.0f);
 
         return data;
     }
@@ -227,7 +227,7 @@ public class TowerData : Singleton<TowerData>
         //Element
         data.Add((byte) Element.LIGHT);
         //debuffchance
-        data.Add((float) 50.0f);
+        data.Add((float) 80.0f);
         //duration
         data.Add((float) 1.0f);
         
@@ -241,7 +241,7 @@ public class TowerData : Singleton<TowerData>
         //plus damage
         data.Add((float) 10.0f);
         //plus duration
-        data.Add((float) 0.5f);
+        data.Add((float) 1.0f);
         //plus chance
         data.Add((float) 10.0f);
 
@@ -256,7 +256,7 @@ public class TowerData : Singleton<TowerData>
         //plus damage
         data.Add((float) 10.0f);
         //plus duration
-        data.Add((float) 0.5f);
+        data.Add((float) 2.0f);
         //plus chance
         data.Add((float) 10.0f);
 

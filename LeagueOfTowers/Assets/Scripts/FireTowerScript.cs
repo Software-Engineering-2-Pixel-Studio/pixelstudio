@@ -141,7 +141,6 @@ public class FireTowerScript : TowerScript
 
         this.tickDamage += this.nextUpgrade.TickDamage;
         this.tickTime += this.nextUpgrade.TickTime;
-        Debug.Log("tickDamage of Slow tower = " + tickDamage);
 
         //increase tower level
         this.level++;

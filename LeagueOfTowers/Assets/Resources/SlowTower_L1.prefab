@@ -105,7 +105,7 @@ MonoBehaviour:
   duration: 0
   level: 0
   projectilePrefab: {fileID: 5169112953947239213, guid: cadaf64132996a941985ba3f66acffe0, type: 3}
-  slowFactor: 1
+  slowFactor: 50
 --- !u!114 &7805580536374042748
 MonoBehaviour:
   m_ObjectHideFlags: 0

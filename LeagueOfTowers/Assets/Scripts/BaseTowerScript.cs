@@ -30,17 +30,17 @@ public class BaseTowerScript : TowerScript
     }
 
     //override and add string to default tower stats
-    // public override string GetStats()
-    // {
-    //     //additional info
-    //     string addInfo = "\nDeal low damage \nand stun monsters";
+     public override string GetStats()
+    {
+        //additional info
+        string addInfo = "\nNormal base tower";
 
-    //     //return the default string result
-    //     string result = string.Format("<color=#FFFF00>{0}</color>{1} {2}",
-    //         tooltipHeader, base.GetStats(), addInfo);
+        //return the default string result
+        string result = string.Format("<color=#FFFF00>{0}</color>{1} {2}",
+            tooltipHeader, base.GetStats(), addInfo);
 
-    //     return result;
-    // }
+        return result;
+    }
 
     //override and also add tower header string
     // public override string GetTechStats()
@@ -75,9 +75,6 @@ public class BaseTowerScript : TowerScript
         this.damage += this.nextUpgrade.Damage;
         this.debuffChance += this.nextUpgrade.DebuffProcChance;
         this.duration += this.nextUpgrade.DebuffDuration;
-
-        // this.slowFactor += this.nextUpgrade.SlowingFactor;
-        // Debug.Log("slowFactor of Slow tower = " + slowFactor);
 
         //increase tower level
         this.level++;

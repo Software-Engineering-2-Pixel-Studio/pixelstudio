@@ -10,11 +10,7 @@ public class MonsterScript : MonoBehaviourPun, IPunInstantiateMagicCallback
     private float mySpeed;
     private int myIncome;
     private bool isAlive;
-    private bool isActive;
-
-    //money you get from killing these monsters
-    private int dummyIncome = 5;
-    private int scarecrowIncome = 10;
+    private bool isActive;   // the condition of the monster (can  move or not)
 
     private Stack<Node> path;
 
@@ -32,24 +28,16 @@ public class MonsterScript : MonoBehaviourPun, IPunInstantiateMagicCallback
 
     private PhotonView view;
     // Start is called before the first frame update
-    void Start()
+    private void Start()
     {
         this.view = this.GetComponent<PhotonView>();
-        maxSpeed = mySpeed;
-    }
-
-    private void Awake()
-    {
-        //maxSpeed = mySpeed;
     }
 
     // Update is called once per frame
-    void Update()
+    private void Update()
     {
-        if(this.isActive){
-            move();
-            HandleDebuffs();
-        }
+        HandleDebuffs();
+        move();
     }
 
     //get/set
@@ -126,17 +114,10 @@ public class MonsterScript : MonoBehaviourPun, IPunInstantiateMagicCallback
             this.myHP = (float) data[1];
             //monsterSpeed
             this.mySpeed = (float) data[2];
+            maxSpeed = mySpeed;
 
             //monsterIncome
             this.myIncome = (int)data[3];
-            if (this.myName == "TrainingDummy")
-            {
-                this.myIncome = dummyIncome;
-            }
-            else if (this.myName == "Scarecrow")
-            {
-                this.myIncome = scarecrowIncome;
-            }
             
             //isAlive
             this.isAlive = (bool) data[4];
@@ -172,8 +153,11 @@ public class MonsterScript : MonoBehaviourPun, IPunInstantiateMagicCallback
         //to make sure it is exactly equal to *to*
         this.transform.localScale = to;
 
+        //set monster to active
+        ChangeIsActiveState(true);
+
         //in case we need to release the moster and make it inactive
-        if(destroy){
+        if (destroy){
             //Release();
             //clear debuffs
             debuffsList.Clear();
@@ -211,14 +195,11 @@ public class MonsterScript : MonoBehaviourPun, IPunInstantiateMagicCallback
     */
     public void TakeDamage(float damage)
     {
-        if (this.isAlive && this.isActive) //if monster is active and alive
+        if (this.isActive) //if monster is active and alive
         {
             //do some damage
             //this.myHP -= damage;
-            if(PhotonNetwork.IsMasterClient)
-            {
-                DecreaseHP(damage);
-            }
+            DecreaseHP(damage);
             //Debug.Log("health: " + healthValue.ToString());
 
             if (this.myHP <= 0) //if it's dead (health is 0)

@@ -85,9 +85,6 @@ public class LightTowerScript : TowerScript
         this.debuffChance += this.nextUpgrade.DebuffProcChance;
         this.duration += this.nextUpgrade.DebuffDuration;
 
-        //this.slowFactor += this.nextUpgrade.SlowingFactor;
-        //Debug.Log("slowFactor of Slow tower = " + slowFactor);
-
         //increase tower level
         this.level++;
         this.nextUpgradeLevel++;

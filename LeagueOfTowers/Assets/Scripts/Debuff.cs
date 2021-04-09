@@ -26,7 +26,7 @@ public abstract class Debuff
         elapsed += Time.deltaTime;
 
         //if time elapsed is equal or more than duration
-        if (elapsed-1.5f >= duration)
+        if (elapsed >= duration)
         {
             //remove the debuff
             Remove();

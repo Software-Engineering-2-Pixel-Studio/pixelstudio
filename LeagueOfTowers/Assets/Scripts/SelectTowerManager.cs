@@ -127,6 +127,7 @@ public class SelectTowerManager : Singleton<SelectTowerManager>
     public void HideSelectedTowerStats()
     {
         statsPanel.SetActive(false);
+        UpdateUpgradeTooltip();
     }
 
     /*
