@@ -12,15 +12,6 @@ public class SlowTowerScript : TowerScript
     protected override void Start()
     {
         base.Start();
-        // base.Set();
-        // setElementType(Element.SLOW);
-
-        // Upgrades = new TowerUpgrade[]
-        // {
-        //     //price, damage, debuffDuration, debuffProcChance, slowing factor
-        //     new TowerUpgrade(10, 5, 1f, 5, 10),
-        //     new TowerUpgrade(15, 10, 1f, 5, 20),
-        // };
     }
 
     protected override void Update()
@@ -67,24 +58,7 @@ public class SlowTowerScript : TowerScript
 
         return result;
     }
-
-    //override and also add tower header string
-    // public override string GetTechStats()
-    // {
-    //     //return a string result with tower header
-    //     string result = string.Format("<color=#00ffffff>{0}</color> {1}", tooltipHeader, base.GetTechStats());
-
-    //     return result;
-    // }
-
-    //override the default upgrade tower function
-    // public override void Upgrade()
-    // {
-    //     //increase the slowing factor
-    //     this.slowFactor += GetNextUpgrade.SlowingFactor;
-    //     base.Upgrade();
-    // }
-
+    
     public override void Upgrade()
     {
         if(this.view.IsMine)

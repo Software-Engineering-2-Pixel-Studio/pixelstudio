@@ -146,7 +146,6 @@ public class Tile : MonoBehaviour
         GameObject towerPref = GameManager.Instance.GetPickedTowerButton().GetTowerPrefab();
 
         //Create the tower prefab on the scene
-        //GameObject tower = Instantiate(towerPref);
         List<object> lo = new List<object>();
         string towerType = pickedButton.GetTowerName();
         if(towerType == "FireTower")

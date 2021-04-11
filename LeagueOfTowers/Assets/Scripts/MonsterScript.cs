@@ -163,7 +163,6 @@ public class MonsterScript : MonoBehaviourPun, IPunInstantiateMagicCallback
 
         //in case we need to release the moster and make it inactive
         if (destroy){
-            //Release();
             //clear debuffs
             debuffsList.Clear();
 

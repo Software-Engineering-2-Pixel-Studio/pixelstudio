@@ -63,11 +63,6 @@ public class MapManager : Singleton<MapManager>
     }
 
     //methods
-    /*public float getTileSize()
-    {
-        //extract width (x) value of a sprite 
-        return tile.GetComponent<SpriteRenderer>().sprite.bounds.size.x;
-    }*/
 
     //function above is the same with this (a C# feature)
     public float TileSize
@@ -83,8 +78,6 @@ public class MapManager : Singleton<MapManager>
     // Start is called before the first frame update
     private void Start()
     {
-        //set up prefab Tile_Grass_0 in Prefabs folder to variable tile at runtime
-        /*tile = (GameObject) Resources.Load("Prefabs/Tile_Grass_0", typeof(GameObject));*/
         view = this.GetComponent<PhotonView>();
         CreateLevel();
     }
@@ -111,9 +104,6 @@ public class MapManager : Singleton<MapManager>
         //this line set the origin point to the topleft screen.
         Vector3 worldStart = Camera.main.ScreenToWorldPoint(new Vector3(0, Screen.height, 0));
 
-        /*int mapXSize = mapData[0].ToCharArray().Length;
-        int mapYSize = mapData.Length;*/
-
         xIndexSize = mapData[0].ToCharArray().Length;
         yIndexSize = mapData.Length;
 
@@ -124,9 +114,7 @@ public class MapManager : Singleton<MapManager>
         {
             char[] newTiles = mapData[y].ToCharArray();
             for (int x = 0; x < xIndexSize; x++) //x-coords
-            {
-                //tileID = y.ToString() + x.ToString();
-                
+            {      
                 PlaceTile(tileCount, newTiles[x].ToString(), x, y, worldStart);
                 tileCount++;
                 

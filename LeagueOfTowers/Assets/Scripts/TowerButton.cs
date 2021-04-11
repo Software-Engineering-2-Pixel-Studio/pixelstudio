@@ -20,8 +20,6 @@ public class TowerButton : MonoBehaviour
     {
         this.SetPriceText();
 
-        //add a new currency changed event to the tower buttons
-        //CurrencyManager.Instance.Changed += new CurrencyChanged(PriceCheck);
     }
 
     // Update is called once per frame

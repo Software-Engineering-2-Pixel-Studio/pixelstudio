@@ -8,7 +8,6 @@ public class WaveManager : Singleton<WaveManager>
 {
     [SerializeField] private GameObject startWaveButton; //reference to the StartWave button
 
-    //private List<Monster> activeMonsters = new List<Monster>(); //the list of the monsters in the wave
     private List<MonsterScript> activeMonsters = new List<MonsterScript>();
     private int waves = 0;   //counter for the Waves
     

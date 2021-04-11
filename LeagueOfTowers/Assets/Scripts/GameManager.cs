@@ -10,12 +10,7 @@ public class GameManager : Singleton<GameManager>
     //fields
     //this is for choosing tower from sidebar
     [SerializeField] private TowerButton pickedButton;
-
-
-    //the list of the monsters in the wave
-    //private List<Monster> activeMonsters = new List<Monster>();
-
-    
+ 
     //Pool of objects (monsters/towers)
     public ObjectPool Pool{ get; set; }
 
@@ -43,8 +38,6 @@ public class GameManager : Singleton<GameManager>
     // Start is called before the first frame update
     private void Start()
     {
-        //this.view = GetComponent<PhotonView>();
-        //Lives = 10;
 
         //initialize variables
         expPoints = 0;

@@ -9,9 +9,6 @@ public delegate void CurrencyChanged();
 
 public class CurrencyManager : Singleton<CurrencyManager>
 {
-    //an event that is triggered when the currency changes
-    //public event CurrencyChanged Changed;
-
     //fields
     [SerializeField] private int currency;              //global share currency value for players
     [SerializeField] private Text currencyDisplay;      //display text box for currency value on scene
@@ -65,8 +62,6 @@ public class CurrencyManager : Singleton<CurrencyManager>
     {
         this.view.RPC("addCurrencyRPC", RpcTarget.All, earnAmount);
 
-        //call currency change
-        //OnCurrencyChanged();
     }
 
     /*
@@ -77,8 +72,6 @@ public class CurrencyManager : Singleton<CurrencyManager>
     {
         this.view.RPC("subCurrencyRPC", RpcTarget.All, payAmount);
 
-        //call currency change
-        //OnCurrencyChanged();
     }
 
     /*

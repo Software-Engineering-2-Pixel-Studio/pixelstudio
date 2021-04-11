@@ -11,15 +11,6 @@ public class LightTowerScript : TowerScript
     protected override void Start()
     {
         base.Start();
-        // base.Set();
-        // setElementType(Element.LIGHT);
-
-        // Upgrades = new TowerUpgrade[]
-        // {
-        //     //price, damage, debuffDuration, debuffProcChance
-        //     new TowerUpgrade(10, 5, 1f, 5),
-        //     new TowerUpgrade(15, 10, 1f, 5),
-        // };
     }
 
     protected override void Update()
@@ -50,15 +41,6 @@ public class LightTowerScript : TowerScript
 
         return result;
     }
-
-    //override and also add tower header string
-    // public override string GetTechStats()
-    // {
-    //     //return a string result with tower header
-    //     string result = string.Format("<color=#FFFF00>{0}</color> {1}", tooltipHeader, base.GetTechStats());
-
-    //     return result;
-    // }
 
     public override void Upgrade()
     {

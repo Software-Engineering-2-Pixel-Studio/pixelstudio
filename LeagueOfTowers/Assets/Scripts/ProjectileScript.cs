@@ -39,9 +39,6 @@ public class ProjectileScript : MonoBehaviourPun, IPunInstantiateMagicCallback
         else{
             DestroyThisProjectile();
         }
-        // else{
-        //     Debug.Log("not found");
-        // }
     }
 
     
@@ -105,7 +102,6 @@ public class ProjectileScript : MonoBehaviourPun, IPunInstantiateMagicCallback
         if (other.tag == "Monster") //if the target in range is a monster
         {
             if(targetMonster == null){
-                //Destroy(this.gameObject);
                 //Debug.Log("Target Monster is not found");
                 DestroyThisProjectile();
                 return;
@@ -123,11 +119,7 @@ public class ProjectileScript : MonoBehaviourPun, IPunInstantiateMagicCallback
 
                         }
                         DestroyThisProjectile();
-                    }
-                    // targetMonster.TakeDamage(this.myDamage);
-                    // DestroyThisProjectile();
-                    
-                    
+                    }                
                 }
             }
 

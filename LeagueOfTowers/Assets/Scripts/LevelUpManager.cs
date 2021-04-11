@@ -46,14 +46,6 @@ public class LevelUpManager : Singleton<LevelUpManager>
     //actions
     public void AddExpPoints(int earnEXP)
     {
-        // this.expPoints += earnEXP;
-        // this.expPointsDisplayText.text = string.Format("Exp: {0} / {1}", this.expPoints.ToString(), this.expRequireToLevelUP);
-
-        // if(this.expPoints >= this.expRequireToLevelUP)
-        // {
-        //     LevelUp();
-            
-        // }
         this.view.RPC("addExpRPC", RpcTarget.All, earnEXP);
     }
 

@@ -16,15 +16,6 @@ public class FireTowerScript : TowerScript
     protected override void Start()
     {
         base.Start();
-        //base.Set();
-        //setElementType(Element.FIRE);
-
-        // Upgrades = new TowerUpgrade[]
-        // {
-        //     //price, damage, debuffDuration, debuffProcChance, tickTime, damage per tick
-        //     new TowerUpgrade(10, 5, 0.5f, 5, 0.1f, 1),
-        //     new TowerUpgrade(15, 10, 0.5f, 5, 0.1f, 1),
-        // };
     }
 
     protected override void Update()
@@ -95,24 +86,6 @@ public class FireTowerScript : TowerScript
 
         return result;
     }
-
-    //override and also add tower header string
-    // public override string GetTechStats()
-    // {
-    //     //return a string result with tower header
-    //     string result = string.Format("<color=#ffa500ff>{0}</color> {1}", tooltipHeader, base.GetTechStats());
-
-    //     return result;
-    // }
-
-    //override the default upgrade tower function
-    // public override void Upgrade()
-    // {
-    //     //decrease ticktime and increase tick damage
-    //     this.tickTime -= GetNextUpgrade.TickTime;
-    //     this.tickDamage += GetNextUpgrade.TickDamage;
-    //     base.Upgrade();
-    // }
 
     public override void Upgrade()
     {
