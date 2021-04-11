@@ -23,7 +23,8 @@ public class MapManager : Singleton<MapManager>
     private float[] mapBounds = new float[4];   //minX,maxX,minY,maxY
 
     //a dictionary of tiles, where each tile mapped on a gridposition of the map
-    private Dictionary<Point, Tile> Tiles;
+    private Dictionary<Point, Tile> Tiles;      //key = GridPoint, value = Tile
+    private Dictionary<int, Tile> tile2;        //key = tileID, value = Tile
 
     //start and end pathing
     private Point spawnPos;
@@ -62,11 +63,6 @@ public class MapManager : Singleton<MapManager>
     }
 
     //methods
-    /*public float getTileSize()
-    {
-        //extract width (x) value of a sprite 
-        return tile.GetComponent<SpriteRenderer>().sprite.bounds.size.x;
-    }*/
 
     //function above is the same with this (a C# feature)
     public float TileSize
@@ -82,8 +78,6 @@ public class MapManager : Singleton<MapManager>
     // Start is called before the first frame update
     private void Start()
     {
-        //set up prefab Tile_Grass_0 in Prefabs folder to variable tile at runtime
-        /*tile = (GameObject) Resources.Load("Prefabs/Tile_Grass_0", typeof(GameObject));*/
         view = this.GetComponent<PhotonView>();
         CreateLevel();
     }
@@ -100,7 +94,9 @@ public class MapManager : Singleton<MapManager>
     private void CreateLevel()
     {
         Tiles = new Dictionary<Point, Tile>();
+        tile2 = new Dictionary<int, Tile>();
         string[] mapData = ReadLevelText();
+        
 
         //set the mapsize
         mapSize = new Point(mapData[0].ToCharArray().Length, mapData.Length);
@@ -108,20 +104,20 @@ public class MapManager : Singleton<MapManager>
         //this line set the origin point to the topleft screen.
         Vector3 worldStart = Camera.main.ScreenToWorldPoint(new Vector3(0, Screen.height, 0));
 
-        /*int mapXSize = mapData[0].ToCharArray().Length;
-        int mapYSize = mapData.Length;*/
-
         xIndexSize = mapData[0].ToCharArray().Length;
         yIndexSize = mapData.Length;
 
         //generate map
+        //string tileID;
+        int tileCount = 0;
         for (int y = 0; y < yIndexSize; y++)       //y-coords
         {
             char[] newTiles = mapData[y].ToCharArray();
             for (int x = 0; x < xIndexSize; x++) //x-coords
-            {
-                PlaceTile(newTiles[x].ToString(), x, y, worldStart);
-
+            {      
+                PlaceTile(tileCount, newTiles[x].ToString(), x, y, worldStart);
+                tileCount++;
+                
             }
         }
 
@@ -140,9 +136,11 @@ public class MapManager : Singleton<MapManager>
     /*
      * PlaceTile: create a tile prefab at a specific location on scene.
      */
-    private void PlaceTile(string tileType, int x, int y, Vector3 worldStart)
+    private void PlaceTile(int count, string tileType, int x, int y, Vector3 worldStart)
     {
         int tileIndex = int.Parse(tileType);
+        //string tileID = y.ToString() + x.ToString();
+        int tileID = count;
 
         int randomIndex;
         if (tileIndex == 0) //for the grass
@@ -161,16 +159,14 @@ public class MapManager : Singleton<MapManager>
         //The actual position on the scene where we place the tile
         Vector3 worldPos = new Vector3(worldStart.x + TileSize * x, worldStart.y - TileSize * y, 0);
 
-        //Instantiate(tilePrefabs[randomIndex]) = create new tile from tile prefabs
-        //Tile newTile = .....GetComponent<Tile>() mean extract the Tile script from this new tile
-        Tile newTile = Instantiate(tilePrefabs[randomIndex]).GetComponent<Tile>();
+        GameObject nTile = Instantiate(tilePrefabs[randomIndex]);
+        
+        Tile nTileScript = nTile.GetComponent<Tile>();
 
         //setup and place this new tile on world scene
-        newTile.SetUpTile(gridPos, worldPos, ground, tileIndex);
-
-        //also, add this new tile along with its gridPos to the dictionary
-        //this can be done from Tile script with Singleton help
-        //Tiles.Add(gridPos, newTile);
+        nTileScript.SetUpTile(tileID, gridPos, worldPos, ground, tileIndex);
+        
+        tile2.Add(tileID, nTileScript);
         
     }
 
@@ -206,6 +202,20 @@ public class MapManager : Singleton<MapManager>
         return mapBounds ;
     }
 
+    public GameObject getTile(int id){
+        return this.ground.GetChild(id).gameObject;
+    }
+
+    public Tile GetSpawnTile()
+    {
+        return this.Tiles[spawnPos];
+    }
+
+    public Tile GetBaseTile()
+    {
+        return this.Tiles[basePos];
+    }
+
     /*
         Method to create the spawn portal on the map
     */
@@ -218,6 +228,7 @@ public class MapManager : Singleton<MapManager>
 
         //place spawn at gridPos = (0,1) or start of the path
         theSpawn.transform.position = Tiles[spawnPos].GetCenterWorldPosition();
+        
 
         SpawnPrefab = theSpawn.GetComponent<Portal>();  //get script to  the reference
         SpawnPrefab.name = "SpawnPrefab";               // rename it 
@@ -234,9 +245,9 @@ public class MapManager : Singleton<MapManager>
         //create a base prefab on the scene
         GameObject theBase = Instantiate(basePrefab);
 
-        //place the base at grid(16,5) or end of the path
+        //place the base at grid(15,5) or end of the path
         theBase.transform.position = Tiles[basePos].GetCenterWorldPosition();
-        //theBase.transform.localScale = new Vector3(1.2f, 1.2f, 1.0f);
+
     }
 
     /*
@@ -245,6 +256,10 @@ public class MapManager : Singleton<MapManager>
     public Dictionary<Point, Tile> getTiles()
     {
         return this.Tiles;
+    }
+
+    public Dictionary<int, Tile> getTile2(){
+        return this.tile2;
     }
 
     //return number of tiles in horizontal of the map
@@ -277,13 +292,7 @@ public class MapManager : Singleton<MapManager>
         path = AStar.getPath(basePos,spawnPos); 
     }
 
-    /*
-        Sync a specific tile to be full and send signal to other players
-    */
-    public void SetTileIsPlacedAt(int gridPointX, int gridPointY)
-    {
-        this.view.RPC("setTileIsPlacedAtRPC", RpcTarget.All, gridPointX, gridPointY);
-    }
+    
 
     /*
         PunRPC
@@ -298,12 +307,11 @@ public class MapManager : Singleton<MapManager>
     }
 
     /*
-        Method to set the Tile is empty so we can place tower on it, also send the signal
-        to every player that this variable has been changed
+        Sync a specific tile to be full and send signal to other players
     */
-    public void SetTileIsEmptyAt(int gridPointX, int gridPointY)
+    public void SetTileIsPlacedAt(int gridPointX, int gridPointY)
     {
-        this.view.RPC("setTileIsEmptyAtRPC", RpcTarget.All, gridPointX, gridPointY);
+        this.view.RPC("setTileIsPlacedAtRPC", RpcTarget.All, gridPointX, gridPointY);
     }
 
     /*
@@ -316,4 +324,32 @@ public class MapManager : Singleton<MapManager>
         this.Tiles[gP].SetIsPlaced(false);
         //Debug.Log("RPC called for setTileIsPlacedRPC to true");
     }
+
+    /*
+        Method to set the Tile is empty so we can place tower on it, also send the signal
+        to every player that this variable has been changed
+    */
+    public void SetTileIsEmptyAt(int gridPointX, int gridPointY)
+    {
+        this.view.RPC("setTileIsEmptyAtRPC", RpcTarget.All, gridPointX, gridPointY);
+    }
+
+    /*
+        Pair of methods to set the tile state over network
+    */
+    [PunRPC]
+    private void setTileIsPlacedAtRPC2(int tileID, bool state)
+    {
+        this.tile2[tileID].SetIsPlaced(state);
+        if(state == false)  //is not placed
+        {
+            this.tile2[tileID].SetMyTower(null);
+        }
+    }
+
+    public void SetTileIsPlacedAt2(int tileID, bool state)
+    {
+        this.view.RPC("setTileIsPlacedAtRPC2", RpcTarget.All, tileID, state);
+    }
+
 }

@@ -10,9 +10,9 @@ GameObject:
   m_Component:
   - component: {fileID: 4282152743367297058}
   - component: {fileID: 4282152743367297059}
+  - component: {fileID: -1689159125677085747}
   - component: {fileID: -4069579295293657298}
   - component: {fileID: -1910726921187074332}
-  - component: {fileID: -4408064318006466153}
   - component: {fileID: -176990926281133625}
   m_Layer: 0
   m_Name: LightProjectile
@@ -86,6 +86,18 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &-1689159125677085747
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4282152743367297060}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 23526ce70e157994a882cbc1f6517747, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &-4069579295293657298
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -142,18 +154,6 @@ MonoBehaviour:
     InterpolateOption: 0
     InterpolateMoveTowardsSpeed: 1
     InterpolateLerpSpeed: 0
---- !u!114 &-4408064318006466153
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4282152743367297060}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 70e9d69d8b1fba54196e62867c17b98c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!61 &-176990926281133625
 BoxCollider2D:
   m_ObjectHideFlags: 0
