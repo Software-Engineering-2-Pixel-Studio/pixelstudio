@@ -42,16 +42,20 @@ public class SelectTowerManager : Singleton<SelectTowerManager>
     */
     public void SelectTower(TowerScript tower)
     {
-        //Debug.Log("clicked");
+        //if stower already exists
         if (sTower != null)
         {
             sTower.Select();
         }
 
+        //update tower
         sTower = tower;
         sTower.Select();
 
+        //update sell text
         sellPriceText.text = (sTower.GetPrice() / 2).ToString() + "<color='lime'>$</color>";
+
+        //if there is an upgrade
         if (sTower.GetNextUpgrade() != null)
         {
             upgradePriceText.text = sTower.GetNextUpgrade().Price.ToString() + "<color='lime'>$</color>";
@@ -59,16 +63,17 @@ public class SelectTowerManager : Singleton<SelectTowerManager>
         else
         {
             //if there are no more upgrades, just make the string empty
-            upgradePriceText.text = "<color='lime'>MaxLevel</color>";
+            upgradePriceText.text = "<color='lime'>Max\nLevel</color>";
         }
 
-        if(this.sTower.UpgradedTech())
+        //if there is tech upgrade
+        if (this.sTower.UpgradedTech())
         {
-            //Debug.Log("test");
-            this.techUpgradePriceText.text = "<color='lime'>MaxLevel</color>";
+            this.techUpgradePriceText.text = "<color='lime'>Max\nLevel</color>";
         }
         else
         {
+            //if there are no more tech upgrades
             this.techUpgradePriceText.text = "1<color='lime'>T</color>";
         }
 
@@ -94,16 +99,18 @@ public class SelectTowerManager : Singleton<SelectTowerManager>
     */
     public void SellTower()
     {
-        //Debug.Log("Sell Tower 2 is called");
         if(sTower != null)
         {
-            
+            //update global shared currency
             CurrencyManager.Instance.AddCurrency(sTower.GetPrice() / 2);
 
+            //remove tower
             MapManager.Instance.SetTileIsPlacedAt2(sTower.GetParentTileID(), false);
 
+            //destroy tower from network
             sTower.DestroyThisTower();
 
+            //de-select tower
             DeselectTower();
         }
     }
@@ -121,14 +128,12 @@ public class SelectTowerManager : Singleton<SelectTowerManager>
             {
                 if(sTower.GetNextUpgrade() == null)
                 {
-                    //Debug.Log("Cant found nextUpgrade");
                     return;
                 }
                 else if(CurrencyManager.Instance.GetCurrency() >= sTower.GetNextUpgrade().Price)
                 {
                     sTower.Upgrade();
                     UpdateUpgradeTooltip();
-                    
                 }
             }
         }
@@ -171,6 +176,9 @@ public class SelectTowerManager : Singleton<SelectTowerManager>
         UpdateUpgradeTooltip();
     }
 
+    /*
+        This method shows the selected tower tech stats
+    */
     public void ShowSelectedTowerTechStats()
     {
         techPanel.SetActive(true);
@@ -204,7 +212,7 @@ public class SelectTowerManager : Singleton<SelectTowerManager>
             else
             {
                 //if there are no more upgrades, just make the string empty
-                upgradePriceText.text = "<color='lime'>MaxLevel</color>";
+                upgradePriceText.text = "<color='lime'>Max\nLevel</color>";
             }
         }
     }
@@ -216,15 +224,17 @@ public class SelectTowerManager : Singleton<SelectTowerManager>
     {
         if (sTower != null)
         {
+            //update the tooltip text
             this.techStatText.text = this.sTower.GetTechStats();
 
-            if(this.sTower.UpgradedTech())
+            //upgrade the price text
+            if (this.sTower.UpgradedTech())
             {
-                //Debug.Log("test");
-                this.techUpgradePriceText.text = "<color='lime'>MaxLevel</color>";
+                this.techUpgradePriceText.text = "<color='lime'>Max\nLevel</color>";
             }
             else
             {
+                //max upgrade
                 this.techUpgradePriceText.text = "1<color='lime'>T</color>";
             }
         }

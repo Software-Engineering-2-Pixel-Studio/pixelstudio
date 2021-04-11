@@ -20,6 +20,8 @@ public class TowerButton : MonoBehaviour
     {
         this.SetPriceText();
 
+        //add a new currency changed event to the tower buttons
+        CurrencyManager.Instance.Changed += new CurrencyChanged(PriceCheck);
     }
 
     // Update is called once per frame
@@ -66,6 +68,21 @@ public class TowerButton : MonoBehaviour
     public string GetTowerName()
     {
         return this.towerName;
+    }
+
+    //for checking price of towers
+    private void PriceCheck()
+    {
+        if (price <= CurrencyManager.Instance.GetCurrency())
+        {
+            GetComponent<Image>().color = Color.white;
+            priceText.color = Color.white;
+        }
+        else
+        {
+            GetComponent<Image>().color = Color.gray;
+            priceText.color = Color.gray;
+        }
     }
     
 }
