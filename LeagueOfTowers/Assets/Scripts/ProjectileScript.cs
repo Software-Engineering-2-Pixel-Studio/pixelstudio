@@ -87,7 +87,7 @@ public class ProjectileScript : MonoBehaviourPun, IPunInstantiateMagicCallback
         //add the debuff if roll is more than or equal to proc chance
         if (rollNum <= ownerTower.getDebuffProcChance())
         {
-            Debug.Log("Apply debuff");
+            //Debug.Log("Apply debuff");
 
             //get parent tower's debuff and apply it to target monster
             targetMonster.AddDebuff(ownerTower.GetDebuff());

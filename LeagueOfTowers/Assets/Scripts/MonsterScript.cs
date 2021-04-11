@@ -178,7 +178,7 @@ public class MonsterScript : MonoBehaviourPun, IPunInstantiateMagicCallback
     {
         //if the monster collide with the base
         if(other.tag == "BasePortal"){
-            Debug.Log("Reach the base");
+            //Debug.Log("Reach the base");
             //scale down in size them
             if(this.myName == "TrainingDummy"){
                 StartCoroutine(Scale(new Vector3(0.6f, 0.6f), new Vector3(0.1f,0.1f), true));

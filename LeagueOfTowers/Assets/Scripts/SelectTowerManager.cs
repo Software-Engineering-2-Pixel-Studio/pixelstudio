@@ -121,7 +121,7 @@ public class SelectTowerManager : Singleton<SelectTowerManager>
             {
                 if(sTower.GetNextUpgrade() == null)
                 {
-                    Debug.Log("Cant found nextUpgrade");
+                    //Debug.Log("Cant found nextUpgrade");
                     return;
                 }
                 else if(CurrencyManager.Instance.GetCurrency() >= sTower.GetNextUpgrade().Price)

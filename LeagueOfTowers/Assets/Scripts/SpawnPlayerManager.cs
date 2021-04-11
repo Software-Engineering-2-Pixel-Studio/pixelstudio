@@ -32,7 +32,7 @@ public class SpawnPlayerManager : Singleton<SpawnPlayerManager>
 
     public void MageClassPicked()
     {
-        Debug.Log("Mage class created");
+        //Debug.Log("Mage class created");
         //spawn player at center of the world
         Vector2 position = new Vector2(0,0);
         PhotonNetwork.Instantiate(playerClasses[(int)PlayerClass.MAGE].name, position, Quaternion.identity);
@@ -41,7 +41,7 @@ public class SpawnPlayerManager : Singleton<SpawnPlayerManager>
 
     public void DefenderClassPicked()
     {
-        Debug.Log("Defender class created");
+        //Debug.Log("Defender class created");
         Vector2 position = new Vector2(0,0);
         PhotonNetwork.Instantiate(playerClasses[(int)PlayerClass.DEFENDER].name, position, Quaternion.identity);
         this.pickClassMenu.SetActive(false);
