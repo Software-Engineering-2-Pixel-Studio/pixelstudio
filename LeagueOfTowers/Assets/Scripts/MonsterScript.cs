@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using Photon.Pun;
 
 public class MonsterScript : MonoBehaviourPun, IPunInstantiateMagicCallback
@@ -26,6 +27,8 @@ public class MonsterScript : MonoBehaviourPun, IPunInstantiateMagicCallback
 
     private Point GridPosition{ get; set;}
     private Vector3 destination; // the destination of the monster (base location)
+
+    [SerializeField] private Text hpDisplay;      //display text box for currency value on scene
 
     private PhotonView view;
     // Start is called before the first frame update
@@ -115,6 +118,9 @@ public class MonsterScript : MonoBehaviourPun, IPunInstantiateMagicCallback
             this.myName = (string) data[0];
             //hp
             this.myHP = (float) data[1];
+            //Update monster hp string
+            hpDisplay.text = myHP.ToString();
+
             //monsterSpeed
             this.mySpeed = (float) data[2];
             maxSpeed = mySpeed;
@@ -202,10 +208,7 @@ public class MonsterScript : MonoBehaviourPun, IPunInstantiateMagicCallback
         if (this.isActive) //if monster is active and alive
         {
             //do some damage
-            //this.myHP -= damage;
-            
             DecreaseHP(damage);
-            //Debug.Log("health: " + healthValue.ToString());
 
             if (this.myHP <= 0) //if it's dead (health is 0)
             {
@@ -248,6 +251,9 @@ public class MonsterScript : MonoBehaviourPun, IPunInstantiateMagicCallback
     private void decreaseHPRPC(float damage)
     {
         this.myHP -= damage;
+
+        //Update monster hp string
+        hpDisplay.text = myHP.ToString();
     }
     public void DecreaseHP(float damage)
     {

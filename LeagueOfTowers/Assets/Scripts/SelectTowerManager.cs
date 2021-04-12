@@ -19,12 +19,6 @@ public class SelectTowerManager : Singleton<SelectTowerManager>
     [SerializeField] private Text techUpgradePriceText;
     [SerializeField] private Text techStatText;
 
-    //for upgrade button
-    [SerializeField] private Text upgradePrice;
-
-    //for tech upgrade button
-    [SerializeField] private Text techUpgradePrice;
-
     // Start is called before the first frame update
     private void Start()
     {

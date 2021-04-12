@@ -34,7 +34,7 @@ public class SlowDebuff : Debuff
 
     public override void Remove()
     {
-        if (target != null) //if target exists
+        if (target != null && slowIsApplied) //if target exists
         {
             slowIsApplied = false;
 

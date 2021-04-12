@@ -51,6 +51,9 @@ public class CurrencyManager : Singleton<CurrencyManager>
     {
         this.currency += earnAmount;
         this.currencyDisplay.text = this.currency.ToString() + "<color='lime'>$</color>";
+
+        //call currency change
+        OnCurrencyChanged();
     }
 
     /*
@@ -63,6 +66,9 @@ public class CurrencyManager : Singleton<CurrencyManager>
     {
         this.currency -= payAmount;
         this.currencyDisplay.text = this.currency.ToString() + "<color='lime'>$</color>";
+
+        //call currency change
+        OnCurrencyChanged();
     }
 
     //public methods
@@ -73,9 +79,6 @@ public class CurrencyManager : Singleton<CurrencyManager>
     public void AddCurrency(int earnAmount)
     {
         this.view.RPC("addCurrencyRPC", RpcTarget.All, earnAmount);
-
-        //call currency change
-        OnCurrencyChanged();
     }
 
     /*
@@ -85,10 +88,6 @@ public class CurrencyManager : Singleton<CurrencyManager>
     public void SubCurrency(int payAmount)
     {
         this.view.RPC("subCurrencyRPC", RpcTarget.All, payAmount);
-
-        //call currency change
-        OnCurrencyChanged();
-
     }
 
     /*
