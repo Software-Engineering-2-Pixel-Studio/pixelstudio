@@ -221,7 +221,7 @@ public class MapManager : Singleton<MapManager>
     */
     private void SetUpSpawn()
     {
-        spawnPos = new Point(0, 1);
+        spawnPos = new Point(0, 2);
 
         //create a spawn prefab on the scene.
         GameObject theSpawn = Instantiate(spawnPrefab);
