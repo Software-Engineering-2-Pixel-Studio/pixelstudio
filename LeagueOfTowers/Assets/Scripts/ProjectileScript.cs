@@ -101,19 +101,20 @@ public class ProjectileScript : MonoBehaviourPun, IPunInstantiateMagicCallback
     {
         if (other.tag == "Monster") //if the target in range is a monster
         {
-            if(targetMonster == null){
-                //Debug.Log("Target Monster is not found");
+            if(targetMonster == null) //if there is no target
+            {
                 DestroyThisProjectile();
                 return;
             }
-            else {
-                if (targetMonster.gameObject == other.gameObject)
+            else 
+            {
+                if (targetMonster.gameObject == other.gameObject) //if there is a target
                 {
-                    //Debug.Log("Monster hit");
-
                     if(this.view != null )
                     {
-                        if(this.view.IsMine){
+                        if(this.view.IsMine)
+                        {
+                            //do damage and debuffs
                             targetMonster.TakeDamage(this.myDamage);
                             ApplyDebuff();
 

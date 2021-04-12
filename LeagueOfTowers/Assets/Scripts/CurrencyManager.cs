@@ -13,6 +13,9 @@ public class CurrencyManager : Singleton<CurrencyManager>
     [SerializeField] private int currency;              //global share currency value for players
     [SerializeField] private Text currencyDisplay;      //display text box for currency value on scene
 
+    //an event that is triggered when the currency changes
+    public event CurrencyChanged Changed;
+
     private PhotonView view;
     // Start is called before the first frame update
     private void Start()
@@ -28,7 +31,16 @@ public class CurrencyManager : Singleton<CurrencyManager>
         
     }
 
-    
+    public void OnCurrencyChanged()
+    {
+        if (Changed != null)
+        {
+            Changed();
+            Debug.Log("Currency Changed");
+        }
+    }
+
+
     /*
         //PUNRPC methods
         a synchronize method for adding an amount to the currency when
@@ -38,7 +50,10 @@ public class CurrencyManager : Singleton<CurrencyManager>
     private void addCurrencyRPC(int earnAmount)
     {
         this.currency += earnAmount;
-        this.currencyDisplay.text = this.currency.ToString();
+        this.currencyDisplay.text = this.currency.ToString() + "<color='lime'>$</color>";
+
+        //call currency change
+        OnCurrencyChanged();
     }
 
     /*
@@ -50,7 +65,10 @@ public class CurrencyManager : Singleton<CurrencyManager>
     private void subCurrencyRPC(int payAmount)
     {
         this.currency -= payAmount;
-        this.currencyDisplay.text = this.currency.ToString();
+        this.currencyDisplay.text = this.currency.ToString() + "<color='lime'>$</color>";
+
+        //call currency change
+        OnCurrencyChanged();
     }
 
     //public methods
@@ -61,7 +79,6 @@ public class CurrencyManager : Singleton<CurrencyManager>
     public void AddCurrency(int earnAmount)
     {
         this.view.RPC("addCurrencyRPC", RpcTarget.All, earnAmount);
-
     }
 
     /*
@@ -71,7 +88,6 @@ public class CurrencyManager : Singleton<CurrencyManager>
     public void SubCurrency(int payAmount)
     {
         this.view.RPC("subCurrencyRPC", RpcTarget.All, payAmount);
-
     }
 
     /*

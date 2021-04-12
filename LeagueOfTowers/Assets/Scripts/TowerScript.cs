@@ -143,7 +143,8 @@ public abstract class TowerScript : MonoBehaviourPun, IPunInstantiateMagicCallba
         string result = string.Format("\nProjectile Speed: {0} \nAttack Cooldown: {1}", this.projectileSpeed, this.attackCooldown);
         
         //if the tower's tech is not upgraded yet
-        if(!this.upgradedTech){
+        if(!this.upgradedTech)
+        {
             result = string.Format("\nProjectile Speed: {0} <color=#00ff00ff>+{2}</color> \nAttack Cooldown: {1} <color=#00ff00ff> {3}</color>", this.projectileSpeed, this.attackCooldown, this.techUpgrade.ProjectileSpeed, this.techUpgrade.AttackCoolDown);
         }
 
@@ -157,14 +158,17 @@ public abstract class TowerScript : MonoBehaviourPun, IPunInstantiateMagicCallba
 
     protected void setNextUpgrade()
     {
+        //check if it has the proper upgrade first then return the proper upgrade
         if(this.upgrades.Length == 2)
         {
             if(this.nextUpgradeLevel == 2)
             {
+                //return upgrade level 2
                 this.nextUpgrade = upgrades[0];
             }
             else if(this.nextUpgradeLevel == 3)
             {
+                //return upgrade level 3
                 this.nextUpgrade = upgrades[1];
             }
             else{
@@ -178,15 +182,16 @@ public abstract class TowerScript : MonoBehaviourPun, IPunInstantiateMagicCallba
         
     }
 
+    //sets-up all the upgrade values
     private void setUpgrades()
     {
+        //sets up the values for upgrades 1, 2 and tech upgrade
         List<object> upgrade1 = new List<object>();
         List<object> upgrade2 = new List<object>();
         List<object> techUp = new List<object>();
 
         if(this.towerName == "BaseTower")
         {
-            //Debug.Log("BasicTower upgrades");
             upgrade1 = TowerData.GetBaseTowerUp1Data();
             
             if(upgrade1.Count == 2)
@@ -410,6 +415,7 @@ public abstract class TowerScript : MonoBehaviourPun, IPunInstantiateMagicCallba
         GameObject projectile = PhotonNetwork.Instantiate(projectilePrefab.name, this.transform.position, Quaternion.identity,0, data );        
     }
 
+    //send upgrade signal to all
     public virtual void Upgrade()
     {
         if(this.view.IsMine)
@@ -473,11 +479,14 @@ public abstract class TowerScript : MonoBehaviourPun, IPunInstantiateMagicCallba
         setNextUpgrade();
     }
 
+    //punRPC
     [PunRPC]
     private void techUpgradeRPC()
     {
+        //this tower is tech upgraded
         this.upgradedTech = true;
         
+        //increase the projectile speed and improve attack cooldown
         this.projectileSpeed += this.techUpgrade.ProjectileSpeed;
         this.attackCooldown += this.techUpgrade.AttackCoolDown;
     }

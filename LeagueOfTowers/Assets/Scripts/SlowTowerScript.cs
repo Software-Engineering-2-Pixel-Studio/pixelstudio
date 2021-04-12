@@ -58,7 +58,16 @@ public class SlowTowerScript : TowerScript
 
         return result;
     }
-    
+
+    //override and also add tower header string
+    public override string GetTechStats()
+    {
+        //return a string result with tower header
+        string result = string.Format("<color=#00ffffff>{0}</color> {1}", tooltipHeader, base.GetTechStats());
+
+        return result;
+    }
+
     public override void Upgrade()
     {
         if(this.view.IsMine)

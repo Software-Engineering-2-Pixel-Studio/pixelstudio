@@ -26,7 +26,7 @@ public class PlayerController : MonoBehaviour
             this.playerCanvas.GetComponent<Canvas>().enabled = true;
             this.playerNameDisplay.GetComponent<Text>().enabled = true;
             if(PhotonNetwork.IsMasterClient){
-                this.playerNameDisplay.text = string.Format("<color='red'>{0}</color>",PhotonNetwork.NickName);
+                this.playerNameDisplay.text = string.Format("<color='white'>{0}</color>",PhotonNetwork.NickName);
             }
             else{
                 this.playerNameDisplay.text = string.Format("<color='blue'>{0}</color>",view.Owner.NickName);
@@ -41,7 +41,7 @@ public class PlayerController : MonoBehaviour
             this.playerCanvas.GetComponent<Canvas>().enabled = false;
             this.playerNameDisplay.GetComponent<Text>().enabled = false;
             if(PhotonNetwork.IsMasterClient){
-                this.playerNameDisplay.text = string.Format("<color='red'>{0}</color>",PhotonNetwork.NickName);
+                this.playerNameDisplay.text = string.Format("<color='white'>{0}</color>", PhotonNetwork.NickName);
             }
             else{
                 this.playerNameDisplay.text = string.Format("<color='blue'>{0}</color>",view.Owner.NickName);
