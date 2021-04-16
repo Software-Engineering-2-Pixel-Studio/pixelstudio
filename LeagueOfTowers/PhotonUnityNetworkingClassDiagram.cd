@@ -1,0 +1,431 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="Photon.Pun.PhotonView">
+    <Position X="22.75" Y="15.25" Width="2.5" />
+    <NestedTypes>
+      <Enum Name="Photon.Pun.PhotonView.ObservableSearch" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>Assets\Photon\PhotonUnityNetworking\Code\PhotonView.cs</NewMemberFileName>
+        </TypeIdentifier>
+      </Enum>
+      <Struct Name="Photon.Pun.PhotonView.CallbackTargetChange" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>Assets\Photon\PhotonUnityNetworking\Code\PhotonView.cs</NewMemberFileName>
+        </TypeIdentifier>
+      </Struct>
+    </NestedTypes>
+    <TypeIdentifier>
+      <HashCode>AAOBqEzwAZgk5EJFBKhwwBAGAQQJAABJIQAAAUkAAMA=</HashCode>
+      <FileName>Assets\Photon\PhotonUnityNetworking\Code\PhotonView.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="OwnershipTransfer" />
+      <Field Name="RpcMonoBehaviours" />
+      <Field Name="Synchronization" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="Photon.Pun.PunRPC">
+    <Position X="39.25" Y="4.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Photon\PhotonUnityNetworking\Code\PunClasses.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Photon.Pun.MonoBehaviourPun">
+    <Position X="12.25" Y="12.75" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AACAAAAAAAAAAAAAAAAAAAIAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Photon\PhotonUnityNetworking\Code\PunClasses.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="pvCache" />
+      <Property Name="photonView" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="Photon.Pun.MonoBehaviourPunCallbacks">
+    <Position X="4.5" Y="14.5" Width="2.5" />
+    <TypeIdentifier>
+      <HashCode>gEKAAEIAAEAAAQAgAEQCAIEAAAEAAAIMEACEAAgASIA=</HashCode>
+      <FileName>Assets\Photon\PhotonUnityNetworking\Code\PunClasses.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="Photon.Pun.PunEvent">
+    <Position X="35.75" Y="4.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAACAAAIAAAAAAAAAABRAAAARBAAAAAAAEEAAAEAA=</HashCode>
+      <FileName>Assets\Photon\PhotonUnityNetworking\Code\PunClasses.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Photon.Pun.PhotonStream">
+    <Position X="31" Y="23.75" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAEAQAAAAAABAAAAQGRQACAAABAACAEAEADAAAA=</HashCode>
+      <FileName>Assets\Photon\PhotonUnityNetworking\Code\PunClasses.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Photon.Pun.SceneManagerHelper">
+    <Position X="33.75" Y="4.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAEBAAAAAAAAAAAAAAAAABAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Photon\PhotonUnityNetworking\Code\PunClasses.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Photon.Pun.DefaultPool" BaseTypeListCollapsed="true">
+    <Position X="37.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAQAAAAAAABAAABAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Photon\PhotonUnityNetworking\Code\PunClasses.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="Photon.Pun.PunExtensions">
+    <Position X="37.5" Y="4.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAIEAAAAAAAAAABIAAAAAAABAAAAAAAAEAAAABAAAA=</HashCode>
+      <FileName>Assets\Photon\PhotonUnityNetworking\Code\PunClasses.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Photon.Pun.ServerSettings">
+    <Position X="30.75" Y="16" Width="2.75" />
+    <TypeIdentifier>
+      <HashCode>AEAAAACACAACAAEEAAAAABAAEBkAAEACAEAAAAAAQAA=</HashCode>
+      <FileName>Assets\Photon\PhotonUnityNetworking\Code\ServerSettings.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="PunLogging" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="Photon.Pun.PhotonStreamQueue">
+    <Position X="1.25" Y="15.75" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAgAAAABABAAAAAAAAABAACBAABCwAAABAAREEAA=</HashCode>
+      <FileName>Assets\Photon\PhotonUnityNetworking\Code\PhotonStreamQueue.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Photon.Pun.PhotonNetwork">
+    <Position X="26.5" Y="0.5" Width="3.25" />
+    <NestedTypes>
+      <Struct Name="Photon.Pun.PhotonNetwork.RaiseEventBatch" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>Assets\Photon\PhotonUnityNetworking\Code\PhotonNetworkPart.cs</NewMemberFileName>
+        </TypeIdentifier>
+        <Lollipop Position="0.2" />
+      </Struct>
+      <Class Name="Photon.Pun.PhotonNetwork.SerializeViewBatch" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>Assets\Photon\PhotonUnityNetworking\Code\PhotonNetworkPart.cs</NewMemberFileName>
+        </TypeIdentifier>
+        <Lollipop Position="0.2" />
+      </Class>
+    </NestedTypes>
+    <TypeIdentifier>
+      <HashCode>FdxYtwz7p3ml/Rpn8P6z+XyW1CNL2189nsaJL38eXSo=</HashCode>
+      <FileName>Assets\Photon\PhotonUnityNetworking\Code\PhotonNetwork.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="ConnectMethod" />
+      <Field Name="LogLevel" />
+      <Field Name="photonServerSettings" />
+      <Field Name="prefabPool" />
+      <Field Name="serializeStreamIn" />
+      <Field Name="serializeStreamOut" />
+      <Property Name="PhotonServerSettings" />
+      <Property Name="PhotonViews" />
+      <Property Name="PrefabPool" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="Photon.Pun.PhotonHandler" BaseTypeListCollapsed="true">
+    <Position X="3.5" Y="21.75" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>AAiAAEAQAmQAAAAAAQQAIIEACghAAAAMVACEAAgBiMA=</HashCode>
+      <FileName>Assets\Photon\PhotonUnityNetworking\Code\PhotonHandler.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="instance" />
+      <Property Name="Instance" />
+    </ShowAsAssociation>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="Photon.Pun.CustomTypes">
+    <Position X="35.75" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAQAAAAAAAAAAAABAABAEAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Photon\PhotonUnityNetworking\Code\CustomTypes.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Photon.Pun.NestedComponentUtilities">
+    <Position X="39.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAABAgAAACAAAAEAAAAAAABAAABBBAAAAAAI=</HashCode>
+      <FileName>Assets\Photon\PhotonUnityNetworking\Code\Utilities\NestedComponentUtilities.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Photon.Pun.PhotonAnimatorView">
+    <Position X="7.75" Y="14.5" Width="2.75" />
+    <NestedTypes>
+      <Enum Name="Photon.Pun.PhotonAnimatorView.ParameterType" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>Assets\Photon\PhotonUnityNetworking\Code\Views\PhotonAnimatorView.cs</NewMemberFileName>
+        </TypeIdentifier>
+      </Enum>
+      <Enum Name="Photon.Pun.PhotonAnimatorView.SynchronizeType" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>Assets\Photon\PhotonUnityNetworking\Code\Views\PhotonAnimatorView.cs</NewMemberFileName>
+        </TypeIdentifier>
+      </Enum>
+      <Class Name="Photon.Pun.PhotonAnimatorView.SynchronizedParameter" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>Assets\Photon\PhotonUnityNetworking\Code\Views\PhotonAnimatorView.cs</NewMemberFileName>
+        </TypeIdentifier>
+      </Class>
+      <Class Name="Photon.Pun.PhotonAnimatorView.SynchronizedLayer" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>Assets\Photon\PhotonUnityNetworking\Code\Views\PhotonAnimatorView.cs</NewMemberFileName>
+        </TypeIdentifier>
+      </Class>
+    </NestedTypes>
+    <TypeIdentifier>
+      <HashCode>ACRAgRAAQIQAAAACgACIQAAQIgAAAlAIIAIRAAAADEA=</HashCode>
+      <FileName>Assets\Photon\PhotonUnityNetworking\Code\Views\PhotonAnimatorView.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="m_StreamQueue" />
+    </ShowAsAssociation>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="Photon.Pun.PhotonRigidbody2DView">
+    <Position X="11.25" Y="14.5" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AIAAAAAAAgACEAAAAAAAQYCAAAACCAAgAAAAAAAAAEA=</HashCode>
+      <FileName>Assets\Photon\PhotonUnityNetworking\Code\Views\PhotonRigidbody2DView.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="Photon.Pun.PhotonRigidbodyView">
+    <Position X="14" Y="14.5" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AIAAAAAAAgACEAAAAAAAQYCAAAACCAAgAAAAAAAAAEA=</HashCode>
+      <FileName>Assets\Photon\PhotonUnityNetworking\Code\Views\PhotonRigidbodyView.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="Photon.Pun.PhotonTransformView">
+    <Position X="16.75" Y="14.5" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAQAEAAAAAAAFAQAAAAAQSAAAAIiCAAACAAAAAgACEA=</HashCode>
+      <FileName>Assets\Photon\PhotonUnityNetworking\Code\Views\PhotonTransformView.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="Photon.Pun.PhotonTransformViewClassic">
+    <Position X="19.5" Y="14.5" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>AIUAEAAABAQAgCAAAAAAQCCCAIAAAAAQAAAAAAgACEA=</HashCode>
+      <FileName>Assets\Photon\PhotonUnityNetworking\Code\Views\PhotonTransformViewClassic.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="m_PhotonView" />
+      <Field Name="m_PositionControl" />
+      <Field Name="m_PositionModel" />
+      <Field Name="m_RotationControl" />
+      <Field Name="m_RotationModel" />
+      <Field Name="m_ScaleControl" />
+      <Field Name="m_ScaleModel" />
+    </ShowAsAssociation>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="Photon.Pun.PhotonTransformViewPositionModel">
+    <Position X="15.25" Y="7.5" Width="2.75" />
+    <Compartments>
+      <Compartment Name="Nested Types" Collapsed="false" />
+    </Compartments>
+    <NestedTypes>
+      <Enum Name="Photon.Pun.PhotonTransformViewPositionModel.InterpolateOptions" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>Assets\Photon\PhotonUnityNetworking\Code\Views\PhotonTransformViewClassic.cs</NewMemberFileName>
+        </TypeIdentifier>
+      </Enum>
+      <Enum Name="Photon.Pun.PhotonTransformViewPositionModel.ExtrapolateOptions">
+        <TypeIdentifier>
+          <NewMemberFileName>Assets\Photon\PhotonUnityNetworking\Code\Views\PhotonTransformViewClassic.cs</NewMemberFileName>
+        </TypeIdentifier>
+      </Enum>
+    </NestedTypes>
+    <TypeIdentifier>
+      <HashCode>AAAAAAIACoAAAAAAEACEAAIAAIAAAAAAAAAAABAAAAA=</HashCode>
+      <FileName>Assets\Photon\PhotonUnityNetworking\Code\Views\PhotonTransformViewClassic.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Photon.Pun.PhotonTransformViewPositionControl">
+    <Position X="19.25" Y="9" Width="2.75" />
+    <TypeIdentifier>
+      <HashCode>AgAAAAAAQIQAADAIAAkAQAAAAAACQgAAgEAAAAAQAAA=</HashCode>
+      <FileName>Assets\Photon\PhotonUnityNetworking\Code\Views\PhotonTransformViewClassic.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="m_Model" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="Photon.Pun.PhotonTransformViewRotationModel">
+    <Position X="22.75" Y="10" Width="2.75" />
+    <NestedTypes>
+      <Enum Name="Photon.Pun.PhotonTransformViewRotationModel.InterpolateOptions" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>Assets\Photon\PhotonUnityNetworking\Code\Views\PhotonTransformViewClassic.cs</NewMemberFileName>
+        </TypeIdentifier>
+      </Enum>
+    </NestedTypes>
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAgAAAAAAAQCAAAAAAIAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Photon\PhotonUnityNetworking\Code\Views\PhotonTransformViewClassic.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Photon.Pun.PhotonTransformViewRotationControl">
+    <Position X="19.25" Y="6" Width="2.75" />
+    <TypeIdentifier>
+      <HashCode>AgAAAAAAAACAAAAAAAAAQAAAAAAACAAIAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Photon\PhotonUnityNetworking\Code\Views\PhotonTransformViewClassic.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="m_Model" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="Photon.Pun.PhotonTransformViewScaleModel">
+    <Position X="12" Y="5.5" Width="2.5" />
+    <NestedTypes>
+      <Enum Name="Photon.Pun.PhotonTransformViewScaleModel.InterpolateOptions" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>Assets\Photon\PhotonUnityNetworking\Code\Views\PhotonTransformViewClassic.cs</NewMemberFileName>
+        </TypeIdentifier>
+      </Enum>
+    </NestedTypes>
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAgAAAAAAAACAAAIAAIAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Photon\PhotonUnityNetworking\Code\Views\PhotonTransformViewClassic.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Photon.Pun.PhotonTransformViewScaleControl">
+    <Position X="11.5" Y="9" Width="2.5" />
+    <TypeIdentifier>
+      <HashCode>AgAAAEAAAAAAAAAAAAAAwAAAAAAAAAAAIAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Photon\PhotonUnityNetworking\Code\Views\PhotonTransformViewClassic.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="m_Model" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="UnityEngine.MonoBehaviour" Collapsed="true">
+    <Position X="23.25" Y="13.75" Width="1.5" />
+    <TypeIdentifier />
+  </Class>
+  <Struct Name="Photon.Pun.PhotonMessageInfo">
+    <Position X="39.25" Y="6" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AACAAAAAAAAAAAAEAAAAAAAgAgCAAAAAAAAAAAAIEAA=</HashCode>
+      <FileName>Assets\Photon\PhotonUnityNetworking\Code\PunClasses.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="photonView" />
+    </ShowAsAssociation>
+  </Struct>
+  <Struct Name="Photon.Pun.InstantiateParameters">
+    <Position X="31.75" Y="6.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAIAAAgIAAAAAAEAAACAIAAAAgAQAAAAAAAQAAAAAAA=</HashCode>
+      <FileName>Assets\Photon\PhotonUnityNetworking\Code\PhotonNetwork.cs</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Interface Name="Photon.Pun.IPhotonViewCallback">
+    <Position X="15.5" Y="19.75" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Photon\PhotonUnityNetworking\Code\Interfaces\IPhotonViewCallbacks.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="Photon.Pun.IOnPhotonViewPreNetDestroy">
+    <Position X="12" Y="21.25" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Photon\PhotonUnityNetworking\Code\Interfaces\IPhotonViewCallbacks.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="Photon.Pun.IOnPhotonViewOwnerChange">
+    <Position X="15" Y="21.25" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAIAAAAAAA=</HashCode>
+      <FileName>Assets\Photon\PhotonUnityNetworking\Code\Interfaces\IPhotonViewCallbacks.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="Photon.Pun.IOnPhotonViewControllerChange">
+    <Position X="18" Y="21.25" Width="2.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Photon\PhotonUnityNetworking\Code\Interfaces\IPhotonViewCallbacks.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="Photon.Pun.IPunObservable">
+    <Position X="37.5" Y="10" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Photon\PhotonUnityNetworking\Code\Interfaces\IPunCallbacks.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="Photon.Pun.IPunOwnershipCallbacks">
+    <Position X="39.25" Y="10" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>QAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACAAAAAAAA=</HashCode>
+      <FileName>Assets\Photon\PhotonUnityNetworking\Code\Interfaces\IPunCallbacks.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="Photon.Pun.IPunInstantiateMagicCallback">
+    <Position X="35.75" Y="10" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Photon\PhotonUnityNetworking\Code\Interfaces\IPunCallbacks.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="Photon.Pun.IPunPrefabPool">
+    <Position X="31.25" Y="21.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAQAAAAAAABAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Photon\PhotonUnityNetworking\Code\Interfaces\IPunCallbacks.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Enum Name="Photon.Pun.ConnectMethod">
+    <Position X="31.25" Y="29.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAEAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAEAAAA=</HashCode>
+      <FileName>Assets\Photon\PhotonUnityNetworking\Code\Enums.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="Photon.Pun.PunLogLevel">
+    <Position X="33.25" Y="13.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAEAAAABAAAAAAAAAAAAAgAAAAAAAAA=</HashCode>
+      <FileName>Assets\Photon\PhotonUnityNetworking\Code\Enums.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="Photon.Pun.RpcTarget">
+    <Position X="35.75" Y="12.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>BAAAAAAAAAAAAAAAAAIAAQAAAAAAAkAAAIAAgAAAAAA=</HashCode>
+      <FileName>Assets\Photon\PhotonUnityNetworking\Code\Enums.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="Photon.Pun.ViewSynchronization">
+    <Position X="20" Y="18.5" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AABAAIAAAAAAAAAAAAAAAAAAgAAAAAAAAAAgAAAAAAA=</HashCode>
+      <FileName>Assets\Photon\PhotonUnityNetworking\Code\Enums.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="Photon.Pun.OwnershipOption">
+    <Position X="20.25" Y="23.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAgAAAAEAAAABAAAA=</HashCode>
+      <FileName>Assets\Photon\PhotonUnityNetworking\Code\Enums.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

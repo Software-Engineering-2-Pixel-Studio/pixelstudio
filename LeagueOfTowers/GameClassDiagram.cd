@@ -1,0 +1,369 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="MapManager">
+    <Position X="27" Y="3.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AQR2AEYAAGAEBCOEIAQChABAAICCCMKAAQAgAAECAsA=</HashCode>
+      <FileName>Assets\Scripts\MapManager.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="basePos" />
+      <Field Name="mapSize" />
+      <Field Name="spawnPos" />
+      <Property Name="SpawnPos" />
+      <Property Name="SpawnPrefab" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="Singleton&lt;T&gt;">
+    <Position X="31" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAABAAAAAQAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\Singleton.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ConnectToServer">
+    <Position X="51" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAIAACAAAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\ConnectToServer.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CurrencyManager">
+    <Position X="31.5" Y="3.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAAKAIAAAABAAIAAAAAAAAAAAAAQUAAAAAAGA=</HashCode>
+      <FileName>Assets\Scripts\CurrencyManager.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Debuff">
+    <Position X="19.25" Y="7.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAACIAAAAAIAAAIAQABAAAAAAAAAAAAEAAAAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\Debuff.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="target" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="FireDebuff">
+    <Position X="21.75" Y="8" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQCAAAIAAAAAACAAAAAAAAAAAAAAIAAAAAAAQAAAAE=</HashCode>
+      <FileName>Assets\Scripts\FireDebuff.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="FireTowerScript">
+    <Position X="9.25" Y="14" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AgQCEAQAACAAAACAEAIgEAAAAAAAAAAAAAIAAQABACE=</HashCode>
+      <FileName>Assets\Scripts\FireTowerScript.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GameManager">
+    <Position X="40.5" Y="3.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>FAQAgAACQCAAgAACAAAQgIAACAjEDAAAAAAAAQQAAEA=</HashCode>
+      <FileName>Assets\Scripts\GameManager.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="pickedButton" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="GameOver">
+    <Position X="18" Y="3.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>EAwAABAAACAAAAAAAQAAAAAAAAAAAAAAAQAAAAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\GameOver.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Hover">
+    <Position X="20.25" Y="3.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAQACBAACBAEAAAAAAAAAIAAAAAAAAAACAAAAA=</HashCode>
+      <FileName>Assets\Scripts\Hover.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="LevelUpManager">
+    <Position X="29.25" Y="3.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>FAQAAAAAACAAAAAAAAAAASAHgAABAAAAQQAAAAAAQAA=</HashCode>
+      <FileName>Assets\Scripts\LevelUpManager.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="LightDebuff">
+    <Position X="19.25" Y="10.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAAAAAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\LightDebuff.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="LightTowerScript">
+    <Position X="11.5" Y="14" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAEAQAACAAQAAAAAIgEAAAAAAAAIAAAAAAAQABAAA=</HashCode>
+      <FileName>Assets\Scripts\LightTowerScript.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="LivesManager">
+    <Position X="36" Y="3.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAACAQAAAAAAACAAAAAAIAIAAAAQAAAAAAAIA=</HashCode>
+      <FileName>Assets\Scripts\LivesManager.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Constants">
+    <Position X="45.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAgAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\MainMenuController.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MainMenuController">
+    <Position X="45.25" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAEAGAAAAAAAAACAACAAAAAEAgAEBACCAQwAEA=</HashCode>
+      <FileName>Assets\Scripts\MainMenuController.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MonsterData">
+    <Position X="22.5" Y="3.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>EAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEA=</HashCode>
+      <FileName>Assets\Scripts\MonsterData.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MonsterScript" BaseTypeListCollapsed="true">
+    <Position X="14.75" Y="2.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>EAQCgAAgKGAGEQyCAAIDEBAkAHAQQAABAUAAhIEQEMA=</HashCode>
+      <FileName>Assets\Scripts\MonsterScript.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="GridPosition" />
+    </ShowAsAssociation>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="ObjectPool">
+    <Position X="47.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAABIAQAAAAAAAAAAAAIAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\ObjectPool.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Portal">
+    <Position X="30" Y="9.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAACAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\Portal.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ProjectileScript" BaseTypeListCollapsed="true">
+    <Position X="12.5" Y="5.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AIQAAAACBCAAAAACCAAAEAAAAEgQIAAAEQAAAAAAAEA=</HashCode>
+      <FileName>Assets\Scripts\ProjectileScript.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="ownerTower" />
+      <Field Name="targetMonster" />
+    </ShowAsAssociation>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="RangeScript">
+    <Position X="7.25" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAACAAiAAAAAAAAAAAAABAEAAAAAIAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\RangeScript.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="myTowerScript" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="SelectTowerManager">
+    <Position X="24.75" Y="3.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>pgcACAAgACAAACAIAAgQAAEhAACAgQCAACAAAAAQAAA=</HashCode>
+      <FileName>Assets\Scripts\SelectTowerManager.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SlowDebuff">
+    <Position X="17" Y="10.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAACAgAAAAAAAAABAAAAAAAAAAAAACAAAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\SlowDebuff.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SlowTowerScript">
+    <Position X="7" Y="14" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAEAQACCAAAIAAAAIgEAAIAAAAAAAAAACAAQABAAA=</HashCode>
+      <FileName>Assets\Scripts\SlowTowerScript.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SpawnPlayerManager">
+    <Position X="38.25" Y="3.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAABAAAiAAAAQAAAIAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\SpawnPlayerManager.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="TechUpgrade">
+    <Position X="7.25" Y="6.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAEQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\TechUpgrade.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Tile">
+    <Position X="19.25" Y="13.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>EgQEEAAAACAAACEEBpCIAQAAEBJCAgQAACCIEJAQQEA=</HashCode>
+      <FileName>Assets\Scripts\Tile.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="gridPos" />
+      <Field Name="myTower" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="TowerButton">
+    <Position X="38.25" Y="7.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQBAQAAACAEEAAAEAAASAAAABAAAABAAAAAAAAIAAA=</HashCode>
+      <FileName>Assets\Scripts\TowerButton.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="TowerData">
+    <Position X="33.75" Y="3.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ASAAAAAAEACYAAAAQAABAAAAAAAgAAAAEAAAAAEAAYA=</HashCode>
+      <FileName>Assets\Scripts\TowerData.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="TowerScript">
+    <Position X="10.5" Y="2.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ABQBmBYFQWgCgHRFcANyECaBAIEAAEBEAWAAQgABAJA=</HashCode>
+      <FileName>Assets\Scripts\TowerScript.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="myRangeScript" />
+      <Field Name="upgrades" />
+      <Field Name="techUpgrade" />
+      <Field Name="nextUpgrade" />
+      <Field Name="myElement" />
+      <Field Name="target" />
+    </ShowAsAssociation>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="TowerUpgrade">
+    <Position X="7.25" Y="9.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AQAAAACAAYAAAAAAAAAAAAAAAAAACAAAAIAAAQAAAAA=</HashCode>
+      <FileName>Assets\Scripts\TowerUpgrade.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="WaveManager">
+    <Position X="42.75" Y="3.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AoQAAABAICAAAAAggAABAgQAAABDBABAAQjQIBoGAAA=</HashCode>
+      <FileName>Assets\Scripts\WaveManager.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BaseTowerScript">
+    <Position X="13.75" Y="14" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQQEAQAACAAAAAAAAIgEABAAAAAAAAAAAAAAQABAAA=</HashCode>
+      <FileName>Assets\Scripts\BaseTowerScript.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="AStar">
+    <Position X="49.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAACAAAAAAAAAIAAAAAAAAAAAAAAgAAIAA=</HashCode>
+      <FileName>Assets\Scripts\AStarAlgorithm\AStar.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="AStarDebugger">
+    <Position X="16.25" Y="15.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAEAAACABABAgAEAAAAAAAAAAAAAAAAJACAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\AStarAlgorithm\AStarDebugger.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="startTile" />
+      <Field Name="goalTile" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="DebugTile">
+    <Position X="51" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAEAAAAAgAAAAAAAAAAAAAAAAAAAAAGEBAAAA=</HashCode>
+      <FileName>Assets\Scripts\AStarAlgorithm\DebugTile.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Node">
+    <Position X="24" Y="14.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAgAAEAAAAiAAAAAAAQAAAAAAAEAAAAAAAACAAAAE=</HashCode>
+      <FileName>Assets\Scripts\AStarAlgorithm\Node.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="Parent" />
+      <Property Name="TileReference" />
+      <Property Name="GridPosition" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="PlayerController">
+    <Position X="47.25" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAACAAAAAAAAAgAAAAAAAAAAAAAQAAACAIAAA=</HashCode>
+      <FileName>Assets\Scripts\Player\PlayerController.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PickedTowerScript">
+    <Position X="34.5" Y="9.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAACAAAAACAAAAAAAAAAAAAAAAAACAACgAAAA=</HashCode>
+      <FileName>Assets\Scripts\Player\PickedTowerScript.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="pickedButton" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="PlayerMovement">
+    <Position X="49" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAACAAAAAAAAAAAAAAAAAAAQAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\Player\PlayerMovement.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Struct Name="Point">
+    <Position X="24" Y="11" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAggAAAAAAAAAAAAAAAYAA=</HashCode>
+      <FileName>Assets\Scripts\Point.cs</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Enum Name="PlayerClass">
+    <Position X="52.75" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAACAAAAAAAAAAAAAAAAAAAAIAAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\SpawnPlayerManager.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="Element">
+    <Position X="4.25" Y="7.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAABAAAAAAAAQAAAAAAAACAAAAAAAAAQAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\TowerData.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Delegate Name="CurrencyChanged">
+    <Position X="52.75" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\CurrencyManager.cs</FileName>
+    </TypeIdentifier>
+  </Delegate>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>
