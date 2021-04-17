@@ -22,8 +22,8 @@
 ### Team Members
 | Name | GitHub Username | Role | Email
 | --- | --- | --- | --- |
-| Christian Hintay | [hintaycl](https://github.com/hintaycl) | Game Developer | hintaycl@myumanitoba.ca
-| **Nurida Karimbaeva (Leader)** | [nuridak](https://github.com/nuridak)| Game Developer | karimban@myumanitoba.ca
+| **Christian Hintay (Sprint 2 Leader)** | [hintaycl](https://github.com/hintaycl) | Game Developer | hintaycl@myumanitoba.ca
+| **Nurida Karimbaeva (Sprint 3 and 4 Leader)** | [nuridak](https://github.com/nuridak)| Game Developer | karimban@myumanitoba.ca
 | Hoang Huy Pham | [Phamhhuy](https://github.com/Phamhhuy)| Game Developer | phamhh@myumanitoba.ca
 
 ## Description
