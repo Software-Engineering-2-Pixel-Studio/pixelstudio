@@ -23,7 +23,7 @@
 | Name | GitHub Username | Role | Email
 | --- | --- | --- | --- |
 | Christian Hintay | [hintaycl](https://github.com/hintaycl) | Game Developer | hintaycl@myumanitoba.ca
-| Nurida Karimbaeva | [nuridak](https://github.com/nuridak)| Game Developer | karimban@myumanitoba.ca
+| **Nurida Karimbaeva (Leader)** | [nuridak](https://github.com/nuridak)| Game Developer | karimban@myumanitoba.ca
 | Hoang Huy Pham | [Phamhhuy](https://github.com/Phamhhuy)| Game Developer | phamhh@myumanitoba.ca
 
 ## Description
